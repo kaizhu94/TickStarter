@@ -463,9 +463,10 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById("root");
-  var store = (0,_store_store__WEBPACK_IMPORTED_MODULE_3__.default)(); // ReactDOM.render(<Root store={store}/>, root);
-
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "HI"), root);
+  var store = (0,_store_store__WEBPACK_IMPORTED_MODULE_3__.default)();
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Root__WEBPACK_IMPORTED_MODULE_2__.default, {
+    store: store
+  }), root); // ReactDOM.render(<h1>HI</h1>, root);
 });
 
 /***/ }),
