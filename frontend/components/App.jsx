@@ -1,17 +1,23 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import {AuthRoute} from '../util/route_util'
+import { Link } from 'react-router-dom';
 
-import { Route } from 'react-router-dom';
-import LoginFormContainer from './session_forms/login_form_container';
-
-// import {AuthRoute} from '../util/route_util'
+import SignupFormContainer from './session_forms/SignupFormConatiner'
+import LoginFormContainer from './session_forms/LoginFormContainer';
+import NavBarContainer from './NavBarContainer';
 
 const App = () => {
   return (
       <div>
-			<header>
+			<header className='header'>
 				<h1>TickStarter</h1>
-			    {/* <Route path="/login" component={LoginFormContainer} />   */}
+				<NavBarContainer />
 			</header>
+			<Switch>
+				<AuthRoute path="/signup" component={SignupFormContainer} />
+			    <AuthRoute path="/login" component={LoginFormContainer} />  
+			</Switch>
 		</div>
 	);
 }
