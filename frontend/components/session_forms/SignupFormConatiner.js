@@ -1,19 +1,20 @@
-// import { connect } from 'react-redux'
-// // import SessionForm from './session_form'
-// import { signup } from '../../actions/session_action'
+import { connect } from 'react-redux'
 
-// const mStP = (state, ownProps) => {
-//   return ({
-//     errors: state.errors.session,
-//     formType: 'Signup',
-//     loggedIn: Boolean(state.session.id)
-//   })
-// }
+import { signup } from '../../actions/session_action'
 
-// const mDtP = (dispatch, ownProps) => {
-//   return {
-//     processForm: (user) => dispatch(signup(user)),
-//   };
-// }
+import SignupForm from './SignupForm'
 
-// export default connect(mStP, mDtP)(SessionForm)
+const msp = (state, ownProps) => {
+  return ({
+    errors: state.errors.session,
+    // loggedIn: Boolean(state.session.id)
+  })
+}
+
+const mdp = (dispatch, ownProps) => {
+  return {
+    signup: (user) => dispatch(signup(user)),
+  };
+}
+
+export default connect(msp, mdp)(SignupForm)

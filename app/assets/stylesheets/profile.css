@@ -1,0 +1,16 @@
+.profile-dropdown{
+    position: absolute;
+    display: block;
+    top: 70px;
+	right: 0;
+	background-color: white;
+	border: 1px solid rgb(206, 203, 203);
+	padding: 20px;
+	width: 225px;
+	z-index: 1;
+	text-align: left;
+	font-weight: initial;
+}
+#logout{
+    background-color: white;
+}

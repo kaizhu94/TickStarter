@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border-bottom: 1px solid rgb(231, 227, 227);
+}
+
+.mid-nav{
+    background-color: white;
+    text-decoration: none;
+    font-family: 'Zhi Mang Xing', cursive;
+    font-size: 200%;
+}
+.mid-nav > #tickstart-link {
+    padding-left: 70px;
+    background-color: white;
+    text-decoration: none;
+}
+
+.right-nav {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+#login{
+    background-color: white;
+    padding-right: 10px;
+}

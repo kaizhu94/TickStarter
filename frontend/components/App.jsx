@@ -6,18 +6,23 @@ import { Link } from 'react-router-dom';
 import SignupFormContainer from './session_forms/SignupFormConatiner'
 import LoginFormContainer from './session_forms/LoginFormContainer';
 import NavBarContainer from './NavBarContainer';
+import MainContents from './MainContents';
+import Modal from './modal/Modal'
 
 const App = () => {
   return (
       <div>
+		  	<Modal />
 			<header className='header'>
-				<h1>TickStarter</h1>
 				<NavBarContainer />
 			</header>
-			<Switch>
-				<AuthRoute path="/signup" component={SignupFormContainer} />
-			    <AuthRoute path="/login" component={LoginFormContainer} />  
-			</Switch>
+			<section className="main-section">
+				<Switch>
+					<AuthRoute path="/signup" component={SignupFormContainer} />
+					<AuthRoute path="/login" component={LoginFormContainer} />  
+					<Route path='/' component={MainContents} />
+				</Switch>
+			</section>
 		</div>
 	);
 }

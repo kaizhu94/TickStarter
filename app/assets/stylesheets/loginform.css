@@ -1,0 +1,26 @@
+
+.login-block{
+    display: block;
+    width: 300px;
+    border: 1px solid rgb(238, 237, 237);
+    margin: 70px auto 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+/* #signup-link{
+    display: block;
+    position: relative;
+    justify-content: center;
+} */
+.login-block > * {
+    display: block;
+    text-align: center;
+    background-color: white;
+}
+
+.login-block > #login-form {
+    display: block;
+    text-align: center;
+    background-color: white;
+}

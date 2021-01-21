@@ -2,38 +2,43 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-class LoginForm extends React.Component{
+class SignupForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            username: "",
             email: "",
-            password:""
+            password: ""
         }
         this.handleSubmit =this.handleSubmit.bind(this);
     }
     handleSubmit(e){
         e.preventDefault();
-        this.props.logIn(this.state)
-        .then(this.props.openModal('errors'))
-        .then(this.props.closeModal)
+        this.props.signup(this.state)
     }
 
     update(key){
         return e => this.setState({[key]: e.currentTarget.value});
     }
     render(){
-        // debugger;
-        // const errors = this.props.errors.map((error,i) =>{
-        //     return (
-        //         <li key={`errors-${i}`}>{error}</li>
-        //     )
-        // })
-        
-        // this.props.closeModal();
+        const errors = this.props.errors.map((error,i) =>{
+            return (
+                <li key={`error-${i}`}>{error}</li>
+            )
+        })
         return (
-            <div className='login-block'>
-                <h1>Log in</h1>
-                <form onSubmit={this.handleSubmit} id='login-form'>
+            <div className = 'signup-form'>
+                 <p>Have an account?<Link to='/login' >Log in</Link></p>
+                 <h1>Sign up</h1>
+                 <ul className='signup-errors'>
+                    {errors}
+                </ul>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text"
+                            value={this.state.username}
+                            placeholder="Username"
+                            onChange ={this.update('username')}
+                    />
                     <input type="email"
                             value={this.state.email}
                             placeholder="Email"
@@ -45,13 +50,11 @@ class LoginForm extends React.Component{
                             onChange = {this.update('password')}
                     />
 
-                    <button type = "submit" >Log in</button>
+                    <button type = "submit">Create account</button>
                 </form>
-                <p id='signup-link'>New to KickStarter?<Link to='/signup' >Sign up</Link></p>
             </div>
         )
     }
-
 }
 
-export default LoginForm;
+export default SignupForm;

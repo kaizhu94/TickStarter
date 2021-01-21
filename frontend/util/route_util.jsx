@@ -9,7 +9,7 @@ const Auth = ({ component: Component, path, isLogged, exact }) => {
 		path={path}
 		exact={exact}
 		render={(props) =>
-			!isLogged ? <Component {...props} /> : <Redirect to="/" />
+			(!isLogged ? <Component {...props} /> : <Redirect to="/" />)
 		}
     />
     )};
