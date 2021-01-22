@@ -1033,8 +1033,8 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
           rePassword: "",
           showDropdownEmail: false,
           showDropdownPassword: false
-        });
-        this.errors = _toConsumableArray(this.props.errors);
+        }); // this.errors = [...this.props.errors];
+
         this.errors.push("Email and Password did not match");
       } else {
         this.props.signup(newState).then(this.errors = _toConsumableArray(this.props.errors));
@@ -1069,7 +1069,7 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       // debugger;
-      var errors = this.errors.map(function (error, i) {
+      var errors = this.props.errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: "error-".concat(i)
         }, error);
