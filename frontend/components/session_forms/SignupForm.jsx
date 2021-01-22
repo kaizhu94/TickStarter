@@ -26,7 +26,7 @@ class SignupForm extends React.Component{
         delete newState["rePassword"];
         delete newState["showDropdownEmail"];
         delete newState["showDropdownPassword"];
-        // debugger
+        
         const {email, password, reEmail, rePassword} = this.state;
         
         if(email !== reEmail || password !== rePassword){
@@ -59,13 +59,13 @@ class SignupForm extends React.Component{
         this.setState({showDropdownPassword: newState})
     }
     render(){
-        // debugger;
+        
         const errors = this.errors.map((error,i) =>{
             return (
                 <li key={`error-${i}`}>{error}</li>
             )
         })
-        // debugger
+        
         return (
             <div className = 'signup-container'>
                 <div className = 'signup-block'> 

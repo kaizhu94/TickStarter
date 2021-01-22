@@ -22,14 +22,7 @@ class LoginForm extends React.Component{
         return e => this.setState({[key]: e.currentTarget.value});
     }
     render(){
-        // debugger;
-        // const errors = this.props.errors.map((error,i) =>{
-        //     return (
-        //         <li key={`errors-${i}`}>{error}</li>
-        //     )
-        // })
         
-        // this.props.closeModal();
         return (
             <div className='login-container'>
                 <div className='login-block'>

@@ -838,13 +838,6 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger;
-      // const errors = this.props.errors.map((error,i) =>{
-      //     return (
-      //         <li key={`errors-${i}`}>{error}</li>
-      //     )
-      // })
-      // this.props.closeModal();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "login-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -904,7 +897,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // debugger;
   return {
     // is_login: Boolean(state.session.id),
     errors: state.errors.session
@@ -1016,8 +1008,7 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       delete newState["reEmail"];
       delete newState["rePassword"];
       delete newState["showDropdownEmail"];
-      delete newState["showDropdownPassword"]; // debugger
-
+      delete newState["showDropdownPassword"];
       var _this$state = this.state,
           email = _this$state.email,
           password = _this$state.password,
@@ -1068,13 +1059,11 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger;
       var errors = this.errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: "error-".concat(i)
         }, error);
-      }); // debugger
-
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "signup-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1295,7 +1284,6 @@ __webpack_require__.r(__webpack_exports__);
 var sessionErrorsReducer = function sessionErrorsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  // debugger;
   Object.freeze(state);
 
   switch (action.type) {
