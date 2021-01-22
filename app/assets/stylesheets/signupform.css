@@ -1,0 +1,60 @@
+.signup-container{
+    background-color: rgb(248, 248, 248);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* vertical-align: middle; */
+}
+
+.signup-block{
+    /* min-height: 100vh; */
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gainsboro;
+    width: 500px;
+}
+
+.signup-form{
+    margin: none;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    /* border-bottom: 2px solid black; */
+}
+
+.signup-form input{
+    height: 40px;
+    margin-bottom: 30px;
+    width: 400px;
+    padding-left: 10px;
+    border: 1px solid rgb(127, 196, 25);
+}
+
+.signup-form button{
+    height: 40px;
+    margin-bottom: 30px;
+    width: 412px;
+    /* padding-left: 10px; */
+    border: 1px solid rgb(127, 196, 25);
+    background-color: green;
+    font-size: 15px;
+    color: white;
+}
+
+.signup-form h1{
+    text-align: left;  
+}
+
+.signup-form p{
+    display: inline-flexbox;
+    border: 1px solid rgb(236, 236, 236);
+    height: 40px;
+    margin-bottom: 30px;
+    width: 412px;
+}

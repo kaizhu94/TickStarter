@@ -636,8 +636,12 @@ var Profile = /*#__PURE__*/function (_React$Component) {
         className: "profile"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onFocus: this.triggerOrNot,
-        onBlur: this.triggerOrNot
-      }, "profile", this.state.showDropdown ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        onBlur: this.triggerOrNot,
+        id: "profile-button"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        id: "earth",
+        src: window.earth
+      }), this.state.showDropdown ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "profile-dropdown"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: this.handleLogOut,
@@ -842,10 +846,16 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
       // })
       // this.props.closeModal();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "login-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "login-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Log in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "login-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+        id: "login-text"
+      }, "Log in")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
-        id: "login-form"
+        className: "login-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "email",
         value: this.state.email,
@@ -862,7 +872,7 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
         id: "signup-link"
       }, "New to KickStarter?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/signup"
-      }, "Sign up")));
+      }, "Sign up")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.")));
     }
   }]);
 
@@ -936,6 +946,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -973,9 +995,16 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      reEmail: "",
+      rePassword: "",
+      showDropdownEmail: false,
+      showDropdownPassword: false
     };
+    _this.errors = _this.props.errors;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.showReEmail = _this.showReEmail.bind(_assertThisInitialized(_this));
+    _this.showRePassword = _this.showRePassword.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -983,7 +1012,33 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.signup(this.state);
+      var newState = Object.assign({}, this.state);
+      delete newState["reEmail"];
+      delete newState["rePassword"];
+      delete newState["showDropdownEmail"];
+      delete newState["showDropdownPassword"]; // debugger
+
+      var _this$state = this.state,
+          email = _this$state.email,
+          password = _this$state.password,
+          reEmail = _this$state.reEmail,
+          rePassword = _this$state.rePassword;
+
+      if (email !== reEmail || password !== rePassword) {
+        this.setState({
+          username: "",
+          email: "",
+          password: "",
+          reEmail: "",
+          rePassword: "",
+          showDropdownEmail: false,
+          showDropdownPassword: false
+        });
+        this.errors = _toConsumableArray(this.props.errors);
+        this.errors.push("Email and Password did not match");
+      } else {
+        this.props.signup(newState).then(this.errors = _toConsumableArray(this.props.errors));
+      }
     }
   }, {
     key: "update",
@@ -995,18 +1050,42 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "showReEmail",
+    value: function showReEmail(e) {
+      var newState = !this.state.showDropdownEmail;
+      this.setState({
+        showDropdownEmail: newState
+      });
+    }
+  }, {
+    key: "showRePassword",
+    value: function showRePassword(e) {
+      var newState = !this.state.showDropdownPassword;
+      this.setState({
+        showDropdownPassword: newState
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var errors = this.props.errors.map(function (error, i) {
+      // debugger;
+      var errors = this.errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: "error-".concat(i)
         }, error);
-      });
+      }); // debugger
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "signup-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "signup-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Have an account?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/login"
-      }, "Log in")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Sign up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      }, "Log in"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Sign up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "signup-errors"
       }, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
@@ -1019,15 +1098,27 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
         type: "email",
         value: this.state.email,
         placeholder: "Email",
-        onChange: this.update('email')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        onChange: this.update('email'),
+        onFocus: this.showReEmail
+      }), this.state.showDropdownEmail ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "email",
+        value: this.state.reEmail,
+        placeholder: "Re-enter Email",
+        onChange: this.update('reEmail')
+      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
-        value: this.password,
+        value: this.state.password,
         placeholder: "Password",
-        onChange: this.update('password')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onChange: this.update('password'),
+        onFocus: this.showRePassword
+      }), this.state.showDropdownPassword ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "password",
+        value: this.state.rePassword,
+        placeholder: "Re-enter Password",
+        onChange: this.update('rePassword')
+      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit"
-      }, "Create account")));
+      }, "Create account")))));
     }
   }]);
 

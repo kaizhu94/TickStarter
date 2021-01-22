@@ -14,3 +14,12 @@
 #logout{
     background-color: white;
 }
+
+#profile-button{
+	border: none;
+	background: white;
+}
+#earth{
+	height: 40px;
+	width: 40px;
+}

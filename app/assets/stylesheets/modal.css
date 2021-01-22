@@ -4,14 +4,14 @@
     bottom: 0;
     right: 0;
     left: 0;
-    background: rgba(248, 247, 247, 0.7);
+    background: rgba(248, 247, 247, 0.767);
     z-index: 10;
    
   }
   
   .modal-child {
     position: absolute;
-    top: 50%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     margin: auto;
@@ -43,15 +43,22 @@
   }
 
   #xIcon{
-    /* position: relative;
-    width: 20px;
-    height: 20px;
-    top: 390px;
-    left: 90px;
-    z-index: 1; */
+    z-index: 1; 
     display: none;
   }
 
   .modal-child:hover + #xIcon, #xIcon:hover{
     display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 110px;
+    left: 90px;
+    z-index: 1;
+  }
+
+  #xIcon:hover{
+    display: relative;
+    background-color: red;
+    cursor: pointer;
   }

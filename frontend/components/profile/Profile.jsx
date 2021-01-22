@@ -29,8 +29,8 @@ class Profile extends React.Component{
         return (
             <div className='profile'>
                
-                <button  onFocus={this.triggerOrNot} onBlur={this.triggerOrNot}>
-                    profile
+                <button  onFocus={this.triggerOrNot} onBlur={this.triggerOrNot} id='profile-button'>
+                    <img id="earth" src={window.earth} ></img>
                 {
                     this.state.showDropdown
                         ? (
