@@ -39,7 +39,7 @@ class SignupForm extends React.Component{
                 showDropdownEmail: false,
                 showDropdownPassword: false
             });
-            this.errors = [...this.props.errors];
+            // this.errors = [...this.props.errors];
             this.errors.push("Email and Password did not match");
         }else {
             this.props.signup(newState).then(this.errors = [...this.props.errors])
@@ -59,8 +59,8 @@ class SignupForm extends React.Component{
         this.setState({showDropdownPassword: newState})
     }
     render(){
-        
-        const errors = this.errors.map((error,i) =>{
+        // debugger;
+        const errors = this.props.errors.map((error,i) =>{
             return (
                 <li key={`error-${i}`}>{error}</li>
             )
