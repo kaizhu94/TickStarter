@@ -72,7 +72,12 @@
     text-decoration: underline;
 
 }
-
+.recom-project-info #founder #name{
+    text-decoration: none;
+    color: rgb(155, 153, 153);
+}.recom-project-info #founder #name:hover{
+    text-decoration: underline;
+}
 .like-or-not *{
     height:25px;
     width: 25px;

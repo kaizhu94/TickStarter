@@ -30,10 +30,19 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.featured-project-block .project-block #project-header #title {
+    text-decoration: none;
+}
 
 .featured-project-block #founder{
     font-family: 'Khand', sans-serif;
     font-size: 15px;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+.featured-project-block #founder #name{
+    text-decoration: none;
+}
+.featured-project-block #founder #name:hover{
+    text-decoration: underline;
 }
