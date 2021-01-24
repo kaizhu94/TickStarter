@@ -3,6 +3,28 @@ class User < ApplicationRecord
     validates :password, length: {minimum: 6, allow_nil: true}
     validates :email, presence: true, uniqueness: true
     
+
+    has_many :projects,
+      primary_key: :id,
+      foreign_key: :founder_id,
+      class_name: :Project
+
+    has_many :likes,
+      primary_key: :id,
+      foreign_key: :user_id,
+      class_name: :Like
+    has_many :liked_projects,
+      through: :likes,
+      source: :projects
+    has_many :likers,
+      through: :projects,
+      source: :likers
+
+    has_many :backings,
+      primary_key: :id,
+      foreign_key: :backer_id,
+      class_name: :Backing
+
     after_initialize :ensure_session_token
     attr_reader :password
   
