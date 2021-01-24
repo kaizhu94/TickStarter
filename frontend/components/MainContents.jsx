@@ -3,25 +3,14 @@ import { Link } from 'react-router-dom'
 
 import Project from './project/Project'
 import ProjectIndex from './project/ProjectsIndex'
+import SectionBar from './section_bar/SectionBar'
+
 class MainContents extends React.Component{
 
     render(){
         return (
             <div className='main'>
-                <div className= 'section-bar'>
-                    <div className='section-container'>
-                        <ul id='section-index'>
-                            <li>Art</li>
-                            <li>Comics & Illustration</li>
-                            <li>Design & Tech</li>
-                            <li>Film</li>
-                            <li>Food & Craft</li>
-                            <li>Games</li>
-                            <li>Music</li>
-                            <li>Publishing</li>
-                        </ul>
-                    </div>
-                </div>
+                <SectionBar/>
                 <div className='main-project-section'>
                     <div className='main-projects-container'>
                         <div className='featured-project-block'>

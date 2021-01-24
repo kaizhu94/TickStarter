@@ -8,14 +8,17 @@ import LoginFormContainer from './session_forms/LoginFormContainer';
 import NavBarContainer from './NavBarContainer';
 import MainContents from './MainContents';
 import Modal from './modal/Modal'
+import Footer from './footer/Footer'
 
 const App = () => {
   return (
       <div>
 		  	<Modal />
+
 			<header className='header'>
 				<NavBarContainer />
 			</header>
+
 			<section className="main-section">
 				<Switch>
 					<AuthRoute path="/signup" component={SignupFormContainer} />
@@ -23,6 +26,11 @@ const App = () => {
 					<Route path='/' component={MainContents} />
 				</Switch>
 			</section>
+			
+			<footer className='footer-section'>
+				<Footer/>
+			</footer>
+			
 		</div>
 	);
 }

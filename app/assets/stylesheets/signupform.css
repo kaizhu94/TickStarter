@@ -90,6 +90,7 @@
     background-color: red;
     color: white;
     margin-bottom: 20px;
+    
 }
 
 .signup-form .signup-errors li{
@@ -97,4 +98,6 @@
     margin-left: 10px;
     font-family: 'Nunito', sans-serif;
     text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
