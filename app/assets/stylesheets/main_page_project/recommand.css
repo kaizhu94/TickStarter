@@ -37,11 +37,14 @@
     flex-direction: column;
     border-bottom: 1px solid  gainsboro;
 }
+
 .project-index-item-intaincer{
     display: flex;
     padding: 14px;
 }
-
+.project-index-item-intaincer:hover h1{
+    text-decoration: underline;
+}
 .recom-project-info *{
     padding-bottom: 10px;
 }

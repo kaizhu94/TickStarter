@@ -68,7 +68,7 @@ class SignupForm extends React.Component{
             <div className = 'signup-container'>
                 <div className = 'signup-block'> 
                     <div className='log-in'>
-                        <p>Have an account?<Link to='/login' >Log in</Link></p>
+                        <p>Have an account?<Link to='/login' id='login-link'> Log in</Link></p>
                     </div>
                     <div className = 'signup-form'>
                         <h1>Sign up</h1>
@@ -116,9 +116,9 @@ class SignupForm extends React.Component{
                                             ):(null)
                                     }
 
-                            <button type = "submit">Create account</button>
+                            <button type = "submit" id='signup-button'>Create account</button>
                             <p>
-                            By signing up, you agree to our Privacy Policy, Cookie Policy and Terms of Use.
+                            By signing up, you agree to our <span>Privacy Policy</span>, <span>Cookie Policy</span> and <span>Terms of Use</span>.
                             </p>
                         </form>
                     </div>

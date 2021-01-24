@@ -18,7 +18,7 @@
     justify-content: center;
     border: 1px solid gainsboro;
     width: 400px;
-    height: 46%;
+    height: 44%;
     margin-top: 100px;
     padding-top: 20px
 }
@@ -83,8 +83,15 @@
     text-align: center;
     padding-bottom: 12px; 
 }
+#signup-link #signup-link-button{
+    text-decoration: none;
+    color: blue;
+}
 #term{
     width: 362px;
     display: inline;
     font-size: 12px;
+}
+#term span{
+    color: rgb(83, 83, 216);
 }

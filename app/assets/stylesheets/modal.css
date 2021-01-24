@@ -45,21 +45,20 @@
   #xIcon{
     z-index: 1; 
     display: none;
-    position: relative;
   }
 
-  .modal-child:hover + #xIcon, #xIcon:hover{
-    display: inline-block;
+  .modal-child:hover+#xIcon, #xIcon:hover{
+    display: block;
     position: relative;
     width: 20px;
     height: 20px;
-    top: 110px;
-    left: 90px;
+    top: 130px;
+    left: 630px;
     z-index: 1;
   }
 
   #xIcon:hover{
-    display: relative;
+    /* display: relative; */
     background-color: red;
     cursor: pointer;
   }

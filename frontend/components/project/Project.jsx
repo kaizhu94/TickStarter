@@ -6,7 +6,7 @@ class  Project extends React.Component{
         return (
             <div className='project-block'>
                 <img id="posture" src={window.posture} ></img>
-                <h1>GOPOSE: World’s first 2 in 1 fix posture and pulse massager</h1>
+                <h1 id='project-header'>GOPOSE: World’s first 2 in 1 fix posture and pulse massager</h1>
                 <p>GOPOSE Tech | Fix Posture | Pulse Massage | Intuitive GOPOSE App | Get Your Health & Confidence Back</p>
                 <p id='founder'>By Kai</p>
             </div>

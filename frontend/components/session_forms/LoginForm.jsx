@@ -42,8 +42,8 @@ class LoginForm extends React.Component{
                         />
                         <button type = "submit" >Log in</button>
                     </form>
-                    <p id='signup-link'>New to KickStarter?<Link to='/signup' >Sign up</Link></p>
-                    <p id='term'>This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+                    <p id='signup-link'>New to KickStarter? <Link to='/signup' id='signup-link-button'> Sign up</Link></p>
+                    <p id='term'>This site is protected by reCAPTCHA and the Google <span>Privacy Policy</span> and <span>Terms of Service</span> apply.</p>
                 </div>
             </div>
         )

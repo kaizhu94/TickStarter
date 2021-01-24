@@ -23,7 +23,23 @@
     transition-delay: 0s text-decoration;
 }
 
-#section-index *:hover{
-    text-decoration: underline;
-    transition-delay: 5s;
-}
+
+
+#section-index li {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 3px;
+  }
+  #section-index li:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    width: 0px;
+    background: transparent;
+    transition: height 10s ease, background-color 2s ease;
+  }
+  #section-index li:hover:after {
+    width: 100%;
+    background: rgb(120, 120, 233);
+  }
