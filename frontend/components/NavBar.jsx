@@ -18,14 +18,20 @@ class NavBar extends React.Component{
         }
         return (
             <div className = 'navbar'>
-                <nav className='letf-nav'>
-                    <p></p>
+                <nav className='left-nav'>
+                    <div>
+                        <p id='discover'>Discover</p>
+                        <p id='start-project'>Start a project</p>
+                    </div>
                 </nav>
                 <nav className='mid-nav'>
                     <Link to='/' id='tickstart-link'>TickStarter</Link>
                 </nav>
                 
                 <nav className='right-nav'>
+                    <p>Search
+                    <img id="search" src={window.search} ></img>
+                    </p>
                     {logOrProfile}
                 </nav>
                 

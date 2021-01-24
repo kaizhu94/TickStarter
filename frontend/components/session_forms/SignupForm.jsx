@@ -14,7 +14,7 @@ class SignupForm extends React.Component{
             showDropdownEmail: false,
             showDropdownPassword: false
         }
-        this.errors=this.props.errors;
+        this.errors=[];
         this.handleSubmit =this.handleSubmit.bind(this);
         this.showReEmail = this.showReEmail.bind(this);
         this.showRePassword = this.showRePassword.bind(this);
@@ -31,18 +31,16 @@ class SignupForm extends React.Component{
         
         if(email !== reEmail || password !== rePassword){
             this.setState({
-                username: "",
-                email: "",
                 password: "",
-                reEmail: "",
                 rePassword: "",
-                showDropdownEmail: false,
-                showDropdownPassword: false
             });
-            // this.errors = [...this.props.errors];
+
+            this.props.signup(newState)
+            debugger;
             this.errors.push("Email and Password did not match");
+            debugger;
         }else {
-            this.props.signup(newState).then(this.errors = [...this.props.errors])
+            this.props.signup(newState)
         }
     }
 
@@ -60,7 +58,7 @@ class SignupForm extends React.Component{
     }
     render(){
         // debugger;
-        const errors = this.props.errors.map((error,i) =>{
+        const errors = this.errors.map((error,i) =>{
             return (
                 <li key={`error-${i}`}>{error}</li>
             )
@@ -69,10 +67,10 @@ class SignupForm extends React.Component{
         return (
             <div className = 'signup-container'>
                 <div className = 'signup-block'> 
+                    <div className='log-in'>
+                        <p>Have an account?<Link to='/login' >Log in</Link></p>
+                    </div>
                     <div className = 'signup-form'>
-                        <div id=''>
-                            <p>Have an account?<Link to='/login' >Log in</Link></p>
-                        </div>
                         <h1>Sign up</h1>
                         <ul className='signup-errors'>
                             {errors}
@@ -119,6 +117,9 @@ class SignupForm extends React.Component{
                                     }
 
                             <button type = "submit">Create account</button>
+                            <p>
+                            By signing up, you agree to our Privacy Policy, Cookie Policy and Terms of Use.
+                            </p>
                         </form>
                     </div>
                 </div>

@@ -16,17 +16,51 @@
     font-size: 200%;
 }
 .mid-nav > #tickstart-link {
-    padding-left: 70px;
     background-color: white;
     text-decoration: none;
+}
+.mid-nav:hover{
+    cursor: pointer;
 }
 
 .right-nav {
     background-color: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
+.right-nav *:hover{
+    cursor: pointer;
+    color: rgb(54, 80, 15);
+}
+
+.right-nav #search{
+
+    width: 15px;
+    height: 15px;
+    padding-right: 10px;
+}
+
+.left-nav {
+    display: flex;
+    /* justify-content: space-between; */
+}
+.left-nav div *:hover{
+    cursor: pointer;
+    color: rgb(54, 80, 15);
+}
+.left-nav>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 15px;
+}
+.left-nav>div>#discover{
+    padding-right: 10px;
+} 
+
 #login{
     background-color: white;
     padding-right: 10px;
 }
+

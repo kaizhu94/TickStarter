@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab&family=Khand:wght@300&display=swap');
+
+.featured-project-block{
+    grid-column: 1;
+    border-right: 1px solid  gainsboro;
+    padding-right: 70px;
+}
+.featured-project-block h3{
+    font-family: 'Khand', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.featured-project-block #posture{
+    width: 100%;
+}
+
+.featured-project-block h1:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.featured-project-block h1{
+    font-size: 28px;
+    font-family: 'Josefin Slab', serif;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.featured-project-block #founder{
+    font-family: 'Khand', sans-serif;
+    font-size: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

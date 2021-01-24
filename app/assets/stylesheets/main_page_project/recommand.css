@@ -1,0 +1,80 @@
+.recommand-projects-block{
+    grid-column: 2;
+    padding-left: 70px;
+}
+
+.recommand-projects-block #posture{
+    width: 176px;
+    height: 90px;
+    padding-right: 20px;
+}
+.recommand-projects-block h3{
+    font-family: 'Khand', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+.recommand-projects-block h1{
+    font-size: 14px;
+    font-family: 'Josefin Slab', serif;
+    font-weight: bold;
+}
+.recommand-projects-block h1:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.recommand-projects-block #founder{
+    font-size: 12px;
+    font-family: 'Josefin Slab', serif;
+}
+.recommand-projects-block #found-percentage{
+    font-size: 12px;
+    color: rgb(3, 109, 3);
+    font-weight: bold;
+}
+.project-index-item-block{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid  gainsboro;
+}
+.project-index-item-intaincer{
+    display: flex;
+    padding: 14px;
+}
+
+.recom-project-info *{
+    padding-bottom: 10px;
+}
+.recom-project-info{
+    display: block;
+}
+.rec-index-pages{
+    display: flex;
+    float: right;
+}
+.rec-index-pages ul{
+    display: flex;
+    flex: row;
+    position: relative;
+    list-style-type: none;
+    
+}
+.rec-index-pages ul *{
+    padding: 10px;
+    color: rgba(116, 149, 248, 0.9);
+}
+.rec-index-pages ul *:hover{
+    cursor: pointer;
+    color: rgba(43,96,255,0.9);
+    text-decoration: underline;
+
+}
+
+.like-or-not *{
+    height:25px;
+    width: 25px;
+    padding-left: 10px;
+}
+.like-or-not *:hover{
+    cursor: pointer;
+}

@@ -15,12 +15,14 @@ function Modal( {modal, closeModal, errors} ){
             })
             return ( 
             <div className='modal-background' onClick={closeModal}>
-                <div className='modal-child' onClick={event => event.stopPropagation()}>
-                    <ul id='session-error-ul'>
-                        {errorsArr}
-                    </ul>
+                <div className='modal-child-container'>
+                    <div className='modal-child' onClick={event => event.stopPropagation()}>
+                        <ul id='session-error-ul'>
+                            {errorsArr}
+                        </ul>
+                    </div>
+                    <img id="xIcon" src={window.xIcon} />
                 </div>
-                <img id="xIcon" src={window.xIcon} />
             </div> 
             );
         default:

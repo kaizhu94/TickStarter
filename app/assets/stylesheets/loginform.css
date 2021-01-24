@@ -1,36 +1,6 @@
-/* 
-.login-block{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    border: 1px solid rgb(238, 237, 237);
-    margin: 70px auto 0 auto;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    width: 500px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
-.login-block > * {
-    display: block;
-    text-align: center;
-    background-color: white;
-    block-size: border-box;
-}
 
-.login-block > #login-form {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    background-color: white;
-}
-
-#login-block > #login-text{
-    display: inline-block;
-    text-align: left;
-    width: fit-content;
-} */
 .login-container{
     background-color: rgb(248, 248, 248);
     height: 100vh;
@@ -48,8 +18,9 @@
     justify-content: center;
     border: 1px solid gainsboro;
     width: 400px;
-    height: 80%;
+    height: 46%;
     margin-top: 100px;
+    padding-top: 20px
 }
 
 .login-form{
@@ -80,15 +51,22 @@
 }
 .login-block h1{
     display: flex;
-    justify-content: flex-start;
-    color: red;
-    
+    margin: 20px;
+}
+#login-text{
+    display: inline;
+    font-size: 28px;
+    padding-right: 220px;
+    margin: 0px;
+    float: left;
+    margin-bottom: 28px;
 }
 
-#login-hearder{
-    display: flex;
-    float: left;
+#login-header{
+   width: 314px;
+   float: left;
 }
+
 
 .login-block p{
     display: inline-flexbox;
@@ -99,7 +77,14 @@
     margin: 0px;
     width:  362px;
     padding: 20px;
+    font-family: 'Open Sans', sans-serif;
 }
 #signup-link{
     text-align: center;
+    padding-bottom: 12px; 
+}
+#term{
+    width: 362px;
+    display: inline;
+    font-size: 12px;
 }

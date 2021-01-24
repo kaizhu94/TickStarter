@@ -45,6 +45,7 @@
   #xIcon{
     z-index: 1; 
     display: none;
+    position: relative;
   }
 
   .modal-child:hover + #xIcon, #xIcon:hover{

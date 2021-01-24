@@ -1,0 +1,2 @@
+class RewardsItem < ApplicationRecord
+end
