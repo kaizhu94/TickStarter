@@ -20,6 +20,11 @@ class SignupForm extends React.Component{
         this.showReEmail = this.showReEmail.bind(this);
         this.showRePassword = this.showRePassword.bind(this);
     }
+
+    componentWillUnmount(){
+        this.props.clearErrors([]);
+    }
+
     handleSubmit(e){
         e.preventDefault();
         let newState = Object.assign({},this.state);
@@ -37,6 +42,11 @@ class SignupForm extends React.Component{
                 addFrontError: true
             });
         }else{
+            this.setState({
+                password: "",
+                rePassword: "",
+                addFrontError: false
+            });
             this.props.signup(newState)
         }
     }
