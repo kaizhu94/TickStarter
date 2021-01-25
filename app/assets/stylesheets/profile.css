@@ -1,8 +1,8 @@
 .profile-dropdown{
     position: absolute;
     display: block;
-    top: 70px;
-	right: 0;
+    top: 100px;
+	right: 20px;
 	background-color: white;
 	border: 1px solid rgb(206, 203, 203);
 	padding: 20px;
@@ -11,8 +11,14 @@
 	text-align: left;
 	font-weight: initial;
 }
-#logout{
-    background-color: white;
+.logout-block{
+	border-top: 1px solid rgb(206, 203, 203);
+	padding-top: 20px;
+	position: relative;
+}
+.profile-dropdown #logout{
+	position: relative;
+	width: auto;
 }
 
 #profile-button{

@@ -45,6 +45,16 @@ class MainContents extends React.Component{
                     <p>Sign up to receive our weekly Projects We Love newsletter.</p>
                     {tab}
                 </div>
+                <div className= 'addition-section1'>
+                    <div className='fresh-block'>
+                        <h3>FRESH FAVORITES</h3>
+                        <ProjectIndex/>
+                    </div>
+                </div>
+                <div className= 'addition-section2'>
+
+                </div>
+
             </div>
         )
     }

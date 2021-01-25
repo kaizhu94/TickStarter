@@ -35,7 +35,14 @@ class Profile extends React.Component{
                     this.state.showDropdown
                         ? (
                             <div className='profile-dropdown'>
-                                <p onClick={this.handleLogOut} id='logout'>Log out</p>
+                               
+                                <div className='logout-block'>
+                                    <p onClick={this.handleLogOut} id='logout'>Log out</p>
+
+                                </div>
+                               
+                                    
+                                
                             </div>
                     )
                     : (
