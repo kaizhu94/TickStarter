@@ -41,6 +41,7 @@
 .project-index-item-intaincer{
     display: flex;
     padding: 14px;
+    margin-bottom: 0px;
 }
 .project-index-item-intaincer:hover h1{
     color: rgb(2, 134, 2);

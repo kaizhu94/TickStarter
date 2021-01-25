@@ -93,6 +93,10 @@
     text-decoration: none;
     color: blue;
 }
+#signup-link #signup-link-button:hover{
+    text-decoration: underline;
+    color:black;
+}
 #term{
     width: 362px;
     display: inline;

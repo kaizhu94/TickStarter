@@ -6,8 +6,25 @@ import ProjectIndex from './project/ProjectsIndex'
 import SectionBar from './section_bar/SectionBar'
 
 class MainContents extends React.Component{
+    constructor(props){
+        super(props)
+        
+    }
 
+    
     render(){
+        // debugger
+        let tab;
+        if(this.props.currentUser){
+            tab = <Link to='/' id='signup'>Subscribe</Link>
+        }else{
+            tab = <Link to='/signup' id='signup'>Signup</Link>
+        }
+        // if(this.props.isLoggedIn !== true){
+        //     tab = <Link to='/signup' id='signup'>Signup</Link>
+        // }else{
+        //     tab = <Link to='/' id='signup'>Subscribe</Link>
+        // }
         return (
             <div className='main'>
                 <SectionBar/>
@@ -26,7 +43,7 @@ class MainContents extends React.Component{
                 <div className='signup-section'>
                     <h1>Discover the best and brightest projects on Kickstarter.</h1>
                     <p>Sign up to receive our weekly Projects We Love newsletter.</p>
-                    <Link to='/signup' id='signup'>Signup</Link>
+                    {tab}
                 </div>
             </div>
         )
