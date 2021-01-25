@@ -43,6 +43,7 @@
     padding: 14px;
 }
 .project-index-item-intaincer:hover h1{
+    color: rgb(2, 134, 2);
     text-decoration: underline;
 }
 .recom-project-info *{
@@ -68,9 +69,20 @@
 }
 .rec-index-pages ul *:hover{
     cursor: pointer;
-    color: rgba(43,96,255,0.9);
+    color: rgb(2, 134, 2);
     text-decoration: underline;
-
+}
+ #founder-name{
+    /* font-family: 'Imbue', serif; */
+    color: black;
+    text-decoration: none;
+    /* font-weight: bold; */
+}
+#founder-name:hover{
+    text-decoration: underline;
+}
+#feature-founder{
+    padding-top: 20px;
 }
 
 .like-or-not *{
