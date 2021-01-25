@@ -1398,6 +1398,11 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SignupForm, [{
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearErrors([]);
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
@@ -1419,6 +1424,11 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
           addFrontError: true
         });
       } else {
+        this.setState({
+          password: "",
+          rePassword: "",
+          addFrontError: false
+        });
         this.props.signup(newState);
       }
     }
@@ -1546,6 +1556,9 @@ var mdp = function mdp(dispatch, ownProps) {
   return {
     signup: function signup(user) {
       return dispatch((0,_actions_session_action__WEBPACK_IMPORTED_MODULE_1__.signup)(user));
+    },
+    clearErrors: function clearErrors(error) {
+      return dispatch((0,_actions_session_action__WEBPACK_IMPORTED_MODULE_1__.receiveErrors)(error));
     }
   };
 };
