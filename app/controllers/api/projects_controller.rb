@@ -6,6 +6,13 @@ class Api::ProjectsController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
+        render :show
+    end
+
+    def create
+        # debugger
+        @project = Project.create!(project_params)
+        render :show
     end
 
     private

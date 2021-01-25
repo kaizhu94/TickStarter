@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
     validates :project_name, uniqueness: true
-    validates :location_id, :published, :founder_id, :catagory_id, presence: true
-
+    validates :location_id,  :founder_id, :catagory_id, presence: true
+    validates :published, :inclusion => {:in => [true, false]}
     belongs_to :founder,
         primary_key: :id,
         foreign_key: :founder_id,
