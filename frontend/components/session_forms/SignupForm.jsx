@@ -127,9 +127,7 @@ class SignupForm extends React.Component{
                                     }
 
                             <button type = "submit" id='signup-button'>Create account</button>
-                            <p>
-                            By signing up, you agree to our <span>Privacy Policy</span>, <span>Cookie Policy</span> and <span>Terms of Use</span>.
-                            </p>
+                            
                         </form>
                     </div>
                 </div>

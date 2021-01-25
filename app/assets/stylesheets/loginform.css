@@ -18,7 +18,7 @@
     justify-content: center;
     border: 1px solid gainsboro;
     width: 400px;
-    height: 44%;
+    height: 45%;
     margin-top: 100px;
     padding-top: 20px
 }
@@ -49,6 +49,11 @@
     font-size: 15px;
     color: white;
 }
+.login-form button:hover{
+    background: rgb(1, 95, 1);
+    cursor: pointer;
+}
+
 .login-block h1{
     display: flex;
     margin: 20px;
@@ -60,6 +65,7 @@
     margin: 0px;
     float: left;
     margin-bottom: 28px;
+    font-family: 'Lato', sans-serif;
 }
 
 #login-header{
@@ -94,4 +100,22 @@
 }
 #term span{
     color: rgb(83, 83, 216);
+}
+
+
+.login-block .demo-block{
+    margin-bottom: 30px;
+}
+
+.login-block .demo-block #demo-button{
+
+    height: 40px;
+    width: 312px;
+    background: green;
+    color: white;
+    border: none;
+}
+.login-block .demo-block #demo-button:hover{
+    background: rgb(1, 95, 1);
+    cursor: pointer;
 }

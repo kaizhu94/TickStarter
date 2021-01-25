@@ -86,10 +86,13 @@
 }
 
 .like-or-not *{
-    height:25px;
-    width: 25px;
+    height:20px;
+    width: 22px;
     padding-left: 10px;
 }
 .like-or-not *:hover{
     cursor: pointer;
+}
+.like-or-not #dislike{
+    padding-top: 5px;
 }
