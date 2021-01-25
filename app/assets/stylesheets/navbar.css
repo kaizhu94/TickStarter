@@ -55,6 +55,7 @@
     justify-content: space-between;
     font-size: 15px;
 }
+
 .left-nav>div>#discover{
     padding-right: 10px;
 } 
@@ -64,3 +65,11 @@
     padding-right: 10px;
 }
 
+#start-a-project, #login{
+    text-decoration: none;
+    color: black
+}
+#start-a-project:hover, #login:hover{
+    text-decoration: underline;
+    color: lightgreen
+}

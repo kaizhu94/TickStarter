@@ -21,7 +21,7 @@ class NavBar extends React.Component{
                 <nav className='left-nav'>
                     <div>
                         <p id='discover'>Discover</p>
-                        <p id='start-project'>Start a project</p>
+                        <p id='start-project'><Link to='/learn' id='start-a-project'> Start a project</Link> </p>
                     </div>
                 </nav>
                 <nav className='mid-nav'>
