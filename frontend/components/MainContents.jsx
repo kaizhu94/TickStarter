@@ -17,9 +17,9 @@ class MainContents extends React.Component{
     render(){
         let tab;
         if(this.props.currentUser){
-            tab = <Link to='/' id='signup'>Subscribe</Link>
+            tab = <Link to='/' id='signup'>Thanks For Reading</Link>
         }else{
-            tab = <Link to='/signup' id='signup'>Signup</Link>
+            tab = <Link to='/signup' id='signup'>Signup For TickStarter</Link>
         }
         const pages = [
             {pageNumber: '1', content: <ProjectIndex/>},
@@ -42,20 +42,24 @@ class MainContents extends React.Component{
                     </div>
                 </div>
                 <div className='signup-section'>
-                    <h1>Discover the best and brightest projects on Kickstarter.</h1>
-                    <p>Sign up to receive our weekly Projects We Love newsletter.</p>
+                    <h1>Discover the best and brightest projects on Tickstarter.</h1>
+                    <p>Welcome to Tickstarter</p>
                     {tab}
                 </div>
                 <div className= 'addition-section1'>
                     <div className='fresh-block'>
-                        <h3>FRESH FAVORITES</h3>
-                        <FreshSection/>
+                        <div className='project-list'>
+                            <h3>FRESH FAVORITES</h3>
+                            <FreshSection/>
+                        </div>
                     </div>
                 </div>
                 <div className= 'addition-section2'>
                         <div className='takingoff-block'>
-                            <h3>TAKING OFF</h3>
-                            <TakingOffSection/>
+                            <div className='project-list2'>
+                                <h3>TAKING OFF</h3>
+                                <TakingOffSection/>
+                            </div>
                         </div>
                 </div>
 

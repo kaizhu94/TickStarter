@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap');@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
 .signup-section{
     padding: 70px 0;
     border-bottom: 1px solid  gainsboro;
@@ -13,21 +15,24 @@
 } */
 .signup-section h1{
     font-size: 30px;
+    font-family: 'PT Sans Narrow', sans-serif;
 }
 .signup-section p{
     font-family: 'Josefin Slab', serif;
     font-size: 16px;
+    font-weight: bold;
     margin: 40px;
 }
 .signup-section #signup{
     background-color: #464646;
     color: white;
-    width: 90px;
+    width: auto;
     height: 14px;
     padding-top: 12px;
-    padding-right: 2px;
+    padding-right: 12px;
     padding-bottom: 12px;
-    padding-left: 2px;
+    padding-left: 12px;
+    font-family: 'PT Sans Narrow', sans-serif;
     
     text-decoration: none;
     text-align: center;

@@ -3,7 +3,8 @@
 
 .login-container{
     background-color: rgb(248, 248, 248);
-    height: 100vh;
+    height: auto;
+    padding-bottom: 100px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -37,7 +38,11 @@
     margin-bottom: 30px;
     width: 300px;
     padding-left: 10px;
-    border: 1px solid rgb(127, 196, 25);
+    border: 1px solid gainsboro;
+}
+.login-form input:focus{
+    outline: none !important;
+    border: 1px solid rgb(105, 163, 19);
 }
 .login-form input:focus{
     outline: none !important;
@@ -48,7 +53,7 @@
     margin-bottom: 30px;
     width: 312px;
     /* padding-left: 10px; */
-    border: 1px solid rgb(127, 196, 25);
+    border: none;
     background-color: green;
     font-size: 15px;
     color: white;
@@ -56,6 +61,9 @@
 .login-form button:hover{
     background: rgb(1, 95, 1);
     cursor: pointer;
+}
+.login-form button:focus{
+    outline: none !important;
 }
 
 .login-block h1{
@@ -98,7 +106,7 @@
     color: blue;
 }
 #signup-link #signup-link-button:hover{
-    text-decoration: underline;
+    text-decoration: none;
     color:black;
 }
 #term{
@@ -126,4 +134,7 @@
 .login-block .demo-block #demo-button:hover{
     background: rgb(1, 95, 1);
     cursor: pointer;
+}
+.login-block .demo-block #demo-button:focus{
+    outline: none !important;
 }
