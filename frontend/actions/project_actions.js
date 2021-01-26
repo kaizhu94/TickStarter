@@ -10,7 +10,7 @@ export const receivePorjects = (projects)=>{
     })
 }
 
-export const receivePorjects = (project)=>{
+export const receivePorject = (project)=>{
     return ({
         type: RECEIVE_ALL_PROJECTS,
         project

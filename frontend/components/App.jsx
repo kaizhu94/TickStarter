@@ -27,14 +27,8 @@ const App = () => {
 			<section className="main-section">
 				<Switch>
 					<AuthRoute path="/signup" component={SignupFormContainer} />
-<<<<<<< HEAD
-					<AuthRoute path="/login" component={LoginFormContainer} />
-					<Route exact path="/learn" component={LearnStartAProject} />   
-					<Route path='/' component={MainContents} />
-=======
 					<AuthRoute path="/login" component={LoginFormContainer} />  
 					<Route path='/' component={MainContentContainer} />
->>>>>>> main
 				</Switch>
 				
 			</section>
