@@ -17,9 +17,12 @@ class Footers extends React.Component {
                 </li>
             );
         });
+        const {currentPage} = this.props;
         return(
             <ul className='footer-tabs'>
+                <li onClick={() => this.props.onTabChosen(currentPage-1)}>{'<'}</li>
                 {footers}
+                <li onClick={() => this.props.onTabChosen(currentPage+1)}>{'>'}</li>
             </ul>
         );
     }
@@ -31,17 +34,19 @@ class Footers extends React.Component {
     constructor(props){
         super(props);
         this.state ={
-            seletedPage: 0
+            selectedPage: 0
         }
-        this.seletedTab = this.seletedTab.bind(this);
+        this.selectedTab = this.selectedTab.bind(this);
     }
-    seletedTab(num) {
-        this.setState({selectedPage: num});
+    selectedTab(num) {
+        if(num>=0 && num<=2){
+            this.setState({selectedPage: num});
+        }
       }
 
     render(){
-        const page = this.props.pages[this.state.seletedPage];
-
+        const page = this.props.pages[this.state.selectedPage];
+        debugger
         return(
             <div>
                 <div className='content'>
@@ -50,8 +55,9 @@ class Footers extends React.Component {
                 <div className='pages-footer'>
                     <Footers
                         selectedPage={this.state.seletedPage}
-                        onTabChosen={this.seletedTab}
+                        onTabChosen={this.selectedTab}
                         pages={this.props.pages}
+                        currentPage={this.state.selectedPage}
                     />
                 </div>
             </div>

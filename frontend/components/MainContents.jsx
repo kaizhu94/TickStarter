@@ -7,7 +7,7 @@ import SectionBar from './section_bar/SectionBar'
 import FreshSection from './FreshSection'
 import TakingOffSection from './TakingOffSection'
 import Tabs from './project/Tabs'
-
+import SampleIndex from './project/SampleIndex'
 class MainContents extends React.Component{
     constructor(props){
         super(props);   
@@ -22,11 +22,9 @@ class MainContents extends React.Component{
             tab = <Link to='/signup' id='signup'>Signup</Link>
         }
         const pages = [
-            {pageNumber: '<', content: <ProjectIndex/>},
             {pageNumber: '1', content: <ProjectIndex/>},
-            {pageNumber: '2', content: <p>hi</p>},
-            {pageNumber: '3', content: <ProjectIndex/>},
-            {pageNumber: '>', content: <ProjectIndex/>}
+            {pageNumber: '2', content: <SampleIndex/>},
+            {pageNumber: '3', content: <ProjectIndex/>}
           ];
         return (
             <div className='main'>

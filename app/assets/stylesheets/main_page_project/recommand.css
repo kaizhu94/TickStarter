@@ -101,3 +101,8 @@
 .like-or-not #dislike{
     padding-top: 5px;
 }
+.project-index-item-block .project-index-item-intaincer #sample{
+    width:196px;
+    height: 90px;
+    padding-right: 20px;
+}
