@@ -4,27 +4,30 @@ import { Link } from 'react-router-dom'
 import Project from './project/Project'
 import ProjectIndex from './project/ProjectsIndex'
 import SectionBar from './section_bar/SectionBar'
+import FreshSection from './FreshSection'
+import TakingOffSection from './TakingOffSection'
+import Tabs from './project/Tabs'
 
 class MainContents extends React.Component{
     constructor(props){
-        super(props)
-        
+        super(props);   
     }
 
     
     render(){
-        // debugger
         let tab;
         if(this.props.currentUser){
             tab = <Link to='/' id='signup'>Subscribe</Link>
         }else{
             tab = <Link to='/signup' id='signup'>Signup</Link>
         }
-        // if(this.props.isLoggedIn !== true){
-        //     tab = <Link to='/signup' id='signup'>Signup</Link>
-        // }else{
-        //     tab = <Link to='/' id='signup'>Subscribe</Link>
-        // }
+        const pages = [
+            {pageNumber: '<', content: <ProjectIndex/>},
+            {pageNumber: '1', content: <ProjectIndex/>},
+            {pageNumber: '2', content: <p>hi</p>},
+            {pageNumber: '3', content: <ProjectIndex/>},
+            {pageNumber: '>', content: <ProjectIndex/>}
+          ];
         return (
             <div className='main'>
                 <SectionBar/>
@@ -36,7 +39,7 @@ class MainContents extends React.Component{
                         </div>
                         <div className = 'recommand-projects-block'>
                             <h3>RECOMMENDED FOR YOU</h3>
-                            <ProjectIndex/>
+                            <Tabs pages={pages} />
                         </div>
                     </div>
                 </div>
@@ -48,11 +51,14 @@ class MainContents extends React.Component{
                 <div className= 'addition-section1'>
                     <div className='fresh-block'>
                         <h3>FRESH FAVORITES</h3>
-                        <ProjectIndex/>
+                        <FreshSection/>
                     </div>
                 </div>
                 <div className= 'addition-section2'>
-
+                        <div className='takingoff-block'>
+                            <h3>TAKING OFF</h3>
+                            <TakingOffSection/>
+                        </div>
                 </div>
 
             </div>

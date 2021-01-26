@@ -1,10 +1,124 @@
 .addition-section1{
-    display: block;
-    justify-content: center
-    
+    display: block; 
+    border-bottom: 1px solid  gainsboro;
 }
+
 .fresh-block{
     display: block;
     padding-top: 48px;
     padding-bottom: 48px;
+    width: auto;
+    padding-left: 60px;
+}
+.fresh-block h3{
+    padding-bottom: 48px;
+    color:rgb(1, 70, 1);
+    font-family: 'Lato', sans-serif;
+}
+
+.fresh-block .section-index ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+.fresh-block .section-index ul li h1{
+    font-size: 18px;
+    margin-top: 24px;
+    margin-bottom: 24px;;
+    width: 287px;
+    font-family: 'Lato', sans-serif;
+    color: black;
+}
+
+.fresh-block .section-index ul li h1:hover{
+    text-decoration: underline;
+    color: rgb(1, 70, 1);
+}
+.fresh-block .section-index ul li:hover h1{
+    text-decoration: underline;
+    color: rgb(1, 70, 1);
+}
+.fresh-block .section-index ul li #feature-subtitle{
+    width: 287px;
+    font-size: 12px;
+    font-family: 'Yusei Magic', sans-serif;
+}
+.fresh-block .section-index ul li #feature-subtitle:hover{
+    text-decoration: underline;
+    color: rgb(1, 70, 1);
+}
+.fresh-block .section-index ul li #feature-founder{
+    font-size: 12px;
+    font-family: 'Yusei Magic', sans-serif;
+}
+.fresh-block .section-index .project-block{
+    width: 300px;
+    height: auto;
+}
+.addition-section1 img{
+    width: 288px;
+    height: 168px;
+}
+
+/* addition-section2 */
+.addition-section2{
+    display: block; 
+    border-bottom: 1px solid  gainsboro;
+}
+
+.takingoff-block{
+    display: block;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    width: auto;
+    padding-left: 60px;
+}
+.takingoff-block h3{
+    padding-bottom: 48px;
+    color:rgb(1, 70, 1);
+    font-family: 'Lato', sans-serif;
+}
+
+.takingoff-block .section-index ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+.takingoff-block .section-index ul li h1{
+    font-size: 18px;
+    margin-top: 24px;
+    margin-bottom: 24px;;
+    width: 287px;
+    font-family: 'Lato', sans-serif;
+    color: black;
+}
+
+.takingoff-block .section-index ul li h1:hover{
+    text-decoration: underline;
+    color: rgb(1, 70, 1);
+}
+.takingoff-block .section-index ul li:hover h1{
+    text-decoration: underline;
+    color: rgb(1, 70, 1);
+}
+.takingoff-block .section-index ul li #feature-subtitle{
+    width: 287px;
+    font-size: 12px;
+    font-family: 'Yusei Magic', sans-serif;
+}
+.takingoff-block .section-index ul li #feature-subtitle:hover{
+    text-decoration: underline;
+    color: rgb(1, 70, 1);
+}
+.takingoff-block .section-index ul li #feature-founder{
+    font-size: 12px;
+    font-family: 'Yusei Magic', sans-serif;
+}
+.takingoff-block .section-index .project-block{
+    width: 300px;
+    height: auto;
+}
+.addition-section2 img{
+    width: 288px;
+    height: 168px;
 }

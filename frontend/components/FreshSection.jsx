@@ -2,7 +2,7 @@ import React from 'react'
 import Project from './project/Project'
 
 
-class FreshSection extends React.Coponent{
+class FreshSection extends React.Component{
     render(){
         return (
             <div className='section-index'>
