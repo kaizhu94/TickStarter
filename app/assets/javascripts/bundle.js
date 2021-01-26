@@ -109,6 +109,16 @@ var closeModal = function closeModal() {
 
 /***/ }),
 
+/***/ "./frontend/actions/project_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/project_actions.js ***!
+  \*********************************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/kaizhu94/Full_Stack_Project/TickStarter/frontend/actions/project_actions.js: Identifier 'receivePorjects' has already been declared (13:13)\n\n\u001b[0m \u001b[90m 11 | \u001b[39m}\u001b[0m\n\u001b[0m \u001b[90m 12 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m receivePorjects \u001b[33m=\u001b[39m (project)\u001b[33m=>\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 14 | \u001b[39m    \u001b[36mreturn\u001b[39m ({\u001b[0m\n\u001b[0m \u001b[90m 15 | \u001b[39m        type\u001b[33m:\u001b[39m \u001b[33mRECEIVE_ALL_PROJECTS\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 16 | \u001b[39m        project\u001b[0m\n    at Object._raise (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:748:17)\n    at Object.raiseWithData (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:741:17)\n    at Object.raise (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:735:17)\n    at ScopeHandler.checkRedeclarationInScope (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:4919:12)\n    at ScopeHandler.declareName (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:4885:12)\n    at Object.checkLVal (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:9590:24)\n    at Object.parseVarId (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:12361:10)\n    at Object.parseVar (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:12336:12)\n    at Object.parseVarStatement (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:12151:10)\n    at Object.parseStatementContent (/home/kaizhu94/Full_Stack_Project/TickStarter/node_modules/@babel/parser/lib/index.js:11743:21)");
+
+/***/ }),
+
 /***/ "./frontend/actions/session_action.js":
 /*!********************************************!*\
   !*** ./frontend/actions/session_action.js ***!
@@ -1663,12 +1673,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _projects_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projects_reducer */ "./frontend/reducers/projects_reducer.js");
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  projects: _projects_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1728,6 +1741,47 @@ var ModalReducer = function ModalReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ModalReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/projects_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/projects_reducer.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_actions_project_actions__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var projectReducer = function projectReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_PROJECTS:
+      return action.projects;
+
+    case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PROJECT:
+      var newProject = _defineProperty({}, action.project.id, action.project);
+
+      return Object.assign({}, state, newProject);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (projectReducer);
 
 /***/ }),
 
