@@ -1,9 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
-
-=======
->>>>>>> newAuth
 class  ProjectIndexItem extends React.Component{
 
     render(){
@@ -17,11 +13,7 @@ class  ProjectIndexItem extends React.Component{
                     <div className='recom-project-info'>
                         <h1>GOPOSE: World’s first 2 in 1 fix posture and pulse massager</h1>
                         <p id='found-percentage'>100% funded</p>
-<<<<<<< HEAD
-                        <p id='founder'>By <Link to='/signup' id='name'>Kai</Link></p>
-=======
                         <p id='founder'>By <Link to='/' id='founder-name'>Kai</Link></p>
->>>>>>> newAuth
                         <ul className= 'like-or-not'>
                             <img id="like" src={window.like} ></img>
                             <img id="dislike" src={window.dislike} ></img>
