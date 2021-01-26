@@ -72,9 +72,15 @@
     background-color: white;
     padding-right: 10px;
     color: black;
+    font-family: 'Yusei Magic', sans-serif;
 }
 
 #login:hover{
     text-decoration: underline;
     color: rgb(54, 80, 15);
+}
+
+.navbar #search{
+    padding-left: 10px;
+    padding-right: 20px;
 }
