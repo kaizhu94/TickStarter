@@ -5,7 +5,7 @@ const SectionBar = () =>{
         <div className= 'section-bar'>
             <div className='section-container'>
                 <ul id='section-index'>
-                    <li>Art</li>
+                    <li>Arts</li>
                     <li>Comics & Illustration</li>
                     <li>Design & Tech</li>
                     <li>Film</li>

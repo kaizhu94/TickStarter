@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 .section-bar{
     display: flex;
     justify-content: center;
@@ -6,7 +7,7 @@
     height: 60px;
 }
 .section-container{
-    width: 702px;
+    width: 1000px;
     align-items: center;
     margin: auto;
 }
@@ -15,13 +16,14 @@
     display: flex;
     position: relative;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: #656969;
     /* overflow: scroll;
     direction: rtl; */
 }
-#section-index *{
-    transition-delay: 0s text-decoration;
-}
+
 
 
 
@@ -29,17 +31,22 @@
     display: inline-block;
     position: relative;
     padding-bottom: 3px;
+    margin-left: 18px;
+    margin-right: 18px;
   }
   #section-index li:after {
     content: '';
     display: block;
     margin: auto;
-    height: 3px;
+    height: 1px;
     width: 0px;
     background: transparent;
-    transition: height 10s ease, background-color 2s ease;
+    transition: height 1s ease, background-color 1s ease;
   }
   #section-index li:hover:after {
     width: 100%;
     background: rgb(120, 120, 233);
+  }
+  #section-index li:hover{
+    color: rgb(2, 177, 2);
   }

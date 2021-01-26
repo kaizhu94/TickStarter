@@ -1,22 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import DemoLogInContainer from './DemoLogInContainer'
 
 class LoginForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             email: "",
-            password:""
+            password:"",
         }
         this.handleSubmit =this.handleSubmit.bind(this);
     }
     handleSubmit(e){
         e.preventDefault();
+        
         this.props.logIn(this.state)
-        .then(this.props.openModal('errors'))
+        .then(null,reject=>this.props.openModal('errors'))
         .then(this.props.closeModal)
+        this.setState({
+            password: ""
+        })
+        
     }
+    
 
     update(key){
         return e => this.setState({[key]: e.currentTarget.value});
@@ -42,8 +49,9 @@ class LoginForm extends React.Component{
                         />
                         <button type = "submit" >Log in</button>
                     </form>
-                    <p id='signup-link'>New to KickStarter? <Link to='/signup' id='signup-link-button'> Sign up</Link></p>
-                    <p id='term'>This site is protected by reCAPTCHA and the Google <span>Privacy Policy</span> and <span>Terms of Service</span> apply.</p>
+                        <DemoLogInContainer />
+                    <p id='signup-link'>New to TicStarter? <Link to='/signup' id='signup-link-button'> Sign up</Link></p>
+                   
                 </div>
             </div>
         )

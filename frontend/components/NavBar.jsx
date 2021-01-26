@@ -13,7 +13,7 @@ class NavBar extends React.Component{
         }else{
             logOrProfile = <div id='login-or-demo'>
                 <Link to='/login' id='login'>Log in</Link>
-                <DemoLogInContainer/>
+                {/* <DemoLogInContainer/> */}
             </div>
         }
         return (

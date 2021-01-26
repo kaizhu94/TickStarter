@@ -36,6 +36,10 @@
     color: blue;
     font-weight: bold;
 }
+.log-in #login-link:hover{
+    text-decoration: none;
+    color: black;
+}
 .signup-form{
     display: flex;
     flex-direction: column;
@@ -47,6 +51,7 @@
     font-size: 28px;
     margin-top: 25px;
     margin-bottom: 25px;
+    font-family: 'Lato', sans-serif;
 }
 .signup-form input{
     height: 40px;
@@ -65,13 +70,16 @@
     margin-bottom: 30px;
     width: 312px;
     color: white;
-    background-color: rgb(105, 156, 33);
+    background-color: rgb(70, 105, 21);
     border: none;
 }
 .signup-form #signup-button:hover{
     outline: none !important;
     background-color: rgb(61, 92, 18);
     cursor: pointer;
+}
+.signup-form #signup-button:focus{
+     outline: none !important;
 }
 
 .signup-form p{

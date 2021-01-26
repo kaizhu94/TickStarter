@@ -1,6 +1,6 @@
 import React from 'react'
-import ProjectIndexItem from './ProjectIndexItem'
-class ProjectIndex extends React.Component{
+import SampleIndexItem from './SampleIndexItem'
+class SampleIndex extends React.Component{
     constructor(props){
         super(props);
     }
@@ -14,9 +14,9 @@ class ProjectIndex extends React.Component{
             <div>
                 <div id='recom-item-info'>
                     <ul>
-                        <li><ProjectIndexItem/></li>
-                        <li><ProjectIndexItem/></li>
-                        <li><ProjectIndexItem/></li>
+                        <li><SampleIndexItem/></li>
+                        <li><SampleIndexItem/></li>
+                        <li><SampleIndexItem/></li>
                     </ul>
                 </div>
                
@@ -25,4 +25,4 @@ class ProjectIndex extends React.Component{
     }
 }
 
-export default ProjectIndex;
+export default SampleIndex;

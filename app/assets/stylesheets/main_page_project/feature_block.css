@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab&family=Khand:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Imbue&family=Yusei+Magic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&family=Open+Sans+Condensed:wght@300&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@300&family=Montserrat:wght@300;400;500;600;800&family=Open+Sans+Condensed:wght@300&family=Poppins&display=swap');
 .featured-project-block{
     grid-column: 1;
     border-right: 1px solid  gainsboro;
@@ -8,15 +12,22 @@
 .featured-project-block h3{
     font-family: 'Khand', sans-serif;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 30px;
+    color: #656969;
 }
+
+
 .featured-project-block #posture{
     width: 100%;
+}
+.featured-project-block #posture:hover{
+    cursor: pointer;
 }
 .featured-project-block:hover  h1{
     text-decoration: underline;
     cursor: pointer;
+    color: rgb(2, 134, 2);
 }
 /* .featured-project-block h1:hover{
     text-decoration: underline;
@@ -24,9 +35,9 @@
 } */
 
 .featured-project-block h1{
-    font-size: 28px;
-    font-family: 'Josefin Slab', serif;
-    font-weight: bold;
+    font-size: 22px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -34,15 +45,17 @@
     text-decoration: none;
 }
 
-.featured-project-block #founder{
-    font-family: 'Khand', sans-serif;
-    font-size: 15px;
+.featured-project-block #feature-subtitle{
+    font-family: 'Martel', serif;
+}
+.featured-project-block #founder-name{
     padding-top: 30px;
     padding-bottom: 30px;
+    color: #656969;
 }
-.featured-project-block #founder #name{
-    text-decoration: none;
-}
-.featured-project-block #founder #name:hover{
-    text-decoration: underline;
+.featured-project-block  #feature-founder{
+    font-size: 15px;
+    font-family: 'Khand', sans-serif;
+    font-weight: 600;
+    color: #656969;
 }

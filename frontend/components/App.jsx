@@ -6,6 +6,7 @@ import SignupFormContainer from './session_forms/SignupFormConatiner'
 import LoginFormContainer from './session_forms/LoginFormContainer';
 import NavBarContainer from './NavBarContainer';
 import MainContents from './MainContents';
+import MainContentContainer from './MainContentContainer'
 import Modal from './modal/Modal'
 import Footer from './footer/Footer'
 import LearnStartAProject from './project/LearnStartAProject'
@@ -26,10 +27,16 @@ const App = () => {
 			<section className="main-section">
 				<Switch>
 					<AuthRoute path="/signup" component={SignupFormContainer} />
+<<<<<<< HEAD
 					<AuthRoute path="/login" component={LoginFormContainer} />
 					<Route exact path="/learn" component={LearnStartAProject} />   
 					<Route path='/' component={MainContents} />
+=======
+					<AuthRoute path="/login" component={LoginFormContainer} />  
+					<Route path='/' component={MainContentContainer} />
+>>>>>>> main
 				</Switch>
+				
 			</section>
 			
 			<footer className='footer-section'>

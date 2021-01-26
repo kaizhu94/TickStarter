@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&family=Open+Sans+Condensed:wght@300&display=swap');
 
 .navbar{
     display: flex;
@@ -7,6 +9,7 @@
     padding: 20px;
     background-color: white;
     border-bottom: 1px solid rgb(231, 227, 227);
+    height: 25px;
 }
 
 .mid-nav{
@@ -18,6 +21,7 @@
 .mid-nav > #tickstart-link {
     background-color: white;
     text-decoration: none;
+    /* font-family: ; */
 }
 .mid-nav:hover{
     cursor: pointer;
@@ -28,6 +32,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+.right-nav>div{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
 }
 .right-nav *:hover{
     cursor: pointer;
@@ -53,7 +65,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 15px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
 }
 
 .left-nav>div>#discover{
@@ -61,10 +75,21 @@
 } 
 
 #login{
+    text-decoration: none;
     background-color: white;
     padding-right: 10px;
+    color: black;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
 }
 
+#login:hover{
+    /* text-decoration: underline; */
+    color: rgb(54, 80, 15);
+}
+
+<<<<<<< HEAD
 #start-a-project, #login{
     text-decoration: none;
     color: black
@@ -72,4 +97,9 @@
 #start-a-project:hover, #login:hover{
     text-decoration: underline;
     color: lightgreen
+=======
+.navbar #search{
+    padding-left: 10px;
+    padding-right: 20px;
+>>>>>>> main
 }

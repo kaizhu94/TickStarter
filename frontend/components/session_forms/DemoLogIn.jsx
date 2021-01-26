@@ -10,7 +10,12 @@ class DemoLogIn extends React.Component{
     }
     render(){
         return (
-            <button onClick={()=>this.props.login(this.state)}>Demo</button>
+            <div className='demo-block'>
+
+                <button  id='demo-button' onClick={()=>this.props.login(this.state)}>Guest Login</button>
+            </div>
+
+            
         )
     }
 }
