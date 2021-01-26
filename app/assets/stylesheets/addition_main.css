@@ -1,14 +1,25 @@
 .addition-section1{
     display: block; 
     border-bottom: 1px solid  gainsboro;
+    justify-content: center;
+    margin: auto;
 }
 
 .fresh-block{
+    justify-content: center;
+    align-items: center;
     display: block;
     padding-top: 48px;
     padding-bottom: 48px;
-    width: auto;
+    width: 1246px;
     padding-left: 60px;
+    margin: auto;
+}
+
+.fresh-block .project-list{
+    justify-content: center;
+    align-items: center;
+    
 }
 .fresh-block h3{
     padding-bottom: 48px;
@@ -69,14 +80,25 @@
 .addition-section2{
     display: block; 
     border-bottom: 1px solid  gainsboro;
+    justify-content: center;
+    margin: auto;
 }
 
 .takingoff-block{
+    justify-content: center;
+    align-items: center;
     display: block;
     padding-top: 48px;
     padding-bottom: 48px;
-    width: auto;
+    width: 1246px;
     padding-left: 60px;
+    margin: auto;
+}
+
+.takingoff-block .project-list2{
+    justify-content: center;
+    align-items: center;
+    
 }
 .takingoff-block h3{
     padding-bottom: 48px;
@@ -101,7 +123,7 @@
 .takingoff-block .section-index ul li h1:hover{
     text-decoration: underline;
     color: rgb(1, 70, 1);
-    cursor: pointer
+    cursor: pointer;
 }
 .takingoff-block .section-index ul li:hover h1{
     text-decoration: underline;
@@ -115,7 +137,7 @@
 .takingoff-block .section-index ul li #feature-subtitle:hover{
     text-decoration: underline;
     color: rgb(1, 70, 1);
-    cursor: pointer
+    cursor: pointer;
 }
 .takingoff-block .section-index ul li #feature-founder{
     font-size: 12px;

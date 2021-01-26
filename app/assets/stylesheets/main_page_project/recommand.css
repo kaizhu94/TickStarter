@@ -1,6 +1,9 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&display=swap');
 .recommand-projects-block{
     grid-column: 2;
     padding-left: 70px;
+    width: 526px;
 }
 
 .recommand-projects-block #posture{
@@ -8,11 +11,15 @@
     height: 90px;
     padding-right: 20px;
 }
+.recommand-projects-block #posture:hover{
+    cursor: pointer;
+}
 .recommand-projects-block h3{
     font-family: 'Khand', sans-serif;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 18px;
+    color: #656969;
 }
 .recommand-projects-block h1{
     font-size: 14px;
@@ -24,14 +31,22 @@
     text-decoration: underline;
 }
 .recommand-projects-block #founder{
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Josefin Slab', serif;
+    color: #656969;
+    font-family: 'Khand', sans-serif;
+    font-weight: 600;
+}
+.recommand-projects-block #founder-name{
+    color: #656969;
 }
 .recommand-projects-block #found-percentage{
-    font-size: 12px;
-    color: rgb(3, 109, 3);
-    font-weight: bold;
+    /* font-size: 12px; */
+    font-weight: 800;
+    font-family: 'Khand', sans-serif;
+    color: #037362;
 }
+
 .project-index-item-block{
     display: flex;
     flex-direction: column;
@@ -48,7 +63,7 @@
     text-decoration: underline;
 }
 .recom-project-info *{
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 .recom-project-info{
     display: block;
@@ -88,6 +103,7 @@
 }
 #feature-founder{
     padding-top: 20px;
+    font-weight: 800;
 }
 
 .like-or-not *{
@@ -111,6 +127,9 @@
     padding-right: 20px;
 }
 
+.footer-tabs{
+    margin-top: 20px;
+}
 
 .footer-tabs #arrow{
     width: auto;
