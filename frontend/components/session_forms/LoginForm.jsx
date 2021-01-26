@@ -18,6 +18,9 @@ class LoginForm extends React.Component{
         this.props.logIn(this.state)
         .then(null,reject=>this.props.openModal('errors'))
         .then(this.props.closeModal)
+        this.setState({
+            password: ""
+        })
         
     }
     

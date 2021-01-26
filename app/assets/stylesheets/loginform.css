@@ -96,6 +96,9 @@
 #signup-link{
     text-align: center;
     padding-bottom: 12px; 
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
 }
 #signup-link #signup-link-button{
     text-decoration: none;

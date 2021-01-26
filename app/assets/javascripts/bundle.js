@@ -1766,6 +1766,9 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
       this.props.logIn(this.state).then(null, function (reject) {
         return _this2.props.openModal('errors');
       }).then(this.props.closeModal);
+      this.setState({
+        password: ""
+      });
     }
   }, {
     key: "update",

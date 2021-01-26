@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&family=Open+Sans+Condensed:wght@300&display=swap');
+
 .navbar{
     display: flex;
     justify-content: space-between;
@@ -30,12 +32,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px;
-    font-family: 'Yusei Magic', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
 }
 .right-nav>div{
-    font-family: 'Yusei Magic', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
     font-size: 14px;
+    font-weight: 400;
 }
 .right-nav *:hover{
     cursor: pointer;
@@ -61,8 +65,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 14px;
-    font-family: 'Yusei Magic', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
 }
 .left-nav>div>#discover{
     padding-right: 10px;
@@ -73,7 +78,9 @@
     background-color: white;
     padding-right: 10px;
     color: black;
-    font-family: 'Yusei Magic', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
 }
 
 #login:hover{

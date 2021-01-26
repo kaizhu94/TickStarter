@@ -23,8 +23,8 @@
 }
 .recommand-projects-block h1{
     font-size: 14px;
-    font-family: 'Josefin Slab', serif;
-    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    
 }
 .recommand-projects-block h1:hover{
     cursor: pointer;
