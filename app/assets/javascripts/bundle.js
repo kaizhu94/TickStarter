@@ -403,10 +403,11 @@ var MainContents = /*#__PURE__*/function (_React$Component) {
       var tab;
 
       if (this.props.currentUser) {
-        tab = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
-          to: "/",
-          id: "signup"
-        }, "Thanks For Reading");
+        tab = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+          target: "_blank",
+          href: "https://github.com/kaizhu94/TickStarter/wiki",
+          id: "WIKI-link"
+        }, "WIKI News");
       } else {
         tab = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
           to: "/signup",
