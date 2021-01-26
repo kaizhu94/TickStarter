@@ -17,7 +17,7 @@ class MainContents extends React.Component{
     render(){
         let tab;
         if(this.props.currentUser){
-            tab = <Link to='/' id='signup'>Thanks For Reading</Link>
+            tab = <a target="_blank" href="https://github.com/kaizhu94/TickStarter/wiki" id='WIKI-link'>WIKI News</a>
         }else{
             tab = <Link to='/signup' id='signup'>Signup For TickStarter</Link>
         }
