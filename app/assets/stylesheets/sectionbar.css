@@ -16,12 +16,12 @@
     position: relative;
     flex-direction: row;
     justify-content: space-between;
+    font-size: 16px;
+    font-family: 'Yusei Magic', sans-serif;
     /* overflow: scroll;
     direction: rtl; */
 }
-#section-index *{
-    transition-delay: 0s text-decoration;
-}
+
 
 
 
@@ -34,12 +34,15 @@
     content: '';
     display: block;
     margin: auto;
-    height: 3px;
+    height: 1px;
     width: 0px;
     background: transparent;
-    transition: height 10s ease, background-color 2s ease;
+    transition: height 1s ease, background-color 1s ease;
   }
   #section-index li:hover:after {
     width: 100%;
     background: rgb(120, 120, 233);
+  }
+  #section-index li:hover{
+    color: rgb(2, 177, 2);
   }

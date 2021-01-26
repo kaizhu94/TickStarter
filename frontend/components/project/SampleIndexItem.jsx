@@ -1,27 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
-
-=======
->>>>>>> newAuth
-class  ProjectIndexItem extends React.Component{
+class  SampleIndexItem extends React.Component{
 
     render(){
         return (
             <div className='project-index-item-block'>
                 <div className='project-index-item-intaincer'>
-                    <Link to='/signup'>
-                        <img id="posture" src={window.posture} ></img>
-                    </Link>
-                    
+                    <img id="sample" src={window.sample} ></img>
                     <div className='recom-project-info'>
-                        <h1>GOPOSE: World’s first 2 in 1 fix posture and pulse massager</h1>
-                        <p id='found-percentage'>100% funded</p>
-<<<<<<< HEAD
-                        <p id='founder'>By <Link to='/signup' id='name'>Kai</Link></p>
-=======
+                        <h1>Human Punishment: The Beginning</h1>
+                        <p id='found-percentage'>56% funded</p>
                         <p id='founder'>By <Link to='/' id='founder-name'>Kai</Link></p>
->>>>>>> newAuth
                         <ul className= 'like-or-not'>
                             <img id="like" src={window.like} ></img>
                             <img id="dislike" src={window.dislike} ></img>
@@ -34,4 +23,4 @@ class  ProjectIndexItem extends React.Component{
 
 }
 
-export default ProjectIndexItem;
+export default SampleIndexItem;

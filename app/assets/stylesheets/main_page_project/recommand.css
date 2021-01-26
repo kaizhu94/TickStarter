@@ -40,9 +40,11 @@
 
 .project-index-item-intaincer{
     display: flex;
-    padding: 14px;
+    padding-top: 14px;
+    margin-bottom: 0px;
 }
 .project-index-item-intaincer:hover h1{
+    color: rgb(2, 134, 2);
     text-decoration: underline;
 }
 .recom-project-info *{
@@ -51,26 +53,41 @@
 .recom-project-info{
     display: block;
 }
-.rec-index-pages{
+.pages-footer ul{
     display: flex;
-    float: right;
+    flex-direction: row;
+    justify-content: center;
+    padding-left: 350px;
+    padding-top: 25px;
+    /* text-align: right; */
 }
-.rec-index-pages ul{
-    display: flex;
-    flex: row;
-    position: relative;
-    list-style-type: none;
-    
+.pages-footer ul li{
+    margin-left: 12px;
+    margin-right: 12px;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    color: rgb(69, 69, 243);
 }
-.rec-index-pages ul *{
-    padding: 10px;
-    color: rgba(116, 149, 248, 0.9);
-}
-.rec-index-pages ul *:hover{
+.pages-footer ul li:hover{
     cursor: pointer;
-    color: rgba(43,96,255,0.9);
     text-decoration: underline;
+}
+.pages-footer ul li:focus{
+    text-decoration: underline;
+    color: rgb(2, 2, 109);
+}
 
+ #founder-name{
+    /* font-family: 'Imbue', serif; */
+    color: black;
+    text-decoration: none;
+    /* font-weight: bold; */
+}
+#founder-name:hover{
+    text-decoration: underline;
+}
+#feature-founder{
+    padding-top: 20px;
 }
 .recom-project-info #founder #name{
     text-decoration: none;
@@ -79,10 +96,18 @@
     text-decoration: underline;
 }
 .like-or-not *{
-    height:25px;
-    width: 25px;
+    height:20px;
+    width: 22px;
     padding-left: 10px;
 }
 .like-or-not *:hover{
     cursor: pointer;
+}
+.like-or-not #dislike{
+    padding-top: 5px;
+}
+.project-index-item-block .project-index-item-intaincer #sample{
+    width:196px;
+    height: 90px;
+    padding-right: 20px;
 }

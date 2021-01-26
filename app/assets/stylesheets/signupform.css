@@ -36,6 +36,10 @@
     color: blue;
     font-weight: bold;
 }
+.log-in #login-link:hover{
+    text-decoration: underline;
+    color: black;
+}
 .signup-form{
     display: flex;
     flex-direction: column;
@@ -47,6 +51,7 @@
     font-size: 28px;
     margin-top: 25px;
     margin-bottom: 25px;
+    font-family: 'Lato', sans-serif;
 }
 .signup-form input{
     height: 40px;
