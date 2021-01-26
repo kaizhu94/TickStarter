@@ -20,9 +20,9 @@ class Footers extends React.Component {
         const {currentPage} = this.props;
         return(
             <ul className='footer-tabs'>
-                <li onClick={() => this.props.onTabChosen(currentPage-1)}>{'<'}</li>
+                <li onClick={() => this.props.onTabChosen(currentPage-1)} id='arrow'>{'<'}</li>
                 {footers}
-                <li onClick={() => this.props.onTabChosen(currentPage+1)}>{'>'}</li>
+                <li onClick={() => this.props.onTabChosen(currentPage+1)} id='arrow'>{'>'}</li>
             </ul>
         );
     }

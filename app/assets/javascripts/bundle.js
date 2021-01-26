@@ -1494,11 +1494,13 @@ var Footers = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         onClick: function onClick() {
           return _this.props.onTabChosen(currentPage - 1);
-        }
+        },
+        id: "arrow"
       }, '<'), footers, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         onClick: function onClick() {
           return _this.props.onTabChosen(currentPage + 1);
-        }
+        },
+        id: "arrow"
       }, '>'));
     }
   }]);
