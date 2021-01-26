@@ -1475,11 +1475,9 @@ var Footers = /*#__PURE__*/function (_React$Component) {
       var _this = this;
 
       var selected = this.props.selectedPage;
-      debugger;
       var footers = this.props.pages.map(function (p, index) {
         var page = p.pageNumber;
         var klass = index === selected ? 'active' : "";
-        debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index,
           className: klass,
@@ -1537,7 +1535,6 @@ var Pages = /*#__PURE__*/function (_React$Component2) {
     key: "render",
     value: function render() {
       var page = this.props.pages[this.state.selectedPage];
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "content"
       }, page.content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

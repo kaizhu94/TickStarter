@@ -4,11 +4,11 @@ import React from 'react';
 class Footers extends React.Component {
     render(){
         const selected = this.props.selectedPage;
-        debugger
+        
         const footers = this.props.pages.map((p,index)=>{
             const page = p.pageNumber;
             const klass = index === selected ? 'active' : "";
-            debugger
+            
             return (
                 <li key={index}
                     className={klass}
@@ -46,7 +46,7 @@ class Footers extends React.Component {
 
     render(){
         const page = this.props.pages[this.state.selectedPage];
-        debugger
+        
         return(
             <div>
                 <div className='content'>
