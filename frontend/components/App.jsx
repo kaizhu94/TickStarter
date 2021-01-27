@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import {AuthRoute} from '../util/route_util'
+import {AuthRoute, ProtectedRoute} from '../util/route_util'
 
 import SignupFormContainer from './session_forms/SignupFormConatiner'
 import LoginFormContainer from './session_forms/LoginFormContainer';
 import NavBarContainer from './NavBarContainer';
-import MainContents from './MainContents';
 import MainContentContainer from './MainContentContainer'
 import Modal from './modal/Modal'
 import Footer from './footer/Footer'
-import LearnStartAProject from './project/LearnStartAProject'
+import NewProjectNavContainer from './NavBar/NewProjectNavContainer'
+import NewProjectFormContainer from './project_forms/NewProjectFormContainer'
 
 const App = () => {
   return (
@@ -20,6 +20,7 @@ const App = () => {
 				<Switch>
 					<Route path='/signup' component={NavBarContainer} />
 					<Route path='/login' component={NavBarContainer} />
+					<ProtectedRoute path='/projects/new' component={NewProjectNavContainer}/>
 					<Route path='/' component={NavBarContainer} />
 				</Switch>
 			</header>
@@ -27,14 +28,18 @@ const App = () => {
 			<section className="main-section">
 				<Switch>
 					<AuthRoute path="/signup" component={SignupFormContainer} />
-					<AuthRoute path="/login" component={LoginFormContainer} />  
+					<AuthRoute path="/login" component={LoginFormContainer} /> 
+					<ProtectedRoute path='/projects/new' component={NewProjectFormContainer}/> 
 					<Route path='/' component={MainContentContainer} />
 				</Switch>
-				
 			</section>
 			
 			<footer className='footer-section'>
-				<Footer/>
+				<Switch>
+					<Route exact path='/' component={Footer} />
+					<Route exact path='/signup' component={Footer} />
+					<Route exact path='/login' component={Footer} />
+				</Switch>
 			</footer>
 			
 		</div>

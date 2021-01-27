@@ -74,6 +74,11 @@
     padding-right: 10px;
 } 
 
+.left-nav #start-project #start-a-project{
+    text-decoration: none;
+    color: black;
+}
+
 #login{
     text-decoration: none;
     background-color: white;
@@ -89,17 +94,7 @@
     color: rgb(54, 80, 15);
 }
 
-<<<<<<< HEAD
-#start-a-project, #login{
-    text-decoration: none;
-    color: black
-}
-#start-a-project:hover, #login:hover{
-    text-decoration: underline;
-    color: lightgreen
-=======
 .navbar #search{
     padding-left: 10px;
     padding-right: 20px;
->>>>>>> main
 }

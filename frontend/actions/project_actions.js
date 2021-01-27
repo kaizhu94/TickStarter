@@ -17,6 +17,7 @@ export const receivePorject = (project)=>{
     })
 }
 
+
 export const fetchProjects = () => dispatch =>{
     return PorjectAPIUtil.fetchPorjects().then(
         (projects) => dispatch(receivePorjects(projects))
@@ -25,6 +26,12 @@ export const fetchProjects = () => dispatch =>{
 
 export const fetchProject = (projectId) => dispatch =>{
     return PorjectAPIUtil.fetchPorject(projectId).then(
-        (project) => dispatch(receivePorjects(project))
+        (project) => dispatch(receivePorject(project))
+        )
+}
+
+export const createProject = (project) => dispatch =>{
+    return PorjectAPIUtil.createPorject(project).then(
+        (project) => dispatch(receivePorject(project))
         )
 }

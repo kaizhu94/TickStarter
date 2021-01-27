@@ -1,4 +1,5 @@
 class Api::ProjectsController < ApplicationController
+    before_action :ensure_logged_in, only: [:create]
     def index
         @projects = Project.all
         render :index
@@ -10,9 +11,12 @@ class Api::ProjectsController < ApplicationController
     end
 
     def create
-        # debugger
-        @project = Project.create!(project_params)
-        render :show
+        @project = Project.new(project_params)
+        if @project.save
+            render :show
+        else
+            render json: @project.errors.full_messages, status: 404
+        end
     end
 
     private
