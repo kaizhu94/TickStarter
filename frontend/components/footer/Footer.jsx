@@ -22,7 +22,7 @@ const Footer =() =>{
 
                     </div>
                     <div className='footer-more'>
-                        <h3>MORE FROM TICSTARTER</h3>
+                        <h3>MORE FROM TICKSTARTER</h3>
                         <a target="_blank" href="https://github.com/kaizhu94/TickStarter/wiki">WIKI</a>
                         <a target="_blank" href="https://github.com/kaizhu94/TickStarter/wiki/backend-routes">Backend Routes</a>
                         <a target="_blank" href="https://github.com/kaizhu94/TickStarter/wiki/frontend-routes">Frontend Routes</a>
