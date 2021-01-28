@@ -12,6 +12,7 @@ class Api::ProjectsController < ApplicationController
 
     def create
         @project = Project.new(project_params)
+        # debugger
         if @project.save
             render :show
         else
@@ -23,6 +24,6 @@ class Api::ProjectsController < ApplicationController
 
     def project_params
         params.require(:project).permit(:project_name, :title, :subtitle, :description, 
-            :risks, :goal, :end_date, :location_id, :launch_date, :published, :founder_id, :catagory_id)
+            :risks, :goal, :end_date, :location_id, :launch_date, :published, :founder_id, :category_id)
     end
 end

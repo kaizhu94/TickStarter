@@ -1,5 +1,5 @@
 @projects.each do |project|
     json.set! project.id do
-        json.partial! 'project', project: project
+        json.extract! project, :id, :project_name, :title, :subtitle, :description, :risks, :goal, :end_date, :location_id, :launch_date, :published, :founder_id, :category_id
     end
 end

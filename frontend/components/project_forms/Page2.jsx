@@ -7,12 +7,12 @@ class Page2 extends React.Component{
             return null
         }
         return(
-            <div>
-                <div>
-                    <div>
+            <div className = 'inner-page-blcok'>
+                <div className = 'inter-page-container'>
                         <h2>Describe what you’ll be creating.</h2>
+                    <div className = 'page'>
                         <p>And don’t worry, you can edit this later, too.</p>
-                        <input type="text" 
+                        <textarea
                                 id='subtitle' 
                                 name='subtitle' 
                                 onChange={this.props.handleChange} 

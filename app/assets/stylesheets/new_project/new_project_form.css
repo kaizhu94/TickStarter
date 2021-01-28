@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&family=Raleway:wght@400;500&display=swap');
+#new-project-button{
+    background-color: white;
+    border: none;
+    display: flex;
+}
+
+.new-project-dropdown{
+    position: absolute;
+    display: block;
+    top: 46px;
+    right: 180px;
+	background-color: white;
+	border: 1px solid rgb(206, 203, 203);
+	padding: 6px;
+	width: 180px;
+	z-index: 1;
+	text-align: left;
+	font-weight: initial;
+}
+
+.ul-list li{
+    display: block;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 5px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+.ul-list li:hover{
+    background: gainsboro;
+}
+
+.new-project-form-block{
+    width: 100%;
+    height: 1000px;
+    margin: auto;
+}
+.new-project-form-container{
+    width: 70%;
+    height: 100%;
+    margin: auto;
+    justify-content: center;
+}
+.new-project-form-container h3{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    padding-top: 5px;
+    font-size: 14px;
+}
+.page-block{
+    margin: auto;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+    
+}
+.page-container{
+    margin-top: 150px;
+}
+.page-container form{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    width: 60%;
+    margin: auto;
+}
+.page-container form *{
+    text-align: center;
+}
+.page-container form .form-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.inner-page-blcok h2{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+}
+.inner-page-blcok p{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+div.form-buttons{
+    border-top: 1px solid gainsboro;
+    padding-top: 20px;
+    margin-top: 40px;
+}
+
+#category-selector{
+    box-shadow: 1px 2px 8px 2px #d4d4d4;
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: rgb(138, 138, 138);
+    margin-bottom: 50px;
+}
+
+#category-selector *{
+    color: black;
+    display: block;
+    margin: 10px;
+}
+#category-selector *:hvoer{
+    cursor: pointer;
+    background: gainsboro;
+}
+#category-selector:focus{
+    outline: none;
+}
+.form-buttons #next-button:disabled{
+    border: none;
+    color: white;
+    padding: 14px 22px;
+    background-color: lightgray;
+}
+
+.form-buttons #next-button:disabled:hover{
+    background-color: rgb(187, 186, 186);
+    cursor: not-allowed;
+}
+
+.form-buttons #next-button{
+    border: none;
+    color: white;
+    padding: 14px 22px;
+    background-color: rgb(80, 80, 80);
+}
+.form-buttons #next-button:hover{
+    background-color: black;
+    cursor: pointer;
+}
+
+.form-buttons p{
+    padding-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: rgb(138, 138, 138);
+}
+
+.page #subtitle{
+    width: 100%;
+    height: 80px;
+    border: 1px solid gainsboro;
+    text-align: left;
+    resize: none;
+}
+
+.page #subtitle:hover{
+    border: 1px solid rgb(141, 221, 22);
+}
+.page #subtitle:focus{
+    border: 1px solid black;
+    outline: none;
+}
+
+.form-buttons #prev-button{
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: rgb(138, 138, 138);
+    background: white;
+}
+.form-buttons #prev-button:hover{
+    color: black;
+    cursor: pointer;
+}
+
+#location-selector{
+    box-shadow: 1px 2px 8px 2px #d4d4d4;
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: rgb(138, 138, 138);
+    margin-bottom: 50px;
+}
+#location-selector *{
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#location-selector:focus{
+    outline: none;
+}

@@ -368,7 +368,7 @@ p1 = Project.create!(
     location_id: l1.id,
     published: false,
     founder_id: u1.id,
-    catagory_id: c77.id,
+    category_id: c77.id,
 )
 p2 = Project.create!(
     project_name: "massager",
@@ -378,5 +378,5 @@ p2 = Project.create!(
     location_id: l1.id,
     published: true,
     founder_id: u1.id,
-    catagory_id: c77.id,
+    category_id: c77.id,
 )

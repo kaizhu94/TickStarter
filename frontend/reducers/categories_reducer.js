@@ -5,6 +5,7 @@ const categoriesReducer = (state = {}, action )=>{
     Object.freeze(state)
     switch(action.type){
         case RECEIVE_ALL_CATEGORIES:
+            // debugger
             return action.categories;
         default:
             return state;

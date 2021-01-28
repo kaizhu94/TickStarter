@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
-    validates :project_name, uniqueness: true
-    validates :location_id,  :founder_id, :catagory_id, presence: true
+    validates :project_name, allow_nil: true, uniqueness: true
+    validates :location_id,  :founder_id, :category_id, presence: true
     validates :published, :inclusion => {:in => [true, false]}
     belongs_to :founder,
         primary_key: :id,
@@ -12,7 +12,7 @@ class Project < ApplicationRecord
         class_name: :Location
     belongs_to :category,
         primary_key: :id,
-        foreign_key: :catagory_id,
+        foreign_key: :category_id,
         class_name: :Category
 
     has_many :likes,

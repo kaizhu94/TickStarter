@@ -1,19 +1,19 @@
-export const fetchPorjects = () =>{
-    $.ajax({
+export const fetchProjects = () =>{
+    return $.ajax({
         method: 'GET',
         url: 'api/projects',
       })
 }
 
-export const fetchPorject = projectId =>{
-    $.ajax({
+export const fetchProject = projectId =>{
+   return $.ajax({
         method: 'GET',
         url: `api/projects/${projectId}`,
       })
 }
 
-export const createPorject = project =>{
-  $.ajax({
+export const createProject = project =>{
+  return $.ajax({
       method: 'POST',
       url: `api/projects`,
       data: {project}

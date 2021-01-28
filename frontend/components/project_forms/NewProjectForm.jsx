@@ -10,10 +10,10 @@ class NewProjectForm extends React.Component{
         this.state={
             currentPage: 1,
             subtitle:"",
-            location_id:"",
+            location_id:0,
             published: false,
-            founder_id: "",
-            catagory_id: ""
+            founder_id: this.props.founderId,
+            category_id: 0
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,17 +25,26 @@ class NewProjectForm extends React.Component{
     }
 
     componentDidMount(){
+        // debugger
         this.props.receiveLocations();
+        this.props.receiveCategories();
     }
 
     handleChange(event){
+        // debugger
         const {name, value} = event.target;
         this.setState({
             [name]: value
         })
+        // debugger
     }
     handleSubmit(event){
         event.preventDefault();
+        let newState =Object.assign({}, this.state);
+        delete newState['currentPage'];
+        this.props.createProject(newState)
+        // then( () => this.props.history.push('frontend route')
+
     }
     next(){
         // debugger
@@ -54,12 +63,38 @@ class NewProjectForm extends React.Component{
     }
 
     nextButton(){
-        if(this.state.currentPage < 3){
+        if(this.state.currentPage === 1){
             return (
                 <button
+                    id= 'next-button'
                     className = 'next-page-button'
                     type = 'button'
                     onClick = {this.next}
+                    disabled={!this.state.category_id}
+                >
+                    Next: Project Idea
+                </button>
+            )
+        }else if(this.state.currentPage === 2){
+            return (
+                <button
+                    id= 'next-button'
+                    className = 'next-page-button'
+                    type = 'button'
+                    onClick = {this.next}
+                    disabled={!this.state.subtitle}
+                >
+                    Next: Location
+                </button>
+            )
+        }else{
+            return (
+                
+                <button
+                    id= 'next-button'
+                    className = 'next-page-button'
+                    type = 'submit'
+                    disabled={!this.state.location_id}
                 >
                     Continue
                 </button>
@@ -67,52 +102,84 @@ class NewProjectForm extends React.Component{
         }
     }
     prevButton(){
-        if(this.state.currentPage !== 1){
+        if(this.state.currentPage === 2){
             return(
                 <button
+                    id='prev-button'
                     className = 'prev-page-button'
                     type ='button'
                     onClick={this.previous}
                 >
-                    Previous
+                    ⬅ Category
                 </button>
             )
+        }else if( this.state.currentPage === 3){
+            return(
+                <button
+                    id='prev-button'
+                    className = 'prev-page-button'
+                    type ='button'
+                    onClick={this.previous}
+                >
+                    ⬅ Project Idea
+                </button>
+            )
+        }else{
+            return (
+                <p>Welcome back.</p>
+            )
         }
-        return null
     }
     render(){
-        const {locations} = this.props;
-        return (
-            <React.Fragment>
-            <div>
-                <div>
-                    <h3>{this.state.currentPage} of 3</h3>
+        // debugger
+        if(!this.props.maincategories){
+            // debugger
+            return <div>Loading Page</div>
+        }else{
+            // debugger
+            const maincategories = Object.values(this.props.maincategories)
+            const locations = Object.values(this.props.locations)
+            // debugger
+            return (
+                
+                <div className='new-project-form-block'>
+                    <div className='new-project-form-container'>
+                            <h3>{this.state.currentPage} of 3</h3>
+                        <div className='page-block'>
+                            <div className='page-container'>
+                                <form onSubmit={this.handleSubmit}>
+                                    <Page1 
+                                        currentPage = {this.state.currentPage}
+                                        handleChange = {this.handleChange}
+                                        category_id = {this.state.category_id}
+                                        maincategories = {maincategories}
+                                    />
+                                    <Page2 
+                                        currentPage = {this.state.currentPage}
+                                        handleChange = {this.handleChange}
+                                        subtitle ={this.state.subtitle}
+            
+                                    />
+                                    <Page3 
+                                        currentPage = {this.state.currentPage}
+                                        handleChange = {this.handleChange}    
+                                        location_id = {this.state.location_id}   
+                                        locations = {locations}                  
+                                    />
+                                    <div className='form-buttons'>
+                                        {this.prevButton()}
+                                        {this.nextButton()}
+                                    </div>
+                                </form>
+                            </div>
 
-                    <form onSubmit={this.handleSubmit}>
-                        <Page1 
-                            currentPage = {this.state.currentPage}
-                            handleChange = {this.handleChange}
-                            catagory_id = {this.state.catagory_id}
-                        />
-                        <Page2 
-                            currentPage = {this.state.currentPage}
-                            handleChange = {this.handleChange}
-                            subtitle ={this.state.subtitle}
-                        />
-                        <Page3 
-                            currentPage = {this.state.currentPage}
-                            handleChange = {this.handleChange}    
-                            location_id = {this.state.location_id}                     
-                        />
-                        <div>
-                            {this.prevButton()}
-                            {this.nextButton()}
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            </React.Fragment>
-        )
+                    
+            )
+        }
+        
     }
 }
 

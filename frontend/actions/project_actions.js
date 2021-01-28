@@ -1,37 +1,38 @@
-import * as PorjectAPIUtil from '../util/project_util';
+import * as ProjectAPIUtil from '../util/project_util';
 
 export const RECEIVE_ALL_PROJECTS = 'RECEIVE_ALL_PROJECTS';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
 
-export const receivePorjects = (projects)=>{
+export const receiveProjects = (projects)=>{
     return ({
         type: RECEIVE_ALL_PROJECTS,
         projects
     })
 }
 
-export const receivePorject = (project)=>{
+export const receiveProject = (project)=>{
     return ({
-        type: RECEIVE_ALL_PROJECTS,
+        type: RECEIVE_PROJECT,
         project
     })
 }
 
 
 export const fetchProjects = () => dispatch =>{
-    return PorjectAPIUtil.fetchPorjects().then(
-        (projects) => dispatch(receivePorjects(projects))
+    return ProjectAPIUtil.fetchProjects().then(
+        (projects) => dispatch(receiveProjects(projects))
         )
 }
 
 export const fetchProject = (projectId) => dispatch =>{
-    return PorjectAPIUtil.fetchPorject(projectId).then(
-        (project) => dispatch(receivePorject(project))
+    return ProjectAPIUtil.fetchProject(projectId).then(
+        (project) => dispatch(receiveProject(project))
         )
 }
 
 export const createProject = (project) => dispatch =>{
-    return PorjectAPIUtil.createPorject(project).then(
-        (project) => dispatch(receivePorject(project))
+    // debugger;
+    return ProjectAPIUtil.createProject(project).then(
+        (project) => dispatch(receiveProject(project))
         )
 }
