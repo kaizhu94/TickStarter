@@ -7,14 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
-# Category.destroy_all
-# Rewards_item.destroy_all
-# Reward.destroy_all
-# Project.destroy_all
-# Location.destroy_all
-# Like.destroy_all
-# Item.destroy_all
-# Backing.destroy_all
+Category.destroy_all
+Rewards_item.destroy_all
+Reward.destroy_all
+Project.destroy_all
+Location.destroy_all
+Like.destroy_all
+Item.destroy_all
+Backing.destroy_all
 
 
 
@@ -375,7 +375,7 @@ p2 = Project.create!(
     title: "GOPOSE Tech | Fix Posture | Pulse Massage | Intuitive GOPOSE App | Get Your Health & Confidence Back",
     subtitle: "A nice equipment for fix posture",
     description: "Introducting GOPOSE, world's first fix posture and pulse massager. It is an innovative all in one gadget for your back. Once put on, it will automatically improve and correct your posture day by day. ",
-    location_id: l1.id,
+    location_id: l2.id,
     published: true,
     founder_id: u1.id,
     category_id: c77.id,

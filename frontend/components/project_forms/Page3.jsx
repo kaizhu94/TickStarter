@@ -18,7 +18,7 @@ class Page3 extends React.Component{
                                     })
                                 }
                         </select>
-        // debugger
+        //    
         return(
             <div className = 'inner-page-blcok'>
                 <div className = 'inter-page-container'>

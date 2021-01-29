@@ -2,7 +2,7 @@
 import {RECEIVE_ALL_PROJECTS, RECEIVE_PROJECT} from '../actions/project_actions'
 
 const projectReducer = (state={}, action) =>{
-    // debugger
+    //    
     Object.freeze(state);
     switch(action.type){
         case RECEIVE_ALL_PROJECTS:

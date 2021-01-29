@@ -16,7 +16,6 @@
     # end
     json.subcategories do 
         @subcategories.each do |subcategory|
-            # debugger
             json.set! subcategory.id do
                 json.extract! subcategory, :id, :category_name, :parent_id
             end

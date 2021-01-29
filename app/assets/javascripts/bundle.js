@@ -239,7 +239,6 @@ var fetchProject = function fetchProject(projectId) {
 };
 var createProject = function createProject(project) {
   return function (dispatch) {
-    // debugger;
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.createProject(project).then(function (project) {
       return dispatch(receiveProject(project));
     });
@@ -815,7 +814,6 @@ var NewProjectNavBar = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "new-pro-form-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -872,7 +870,7 @@ __webpack_require__.r(__webpack_exports__);
 // }
 
 var mdp = function mdp(dispatch) {
-  // debugger
+  //   
   return {
     logout: function logout() {
       return dispatch((0,_actions_session_action__WEBPACK_IMPORTED_MODULE_1__.logout)());
@@ -2081,7 +2079,7 @@ var NewProjectForm = /*#__PURE__*/function (_React$Component) {
     _this.next = _this.next.bind(_assertThisInitialized(_this));
     _this.previous = _this.previous.bind(_assertThisInitialized(_this));
     _this.nextButton = _this.nextButton.bind(_assertThisInitialized(_this));
-    _this.prevButton = _this.prevButton.bind(_assertThisInitialized(_this)); // debugger
+    _this.prevButton = _this.prevButton.bind(_assertThisInitialized(_this)); //    
 
     return _this;
   }
@@ -2089,18 +2087,18 @@ var NewProjectForm = /*#__PURE__*/function (_React$Component) {
   _createClass(NewProjectForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger
+      //    
       this.props.receiveLocations();
       this.props.receiveCategories();
     }
   }, {
     key: "handleChange",
     value: function handleChange(event) {
-      // debugger
+      //    
       var _event$target = event.target,
           name = _event$target.name,
           value = _event$target.value;
-      this.setState(_defineProperty({}, name, value)); // debugger
+      this.setState(_defineProperty({}, name, value)); //    
     }
   }, {
     key: "handleSubmit",
@@ -2117,7 +2115,7 @@ var NewProjectForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "next",
     value: function next() {
-      // debugger
+      //    
       var currentPage = this.state.currentPage;
       currentPage = currentPage >= 2 ? 3 : currentPage + 1;
       this.setState({
@@ -2185,14 +2183,14 @@ var NewProjectForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
+      //    
       if (!this.props.maincategories) {
-        // debugger
+        //    
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Loading Page");
       } else {
-        // debugger
+        //    
         var maincategories = Object.values(this.props.maincategories);
-        var locations = Object.values(this.props.locations); // debugger
+        var locations = Object.values(this.props.locations); //    
 
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "new-project-form-block"
@@ -2255,7 +2253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // debugger
+  //    
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
@@ -2332,7 +2330,7 @@ var Page1 = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       // let categorisSelectore = Object.value()
-      // debugger
+      //    
       if (this.props.currentPage !== 1) {
         return null;
       }
@@ -2352,7 +2350,7 @@ var Page1 = /*#__PURE__*/function (_React$Component) {
           value: c.id,
           key: i
         }, c.category_name);
-      })); // debugger
+      })); //    
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "inner-page-blcok"
@@ -2515,7 +2513,7 @@ var Page3 = /*#__PURE__*/function (_React$Component) {
           value: l.id,
           key: i
         }, l.location);
-      })); // debugger
+      })); //    
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "inner-page-blcok"
@@ -2945,7 +2943,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // debugger
+  //    
   return {
     // is_login: Boolean(state.session.id),
     errors: state.errors.session
@@ -3241,7 +3239,7 @@ var categoriesReducer = function categoriesReducer() {
 
   switch (action.type) {
     case _actions_category_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_CATEGORIES:
-      // debugger
+      //    
       return action.categories;
 
     case _actions_category_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CATEGORY:
@@ -3395,7 +3393,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var projectReducer = function projectReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  // debugger
+  //    
   Object.freeze(state);
 
   switch (action.type) {

@@ -21,7 +21,6 @@ class NewProjectNavBar extends React.Component{
         this.props.logout();
     }
     render(){
-        // debugger
         return (
             <div className = 'new-pro-form-header'>
                 <div className = 'new-pro-header-link'>

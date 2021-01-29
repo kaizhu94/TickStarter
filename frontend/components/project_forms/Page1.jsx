@@ -4,7 +4,7 @@ class Page1 extends React.Component{
     
     render(){
         // let categorisSelectore = Object.value()
-        // debugger
+        //    
         if(this.props.currentPage !==1){
             return null
         }
@@ -21,7 +21,7 @@ class Page1 extends React.Component{
                                     })
                                 }
                         </select>
-        // debugger
+        //    
         return(
             <div className = 'inner-page-blcok'>
                 <div className = 'inter-page-container'>
