@@ -1,5 +1,5 @@
 class Backing < ApplicationRecord
-    validates :backer_id, :backing_amount, :reward_id
+    validates :backer_id, :backing_amount, :reward_id, presence: true
 
     belongs_to :backer,
         primary_key: :id,

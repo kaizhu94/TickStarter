@@ -14,7 +14,7 @@ Project.destroy_all
 Location.destroy_all
 Like.destroy_all
 Item.destroy_all
-# Backing.destroy_all
+Backing.destroy_all
 
 
 
