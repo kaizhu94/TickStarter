@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Profile from '../components/profile/Profile'
+import Profile from '../profile/Profile'
 
-class NavBar extends React.Component{
+class ProjectDashboardNavBar extends React.Component{
     render(){
         let logOrProfile;
         if(this.props.currentUser){
@@ -18,8 +18,7 @@ class NavBar extends React.Component{
             <div className = 'navbar'>
                 <nav className='left-nav'>
                     <div>
-                        <p id='discover'>Discover</p>
-                        <p id='start-project'><Link to='/projects/new' id='start-a-project'> Start a project</Link> </p>
+                       {null}
                     </div>
                 </nav>
                 <nav className='mid-nav'>
@@ -27,9 +26,6 @@ class NavBar extends React.Component{
                 </nav>
                 
                 <nav className='right-nav'>
-                    <p>Search
-                    <img id="search" src={window.search} ></img>
-                    </p>
                     {logOrProfile}
                 </nav>
                 
@@ -38,4 +34,4 @@ class NavBar extends React.Component{
     }
 }
 
-export default NavBar;
+export default ProjectDashboardNavBar;

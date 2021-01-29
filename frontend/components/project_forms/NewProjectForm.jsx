@@ -43,8 +43,8 @@ class NewProjectForm extends React.Component{
         let newState =Object.assign({}, this.state);
         delete newState['currentPage'];
         this.props.createProject(newState)
-        // then( () => this.props.history.push('frontend route')
-
+            .then((project)=>{
+                return  this.props.history.push(`/projects/${project.project.id}/dashboard`)})
     }
     next(){
         // debugger

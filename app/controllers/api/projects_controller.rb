@@ -20,6 +20,11 @@ class Api::ProjectsController < ApplicationController
         end
     end
 
+    def update
+
+
+    end
+
     private
 
     def project_params

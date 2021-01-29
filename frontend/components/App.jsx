@@ -10,7 +10,8 @@ import Modal from './modal/Modal'
 import Footer from './footer/Footer'
 import NewProjectNavContainer from './NavBar/NewProjectNavContainer'
 import NewProjectFormContainer from './project_forms/NewProjectFormContainer'
-
+import ProjectDashboardNavBar from './NavBar/ProjectDashboardNavContainer'
+import ProjectDashbordContainer from './project_forms/ProjectDashbordContainer'
 const App = () => {
   return (
       <div>
@@ -21,6 +22,7 @@ const App = () => {
 					<Route path='/signup' component={NavBarContainer} />
 					<Route path='/login' component={NavBarContainer} />
 					<ProtectedRoute path='/projects/new' component={NewProjectNavContainer}/>
+					<ProtectedRoute path='/projects/:projectId/dashboard' component={ProjectDashboardNavBar}/>
 					<Route path='/' component={NavBarContainer} />
 				</Switch>
 			</header>
@@ -30,6 +32,7 @@ const App = () => {
 					<AuthRoute path="/signup" component={SignupFormContainer} />
 					<AuthRoute path="/login" component={LoginFormContainer} /> 
 					<ProtectedRoute path='/projects/new' component={NewProjectFormContainer}/> 
+					<ProtectedRoute path='/projects/:projectId/dashboard' component={ProjectDashbordContainer}/>
 					<Route path='/' component={MainContentContainer} />
 				</Switch>
 			</section>

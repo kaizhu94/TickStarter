@@ -5,9 +5,10 @@ class Api::CategoriesController < ApplicationController
         render :index
     end
 
-    # def show
-    #     @categories
-    # end
+    def show
+        @categories = Category.find(params[:id])
+        render :show
+    end
 
 
 end

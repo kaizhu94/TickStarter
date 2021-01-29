@@ -1,4 +1,4 @@
-import {RECEIVE_ALL_CATEGORIES} from '../actions/category_actions'
+import {RECEIVE_ALL_CATEGORIES, RECEIVE_CATEGORY} from '../actions/category_actions'
 
 
 const categoriesReducer = (state = {}, action )=>{
@@ -7,6 +7,8 @@ const categoriesReducer = (state = {}, action )=>{
         case RECEIVE_ALL_CATEGORIES:
             // debugger
             return action.categories;
+        case RECEIVE_CATEGORY:
+            return Object.assign({}, state, action.category)
         default:
             return state;
     }
