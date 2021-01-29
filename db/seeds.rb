@@ -8,13 +8,13 @@
 
 User.destroy_all
 Category.destroy_all
-Rewards_item.destroy_all
+RewardsItem.destroy_all
 Reward.destroy_all
 Project.destroy_all
 Location.destroy_all
 Like.destroy_all
 Item.destroy_all
-Backing.destroy_all
+# Backing.destroy_all
 
 
 
