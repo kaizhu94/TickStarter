@@ -23,11 +23,13 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
 # Challenges
   * Implement A Modal For Session Errors                        
     <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/modal.PNG' >
+    
   * Implement A Multipage Form For Creating A Project                                   
     <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/formpage1.PNG' >
     <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/formpage2.PNG' >
   
 # Code Snippets
+* Idea For Showing Modal Based On Different Cases
 ```
 switch(modal){
         case 'errors':
