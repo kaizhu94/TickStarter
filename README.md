@@ -31,8 +31,8 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
   * Sign Up, Log In
     * Users are able to log in to an existing account, or use the guest credential to log in
     * Users can sign up for a new account                            
-    <img width='200' height='200' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/login.PNG' >
-    <img width='200' height='200' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/signup.PNG' >
+    <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/login.PNG' >
+    <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/signup.PNG' >
 # Technologies Used
   * Ruby on rails
   * Javascript
