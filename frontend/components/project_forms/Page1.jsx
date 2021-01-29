@@ -14,7 +14,7 @@ class Page1 extends React.Component{
                                  id="category-selector"
                                  value = {this.props.category_id}
                                  onChange = {this.props.handleChange}>
-                                <option value='0' disabled hidden> Select your category </option>
+                                <option value='0' disabled hidden > Select your category </option>
                                 {
                                     maincategories.map((c, i) => {
                                     return  <option value={c.id} key={i}>{c.category_name}</option>
