@@ -21,7 +21,8 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
   
   
 # Challenges
-  * Implement A Modal For Session Errors                               
+  * Implement A Modal For Session Errors   
+  ```
   `switch(modal){
         case 'errors':
             const errorsArr = errors.map((error,i) =>{
@@ -44,6 +45,7 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
         default:
             return null;
     }`
+    ```
     <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/modal.PNG' >
   * Implement A Multipage Form For Creating A Project                                   
     <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/formpage1.PNG' >
