@@ -28,7 +28,9 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
 # [Live Demo](https://tickstarter.herokuapp.com)
 
 # Main Features
-  * 
+  * Sign Up, Log In
+    * Users are able to log in to an existing account, or use the guest credential to log in
+    * Users can sign up for a new account.
   
 # Technologies Used
   * Ruby on rails
@@ -40,6 +42,7 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
   
   
 # Challenges
+  * A Modal For Session Errors
   * Multipage Form
   
 # Code Snippets
