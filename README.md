@@ -30,7 +30,8 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
 # Main Features
   * Sign Up, Log In
     * Users are able to log in to an existing account, or use the guest credential to log in:
-    ![alt text](https://github.com/kaizhu94/TickStarter/blob/main/app/assets/images/login.PNG "Log In")
+    ![alt text](https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/login.PNG "Log In")
+     <img width='100' height='100' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/login.PNG' >
     * Users can sign up for a new account:                             
     ![alt text](https://github.com/kaizhu94/TickStarter/blob/main/app/assets/images/signup.PNG "Sign Up")
 # Technologies Used
