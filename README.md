@@ -25,11 +25,25 @@ Things you may want to cover:
 # TickStarter
 Tickstarter, a Kickstarter clone, is a platform application that allows individuals to crowdsource funding from other users for ideas. A user can share projects, explore through projects, and support other users' projects.
 
+# Live Demo [https://tickstarter.herokuapp.com]
 
 # Main Features
-
+  * 
 # Technologies Used
-
+  * Ruby on rails
+  * Javascript
+  * CSS
+  * React
+  * Postgresql
 # Challenges
-
+  * Multipage Form
+  
 # Code Snippets
+
+# Features Coming Soon
+  * Project Editing
+  * Project Deleting
+  * Project Show
+  * Porject Backing
+  * Project Searching
+  * Likes or Dislike Porject
