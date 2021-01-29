@@ -69,9 +69,15 @@
     font-weight: 400;
     font-size: 18px;
 }
+
 .left-nav>div>#discover{
     padding-right: 10px;
 } 
+
+.left-nav #start-project #start-a-project{
+    text-decoration: none;
+    color: black;
+}
 
 #login{
     text-decoration: none;

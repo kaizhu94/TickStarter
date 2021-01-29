@@ -368,5 +368,15 @@ p1 = Project.create!(
     location_id: l1.id,
     published: false,
     founder_id: u1.id,
-    catagory_id: c77.id,
+    category_id: c77.id,
+)
+p2 = Project.create!(
+    project_name: "massager",
+    title: "GOPOSE Tech | Fix Posture | Pulse Massage | Intuitive GOPOSE App | Get Your Health & Confidence Back",
+    subtitle: "A nice equipment for fix posture",
+    description: "Introducting GOPOSE, world's first fix posture and pulse massager. It is an innovative all in one gadget for your back. Once put on, it will automatically improve and correct your posture day by day. ",
+    location_id: l1.id,
+    published: true,
+    founder_id: u1.id,
+    category_id: c77.id,
 )

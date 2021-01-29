@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Profile from './profile/Profile'
-import DemoLogInContainer from './session_forms/DemoLogInContainer'
+import Profile from '../components/profile/Profile'
 
 class NavBar extends React.Component{
     render(){
@@ -13,7 +12,6 @@ class NavBar extends React.Component{
         }else{
             logOrProfile = <div id='login-or-demo'>
                 <Link to='/login' id='login'>Log in</Link>
-                {/* <DemoLogInContainer/> */}
             </div>
         }
         return (
@@ -21,7 +19,7 @@ class NavBar extends React.Component{
                 <nav className='left-nav'>
                     <div>
                         <p id='discover'>Discover</p>
-                        <p id='start-project'>Start a project</p>
+                        <p id='start-project'><Link to='/projects/new' id='start-a-project'> Start a project</Link> </p>
                     </div>
                 </nav>
                 <nav className='mid-nav'>

@@ -1,0 +1,28 @@
+.new-pro-form-header{
+    width: 100%;
+    height: 58px;
+}
+.new-pro-header-link{
+    margin: auto;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+    border-bottom: 2px solid #F0F0F0;;
+
+}
+.new-pro-header-link #tickstart-link{
+    text-decoration: none;
+    font-family: 'Zhi Mang Xing', cursive;
+    font-size: 200%;
+    color: greenyellow;
+}
+.new-pro-header-link #earth{
+    width: 30px;
+    height: 30px;
+    /* display: flex; */
+}
+/* .new-pro-header-link #earth:focus{
+    border: 1px solid black;
+} */
