@@ -28,7 +28,25 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
     <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/formpage2.PNG' >
   
 # Code Snippets
-
+```
+switch(modal){
+        case 'errors':
+            const errorsArr = errors.map((error,i) =>{
+                return (
+                    <li key={`errors-${i}`} id='session-error-item'>{error}</li>
+                )
+            })
+            return ( 
+            <div className='modal-background' onClick={closeModal}>
+                        <ul id='session-error-ul'>
+                            {errorsArr}
+                        </ul>
+            </div> 
+            );
+        default:
+            return null;
+    }
+```
 
 # Features Coming Soon
   * Project Editing
