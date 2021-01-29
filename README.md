@@ -22,6 +22,28 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
   
 # Challenges
   * Implement A Modal For Session Errors                               
+  `switch(modal){
+        case 'errors':
+            const errorsArr = errors.map((error,i) =>{
+                return (
+                    <li key={`errors-${i}`} id='session-error-item'>{error}</li>
+                )
+            })
+            return ( 
+            <div className='modal-background' onClick={closeModal}>
+                <div className='modal-child-container'>
+                    <div className='modal-child' onClick={event => event.stopPropagation()}>
+                        <ul id='session-error-ul'>
+                            {errorsArr}
+                        </ul>
+                    </div>
+                    <img id="xIcon" src={window.xIcon} />
+                </div>
+            </div> 
+            );
+        default:
+            return null;
+    }`
     <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/modal.PNG' >
   * Implement A Multipage Form For Creating A Project                                   
     <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/formpage1.PNG' >
