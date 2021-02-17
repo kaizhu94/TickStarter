@@ -4,7 +4,9 @@
 
 json.extract! @project, :id, :project_name, :title, :subtitle, :description, :risks, :goal, :end_date, :location_id, :launch_date, :published, :founder_id, :category_id
 json.category_name  @project.category.category_name
-
+@project.photo.each do |photo|
+    json.photoUrl url_for(photo)
+end
 
 # json.project do
 #     json.id @project.id

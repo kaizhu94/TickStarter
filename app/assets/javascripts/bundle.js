@@ -2645,7 +2645,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownprops) {
   return {
-    user: state.entities.users[1],
+    user: state.entities.users[state.session.id],
     project: state.entities.projects[ownprops.match.params.projectId]
   };
 };
