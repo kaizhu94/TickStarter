@@ -12,6 +12,8 @@ import NewProjectNavContainer from './NavBar/NewProjectNavContainer'
 import NewProjectFormContainer from './project_forms/NewProjectFormContainer'
 import ProjectDashboardNavBar from './NavBar/ProjectDashboardNavContainer'
 import ProjectDashbordContainer from './project_forms/ProjectDashbordContainer'
+import EditProfileNavContainer from './NavBar/EditProfileNavContainer'
+
 const App = () => {
   return (
       <div>
@@ -23,6 +25,7 @@ const App = () => {
 					<Route path='/login' component={NavBarContainer} />
 					<ProtectedRoute path='/projects/new' component={NewProjectNavContainer}/>
 					<ProtectedRoute path='/projects/:projectId/dashboard' component={ProjectDashboardNavBar}/>
+					<ProtectedRoute path='/projects/:projectId/edit/:id' component={EditProfileNavContainer}/>
 					<Route path='/' component={NavBarContainer} />
 				</Switch>
 			</header>

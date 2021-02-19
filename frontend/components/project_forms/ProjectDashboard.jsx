@@ -12,6 +12,7 @@ class ProjectDashboard extends React.Component{
             return null
         }
         const {user, project} = this.props
+        debugger
         return (
             <div className = 'dashboard-main'>
                 <div className = 'dashboard-head'>
@@ -24,19 +25,19 @@ class ProjectDashboard extends React.Component{
                             <div className='editform-links'>
                                 <ul>
                                     <li>
-                                        <Link to="/projects/:projectId/basics">Basics</Link>
+                                        <Link to={`/projects/${project.id}/edit/1`}>Basics</Link>
                                         <p>Name your project, upload an image, and estalish your campaign deatails.</p>  
                                     </li>
                                     <li>
-                                        <Link to="/projects/:projectId/funding">Funding</Link>  
+                                        <Link to={`/projects/${project.id}/edit/2`}>Funding</Link>  
                                         <p>Setyour financial goals</p>
                                     </li>
                                     <li>
-                                        <Link to="/projects/:projectId/rewards">Rewards</Link>  
+                                        <Link to={`/projects/${project.id}/edit/3`}>Rewards</Link>  
                                         <p>Set your rewards</p>
                                     </li>
                                     <li>
-                                        <Link to="/projects/:projectId/story">Story</Link>  
+                                        <Link to={`/projects/${project.id}/edit/4`}>Story</Link>  
                                         <p>Add a detailed project description</p>
                                     </li>
                                 </ul>
