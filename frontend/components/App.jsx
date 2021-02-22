@@ -13,6 +13,7 @@ import NewProjectFormContainer from './project_forms/NewProjectFormContainer'
 import ProjectDashboardNavBar from './NavBar/ProjectDashboardNavContainer'
 import ProjectDashbordContainer from './project_forms/ProjectDashbordContainer'
 import EditProfileNavContainer from './NavBar/EditProfileNavContainer'
+import EditProjectContainer from './project_forms/EditProjectContainer'
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
 					<AuthRoute path="/login" component={LoginFormContainer} /> 
 					<ProtectedRoute path='/projects/new' component={NewProjectFormContainer}/> 
 					<ProtectedRoute path='/projects/:projectId/dashboard' component={ProjectDashbordContainer}/>
+					<ProtectedRoute path='/projects/:projectId/edit/:id' component={EditProjectContainer}/>
 					<Route path='/' component={MainContentContainer} />
 				</Switch>
 			</section>

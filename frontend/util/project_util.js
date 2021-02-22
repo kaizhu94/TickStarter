@@ -19,3 +19,10 @@ export const createProject = project =>{
       data: {project}
     })
 }
+
+export const deleteProject = projectID =>{
+  return $.ajax({
+      method: 'DELETE',
+      url: `api/projects/${projectID}`
+    })
+}
