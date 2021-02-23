@@ -265,6 +265,7 @@ var deleteProject = function deleteProject(projectId) {
 };
 var updateProject = function updateProject(project) {
   return function (dispatch) {
+    debugger;
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(project).then(function (project) {
       return dispatch(receiveProject(project));
     });
@@ -2205,8 +2206,8 @@ var mdp = function mdp(dispatch) {
     receiveCategories: function receiveCategories() {
       return dispatch((0,_actions_category_actions__WEBPACK_IMPORTED_MODULE_2__.fetchCategories)());
     },
-    receiveProject: function receiveProject(projectId) {
-      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.fetchProject)(projectId));
+    updateProject: function updateProject(project) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProject)(project));
     }
   };
 };
@@ -2320,10 +2321,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _classCallCheck(this, EditProjectForm);
 
     _this2 = _super2.call(this, props);
-    debugger;
     _this2.state = {
       tab: parseInt(props.match.params.id),
       isModified: false,
+      id: '',
       project_name: '',
       subtitle: ''
     };
@@ -2332,14 +2333,18 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.next = _this2.next.bind(_assertThisInitialized(_this2));
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
+    _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
     return _this2;
   }
 
   _createClass(EditProjectForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      debugger;
+
       if (prevProps.project === undefined && this.props.project) {
         this.setState({
+          'id': this.props.project.id,
           'project_name': this.props.project.project_name,
           'subtitle': this.props.project.subtitle
         });
@@ -2348,16 +2353,14 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
-
       if (this.props.project !== undefined) {
         debugger;
         this.setState({
+          'id': this.props.project.id,
           'project_name': this.props.project.project_name,
           'subtitle': this.props.project.subtitle
         });
-      } // this.props.receiveProject(this.props.match.params.projectId)
-
+      }
     }
   }, {
     key: "selectTab",
@@ -2376,6 +2379,13 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
 
         return _this3.setState((_this3$setState = {}, _defineProperty(_this3$setState, key, e.currentTarget.value), _defineProperty(_this3$setState, 'isModified', true), _this3$setState));
       };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      debugger;
+      this.props.updateProject(this.state);
     }
   }, {
     key: "previous",
@@ -2469,17 +2479,17 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       }];
 
       if (!this.props.project) {
-        debugger;
         return null;
       } else {
-        debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
           selected: this.state.tab,
           tabs: tabs,
           selectTab: this.selectTab
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+          onSubmit: this.handleSubmit
+        }, this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-block"
@@ -4291,8 +4301,9 @@ var deleteProject = function deleteProject(projectID) {
   });
 };
 var updateProject = function updateProject(project) {
+  debugger;
   return $.ajax({
-    method: 'DELETE',
+    method: 'PATCH',
     url: "api/projects/".concat(project.id),
     data: {
       project: project

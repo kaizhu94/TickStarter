@@ -53,6 +53,7 @@ export const deleteProject = (projectId) => dispatch =>{
 }
 
 export const updateProject = (project) => dispatch =>{
+    debugger
     return ProjectAPIUtil.updateProject(project).then(
         (project) => dispatch(receiveProject(project))
         )

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import {fetchLocations} from '../../actions/location_actions'
 import {fetchCategories } from '../../actions/category_actions'
-import {fetchProject} from '../../actions/project_actions'
+import { updateProject} from '../../actions/project_actions'
 
 import EditProjectForm from './EditProjectForm'
 
@@ -19,7 +19,7 @@ const mdp = dispatch=>{
     return ({
         receiveLocations: ()=>dispatch(fetchLocations()),
         receiveCategories: ()=> dispatch(fetchCategories()),
-        receiveProject: projectId => dispatch(fetchProject(projectId))
+        updateProject: (project) => dispatch(updateProject(project))
     })
 }
 export default connect(msp, mdp)(EditProjectForm);

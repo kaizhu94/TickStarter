@@ -47,10 +47,10 @@ class Headers extends React.Component {
 class EditProjectForm extends React.Component{
     constructor(props){
         super(props)
-        debugger
         this.state = {
             tab: parseInt(props.match.params.id),
             isModified: false,
+            id: '',
             project_name: '',
             subtitle:  ''
         }
@@ -59,25 +59,27 @@ class EditProjectForm extends React.Component{
         this.next = this.next.bind(this);
         this.previousButton = this.previousButton.bind(this);
         this.nextButton = this.nextButton.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     componentDidUpdate(prevProps){
+        debugger
         if(prevProps.project === undefined && this.props.project){
                 this.setState({
+                    'id': this.props.project.id,
                     'project_name': this.props.project.project_name,
                     'subtitle': this.props.project.subtitle
                 })
         }
     }
     componentDidMount(){
-        debugger
         if(this.props.project !== undefined){
             debugger
             this.setState({
+                        'id': this.props.project.id,
                         'project_name': this.props.project.project_name,
                         'subtitle': this.props.project.subtitle
                     })
         }
-        // this.props.receiveProject(this.props.match.params.projectId)
     }
    
     selectTab(num) {
@@ -88,6 +90,12 @@ class EditProjectForm extends React.Component{
         return e => this.setState({[key]: e.currentTarget.value,
                                 'isModified': true}
                                 );
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+        debugger
+        this.props.updateProject(this.state);
     }
 
     previous(){
@@ -185,16 +193,16 @@ class EditProjectForm extends React.Component{
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project){
-            debugger
+            
             return null;
         }else{
-            debugger
+            
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}
                              tabs={tabs}
                              selectTab={this.selectTab}/>
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         {
                             this.state.tab == 0? (
                                 <div>
