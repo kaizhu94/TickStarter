@@ -2326,17 +2326,23 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
     return _this2;
-  } // componentDidUpdate(){
-  //     this.setState({
-  //         'project_name': this.props.project.project_name,
-  //         'subtitle': this.props.project.subtitle
-  //     })
-  // }
-
+  }
 
   _createClass(EditProjectForm, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.project === undefined && this.props.project) {
+        this.setState({
+          'project_name': this.props.project.project_name,
+          'subtitle': this.props.project.subtitle
+        });
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
+
       if (this.props.project !== undefined) {
         debugger;
         this.setState({
@@ -2345,17 +2351,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         });
       } // this.props.receiveProject(this.props.match.params.projectId)
 
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      if (this.props.project !== undefined) {
-        debugger;
-        this.setState({
-          'project_name': this.props.project.project_name,
-          'subtitle': this.props.project.subtitle
-        });
-      }
     }
   }, {
     key: "selectTab",
@@ -2467,6 +2462,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       }];
 
       if (!this.props.project) {
+        debugger;
         return null;
       } else {
         debugger;

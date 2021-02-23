@@ -61,13 +61,16 @@ class EditProjectForm extends React.Component{
         this.previousButton = this.previousButton.bind(this);
         this.nextButton = this.nextButton.bind(this);
     }
-    // componentDidUpdate(){
-    //     this.setState({
-    //         'project_name': this.props.project.project_name,
-    //         'subtitle': this.props.project.subtitle
-    //     })
-    // }
+    componentDidUpdate(prevProps){
+        if(prevProps.project === undefined && this.props.project){
+                this.setState({
+                    'project_name': this.props.project.project_name,
+                    'subtitle': this.props.project.subtitle
+                })
+        }
+    }
     componentDidMount(){
+        debugger
         if(this.props.project !== undefined){
             debugger
             this.setState({
@@ -77,15 +80,7 @@ class EditProjectForm extends React.Component{
         }
         // this.props.receiveProject(this.props.match.params.projectId)
     }
-    componentWillUnmount(){
-        if(this.props.project !== undefined){
-            debugger
-            this.setState({
-                        'project_name': this.props.project.project_name,
-                        'subtitle': this.props.project.subtitle
-                    })
-        }
-    }
+   
     selectTab(num) {
         this.setState({tab: num});
     }
@@ -190,6 +185,7 @@ class EditProjectForm extends React.Component{
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project){
+            debugger
             return null;
         }else{
             debugger
