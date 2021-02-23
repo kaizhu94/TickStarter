@@ -52,7 +52,7 @@ class EditProjectForm extends React.Component{
             tab: parseInt(props.match.params.id),
             isModified: false,
             project_name: '',
-            subtitle:  ''
+            subtitle: ''
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
