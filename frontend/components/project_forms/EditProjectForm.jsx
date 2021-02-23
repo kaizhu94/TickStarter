@@ -9,7 +9,6 @@ class Headers extends React.Component {
       const headers = this.props.tabs.map((tab, index) => {
         const title = tab.title;
         const klass = index == selected ? 'active' : '';
-        debugger
         return (
         <div className={`${klass}-div`}>
           <li
@@ -50,9 +49,16 @@ class EditProjectForm extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            tab: props.match.params.id
+            tab: parseInt(props.match.params.id),
+            isModified: false,
+            project_name: '',
+            subtitle:  ''
         }
         this.selectTab = this.selectTab.bind(this);
+        this.previous = this.previous.bind(this);
+        this.next = this.next.bind(this);
+        this.previousButton = this.previousButton.bind(this);
+        this.nextButton = this.nextButton.bind(this);
     }
     componentDidMount(){
         this.props.receiveProject(this.props.match.params.projectId)
@@ -61,11 +67,106 @@ class EditProjectForm extends React.Component{
         this.setState({tab: num});
     }
 
+    update(key){
+        return e => this.setState({[key]: e.currentTarget.value,
+                                'isModified': true});
+    }
+
+    previous(){
+        let currentTab = this.state.tab;
+        currentTab = currentTab < 1 ? 0 : currentTab-1;
+        this.setState({
+            tab: currentTab
+        })
+    }
+
+    next(){
+        let currentTab = this.state.tab;
+        currentTab = currentTab >= 2 ? 3 : currentTab+1;
+        this.setState({
+            tab: currentTab
+        })
+    }
+
+    previousButton(){
+        if(this.state.tab === 1){
+            return(
+                <button id = 'edit-pre-button'
+                        onClick={this.previous}
+                        type = 'button'>
+                    <i class="fas fa-chevron-left"></i>  <span>Back to basics</span>
+                </button>
+            )
+        }else if(this.state.tab === 2){
+            return(
+                <button id = 'edit-pre-button'
+                        onClick={this.previous}
+                        type = 'button'>
+                    <i class="fas fa-chevron-left"></i>  <span>Back to funding</span>
+                </button>
+            )   
+        }else if(this.state.tab === 3){
+            return(
+                <button id = 'edit-pre-button'
+                        onClick={this.previous}
+                        type = 'button'>
+                    <i class="fas fa-chevron-left"></i>  <span>Back to rewards</span>
+                </button>
+            )   
+        }else{
+            return(
+                <div>
+                </div>
+            )
+        }
+    }
+
+    nextButton(){
+        if(this.state.tab === 0){
+            return(
+                <div>
+                    <button
+                    id='edit-next-button'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: funding <i class="fas fa-chevron-right"></i>
+                </button>
+                </div>
+            )
+        }else if(this.state.tab === 1){
+            return(
+                <div>
+                    <button
+                    id='edit-next-button'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: rewards <i class="fas fa-chevron-right"></i>
+                </button>
+                </div>
+            )
+        }else if(this.state.tab === 2){
+            return(
+                <div>
+                    <button
+                    id='edit-next-button'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: background <i class="fas fa-chevron-right"></i>
+                </button>
+                </div>
+            )
+        }else{
+
+        }
+    }
+
     render(){
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project){
-            debugger
             return null;
         }else{
             debugger
@@ -101,6 +202,7 @@ class EditProjectForm extends React.Component{
                                                             <input type="text" 
                                                                 placeholder='Alow Bub: Self-care pocket companion for iOS'
                                                                 value={this.props.project.project_name}
+                                                                onChange={this.update('project_name')}
                                                                 />
                                                     </div>
                                                     <div>
@@ -109,6 +211,7 @@ class EditProjectForm extends React.Component{
                                                             <textarea type="text"
                                                                 placeholder='Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.'
                                                                 value={this.props.project.subtitle}
+                                                                onChange={this.update('subtitle')}
                                                                 />
                                                     </div>
                                                 </div>
@@ -118,6 +221,28 @@ class EditProjectForm extends React.Component{
                                 </div>
                             ):(null)
                         }
+                        <div className='edit-button-block'>
+                            <div className = 'edit-button-container'> 
+                                {
+                                    this.state.isModified? (
+                                        <div>
+                                            <div>
+                                                <div></div>
+                                                <button type='submit'>Save</button>
+                                            </div>
+                                        </div>
+                                    ): (
+                                        <div>
+                                            {this.previousButton()}
+                                            <div>
+                                                <span>No unsaved changes</span>
+                                                {this.nextButton()} 
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </div>
                     </form>
                 </div>
             )

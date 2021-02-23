@@ -149,7 +149,7 @@
 }
 
 .right-container div input{
-    height: 30px;
+    height: 35px;
     padding-left: 15px;
 }
 .right-container div textarea{
@@ -164,3 +164,5 @@
     outline: none;
     border-color: green;
 }
+
+

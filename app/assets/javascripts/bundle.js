@@ -2180,7 +2180,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
@@ -2220,6 +2219,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2265,7 +2266,6 @@ var Headers = /*#__PURE__*/function (_React$Component) {
       var headers = this.props.tabs.map(function (tab, index) {
         var title = tab.title;
         var klass = index == selected ? 'active' : '';
-        debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "".concat(klass, "-div")
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -2313,9 +2313,16 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
 
     _this2 = _super2.call(this, props);
     _this2.state = {
-      tab: props.match.params.id
+      tab: parseInt(props.match.params.id),
+      isModified: false,
+      project_name: '',
+      subtitle: ''
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
+    _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
+    _this2.next = _this2.next.bind(_assertThisInitialized(_this2));
+    _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
+    _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
     return _this2;
   }
 
@@ -2332,6 +2339,95 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       });
     }
   }, {
+    key: "update",
+    value: function update(key) {
+      var _this3 = this;
+
+      return function (e) {
+        var _this3$setState;
+
+        return _this3.setState((_this3$setState = {}, _defineProperty(_this3$setState, key, e.currentTarget.value), _defineProperty(_this3$setState, 'isModified', true), _this3$setState));
+      };
+    }
+  }, {
+    key: "previous",
+    value: function previous() {
+      var currentTab = this.state.tab;
+      currentTab = currentTab < 1 ? 0 : currentTab - 1;
+      this.setState({
+        tab: currentTab
+      });
+    }
+  }, {
+    key: "next",
+    value: function next() {
+      var currentTab = this.state.tab;
+      currentTab = currentTab >= 2 ? 3 : currentTab + 1;
+      this.setState({
+        tab: currentTab
+      });
+    }
+  }, {
+    key: "previousButton",
+    value: function previousButton() {
+      if (this.state.tab === 1) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-pre-button",
+          onClick: this.previous,
+          type: "button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          "class": "fas fa-chevron-left"
+        }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to basics"));
+      } else if (this.state.tab === 2) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-pre-button",
+          onClick: this.previous,
+          type: "button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          "class": "fas fa-chevron-left"
+        }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to funding"));
+      } else if (this.state.tab === 3) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-pre-button",
+          onClick: this.previous,
+          type: "button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          "class": "fas fa-chevron-left"
+        }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to rewards"));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+      }
+    }
+  }, {
+    key: "nextButton",
+    value: function nextButton() {
+      if (this.state.tab === 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-next-button",
+          type: "button",
+          onClick: this.next
+        }, "Next step: funding ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          "class": "fas fa-chevron-right"
+        })));
+      } else if (this.state.tab === 1) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-next-button",
+          type: "button",
+          onClick: this.next
+        }, "Next step: rewards ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          "class": "fas fa-chevron-right"
+        })));
+      } else if (this.state.tab === 2) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-next-button",
+          type: "button",
+          onClick: this.next
+        }, "Next step: background ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          "class": "fas fa-chevron-right"
+        })));
+      } else {}
+    }
+  }, {
     key: "render",
     value: function render() {
       var tabs = [{
@@ -2345,7 +2441,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       }];
 
       if (!this.props.project) {
-        debugger;
         return null;
       } else {
         debugger;
@@ -2374,12 +2469,20 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "text",
           placeholder: "Alow Bub: Self-care pocket companion for iOS",
-          value: this.props.project.project_name
+          value: this.props.project.project_name,
+          onChange: this.update('project_name')
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Subtitle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
           type: "text",
           placeholder: "Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.",
-          value: this.props.project.subtitle
-        }))))))) : null));
+          value: this.props.project.subtitle,
+          onChange: this.update('subtitle')
+        }))))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-button-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-button-container"
+        }, this.state.isModified ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "submit"
+        }, "Save"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.previousButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "No unsaved changes"), this.nextButton()))))));
       }
     }
   }]);
