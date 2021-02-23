@@ -2171,18 +2171,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_location_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/location_actions */ "./frontend/actions/location_actions.js");
 /* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/category_actions */ "./frontend/actions/category_actions.js");
-/* harmony import */ var _EditProjectForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditProjectForm */ "./frontend/components/project_forms/EditProjectForm.jsx");
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _EditProjectForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditProjectForm */ "./frontend/components/project_forms/EditProjectForm.jsx");
 
 
 
 
 
-var msp = function msp(state) {
+
+var msp = function msp(state, ownprops) {
   debugger;
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
-    maincategories: state.entities.categories.maincategories
+    maincategories: state.entities.categories.maincategories,
+    project: state.entities.projects[ownprops.match.params.projectId]
   };
 };
 
@@ -2193,11 +2196,14 @@ var mdp = function mdp(dispatch) {
     },
     receiveCategories: function receiveCategories() {
       return dispatch((0,_actions_category_actions__WEBPACK_IMPORTED_MODULE_2__.fetchCategories)());
+    },
+    receiveProject: function receiveProject(projectId) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.fetchProject)(projectId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditProjectForm__WEBPACK_IMPORTED_MODULE_3__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditProjectForm__WEBPACK_IMPORTED_MODULE_4__.default));
 
 /***/ }),
 
@@ -2314,6 +2320,11 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }
 
   _createClass(EditProjectForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveProject(this.props.match.params.projectId);
+    }
+  }, {
     key: "selectTab",
     value: function selectTab(num) {
       this.setState({
@@ -2332,14 +2343,44 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       }, {
         title: 'Background'
       }];
-      debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "Edit-Project"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
-        selected: this.state.tab,
-        tabs: tabs,
-        selectTab: this.selectTab
-      }));
+
+      if (!this.props.project) {
+        debugger;
+        return null;
+      } else {
+        debugger;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "Edit-Project"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
+          selected: this.state.tab,
+          tabs: tabs,
+          selectTab: this.selectTab
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "start-from-basic"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "start-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Start from the basics"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Let people easily understand your project."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-name-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-name-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "left"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Project name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Write a clear, short title to let people quickly understand the gist of the project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "right"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "right-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "text",
+          placeholder: "Alow Bub: Self-care pocket companion for iOS",
+          value: this.props.project.project_name
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Subtitle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+          type: "text",
+          placeholder: "Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.",
+          value: this.props.project.subtitle
+        }))))))) : null));
+      }
     }
   }]);
 
