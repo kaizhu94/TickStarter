@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 
 
 class Headers extends React.Component {
@@ -87,7 +86,8 @@ class EditProjectForm extends React.Component{
 
     update(key){
         return e => this.setState({[key]: e.currentTarget.value,
-                                'isModified': true});
+                                'isModified': true}
+                                );
     }
 
     previous(){

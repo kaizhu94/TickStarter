@@ -208,7 +208,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchProjects": () => /* binding */ fetchProjects,
 /* harmony export */   "fetchProject": () => /* binding */ fetchProject,
 /* harmony export */   "createProject": () => /* binding */ createProject,
-/* harmony export */   "deleteProject": () => /* binding */ deleteProject
+/* harmony export */   "deleteProject": () => /* binding */ deleteProject,
+/* harmony export */   "updateProject": () => /* binding */ updateProject
 /* harmony export */ });
 /* harmony import */ var _util_project_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/project_util */ "./frontend/util/project_util.js");
 
@@ -259,6 +260,13 @@ var deleteProject = function deleteProject(projectId) {
     debugger;
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.deleteProject(projectId).then(function () {
       return dispatch(removeProject(projectId));
+    });
+  };
+};
+var updateProject = function updateProject(project) {
+  return function (dispatch) {
+    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(project).then(function (project) {
+      return dispatch(receiveProject(project));
     });
   };
 };
@@ -2245,7 +2253,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var Headers = /*#__PURE__*/function (_React$Component) {
   _inherits(Headers, _React$Component);
 
@@ -3933,7 +3940,7 @@ var projectReducer = function projectReducer() {
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PROJECT:
       var newProject = _defineProperty({}, action.project.id, action.project);
 
-      return Object.assign({}, state, newProject);
+      return newProject;
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_PROJECT:
       var newProjects = Object.assign({}, state);
@@ -4253,7 +4260,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchProjects": () => /* binding */ fetchProjects,
 /* harmony export */   "fetchProject": () => /* binding */ fetchProject,
 /* harmony export */   "createProject": () => /* binding */ createProject,
-/* harmony export */   "deleteProject": () => /* binding */ deleteProject
+/* harmony export */   "deleteProject": () => /* binding */ deleteProject,
+/* harmony export */   "updateProject": () => /* binding */ updateProject
 /* harmony export */ });
 var fetchProjects = function fetchProjects() {
   return $.ajax({
@@ -4280,6 +4288,15 @@ var deleteProject = function deleteProject(projectID) {
   return $.ajax({
     method: 'DELETE',
     url: "api/projects/".concat(projectID)
+  });
+};
+var updateProject = function updateProject(project) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "api/projects/".concat(project.id),
+    data: {
+      project: project
+    }
   });
 };
 
