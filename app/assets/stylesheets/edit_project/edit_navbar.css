@@ -1,0 +1,21 @@
+.edit-navbar{
+    width: 100%;
+    height: 70px;
+    border-bottom: 2px solid gainsboro;
+    display: flex;
+    align-items: center;
+}
+
+.edit-navbar #tickstart-link{
+    text-decoration: none;
+    font-family: 'Zhi Mang Xing', cursive;
+    font-size: 200%;
+    color: greenyellow;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.edit-navbar #dashboard-link{
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}

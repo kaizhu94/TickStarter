@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 
-import {fetchProject} from '../../actions/project_actions'
+import {fetchProject, deleteProject} from '../../actions/project_actions'
 import ProjectDashboard from './ProjectDashboard'
 
 
 const msp = (state, ownprops) =>{
+    debugger
     return ({
-        user: state.entities.users[1],
+        user: state.entities.users[state.session.id],
         project: state.entities.projects[ownprops.match.params.projectId]
     })
 }
@@ -15,6 +16,7 @@ const msp = (state, ownprops) =>{
 const mdp = (dispatch) => {
     return {
       receiveProject: projectId => dispatch(fetchProject(projectId)),
+      deleteProject: projectId => dispatch(deleteProject(projectId))
     };
   }
 

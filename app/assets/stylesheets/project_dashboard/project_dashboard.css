@@ -70,3 +70,33 @@
     font-size: 14px;
     color: rgb(189, 188, 188)
 }
+
+.delete-project{
+    height: 250px;
+}
+.delete-block{
+    width: 80%;
+    margin: auto;
+    padding-top: 70px;
+
+}
+
+.delete-block i{
+    color: rgb(139, 138, 138);
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 18px;
+}
+.delete-block i:hover{
+    display: block;
+    background-color: gainsboro;
+    color: black;
+    width: 144px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.delete-block i span{
+    font-family: 'Raleway', sans-serif;
+}
