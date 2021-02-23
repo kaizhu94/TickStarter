@@ -2180,6 +2180,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
+  debugger;
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
@@ -2312,6 +2313,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _classCallCheck(this, EditProjectForm);
 
     _this2 = _super2.call(this, props);
+    debugger;
     _this2.state = {
       tab: parseInt(props.match.params.id),
       isModified: false,
@@ -2324,12 +2326,36 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
     return _this2;
-  }
+  } // componentDidUpdate(){
+  //     this.setState({
+  //         'project_name': this.props.project.project_name,
+  //         'subtitle': this.props.project.subtitle
+  //     })
+  // }
+
 
   _createClass(EditProjectForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveProject(this.props.match.params.projectId);
+      if (this.props.project !== undefined) {
+        debugger;
+        this.setState({
+          'project_name': this.props.project.project_name,
+          'subtitle': this.props.project.subtitle
+        });
+      } // this.props.receiveProject(this.props.match.params.projectId)
+
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      if (this.props.project !== undefined) {
+        debugger;
+        this.setState({
+          'project_name': this.props.project.project_name,
+          'subtitle': this.props.project.subtitle
+        });
+      }
     }
   }, {
     key: "selectTab",
@@ -2469,12 +2495,12 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "text",
           placeholder: "Alow Bub: Self-care pocket companion for iOS",
-          value: this.props.project.project_name,
+          value: this.state.project_name,
           onChange: this.update('project_name')
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Subtitle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
           type: "text",
           placeholder: "Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.",
-          value: this.props.project.subtitle,
+          value: this.state.subtitle,
           onChange: this.update('subtitle')
         }))))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-block"

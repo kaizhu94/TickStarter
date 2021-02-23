@@ -48,11 +48,12 @@ class Headers extends React.Component {
 class EditProjectForm extends React.Component{
     constructor(props){
         super(props)
+        debugger
         this.state = {
             tab: parseInt(props.match.params.id),
             isModified: false,
             project_name: '',
-            subtitle: ''
+            subtitle:  ''
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -60,8 +61,30 @@ class EditProjectForm extends React.Component{
         this.previousButton = this.previousButton.bind(this);
         this.nextButton = this.nextButton.bind(this);
     }
+    // componentDidUpdate(){
+    //     this.setState({
+    //         'project_name': this.props.project.project_name,
+    //         'subtitle': this.props.project.subtitle
+    //     })
+    // }
     componentDidMount(){
-        this.props.receiveProject(this.props.match.params.projectId)
+        if(this.props.project !== undefined){
+            debugger
+            this.setState({
+                        'project_name': this.props.project.project_name,
+                        'subtitle': this.props.project.subtitle
+                    })
+        }
+        // this.props.receiveProject(this.props.match.params.projectId)
+    }
+    componentWillUnmount(){
+        if(this.props.project !== undefined){
+            debugger
+            this.setState({
+                        'project_name': this.props.project.project_name,
+                        'subtitle': this.props.project.subtitle
+                    })
+        }
     }
     selectTab(num) {
         this.setState({tab: num});
@@ -201,7 +224,7 @@ class EditProjectForm extends React.Component{
                                                         </label>
                                                             <input type="text" 
                                                                 placeholder='Alow Bub: Self-care pocket companion for iOS'
-                                                                value={this.props.project.project_name}
+                                                                value={this.state.project_name}
                                                                 onChange={this.update('project_name')}
                                                                 />
                                                     </div>
@@ -210,7 +233,7 @@ class EditProjectForm extends React.Component{
                                                         </label>
                                                             <textarea type="text"
                                                                 placeholder='Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.'
-                                                                value={this.props.project.subtitle}
+                                                                value={this.state.subtitle}
                                                                 onChange={this.update('subtitle')}
                                                                 />
                                                     </div>
