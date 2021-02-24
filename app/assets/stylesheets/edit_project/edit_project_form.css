@@ -183,3 +183,28 @@
     padding-top: 32px;
 }
 
+.category-right-container{
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-right-container select{
+    margin-bottom: 5px;
+    height: 40px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    padding-left: 15px;
+}
+
+.category-right-container select:focus{
+    outline: none;
+    border-color: green;
+}
+
+.category-right-container select:hover{
+    border-color: green;
+    cursor: pointer;
+}

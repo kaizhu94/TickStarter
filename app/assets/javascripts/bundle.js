@@ -2505,8 +2505,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
-      var _this6 = this;
-
       var tabs = [{
         title: 'Basics'
       }, {
@@ -2517,25 +2515,27 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         title: 'Background'
       }];
 
-      if (!this.props.project || !this.props.maincategories) {
+      if (!this.props.project || !this.props.maincategories || !this.props.subcategories || this.state.selectedMainCat === '') {
         return null;
       } else {
         var maincategoriesID = Object.keys(this.props.maincategories);
         var maincategories = Object.values(this.props.maincategories);
         var allSubcategories = Object.values(this.props.subcategories);
         var subcategories = [];
+        debugger;
+        var selectedMainCat = parseInt(this.state.selectedMainCat);
         allSubcategories.forEach(function (sub) {
-          if (sub.parent_id === _this6.state.chosedMainCat) {
-            subcategories.push(sub);
+          if (sub.parent_id === selectedMainCat) {
+            return subcategories.push(sub);
           }
         });
+        debugger;
         var maincatId = '';
 
         if (maincategoriesID.includes(this.state.selectedMainCat.toString())) {
           maincatId = this.state.selectedMainCat;
         } else {
-          debugger; // maincatId;
-
+          debugger;
           maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
         }
 
@@ -2582,7 +2582,11 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "left"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, " Project category"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "p-block"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose the category that is most consistent with your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Think about where supporters might find it. Find more specific communities by selecting subcategories."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You can change the category and subcategory even after the project goes live."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose the category that is most consistent with your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Think about where supporters might find it. Find more specific communities by selecting subcategories."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You can change the category and subcategory even after the project goes live."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "right"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "category-right-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
           name: "category_id",
           id: "category",
           value: maincatId === '' ? this.state.category_id : maincatId,

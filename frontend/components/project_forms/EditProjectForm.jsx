@@ -220,24 +220,27 @@ class EditProjectForm extends React.Component{
     render(){
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
-        if(!this.props.project || !this.props.maincategories){
+        if(!this.props.project || !this.props.maincategories || !this.props.subcategories
+            || this.state.selectedMainCat === ''){
             return null;
         }else{
             const maincategoriesID = Object.keys(this.props.maincategories);
             const maincategories = Object.values(this.props.maincategories);
             const allSubcategories = Object.values(this.props.subcategories);
             const subcategories = [];
+            debugger
+            const selectedMainCat = parseInt(this.state.selectedMainCat)
             allSubcategories.forEach(sub => {
-                if(sub.parent_id === this.state.chosedMainCat) {
-                    subcategories.push(sub)
+                if(sub.parent_id === selectedMainCat) {
+                   return  subcategories.push(sub)
                 }
             })
+            debugger
             let maincatId = '';
             if(maincategoriesID.includes(this.state.selectedMainCat.toString())){
                 maincatId = this.state.selectedMainCat;
             }else{
                 debugger
-                // maincatId;
                 maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
             }
             debugger
@@ -300,8 +303,8 @@ class EditProjectForm extends React.Component{
                                                     <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div>
+                                            <div className ='right'>
+                                                <div className = 'category-right-container'>
                                                     <select name="category_id" id="category" value = {maincatId === ''? this.state.category_id : maincatId}  onChange={this.updateMainCat('category_id', 'chosedMainCat') }>
                                                         <option value='0' disabled hidden > {this.props.project.category_name} </option>
                                                         <option value='' disabled  > category </option>
@@ -312,7 +315,7 @@ class EditProjectForm extends React.Component{
                                                         }
                                                     </select>
                                                     <select name="category_id" id="sub_category" value = {this.state.category_id}  onChange={this.updateSubCat('category_id')}>
-                                                        <option value='0' disabled > Subcategory (Optionnal) </option>
+                                                        <option value='0' disabled> Subcategory (Optionnal) </option>
                                                         <option value='' > --No Subcategories-- </option>
                                                         {
                                                             subcategories.map((c, i) => {
