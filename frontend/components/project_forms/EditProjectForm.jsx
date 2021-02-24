@@ -92,7 +92,12 @@ class EditProjectForm extends React.Component{
     }
    
     selectTab(num) {
-        this.setState({tab: num});
+        let modalOpen = false;
+        if(this.state.isModified){
+            modalOpen = true;
+            this.props.openModal('unsave')
+        }
+        if(!modalOpen) this.setState({tab: num});
     }
 
     update(key){
@@ -111,10 +116,20 @@ class EditProjectForm extends React.Component{
         }
         
     updateSubCat(key){
-        return e => this.setState({[key]:  parseInt(e.currentTarget.value),
+        // debugger
+        return e =>{  
+            // debugger
+        let id = '';
+        if(e.currentTarget.value === '0'){
+            id = this.state.selectedMainCat;
+        }else{
+            id = e.currentTarget.value;
+        }
+        return this.setState({[key]:  parseInt(id),
         'maincatId':'',
         'isModified': true}
         );
+        }
     }
 
     handleSubmit(e){
@@ -225,22 +240,23 @@ class EditProjectForm extends React.Component{
             return null;
         }else{
             const maincategoriesID = Object.keys(this.props.maincategories);
+            const allSubIDs = Object.keys(this.props.subcategories);
             const maincategories = Object.values(this.props.maincategories);
             const allSubcategories = Object.values(this.props.subcategories);
             const subcategories = [];
-            debugger
-            const selectedMainCat = parseInt(this.state.selectedMainCat)
+            let selectedMainCat = parseInt(this.state.selectedMainCat)
+            if(allSubIDs.includes(this.props.project.category_id.toString())){
+                selectedMainCat = this.props.subcategories[this.props.project.category_id].parent_id;
+            }
             allSubcategories.forEach(sub => {
                 if(sub.parent_id === selectedMainCat) {
                    return  subcategories.push(sub)
                 }
             })
-            debugger
             let maincatId = '';
             if(maincategoriesID.includes(this.state.selectedMainCat.toString())){
                 maincatId = this.state.selectedMainCat;
             }else{
-                debugger
                 maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
             }
             debugger
@@ -305,7 +321,7 @@ class EditProjectForm extends React.Component{
                                             </div>
                                             <div className ='right'>
                                                 <div className = 'category-right-container'>
-                                                    <select name="category_id" id="category" value = {maincatId === ''? this.state.category_id : maincatId}  onChange={this.updateMainCat('category_id', 'chosedMainCat') }>
+                                                    <select name="category_id" id="category" value = {maincatId === ''? this.state.category_id : maincatId}  onChange={this.updateMainCat('category_id', 'selectedMainCat') }>
                                                         <option value='0' disabled hidden > {this.props.project.category_name} </option>
                                                         <option value='' disabled  > category </option>
                                                         {
@@ -316,7 +332,7 @@ class EditProjectForm extends React.Component{
                                                     </select>
                                                     <select name="category_id" id="sub_category" value = {this.state.category_id}  onChange={this.updateSubCat('category_id')}>
                                                         <option value='0' disabled> Subcategory (Optionnal) </option>
-                                                        <option value='' > --No Subcategories-- </option>
+                                                        <option value='0' > --No Subcategories-- </option>
                                                         {
                                                             subcategories.map((c, i) => {
                                                                 return  <option value={c.id} key={i}>{c.category_name}</option>

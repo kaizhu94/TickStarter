@@ -1438,6 +1438,9 @@ function Modal(_ref) {
         src: window.xIcon
       })));
 
+    case 'unsave':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "hi");
+
     default:
       return null;
   }
@@ -2180,7 +2183,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_location_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/location_actions */ "./frontend/actions/location_actions.js");
 /* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/category_actions */ "./frontend/actions/category_actions.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var _EditProjectForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditProjectForm */ "./frontend/components/project_forms/EditProjectForm.jsx");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _EditProjectForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EditProjectForm */ "./frontend/components/project_forms/EditProjectForm.jsx");
+
 
 
 
@@ -2208,11 +2213,17 @@ var mdp = function mdp(dispatch) {
     },
     updateProject: function updateProject(project) {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProject)(project));
+    },
+    openModal: function openModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.openModal)(modal));
+    },
+    closeModal: function closeModal() {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.closeModal)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditProjectForm__WEBPACK_IMPORTED_MODULE_4__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditProjectForm__WEBPACK_IMPORTED_MODULE_5__.default));
 
 /***/ }),
 
@@ -2376,7 +2387,14 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "selectTab",
     value: function selectTab(num) {
-      this.setState({
+      var modalOpen = false;
+
+      if (this.state.isModified) {
+        modalOpen = true;
+        this.props.openModal('unsave');
+      }
+
+      if (!modalOpen) this.setState({
         tab: num
       });
     }
@@ -2408,10 +2426,20 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function updateSubCat(key) {
       var _this5 = this;
 
+      // debugger
       return function (e) {
         var _this5$setState;
 
-        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, 'maincatId', ''), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
+        // debugger
+        var id = '';
+
+        if (e.currentTarget.value === '0') {
+          id = _this5.state.selectedMainCat;
+        } else {
+          id = e.currentTarget.value;
+        }
+
+        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key, parseInt(id)), _defineProperty(_this5$setState, 'maincatId', ''), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
       };
     }
   }, {
@@ -2519,23 +2547,26 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         return null;
       } else {
         var maincategoriesID = Object.keys(this.props.maincategories);
+        var allSubIDs = Object.keys(this.props.subcategories);
         var maincategories = Object.values(this.props.maincategories);
         var allSubcategories = Object.values(this.props.subcategories);
         var subcategories = [];
-        debugger;
         var selectedMainCat = parseInt(this.state.selectedMainCat);
+
+        if (allSubIDs.includes(this.props.project.category_id.toString())) {
+          selectedMainCat = this.props.subcategories[this.props.project.category_id].parent_id;
+        }
+
         allSubcategories.forEach(function (sub) {
           if (sub.parent_id === selectedMainCat) {
             return subcategories.push(sub);
           }
         });
-        debugger;
         var maincatId = '';
 
         if (maincategoriesID.includes(this.state.selectedMainCat.toString())) {
           maincatId = this.state.selectedMainCat;
         } else {
-          debugger;
           maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
         }
 
@@ -2590,7 +2621,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           name: "category_id",
           id: "category",
           value: maincatId === '' ? this.state.category_id : maincatId,
-          onChange: this.updateMainCat('category_id', 'chosedMainCat')
+          onChange: this.updateMainCat('category_id', 'selectedMainCat')
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
           value: "0",
           disabled: true,
@@ -2612,7 +2643,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           value: "0",
           disabled: true
         }, " Subcategory (Optionnal) "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-          value: ""
+          value: "0"
         }, " --No Subcategories-- "), subcategories.map(function (c, i) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
             value: c.id,
