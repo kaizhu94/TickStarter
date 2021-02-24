@@ -11,6 +11,7 @@ const msp = (state, ownprops) =>{
         founderId: state.session.id,
         locations: state.entities.locations,
         maincategories: state.entities.categories.maincategories,
+        subcategories: state.entities.categories.subcategories,
         project: state.entities.projects[ownprops.match.params.projectId]
     })
 }

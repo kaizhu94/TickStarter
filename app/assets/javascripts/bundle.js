@@ -837,17 +837,16 @@ var EditProfileNavBar = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
-      debugger;
       var project = this.props.project;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        "class": "edit-navbar"
+        className: "edit-navbar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/",
         id: "tickstart-link"
       }, "TickStarter"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/projects/".concat(project.id, "/dashboard"),
         id: "dashboard-link"
-      }, "\u2190 ", project.category_name));
+      }, "\u2190 ", project.project_name ? project.project_name : project.category_name));
     }
   }]);
 
@@ -2194,6 +2193,7 @@ var msp = function msp(state, ownprops) {
     founderId: state.session.id,
     locations: state.entities.locations,
     maincategories: state.entities.categories.maincategories,
+    subcategories: state.entities.categories.subcategories,
     project: state.entities.projects[ownprops.match.params.projectId]
   };
 };
@@ -2276,9 +2276,10 @@ var Headers = /*#__PURE__*/function (_React$Component) {
         var title = tab.title;
         var klass = index == selected ? 'active' : '';
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "".concat(klass, "-div")
+          className: "".concat(klass, "-div"),
+          key: "tabs-".concat(index)
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          key: index,
+          key: "tabs-".concat(index),
           className: klass,
           onClick: function onClick() {
             return _this.props.selectTab(index);
@@ -2326,7 +2327,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       isModified: false,
       id: '',
       project_name: '',
-      subtitle: ''
+      subtitle: '',
+      category_id: '',
+      category_name: '',
+      chosedMainCat: ''
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2340,15 +2344,30 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   _createClass(EditProjectForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      debugger;
-
       if (prevProps.project === undefined && this.props.project) {
         this.setState({
           'id': this.props.project.id,
           'project_name': this.props.project.project_name,
-          'subtitle': this.props.project.subtitle
+          'subtitle': this.props.project.subtitle,
+          'category_id': this.props.project.category_id,
+          'category_name': this.props.project.category_name,
+          'chosedMainCat': this.props.project.category_id
         });
-      }
+      } // if(prevProps.maincategories === undefined && this.props.maincategories){
+      //     const allSubcategories = Object.values(this.props.subcategories)
+      //     const subcategories = [];
+      //     allSubcategories.forEach(sub => {
+      //         if(sub.parent_id === this.props.project.category_id) {
+      //             subcategories.push(sub)
+      //         }
+      //     })
+      //     debugger
+      //     this.setState({
+      //         'mainCategories': Object.values(this.props.maincategories),
+      //         'subCategories': Object.values(this.props.subcategories)
+      //     })
+      // }
+
     }
   }, {
     key: "componentDidMount",
@@ -2358,9 +2377,13 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         this.setState({
           'id': this.props.project.id,
           'project_name': this.props.project.project_name,
-          'subtitle': this.props.project.subtitle
+          'subtitle': this.props.project.subtitle,
+          'category_id': this.props.project.category_id,
+          'category_name': this.props.project.category_name
         });
       }
+
+      this.props.receiveCategories();
     }
   }, {
     key: "selectTab",
@@ -2374,10 +2397,23 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function update(key) {
       var _this3 = this;
 
+      debugger;
       return function (e) {
         var _this3$setState;
 
         return _this3.setState((_this3$setState = {}, _defineProperty(_this3$setState, key, e.currentTarget.value), _defineProperty(_this3$setState, 'isModified', true), _this3$setState));
+      };
+    }
+  }, {
+    key: "updateMainCat",
+    value: function updateMainCat(key1, key2) {
+      var _this4 = this;
+
+      debugger;
+      return function (e) {
+        var _this4$setState;
+
+        return _this4.setState((_this4$setState = {}, _defineProperty(_this4$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this4$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this4$setState, 'isModified', true), _this4$setState));
       };
     }
   }, {
@@ -2386,6 +2422,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       e.preventDefault();
       debugger;
       this.props.updateProject(this.state);
+      this.setState({
+        'isModified': false
+      });
     }
   }, {
     key: "previous",
@@ -2414,7 +2453,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           onClick: this.previous,
           type: "button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-left"
+          className: "fas fa-chevron-left"
         }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to basics"));
       } else if (this.state.tab === 2) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2422,7 +2461,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           onClick: this.previous,
           type: "button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-left"
+          className: "fas fa-chevron-left"
         }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to funding"));
       } else if (this.state.tab === 3) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2430,7 +2469,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           onClick: this.previous,
           type: "button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-left"
+          className: "fas fa-chevron-left"
         }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to rewards"));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
@@ -2445,7 +2484,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           type: "button",
           onClick: this.next
         }, "Next step: funding ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-right"
+          className: "fas fa-chevron-right"
         })));
       } else if (this.state.tab === 1) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2453,7 +2492,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           type: "button",
           onClick: this.next
         }, "Next step: rewards ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-right"
+          className: "fas fa-chevron-right"
         })));
       } else if (this.state.tab === 2) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2461,13 +2500,15 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           type: "button",
           onClick: this.next
         }, "Next step: background ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-right"
+          className: "fas fa-chevron-right"
         })));
       } else {}
     }
   }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       var tabs = [{
         title: 'Basics'
       }, {
@@ -2478,9 +2519,18 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         title: 'Background'
       }];
 
-      if (!this.props.project) {
+      if (!this.props.project || !this.props.maincategories) {
         return null;
       } else {
+        var maincategories = Object.values(this.props.maincategories);
+        var allSubcategories = Object.values(this.props.subcategories);
+        var subcategories = [];
+        allSubcategories.forEach(function (sub) {
+          if (sub.parent_id === _this5.state.chosedMainCat) {
+            subcategories.push(sub);
+          }
+        });
+        debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
@@ -2515,6 +2565,43 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           placeholder: "Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.",
           value: this.state.subtitle,
           onChange: this.update('subtitle')
+        })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-category-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-category-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "left"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, " Project category"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose the category that is most consistent with your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Think about where supporters might find it. Find more specific communities by selecting subcategories."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You can change the category and subcategory even after the project goes live."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "category_id",
+          id: "category",
+          value: this.state.category_id,
+          onChange: this.updateMainCat('category_id', 'chosedMainCat')
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "0",
+          disabled: true,
+          hidden: true
+        }, " ", this.props.project.category_name, " "), maincategories.map(function (c, i) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            value: c.id,
+            key: i
+          }, c.category_name);
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "category_id",
+          id: "sub_category",
+          value: this.state.category_id,
+          onChange: this.update('category_id')
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "0",
+          disabled: true
+        }, " Subcategory (Optionnal) "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: ""
+        }, " --No Subcategories-- "), subcategories.map(function (c, i) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            value: c.id,
+            key: i
+          }, c.category_name);
         }))))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

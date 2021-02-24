@@ -9,9 +9,9 @@ class Headers extends React.Component {
         const title = tab.title;
         const klass = index == selected ? 'active' : '';
         return (
-        <div className={`${klass}-div`}>
+        <div className={`${klass}-div`} key={`tabs-${index}`}>
           <li
-            key={index}
+            key={`tabs-${index}`}
             className={klass}
             onClick={() => this.props.selectTab(index)}>
                 {
@@ -52,7 +52,10 @@ class EditProjectForm extends React.Component{
             isModified: false,
             id: '',
             project_name: '',
-            subtitle:  ''
+            subtitle:  '',
+            category_id: '',
+            category_name: '',
+            chosedMainCat: ''
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -62,14 +65,31 @@ class EditProjectForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     componentDidUpdate(prevProps){
-        debugger
         if(prevProps.project === undefined && this.props.project){
                 this.setState({
                     'id': this.props.project.id,
                     'project_name': this.props.project.project_name,
-                    'subtitle': this.props.project.subtitle
+                    'subtitle': this.props.project.subtitle,
+                    'category_id': this.props.project.category_id,
+                    'category_name': this.props.project.category_name,
+                    'chosedMainCat': this.props.project.category_id,
                 })
         }
+        
+        // if(prevProps.maincategories === undefined && this.props.maincategories){
+        //     const allSubcategories = Object.values(this.props.subcategories)
+        //     const subcategories = [];
+        //     allSubcategories.forEach(sub => {
+        //         if(sub.parent_id === this.props.project.category_id) {
+        //             subcategories.push(sub)
+        //         }
+        //     })
+        //     debugger
+        //     this.setState({
+        //         'mainCategories': Object.values(this.props.maincategories),
+        //         'subCategories': Object.values(this.props.subcategories)
+        //     })
+        // }
     }
     componentDidMount(){
         if(this.props.project !== undefined){
@@ -77,9 +97,12 @@ class EditProjectForm extends React.Component{
             this.setState({
                         'id': this.props.project.id,
                         'project_name': this.props.project.project_name,
-                        'subtitle': this.props.project.subtitle
+                        'subtitle': this.props.project.subtitle,
+                        'category_id': this.props.project.category_id,
+                        'category_name': this.props.project.category_name
                     })
         }
+        this.props.receiveCategories();
     }
    
     selectTab(num) {
@@ -87,15 +110,27 @@ class EditProjectForm extends React.Component{
     }
 
     update(key){
+        debugger
         return e => this.setState({[key]: e.currentTarget.value,
-                                'isModified': true}
-                                );
+            'isModified': true}
+            );
+        }
+        
+    updateMainCat(key1, key2){
+        debugger
+        return e => this.setState({[key1]: parseInt(e.currentTarget.value),
+                                    [key2]: parseInt(e.currentTarget.value),
+                                    'isModified': true}
+                                    );
     }
 
     handleSubmit(e){
         e.preventDefault();
         debugger
         this.props.updateProject(this.state);
+        this.setState({
+            'isModified': false
+        })
     }
 
     previous(){
@@ -120,7 +155,7 @@ class EditProjectForm extends React.Component{
                 <button id = 'edit-pre-button'
                         onClick={this.previous}
                         type = 'button'>
-                    <i class="fas fa-chevron-left"></i>  <span>Back to basics</span>
+                    <i className="fas fa-chevron-left"></i>  <span>Back to basics</span>
                 </button>
             )
         }else if(this.state.tab === 2){
@@ -128,7 +163,7 @@ class EditProjectForm extends React.Component{
                 <button id = 'edit-pre-button'
                         onClick={this.previous}
                         type = 'button'>
-                    <i class="fas fa-chevron-left"></i>  <span>Back to funding</span>
+                    <i className="fas fa-chevron-left"></i>  <span>Back to funding</span>
                 </button>
             )   
         }else if(this.state.tab === 3){
@@ -136,7 +171,7 @@ class EditProjectForm extends React.Component{
                 <button id = 'edit-pre-button'
                         onClick={this.previous}
                         type = 'button'>
-                    <i class="fas fa-chevron-left"></i>  <span>Back to rewards</span>
+                    <i className="fas fa-chevron-left"></i>  <span>Back to rewards</span>
                 </button>
             )   
         }else{
@@ -156,7 +191,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: funding <i class="fas fa-chevron-right"></i>
+                    Next step: funding <i className="fas fa-chevron-right"></i>
                 </button>
                 </div>
             )
@@ -168,7 +203,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: rewards <i class="fas fa-chevron-right"></i>
+                    Next step: rewards <i className="fas fa-chevron-right"></i>
                 </button>
                 </div>
             )
@@ -180,7 +215,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: background <i class="fas fa-chevron-right"></i>
+                    Next step: background <i className="fas fa-chevron-right"></i>
                 </button>
                 </div>
             )
@@ -192,11 +227,18 @@ class EditProjectForm extends React.Component{
     render(){
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
-        if(!this.props.project){
-            
+        if(!this.props.project || !this.props.maincategories){
             return null;
         }else{
-            
+            const maincategories = Object.values(this.props.maincategories);
+            const allSubcategories = Object.values(this.props.subcategories);
+            const subcategories = [];
+            allSubcategories.forEach(sub => {
+                if(sub.parent_id === this.state.chosedMainCat) {
+                    subcategories.push(sub)
+                }
+            })
+            debugger
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}
@@ -241,6 +283,40 @@ class EditProjectForm extends React.Component{
                                                                 onChange={this.update('subtitle')}
                                                                 />
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className= 'project-category-section'>
+                                        <div className = 'project-category-container'>
+                                            <div className = 'left'>
+                                                <h2> Project category</h2>
+                                                <div className='p-block'>
+                                                    <p>Choose the category that is most consistent with your project.</p>
+                                                    <p>Think about where supporters might find it. Find more specific communities by selecting subcategories.</p>
+                                                    <p>You can change the category and subcategory even after the project goes live.</p>
+                                                    <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <select name="category_id" id="category" value = {this.state.category_id}  onChange={this.updateMainCat('category_id', 'chosedMainCat') }>
+                                                        <option value='0' disabled hidden > {this.props.project.category_name} </option>
+                                                        {
+                                                            maincategories.map((c, i) => {
+                                                                return  <option value={c.id} key={i}>{c.category_name}</option>
+                                                                })
+                                                        }
+                                                    </select>
+                                                    <select name="category_id" id="sub_category" value = {this.state.category_id}  onChange={this.update('category_id')}>
+                                                        <option value='0' disabled > Subcategory (Optionnal) </option>
+                                                        <option value='' > --No Subcategories-- </option>
+                                                        {
+                                                            subcategories.map((c, i) => {
+                                                                return  <option value={c.id} key={i}>{c.category_name}</option>
+                                                                })
+                                                        }
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
