@@ -55,7 +55,7 @@ class EditProjectForm extends React.Component{
             subtitle:  '',
             category_id: '',
             category_name: '',
-            chosedMainCat: ''
+            selectedMainCat: '',
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -65,35 +65,21 @@ class EditProjectForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     componentDidUpdate(prevProps){
+        debugger
         if(prevProps.project === undefined && this.props.project){
                 this.setState({
                     'id': this.props.project.id,
                     'project_name': this.props.project.project_name,
                     'subtitle': this.props.project.subtitle,
+                    'selectedMainCat': this.props.project.category_id,
                     'category_id': this.props.project.category_id,
                     'category_name': this.props.project.category_name,
-                    'chosedMainCat': this.props.project.category_id,
                 })
         }
-        
-        // if(prevProps.maincategories === undefined && this.props.maincategories){
-        //     const allSubcategories = Object.values(this.props.subcategories)
-        //     const subcategories = [];
-        //     allSubcategories.forEach(sub => {
-        //         if(sub.parent_id === this.props.project.category_id) {
-        //             subcategories.push(sub)
-        //         }
-        //     })
-        //     debugger
-        //     this.setState({
-        //         'mainCategories': Object.values(this.props.maincategories),
-        //         'subCategories': Object.values(this.props.subcategories)
-        //     })
-        // }
     }
     componentDidMount(){
         if(this.props.project !== undefined){
-            debugger
+            // debugger
             this.setState({
                         'id': this.props.project.id,
                         'project_name': this.props.project.project_name,
@@ -110,23 +96,30 @@ class EditProjectForm extends React.Component{
     }
 
     update(key){
-        debugger
+        // debugger
         return e => this.setState({[key]: e.currentTarget.value,
             'isModified': true}
             );
         }
         
     updateMainCat(key1, key2){
-        debugger
         return e => this.setState({[key1]: parseInt(e.currentTarget.value),
-                                    [key2]: parseInt(e.currentTarget.value),
-                                    'isModified': true}
-                                    );
+            [key2]: parseInt(e.currentTarget.value),
+            'selectedMainCat':e.currentTarget.value,
+            'isModified': true}
+            );
+        }
+        
+    updateSubCat(key){
+        return e => this.setState({[key]:  parseInt(e.currentTarget.value),
+        'maincatId':'',
+        'isModified': true}
+        );
     }
 
     handleSubmit(e){
         e.preventDefault();
-        debugger
+        // debugger
         this.props.updateProject(this.state);
         this.setState({
             'isModified': false
@@ -230,6 +223,7 @@ class EditProjectForm extends React.Component{
         if(!this.props.project || !this.props.maincategories){
             return null;
         }else{
+            const maincategoriesID = Object.keys(this.props.maincategories);
             const maincategories = Object.values(this.props.maincategories);
             const allSubcategories = Object.values(this.props.subcategories);
             const subcategories = [];
@@ -238,6 +232,14 @@ class EditProjectForm extends React.Component{
                     subcategories.push(sub)
                 }
             })
+            let maincatId = '';
+            if(maincategoriesID.includes(this.state.selectedMainCat.toString())){
+                maincatId = this.state.selectedMainCat;
+            }else{
+                debugger
+                // maincatId;
+                maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
+            }
             debugger
             return (
                 <div className = 'Edit-Project'>
@@ -300,15 +302,16 @@ class EditProjectForm extends React.Component{
                                             </div>
                                             <div>
                                                 <div>
-                                                    <select name="category_id" id="category" value = {this.state.category_id}  onChange={this.updateMainCat('category_id', 'chosedMainCat') }>
+                                                    <select name="category_id" id="category" value = {maincatId === ''? this.state.category_id : maincatId}  onChange={this.updateMainCat('category_id', 'chosedMainCat') }>
                                                         <option value='0' disabled hidden > {this.props.project.category_name} </option>
+                                                        <option value='' disabled  > category </option>
                                                         {
                                                             maincategories.map((c, i) => {
                                                                 return  <option value={c.id} key={i}>{c.category_name}</option>
                                                                 })
                                                         }
                                                     </select>
-                                                    <select name="category_id" id="sub_category" value = {this.state.category_id}  onChange={this.update('category_id')}>
+                                                    <select name="category_id" id="sub_category" value = {this.state.category_id}  onChange={this.updateSubCat('category_id')}>
                                                         <option value='0' disabled > Subcategory (Optionnal) </option>
                                                         <option value='' > --No Subcategories-- </option>
                                                         {

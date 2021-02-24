@@ -2330,7 +2330,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       subtitle: '',
       category_id: '',
       category_name: '',
-      chosedMainCat: ''
+      selectedMainCat: ''
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2344,36 +2344,24 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   _createClass(EditProjectForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      debugger;
+
       if (prevProps.project === undefined && this.props.project) {
         this.setState({
           'id': this.props.project.id,
           'project_name': this.props.project.project_name,
           'subtitle': this.props.project.subtitle,
+          'selectedMainCat': this.props.project.category_id,
           'category_id': this.props.project.category_id,
-          'category_name': this.props.project.category_name,
-          'chosedMainCat': this.props.project.category_id
+          'category_name': this.props.project.category_name
         });
-      } // if(prevProps.maincategories === undefined && this.props.maincategories){
-      //     const allSubcategories = Object.values(this.props.subcategories)
-      //     const subcategories = [];
-      //     allSubcategories.forEach(sub => {
-      //         if(sub.parent_id === this.props.project.category_id) {
-      //             subcategories.push(sub)
-      //         }
-      //     })
-      //     debugger
-      //     this.setState({
-      //         'mainCategories': Object.values(this.props.maincategories),
-      //         'subCategories': Object.values(this.props.subcategories)
-      //     })
-      // }
-
+      }
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       if (this.props.project !== undefined) {
-        debugger;
+        // debugger
         this.setState({
           'id': this.props.project.id,
           'project_name': this.props.project.project_name,
@@ -2397,7 +2385,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function update(key) {
       var _this3 = this;
 
-      debugger;
+      // debugger
       return function (e) {
         var _this3$setState;
 
@@ -2409,18 +2397,28 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function updateMainCat(key1, key2) {
       var _this4 = this;
 
-      debugger;
       return function (e) {
         var _this4$setState;
 
-        return _this4.setState((_this4$setState = {}, _defineProperty(_this4$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this4$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this4$setState, 'isModified', true), _this4$setState));
+        return _this4.setState((_this4$setState = {}, _defineProperty(_this4$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this4$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this4$setState, 'selectedMainCat', e.currentTarget.value), _defineProperty(_this4$setState, 'isModified', true), _this4$setState));
+      };
+    }
+  }, {
+    key: "updateSubCat",
+    value: function updateSubCat(key) {
+      var _this5 = this;
+
+      return function (e) {
+        var _this5$setState;
+
+        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, 'maincatId', ''), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
       };
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
-      debugger;
+      e.preventDefault(); // debugger
+
       this.props.updateProject(this.state);
       this.setState({
         'isModified': false
@@ -2507,7 +2505,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var tabs = [{
         title: 'Basics'
@@ -2522,14 +2520,25 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       if (!this.props.project || !this.props.maincategories) {
         return null;
       } else {
+        var maincategoriesID = Object.keys(this.props.maincategories);
         var maincategories = Object.values(this.props.maincategories);
         var allSubcategories = Object.values(this.props.subcategories);
         var subcategories = [];
         allSubcategories.forEach(function (sub) {
-          if (sub.parent_id === _this5.state.chosedMainCat) {
+          if (sub.parent_id === _this6.state.chosedMainCat) {
             subcategories.push(sub);
           }
         });
+        var maincatId = '';
+
+        if (maincategoriesID.includes(this.state.selectedMainCat.toString())) {
+          maincatId = this.state.selectedMainCat;
+        } else {
+          debugger; // maincatId;
+
+          maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
+        }
+
         debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
@@ -2576,13 +2585,16 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose the category that is most consistent with your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Think about where supporters might find it. Find more specific communities by selecting subcategories."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You can change the category and subcategory even after the project goes live."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
           name: "category_id",
           id: "category",
-          value: this.state.category_id,
+          value: maincatId === '' ? this.state.category_id : maincatId,
           onChange: this.updateMainCat('category_id', 'chosedMainCat')
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
           value: "0",
           disabled: true,
           hidden: true
-        }, " ", this.props.project.category_name, " "), maincategories.map(function (c, i) {
+        }, " ", this.props.project.category_name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "",
+          disabled: true
+        }, " category "), maincategories.map(function (c, i) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
             value: c.id,
             key: i
@@ -2591,7 +2603,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           name: "category_id",
           id: "sub_category",
           value: this.state.category_id,
-          onChange: this.update('category_id')
+          onChange: this.updateSubCat('category_id')
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
           value: "0",
           disabled: true
