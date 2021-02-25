@@ -217,6 +217,7 @@ class EditProjectForm extends React.Component{
         if(this.state.tab === 0){
             return(
                 <div>
+                    <span>No unsaved changes    </span>
                     <button
                     id='edit-next-button'
                     type ='button'
@@ -229,6 +230,7 @@ class EditProjectForm extends React.Component{
         }else if(this.state.tab === 1){
             return(
                 <div>
+                    <span>No unsaved changes    </span>
                     <button
                     id='edit-next-button'
                     type ='button'
@@ -241,6 +243,7 @@ class EditProjectForm extends React.Component{
         }else if(this.state.tab === 2){
             return(
                 <div>
+                    <span>No unsaved changes    </span>
                     <button
                     id='edit-next-button'
                     type ='button'
@@ -251,7 +254,7 @@ class EditProjectForm extends React.Component{
                 </div>
             )
         }else{
-
+            return null
         }
     }
 
@@ -408,24 +411,89 @@ class EditProjectForm extends React.Component{
                                             </div>
                                         </div>
                                     </div>
+                                    <div className= 'project-release-section'>
+                                        <div className= 'project-category-container'>
+                                            <div className = 'left'>
+                                                <h2>Project release</h2>
+                                                <div className='p-block'>
+                                                    <p>Publish your project, and set a time limit for your promotion. After the project is published, you will not be able to change this time limit.</p>
+                                                    <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
+                                                </div>
+                                            </div>
+                                            <div className ='right'>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             ):(null)
+                        }
+                        {
+                            this.state.tab == 1? ( 
+                                <div>
+                                     <div className= 'project-funding-section'>
+                                        <div className= 'project-category-container'>
+                                            <div className = 'left'>
+                                                <h2>Fundraising goal</h2>
+                                                <div className='p-block'>
+                                                    <p>Set an achievable goal that covers what is needed to complete the project.</p>
+                                                    <p>The fundraising activity is "all-or-nothing". If you do not reach your goal, you will not receive any funds.</p>
+                                                    <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
+                                                </div>
+                                            </div>
+                                            <div className ='right'>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (null)
+                        }
+                        {
+                            this.state.tab == 3? ( 
+                                <div>
+                                    <div className='start-from-basic'>
+                                        <div className= 'start-block'>
+                                            <h1>Introduce your project</h1>
+                                            <p>Tell people why they should be excited about your project. Be specific but also clear and short.</p>
+                                        </div>
+                                    </div>
+                                    <div className= 'project-funding-section'>
+                                        <div className= 'project-category-container'>
+                                            
+                                        </div>
+                                    </div>
+                                    <div className= 'project-risk-section'>
+                                        <div className= 'project-category-container'>
+                                            <div className = 'left'>
+                                                <h2>Risks and challenges</h2>
+                                                <div className='p-block'>
+                                                    <p>Be honest about the potential risks and challenges of this project, and how you plan to overcome these risks and challenges to complete it.</p>
+                                                    <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
+                                                </div>
+                                            </div>
+                                            <div className ='right'>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (null)
                         }
                         <div className='edit-button-block'>
                             <div className = 'edit-button-container'> 
                                 {
                                     this.state.isModified? (
-                                        <div>
+                                        <div className = 'edit-buttons'>
                                             <div>
                                                 <div></div>
                                                 <button type='submit'>Save</button>
                                             </div>
                                         </div>
                                     ): (
-                                        <div>
+                                        <div className = 'edit-buttons'>
                                             {this.previousButton()}
                                             <div>
-                                                <span>No unsaved changes</span>
                                                 {this.nextButton()} 
                                             </div>
                                         </div>
