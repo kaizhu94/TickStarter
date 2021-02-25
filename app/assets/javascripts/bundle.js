@@ -208,7 +208,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchProjects": () => /* binding */ fetchProjects,
 /* harmony export */   "fetchProject": () => /* binding */ fetchProject,
 /* harmony export */   "createProject": () => /* binding */ createProject,
-/* harmony export */   "deleteProject": () => /* binding */ deleteProject
+/* harmony export */   "deleteProject": () => /* binding */ deleteProject,
+/* harmony export */   "updateProject": () => /* binding */ updateProject
 /* harmony export */ });
 /* harmony import */ var _util_project_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/project_util */ "./frontend/util/project_util.js");
 
@@ -259,6 +260,14 @@ var deleteProject = function deleteProject(projectId) {
     debugger;
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.deleteProject(projectId).then(function () {
       return dispatch(removeProject(projectId));
+    });
+  };
+};
+var updateProject = function updateProject(project) {
+  return function (dispatch) {
+    debugger;
+    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(project).then(function (project) {
+      return dispatch(receiveProject(project));
     });
   };
 };
@@ -828,17 +837,16 @@ var EditProfileNavBar = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
-      debugger;
       var project = this.props.project;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        "class": "edit-navbar"
+        className: "edit-navbar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/",
         id: "tickstart-link"
       }, "TickStarter"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/projects/".concat(project.id, "/dashboard"),
         id: "dashboard-link"
-      }, "\u2190 ", project.category_name));
+      }, "\u2190 ", project.project_name ? project.project_name : project.category_name));
     }
   }]);
 
@@ -1392,14 +1400,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 
 
 
 
-function Modal(_ref) {
-  var modal = _ref.modal,
-      closeModal = _ref.closeModal,
-      errors = _ref.errors;
+
+function Modal(props) {
+  var modal = props.modal,
+      closeModal = props.closeModal,
+      errors = props.errors,
+      projectId = props.projectId;
+  debugger;
+
+  function redirect(projectId, tab) {
+    props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
+  }
 
   if (!modal) {
     return null;
@@ -1430,15 +1446,93 @@ function Modal(_ref) {
         src: window.xIcon
       })));
 
+    case 'unsave-tab-0':
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return redirect(projectId, 0);
+        }
+      }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Go back and save"))));
+
+    case 'unsave-tab-1':
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return redirect(projectId, 1);
+        }
+      }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Go back and save"))));
+
+    case 'unsave-tab-2':
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return redirect(projectId, 2);
+        }
+      }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Go back and save"))));
+
+    case 'unsave-tab-3':
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return redirect(projectId, 3);
+        }
+      }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Go back and save"))));
+
     default:
       return null;
   }
 }
 
 var msp = function msp(state) {
+  debugger;
   return {
     modal: state.ui.modal,
-    errors: state.errors.session
+    errors: state.errors.session,
+    projectId: Object.keys(state.entities.projects)[0]
   };
 };
 
@@ -1450,7 +1544,7 @@ var mdp = function mdp(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal)));
 
 /***/ }),
 
@@ -2172,7 +2266,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_location_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/location_actions */ "./frontend/actions/location_actions.js");
 /* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/category_actions */ "./frontend/actions/category_actions.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var _EditProjectForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditProjectForm */ "./frontend/components/project_forms/EditProjectForm.jsx");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _EditProjectForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EditProjectForm */ "./frontend/components/project_forms/EditProjectForm.jsx");
+
 
 
 
@@ -2180,11 +2276,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
+  debugger;
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
     maincategories: state.entities.categories.maincategories,
-    project: state.entities.projects[ownprops.match.params.projectId]
+    subcategories: state.entities.categories.subcategories,
+    project: state.entities.projects[ownprops.match.params.projectId],
+    tabId: ownprops.match.params.id
   };
 };
 
@@ -2196,13 +2295,22 @@ var mdp = function mdp(dispatch) {
     receiveCategories: function receiveCategories() {
       return dispatch((0,_actions_category_actions__WEBPACK_IMPORTED_MODULE_2__.fetchCategories)());
     },
+    updateProject: function updateProject(project) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProject)(project));
+    },
     receiveProject: function receiveProject(projectId) {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.fetchProject)(projectId));
+    },
+    openModal: function openModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.openModal)(modal));
+    },
+    closeModal: function closeModal() {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.closeModal)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditProjectForm__WEBPACK_IMPORTED_MODULE_4__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditProjectForm__WEBPACK_IMPORTED_MODULE_5__.default));
 
 /***/ }),
 
@@ -2244,7 +2352,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var Headers = /*#__PURE__*/function (_React$Component) {
   _inherits(Headers, _React$Component);
 
@@ -2267,9 +2374,10 @@ var Headers = /*#__PURE__*/function (_React$Component) {
         var title = tab.title;
         var klass = index == selected ? 'active' : '';
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "".concat(klass, "-div")
+          className: "".concat(klass, "-div"),
+          key: "tabs-".concat(index)
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          key: index,
+          key: "tabs-".concat(index),
           className: klass,
           onClick: function onClick() {
             return _this.props.selectTab(index);
@@ -2315,39 +2423,146 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.state = {
       tab: parseInt(props.match.params.id),
       isModified: false,
+      id: '',
       project_name: '',
-      subtitle: ''
+      subtitle: '',
+      category_id: '',
+      category_name: '',
+      selectedMainCat: '',
+      location: '',
+      modalOpen: false,
+      dontSave: false
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
     _this2.next = _this2.next.bind(_assertThisInitialized(_this2));
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
+    _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
     return _this2;
   }
 
   _createClass(EditProjectForm, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      debugger;
+
+      if (prevProps.tabId !== this.props.tabId) {
+        this.setState({
+          tab: parseInt(this.props.match.params.id),
+          isModified: false,
+          'id': this.props.project.id,
+          'project_name': this.props.project.project_name,
+          'subtitle': this.props.project.subtitle,
+          'selectedMainCat': this.props.project.category_id,
+          'category_id': this.props.project.category_id,
+          'category_name': this.props.project.category_name,
+          'location': this.props.project.location_id
+        });
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveProject(this.props.match.params.projectId);
+      var _this3 = this;
+
+      this.props.receiveCategories();
+      this.props.receiveLocations();
+      this.props.receiveProject(this.props.match.params.projectId).then(function () {
+        _this3.setState({
+          'id': _this3.props.project.id,
+          'project_name': _this3.props.project.project_name,
+          'subtitle': _this3.props.project.subtitle,
+          'selectedMainCat': _this3.props.project.category_id,
+          'category_id': _this3.props.project.category_id,
+          'category_name': _this3.props.project.category_name,
+          'location': _this3.props.project.location_id
+        });
+      });
     }
   }, {
     key: "selectTab",
     value: function selectTab(num) {
-      this.setState({
-        tab: num
-      });
+      debugger;
+      var modalOpen = false;
+
+      if (this.state.isModified && num !== this.state.tab) {
+        modalOpen = true;
+
+        switch (num) {
+          case 0:
+            this.props.openModal('unsave-tab-0');
+            break;
+
+          case 1:
+            this.props.openModal('unsave-tab-1');
+            break;
+
+          case 2:
+            this.props.openModal('unsave-tab-2');
+            break;
+
+          default:
+            this.props.openModal('unsave-tab-3');
+        }
+      }
+
+      debugger;
+      if (!modalOpen) this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(num));
     }
   }, {
     key: "update",
     value: function update(key) {
-      var _this3 = this;
+      var _this4 = this;
+
+      // debugger
+      return function (e) {
+        var _this4$setState;
+
+        return _this4.setState((_this4$setState = {}, _defineProperty(_this4$setState, key, e.currentTarget.value), _defineProperty(_this4$setState, 'isModified', true), _this4$setState));
+      };
+    }
+  }, {
+    key: "updateMainCat",
+    value: function updateMainCat(key1, key2) {
+      var _this5 = this;
 
       return function (e) {
-        var _this3$setState;
+        var _this5$setState;
 
-        return _this3.setState((_this3$setState = {}, _defineProperty(_this3$setState, key, e.currentTarget.value), _defineProperty(_this3$setState, 'isModified', true), _this3$setState));
+        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, 'selectedMainCat', e.currentTarget.value), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
       };
+    }
+  }, {
+    key: "updateSubCat",
+    value: function updateSubCat(key) {
+      var _this6 = this;
+
+      // debugger
+      return function (e) {
+        var _this6$setState;
+
+        // debugger
+        var id = '';
+
+        if (e.currentTarget.value === '0') {
+          id = _this6.state.selectedMainCat;
+        } else {
+          id = e.currentTarget.value;
+        }
+
+        return _this6.setState((_this6$setState = {}, _defineProperty(_this6$setState, key, parseInt(id)), _defineProperty(_this6$setState, 'maincatId', ''), _defineProperty(_this6$setState, 'isModified', true), _this6$setState));
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault(); // debugger
+
+      this.props.updateProject(this.state);
+      this.setState({
+        'isModified': false
+      });
     }
   }, {
     key: "previous",
@@ -2376,7 +2591,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           onClick: this.previous,
           type: "button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-left"
+          className: "fas fa-chevron-left"
         }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to basics"));
       } else if (this.state.tab === 2) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2384,7 +2599,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           onClick: this.previous,
           type: "button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-left"
+          className: "fas fa-chevron-left"
         }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to funding"));
       } else if (this.state.tab === 3) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2392,7 +2607,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           onClick: this.previous,
           type: "button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-left"
+          className: "fas fa-chevron-left"
         }), "  ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Back to rewards"));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
@@ -2407,7 +2622,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           type: "button",
           onClick: this.next
         }, "Next step: funding ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-right"
+          className: "fas fa-chevron-right"
         })));
       } else if (this.state.tab === 1) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2415,7 +2630,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           type: "button",
           onClick: this.next
         }, "Next step: rewards ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-right"
+          className: "fas fa-chevron-right"
         })));
       } else if (this.state.tab === 2) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -2423,7 +2638,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           type: "button",
           onClick: this.next
         }, "Next step: background ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          "class": "fas fa-chevron-right"
+          className: "fas fa-chevron-right"
         })));
       } else {}
     }
@@ -2440,9 +2655,34 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         title: 'Background'
       }];
 
-      if (!this.props.project) {
+      if (!this.props.project || !this.props.maincategories || !this.props.subcategories || this.state.selectedMainCat === '' || !this.props.locations) {
         return null;
       } else {
+        var maincategoriesID = Object.keys(this.props.maincategories);
+        var allSubIDs = Object.keys(this.props.subcategories);
+        var maincategories = Object.values(this.props.maincategories);
+        var allSubcategories = Object.values(this.props.subcategories);
+        var subcategories = [];
+        var selectedMainCat = parseInt(this.state.selectedMainCat);
+
+        if (allSubIDs.includes(this.props.project.category_id.toString())) {
+          selectedMainCat = this.props.subcategories[this.props.project.category_id].parent_id;
+        }
+
+        allSubcategories.forEach(function (sub) {
+          if (sub.parent_id === selectedMainCat) {
+            return subcategories.push(sub);
+          }
+        });
+        var maincatId = '';
+
+        if (maincategoriesID.includes(this.state.selectedMainCat.toString())) {
+          maincatId = this.state.selectedMainCat;
+        } else {
+          maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
+        }
+
+        var locations = Object.values(this.props.locations);
         debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
@@ -2450,7 +2690,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           selected: this.state.tab,
           tabs: tabs,
           selectTab: this.selectTab
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+          onSubmit: this.handleSubmit
+        }, this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-block"
@@ -2469,14 +2711,90 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "text",
           placeholder: "Alow Bub: Self-care pocket companion for iOS",
-          value: this.props.project.project_name,
+          value: this.state.project_name,
           onChange: this.update('project_name')
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Subtitle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
           type: "text",
           placeholder: "Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.",
-          value: this.props.project.subtitle,
+          value: this.state.subtitle,
           onChange: this.update('subtitle')
-        }))))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-category-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-category-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "left"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, " Project category"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose the category that is most consistent with your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Think about where supporters might find it. Find more specific communities by selecting subcategories."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You can change the category and subcategory even after the project goes live."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "right"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "category-right-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "category_id",
+          id: "category",
+          value: maincatId === '' ? this.state.category_id : maincatId,
+          onChange: this.updateMainCat('category_id', 'selectedMainCat')
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "0",
+          disabled: true,
+          hidden: true
+        }, " ", this.props.project.category_name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "",
+          disabled: true
+        }, " category "), maincategories.map(function (c, i) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            value: c.id,
+            key: i
+          }, c.category_name);
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "category_id",
+          id: "sub_category",
+          value: this.state.category_id,
+          onChange: this.updateSubCat('category_id')
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "0",
+          disabled: true
+        }, " Subcategory (Optionnal) "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "0"
+        }, " --No Subcategories-- "), subcategories.map(function (c, i) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            value: c.id,
+            key: i
+          }, c.category_name);
+        })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-location-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-category-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "left"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Project location"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Enter the best location description of the project location."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "right"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "location-right-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "location_id",
+          id: "location",
+          value: this.state.location_id,
+          onChange: this.updateSubCat('location_id')
+        }, locations.map(function (c, i) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            value: c.id,
+            key: i
+          }, c.location);
+        })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-image-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-category-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "left"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Project image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add images that can clearly represent your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose an image that looks fine in different sizes. It will appear in different places in different sizes: on your project page, on the Kickstarter website and mobile apps, and (when sharing) on \u200B\u200Bsocial channels."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Try to avoid banners, badges, text materials, etc., because they may not be readable when they are small."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The image should be at least 1024x576 pixels. It will be cropped to a 16:9 ratio."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "right"
+        })))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-container"
@@ -3911,7 +4229,7 @@ var projectReducer = function projectReducer() {
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PROJECT:
       var newProject = _defineProperty({}, action.project.id, action.project);
 
-      return Object.assign({}, state, newProject);
+      return newProject;
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_PROJECT:
       var newProjects = Object.assign({}, state);
@@ -4231,7 +4549,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchProjects": () => /* binding */ fetchProjects,
 /* harmony export */   "fetchProject": () => /* binding */ fetchProject,
 /* harmony export */   "createProject": () => /* binding */ createProject,
-/* harmony export */   "deleteProject": () => /* binding */ deleteProject
+/* harmony export */   "deleteProject": () => /* binding */ deleteProject,
+/* harmony export */   "updateProject": () => /* binding */ updateProject
 /* harmony export */ });
 var fetchProjects = function fetchProjects() {
   return $.ajax({
@@ -4258,6 +4577,16 @@ var deleteProject = function deleteProject(projectID) {
   return $.ajax({
     method: 'DELETE',
     url: "api/projects/".concat(projectID)
+  });
+};
+var updateProject = function updateProject(project) {
+  debugger;
+  return $.ajax({
+    method: 'PATCH',
+    url: "api/projects/".concat(project.id),
+    data: {
+      project: project
+    }
   });
 };
 

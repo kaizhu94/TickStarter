@@ -26,3 +26,12 @@ export const deleteProject = projectID =>{
       url: `api/projects/${projectID}`
     })
 }
+
+export const updateProject = project =>{
+  debugger
+  return $.ajax({
+      method: 'PATCH',
+      url: `api/projects/${project.id}`,
+      data: {project}
+    })
+}

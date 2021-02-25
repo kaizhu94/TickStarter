@@ -4,7 +4,6 @@ export const RECEIVE_ALL_PROJECTS = 'RECEIVE_ALL_PROJECTS';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
 export const DELETE_PROJECT = 'DELETE_PROJECT';
 
-
 export const receiveProjects = (projects)=>{
     return ({
         type: RECEIVE_ALL_PROJECTS,
@@ -25,6 +24,7 @@ export const removeProject = (projectId)=>{
         projectId
     })
 }
+
 
 
 export const fetchProjects = () => dispatch =>{
@@ -52,4 +52,10 @@ export const deleteProject = (projectId) => dispatch =>{
         )
 }
 
+export const updateProject = (project) => dispatch =>{
+    debugger
+    return ProjectAPIUtil.updateProject(project).then(
+        (project) => dispatch(receiveProject(project))
+        )
+}
 

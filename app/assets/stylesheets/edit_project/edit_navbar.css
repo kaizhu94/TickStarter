@@ -4,6 +4,9 @@
     border-bottom: 2px solid gainsboro;
     display: flex;
     align-items: center;
+    position: fixed;
+    background: white;
+    z-index: 10;
 }
 
 .edit-navbar #tickstart-link{

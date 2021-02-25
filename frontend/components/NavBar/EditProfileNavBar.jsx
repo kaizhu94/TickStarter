@@ -14,12 +14,11 @@ class EditProfileNavBar extends React.Component{
         if(!this.props.project){
             return null
         }
-        debugger
         const {project} = this.props
         return(
-            <div class = 'edit-navbar'>
+            <div className = 'edit-navbar'>
                  <Link to='/' id='tickstart-link'>TickStarter</Link>
-                 <Link to={`/projects/${project.id}/dashboard`} id='dashboard-link'>← {project.category_name}</Link>
+                 <Link to={`/projects/${project.id}/dashboard`} id='dashboard-link'>← {project.project_name ? project.project_name  : project.category_name}</Link>
             </div>
         )
     }
