@@ -56,6 +56,8 @@ class EditProjectForm extends React.Component{
             category_id: '',
             category_name: '',
             selectedMainCat: '',
+            modalOpen: false,
+            dontSave:false
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -92,12 +94,14 @@ class EditProjectForm extends React.Component{
     }
    
     selectTab(num) {
+        debugger;
         let modalOpen = false;
         if(this.state.isModified){
-            modalOpen = true;
+            modalOpen = true
             this.props.openModal('unsave')
         }
-        if(!modalOpen) this.setState({tab: num});
+        debugger
+        if(!modalOpen)this.setState({tab: num});
     }
 
     update(key){

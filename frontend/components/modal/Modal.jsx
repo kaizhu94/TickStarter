@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {closeModal} from '../../actions/modal_actions';
+import { Link } from 'react-router-dom'
 
 function Modal( {modal, closeModal, errors} ){
     if(!modal){
@@ -27,8 +28,19 @@ function Modal( {modal, closeModal, errors} ){
             );
         case 'unsave':
             return (
-                <div>
-                    hi
+                <div className='modal-background' onClick={closeModal}>
+                    <div className='unsave-modal-continer'>
+                        <div>
+                            <h2>Your changes are not saved</h2>
+                            {/* <p>If you continue, you will lose all unsaved changes. To save all changes, go back and press "Save".</p>
+                            <button onClick={closeModal}>
+                                No need to save, continue
+                            </button> */}
+                        </div>
+                        <div>
+                            <p onClick={closeModal}>Go back and save</p>
+                        </div>
+                    </div>
                 </div>
             )
         default:

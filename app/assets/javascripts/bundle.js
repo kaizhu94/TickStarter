@@ -1404,6 +1404,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function Modal(_ref) {
   var modal = _ref.modal,
       closeModal = _ref.closeModal,
@@ -1439,7 +1440,14 @@ function Modal(_ref) {
       })));
 
     case 'unsave':
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "hi");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Go back and save"))));
 
     default:
       return null;
@@ -2341,7 +2349,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       subtitle: '',
       category_id: '',
       category_name: '',
-      selectedMainCat: ''
+      selectedMainCat: '',
+      modalOpen: false,
+      dontSave: false
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2387,6 +2397,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "selectTab",
     value: function selectTab(num) {
+      debugger;
       var modalOpen = false;
 
       if (this.state.isModified) {
@@ -2394,6 +2405,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         this.props.openModal('unsave');
       }
 
+      debugger;
       if (!modalOpen) this.setState({
         tab: num
       });
