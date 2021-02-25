@@ -69,8 +69,10 @@ class EditProjectForm extends React.Component{
     }
     componentDidUpdate(prevProps){
         debugger
-        if(prevProps.project === undefined && this.props.project){
+        if(prevProps.tabId !== this.props.tabId){
                 this.setState({
+                    tab: parseInt(this.props.match.params.id),
+                    isModified: false,
                     'id': this.props.project.id,
                     'project_name': this.props.project.project_name,
                     'subtitle': this.props.project.subtitle,
@@ -82,29 +84,43 @@ class EditProjectForm extends React.Component{
         }
     }
     componentDidMount(){
-        if(this.props.project !== undefined){
-            // debugger
-            this.setState({
-                        'id': this.props.project.id,
-                        'project_name': this.props.project.project_name,
-                        'subtitle': this.props.project.subtitle,
-                        'category_id': this.props.project.category_id,
-                        'category_name': this.props.project.category_name
-                    })
-        }
         this.props.receiveCategories();
         this.props.receiveLocations();
+        this.props.receiveProject(this.props.match.params.projectId)
+            .then(() => {
+                this.setState({
+                                'id': this.props.project.id,
+                                'project_name': this.props.project.project_name,
+                                'subtitle': this.props.project.subtitle,
+                                'selectedMainCat': this.props.project.category_id,
+                                'category_id': this.props.project.category_id,
+                                'category_name': this.props.project.category_name,
+                                'location': this.props.project.location_id,
+                            })
+            })
     }
-   
+
     selectTab(num) {
         debugger;
         let modalOpen = false;
-        if(this.state.isModified){
+        if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
-            this.props.openModal('unsave')
+            switch (num){
+                case 0:
+                    this.props.openModal('unsave-tab-0');
+                    break;
+                case 1:
+                    this.props.openModal('unsave-tab-1');
+                    break;
+                case 2:
+                    this.props.openModal('unsave-tab-2');
+                    break;
+                default:
+                    this.props.openModal('unsave-tab-3');
+            }
         }
         debugger
-        if(!modalOpen)this.setState({tab: num});
+        if(!modalOpen) this.props.history.push(`/projects/${this.state.id}/edit/${num}`);
     }
 
     update(key){

@@ -1400,15 +1400,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 
 
 
 
 
-function Modal(_ref) {
-  var modal = _ref.modal,
-      closeModal = _ref.closeModal,
-      errors = _ref.errors;
+function Modal(props) {
+  var modal = props.modal,
+      closeModal = props.closeModal,
+      errors = props.errors,
+      projectId = props.projectId;
+  debugger;
+
+  function redirect(projectId, tab) {
+    props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
+  }
 
   if (!modal) {
     return null;
@@ -1439,14 +1446,62 @@ function Modal(_ref) {
         src: window.xIcon
       })));
 
-    case 'unsave':
+    case 'unsave-tab-0':
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-modal-continer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return redirect(projectId, 0);
+        }
+      }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
+      }, "Go back and save"))));
+
+    case 'unsave-tab-1':
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return redirect(projectId, 1);
+        }
+      }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Go back and save"))));
+
+    case 'unsave-tab-2':
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return redirect(projectId, 2);
+        }
+      }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Go back and save"))));
+
+    case 'unsave-tab-3':
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return redirect(projectId, 3);
+        }
       }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
       }, "Go back and save"))));
@@ -1457,9 +1512,11 @@ function Modal(_ref) {
 }
 
 var msp = function msp(state) {
+  debugger;
   return {
     modal: state.ui.modal,
-    errors: state.errors.session
+    errors: state.errors.session,
+    projectId: Object.keys(state.entities.projects)[0]
   };
 };
 
@@ -1471,7 +1528,7 @@ var mdp = function mdp(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal)));
 
 /***/ }),
 
@@ -2209,7 +2266,8 @@ var msp = function msp(state, ownprops) {
     locations: state.entities.locations,
     maincategories: state.entities.categories.maincategories,
     subcategories: state.entities.categories.subcategories,
-    project: state.entities.projects[ownprops.match.params.projectId]
+    project: state.entities.projects[ownprops.match.params.projectId],
+    tabId: ownprops.match.params.id
   };
 };
 
@@ -2223,6 +2281,9 @@ var mdp = function mdp(dispatch) {
     },
     updateProject: function updateProject(project) {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProject)(project));
+    },
+    receiveProject: function receiveProject(projectId) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.fetchProject)(projectId));
     },
     openModal: function openModal(modal) {
       return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.openModal)(modal));
@@ -2370,8 +2431,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function componentDidUpdate(prevProps) {
       debugger;
 
-      if (prevProps.project === undefined && this.props.project) {
+      if (prevProps.tabId !== this.props.tabId) {
         this.setState({
+          tab: parseInt(this.props.match.params.id),
+          isModified: false,
           'id': this.props.project.id,
           'project_name': this.props.project.project_name,
           'subtitle': this.props.project.subtitle,
@@ -2385,19 +2448,21 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (this.props.project !== undefined) {
-        // debugger
-        this.setState({
-          'id': this.props.project.id,
-          'project_name': this.props.project.project_name,
-          'subtitle': this.props.project.subtitle,
-          'category_id': this.props.project.category_id,
-          'category_name': this.props.project.category_name
-        });
-      }
+      var _this3 = this;
 
       this.props.receiveCategories();
       this.props.receiveLocations();
+      this.props.receiveProject(this.props.match.params.projectId).then(function () {
+        _this3.setState({
+          'id': _this3.props.project.id,
+          'project_name': _this3.props.project.project_name,
+          'subtitle': _this3.props.project.subtitle,
+          'selectedMainCat': _this3.props.project.category_id,
+          'category_id': _this3.props.project.category_id,
+          'category_name': _this3.props.project.category_name,
+          'location': _this3.props.project.location_id
+        });
+      });
     }
   }, {
     key: "selectTab",
@@ -2405,58 +2470,72 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       debugger;
       var modalOpen = false;
 
-      if (this.state.isModified) {
+      if (this.state.isModified && num !== this.state.tab) {
         modalOpen = true;
-        this.props.openModal('unsave');
+
+        switch (num) {
+          case 0:
+            this.props.openModal('unsave-tab-0');
+            break;
+
+          case 1:
+            this.props.openModal('unsave-tab-1');
+            break;
+
+          case 2:
+            this.props.openModal('unsave-tab-2');
+            break;
+
+          default:
+            this.props.openModal('unsave-tab-3');
+        }
       }
 
       debugger;
-      if (!modalOpen) this.setState({
-        tab: num
-      });
+      if (!modalOpen) this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(num));
     }
   }, {
     key: "update",
     value: function update(key) {
-      var _this3 = this;
+      var _this4 = this;
 
       // debugger
       return function (e) {
-        var _this3$setState;
+        var _this4$setState;
 
-        return _this3.setState((_this3$setState = {}, _defineProperty(_this3$setState, key, e.currentTarget.value), _defineProperty(_this3$setState, 'isModified', true), _this3$setState));
+        return _this4.setState((_this4$setState = {}, _defineProperty(_this4$setState, key, e.currentTarget.value), _defineProperty(_this4$setState, 'isModified', true), _this4$setState));
       };
     }
   }, {
     key: "updateMainCat",
     value: function updateMainCat(key1, key2) {
-      var _this4 = this;
+      var _this5 = this;
 
       return function (e) {
-        var _this4$setState;
+        var _this5$setState;
 
-        return _this4.setState((_this4$setState = {}, _defineProperty(_this4$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this4$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this4$setState, 'selectedMainCat', e.currentTarget.value), _defineProperty(_this4$setState, 'isModified', true), _this4$setState));
+        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, 'selectedMainCat', e.currentTarget.value), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
       };
     }
   }, {
     key: "updateSubCat",
     value: function updateSubCat(key) {
-      var _this5 = this;
+      var _this6 = this;
 
       // debugger
       return function (e) {
-        var _this5$setState;
+        var _this6$setState;
 
         // debugger
         var id = '';
 
         if (e.currentTarget.value === '0') {
-          id = _this5.state.selectedMainCat;
+          id = _this6.state.selectedMainCat;
         } else {
           id = e.currentTarget.value;
         }
 
-        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key, parseInt(id)), _defineProperty(_this5$setState, 'maincatId', ''), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
+        return _this6.setState((_this6$setState = {}, _defineProperty(_this6$setState, key, parseInt(id)), _defineProperty(_this6$setState, 'maincatId', ''), _defineProperty(_this6$setState, 'isModified', true), _this6$setState));
       };
     }
   }, {
