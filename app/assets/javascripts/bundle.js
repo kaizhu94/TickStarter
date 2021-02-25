@@ -1445,7 +1445,9 @@ function Modal(_ref) {
         onClick: closeModal
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-modal-continer"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your changes are not saved"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "If you continue, you will lose all unsaved changes. To save all changes, go back and press \"Save\"."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: closeModal
+      }, "No need to save, continue")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
       }, "Go back and save"))));
 
@@ -2350,6 +2352,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       category_id: '',
       category_name: '',
       selectedMainCat: '',
+      location: '',
       modalOpen: false,
       dontSave: false
     };
@@ -2374,7 +2377,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'subtitle': this.props.project.subtitle,
           'selectedMainCat': this.props.project.category_id,
           'category_id': this.props.project.category_id,
-          'category_name': this.props.project.category_name
+          'category_name': this.props.project.category_name,
+          'location': this.props.project.location_id
         });
       }
     }
@@ -2393,6 +2397,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       }
 
       this.props.receiveCategories();
+      this.props.receiveLocations();
     }
   }, {
     key: "selectTab",
@@ -2555,7 +2560,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         title: 'Background'
       }];
 
-      if (!this.props.project || !this.props.maincategories || !this.props.subcategories || this.state.selectedMainCat === '') {
+      if (!this.props.project || !this.props.maincategories || !this.props.subcategories || this.state.selectedMainCat === '' || !this.props.locations) {
         return null;
       } else {
         var maincategoriesID = Object.keys(this.props.maincategories);
@@ -2582,6 +2587,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
         }
 
+        var locations = Object.values(this.props.locations);
         debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
@@ -2661,6 +2667,28 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
             value: c.id,
             key: i
           }, c.category_name);
+        })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-location-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-category-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "left"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Project location"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Enter the best location description of the project location."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "right"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "location-right-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "location_id",
+          id: "location",
+          value: this.state.location_id,
+          onChange: this.updateSubCat('location_id')
+        }, locations.map(function (c, i) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            value: c.id,
+            key: i
+          }, c.location);
         }))))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

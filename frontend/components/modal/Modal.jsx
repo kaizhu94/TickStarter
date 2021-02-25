@@ -32,10 +32,10 @@ function Modal( {modal, closeModal, errors} ){
                     <div className='unsave-modal-continer'>
                         <div>
                             <h2>Your changes are not saved</h2>
-                            {/* <p>If you continue, you will lose all unsaved changes. To save all changes, go back and press "Save".</p>
+                            <p>If you continue, you will lose all unsaved changes. To save all changes, go back and press "Save".</p>
                             <button onClick={closeModal}>
                                 No need to save, continue
-                            </button> */}
+                            </button>
                         </div>
                         <div>
                             <p onClick={closeModal}>Go back and save</p>

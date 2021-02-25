@@ -56,6 +56,7 @@ class EditProjectForm extends React.Component{
             category_id: '',
             category_name: '',
             selectedMainCat: '',
+            location: '',
             modalOpen: false,
             dontSave:false
         }
@@ -76,6 +77,7 @@ class EditProjectForm extends React.Component{
                     'selectedMainCat': this.props.project.category_id,
                     'category_id': this.props.project.category_id,
                     'category_name': this.props.project.category_name,
+                    'location': this.props.project.location_id,
                 })
         }
     }
@@ -91,6 +93,7 @@ class EditProjectForm extends React.Component{
                     })
         }
         this.props.receiveCategories();
+        this.props.receiveLocations();
     }
    
     selectTab(num) {
@@ -240,7 +243,7 @@ class EditProjectForm extends React.Component{
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project || !this.props.maincategories || !this.props.subcategories
-            || this.state.selectedMainCat === ''){
+            || this.state.selectedMainCat === '' || !this.props.locations){
             return null;
         }else{
             const maincategoriesID = Object.keys(this.props.maincategories);
@@ -263,6 +266,9 @@ class EditProjectForm extends React.Component{
             }else{
                 maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
             }
+
+            const locations = Object.values(this.props.locations);
+
             debugger
             return (
                 <div className = 'Edit-Project'>
@@ -344,6 +350,28 @@ class EditProjectForm extends React.Component{
                                                         }
                                                     </select>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className= 'project-location-section'>
+                                        <div className = 'project-category-container'>
+                                            <div  className = 'left'>
+                                                    <h2>Project location</h2>
+                                                    <div className='p-block'>
+                                                        <p>Enter the best location description of the project location.</p>
+                                                        <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
+                                                    </div>
+                                            </div>
+                                            <div className ='right'>
+                                                    <div className='location-right-container'>
+                                                        <select name="location_id" id="location" value = {this.state.location_id}  onChange={this.updateSubCat('location_id')}>
+                                                            {
+                                                                locations.map((c, i) => {
+                                                                    return  <option value={c.id} key={i}>{c.location}</option>
+                                                                    })
+                                                            }
+                                                        </select>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
