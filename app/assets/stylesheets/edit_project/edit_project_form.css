@@ -239,3 +239,9 @@
 .location-right-container select:hover{
     border-color: green;
 }
+
+.project-image-section{
+    width: 100%;
+    height: 595px;
+    border-bottom: 1px solid gainsboro;
+}

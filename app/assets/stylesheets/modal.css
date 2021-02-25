@@ -65,5 +65,61 @@
 
 .unsave-modal-continer{
   display: block;
-  
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  width: 35%;
+}
+
+.unsave-upper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gainsboro;
+  background-color:  white;
+  padding: 28px;
+  width: 88%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.unsave-upper *{
+  padding-bottom: 25px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.unsave-upper h2{
+  font-size: 20px;
+}
+.unsave-upper p{
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.unsave-upper button{
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 18px;
+  color: white;
+  background: #D8503D;
+  border: none;
+}
+.unsave-upper button:hover{
+  background: #961403;
+  cursor: pointer;
+}
+
+.unsave-lower{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-top: 20px;
+  text-decoration: underline;
+  color: #5a5a5a;
+}
+
+.unsave-lower p:hover{
+  cursor: pointer;
 }

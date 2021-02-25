@@ -391,6 +391,23 @@ class EditProjectForm extends React.Component{
                                             </div>
                                         </div>
                                     </div>
+                                    <div className= 'project-image-section'>
+                                        <div className= 'project-category-container'>
+                                            <div className = 'left'>
+                                                <h2>Project image</h2>
+                                                <div className='p-block'>
+                                                    <p>Add images that can clearly represent your project.</p>
+                                                    <p>Choose an image that looks fine in different sizes. It will appear in different places in different sizes: on your project page, on the Kickstarter website and mobile apps, and (when sharing) on ​​social channels.</p>
+                                                    <p>Try to avoid banners, badges, text materials, etc., because they may not be readable when they are small.</p>
+                                                    <p>The image should be at least 1024x576 pixels. It will be cropped to a 16:9 ratio.</p>
+                                                    <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
+                                                </div>
+                                            </div>
+                                            <div className ='right'>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             ):(null)
                         }

@@ -36,14 +36,14 @@ function Modal( props ){
         return (
             <div className='modal-background' onClick={closeModal}>
                 <div className='unsave-modal-continer'>
-                    <div>
+                    <div className = 'unsave-upper'>
                         <h2>Your changes are not saved</h2>
                         <p>If you continue, you will lose all unsaved changes. To save all changes, go back and press "Save".</p>
                         <button onClick={()=>redirect(projectId, 0)}>
                             No need to save, continue
                         </button>
                     </div>
-                    <div>
+                    <div className = 'unsave-lower'>
                         <p onClick={closeModal}>Go back and save</p>
                     </div>
                 </div>
@@ -54,14 +54,14 @@ function Modal( props ){
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
-                        <div>
+                        <div className = 'unsave-upper'>
                             <h2>Your changes are not saved</h2>
                             <p>If you continue, you will lose all unsaved changes. To save all changes, go back and press "Save".</p>
                             <button onClick={()=>redirect(projectId, 1)}>
                                 No need to save, continue
                             </button>
                         </div>
-                        <div>
+                        <div className = 'unsave-lower'>
                             <p onClick={closeModal}>Go back and save</p>
                         </div>
                     </div>
@@ -72,14 +72,14 @@ function Modal( props ){
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
-                        <div>
+                        <div className = 'unsave-upper'>
                             <h2>Your changes are not saved</h2>
                             <p>If you continue, you will lose all unsaved changes. To save all changes, go back and press "Save".</p>
                             <button onClick={()=>redirect(projectId, 2)}>
                                 No need to save, continue
                             </button>
                         </div>
-                        <div>
+                        <div className = 'unsave-lower'>
                             <p onClick={closeModal}>Go back and save</p>
                         </div>
                     </div>
@@ -90,14 +90,14 @@ function Modal( props ){
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
-                        <div>
+                        <div className = 'unsave-upper'>
                             <h2>Your changes are not saved</h2>
                             <p>If you continue, you will lose all unsaved changes. To save all changes, go back and press "Save".</p>
                             <button onClick={()=>redirect(projectId, 3)}>
                                 No need to save, continue
                             </button>
                         </div>
-                        <div>
+                        <div className = 'unsave-lower'>
                             <p onClick={closeModal}>Go back and save</p>
                         </div>
                     </div>
