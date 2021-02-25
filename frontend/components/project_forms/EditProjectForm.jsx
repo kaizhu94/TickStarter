@@ -458,7 +458,7 @@ class EditProjectForm extends React.Component{
                                             <p>Tell people why they should be excited about your project. Be specific but also clear and short.</p>
                                         </div>
                                     </div>
-                                    <div className= 'project-funding-section'>
+                                    <div className= 'project-description-section'>
                                         <div className= 'project-category-container'>
                                             
                                         </div>
