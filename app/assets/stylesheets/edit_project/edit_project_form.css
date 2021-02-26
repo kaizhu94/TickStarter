@@ -84,6 +84,7 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     color: rgb(92, 92, 92);
+    text-align: center;
 }
 
 .project-name-section{
@@ -276,6 +277,87 @@
     border: 1px solid white;
     border-radius: 35px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+.image-block #upload-image{
+    height: 268px;
+    width: 560px;
+    position: absolute;
+    background: transparent;
+    color: transparent;
+    opacity: 0;
+}
+.image-block #upload-image:hover{
+    cursor: pointer;
+}
+
+
+
+
+.image-block-2{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    background: white;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    padding: 15px;
+}
+#upload-image{
+    width: 100%;
+    height: 320px;
+    border: 1px solid gainsboro;
+}
+.image-block-2 .buttons-container{
+    display: flex;
+}
+.image-block-2 label{
+    width: 35px;
+    height: 35px;
+    background: gainsboro;
+    border: none;
+    margin-right: 10px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-block-2 label:hover{
+    background-color:rgb(179, 179, 179);
+    color: white;
+    cursor: pointer;
+}
+.image-block-2 label:focus{
+    outline: none;
+}
+.image-block-2 button{
+    width: 35px;
+    height: 35px;
+    background: gainsboro;
+    border: none;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+.image-block-2 button:hover{
+    background-color:rgb(179, 179, 179);
+    color: white;
+    cursor: pointer;
+}
+.image-block-2 button:focus{
+    outline: none;
+}
+
+.diff-image-dropdown{
+    display: block;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    background: black;
+    color: white;
+    padding: 10px;
+    bottom: 80px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 18px;
 }
 
 .project-release-section{

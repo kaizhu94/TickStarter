@@ -2429,8 +2429,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       category_name: '',
       selectedMainCat: '',
       location: '',
-      photo: null,
-      photoURL: []
+      photo: [],
+      photoURL: null,
+      showDropdown: false
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2439,6 +2440,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
     _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
     _this2.handleFile = _this2.handleFile.bind(_assertThisInitialized(_this2));
+    _this2.triggerOrNot = _this2.triggerOrNot.bind(_assertThisInitialized(_this2));
     return _this2;
   }
 
@@ -2488,18 +2490,30 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       debugger;
       var file = e.currentTarget.files[0];
       var fileReader = new FileReader();
+      debugger;
 
       fileReader.onloadend = function () {
-        var URLs = _this4.state.photoURL;
-        URLs.push(fileReader.result);
+        var photoArray = _this4.state.photo;
+        photoArray.pop();
+        photoArray.push(file);
 
         _this4.setState({
-          photo: file,
-          photoURL: URLs
+          photo: photoArray,
+          photoURL: fileReader.result
         });
       };
 
+      debugger;
       if (file) fileReader.readAsDataURL(file);
+    }
+  }, {
+    key: "triggerOrNot",
+    value: function triggerOrNot() {
+      debugger;
+      var newState = !this.state.showDropdown;
+      this.setState({
+        showDropdown: newState
+      });
     }
   }, {
     key: "selectTab",
@@ -2819,15 +2833,38 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "image-right-conatiner"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "image-block",
-          onClick: this.handleFile
-        }, this.state.photoURL.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        }, !this.state.photoURL ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "image-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
           id: "file",
           src: window.file
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Select a file")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          src: this.state.photoURL[0]
-        })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Select a file"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "file",
+          id: "upload-image",
+          onChange: this.handleFile
+        })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "image-block-2"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: this.state.photoURL,
+          id: "upload-image"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "buttons-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          htmlFor: "upload-another-image",
+          onMouseEnter: this.triggerOrNot,
+          onMouseLeave: this.triggerOrNot
+        }, this.state.showDropdown ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "diff-image-dropdown"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Upload a different image")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-upload"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "file",
+          id: "upload-another-image",
+          onChange: this.handleFile,
+          hidden: true
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-trash"
+        })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-release-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-category-container"

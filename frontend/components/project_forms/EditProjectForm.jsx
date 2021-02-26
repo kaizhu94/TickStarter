@@ -56,8 +56,9 @@ class EditProjectForm extends React.Component{
             category_name: '',
             selectedMainCat: '',
             location: '',
-            photo: null,
-            photoURL: [],
+            photo: [],
+            photoURL: null,
+            showDropdown: false,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -66,6 +67,7 @@ class EditProjectForm extends React.Component{
         this.nextButton = this.nextButton.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFile = this.handleFile.bind(this);
+        this.triggerOrNot = this.triggerOrNot.bind(this);
     }
     componentDidUpdate(prevProps){
         debugger
@@ -104,13 +106,21 @@ class EditProjectForm extends React.Component{
         debugger
         const file = e.currentTarget.files[0];
         const fileReader =new FileReader();
+        debugger
         fileReader.onloadend = () =>{
-            const URLs = this.state.photoURL;
-            URLs.push(fileReader.result)
-            this.setState({ photo: file,
-                            photoURL: URLs})
+            let photoArray = this.state.photo;
+            photoArray.pop();
+            photoArray.push(file);
+            this.setState({ photo: photoArray,
+                            photoURL: fileReader.result})
         }
+        debugger
         if(file) fileReader.readAsDataURL(file);
+    }
+    triggerOrNot(){
+        debugger
+        let newState = !this.state.showDropdown;
+        this.setState({showDropdown: newState})
     }
 
     selectTab(num) {
@@ -419,18 +429,36 @@ class EditProjectForm extends React.Component{
                                             </div>
                                             <div className ='right'>
                                                     <div className = 'image-right-conatiner'>
-                                                        <div className = 'image-block' onClick={this.handleFile}>
                                                             {
-                                                                this.state.photoURL.length === 0 ? (
-                                                                    <div>
+                                                                !this.state.photoURL ? (
+                                                                    <div className = 'image-block'>
                                                                         <img id="file" src={window.file} ></img>
                                                                         <p>Select a file</p>
+                                                                        <input type='file' id='upload-image' onChange={this.handleFile}/> 
                                                                     </div>
-                                                                ):(
-                                                                    <img src={this.state.photoURL[0]} />
+                                                                ):( 
+                                                                    <div className = 'image-block-2'>
+                                                                        <img src={this.state.photoURL} id='upload-image'/>
+                                                                        <div className='buttons-container'>
+                                                                            <label htmlFor="upload-another-image" onMouseEnter={this.triggerOrNot} onMouseLeave={this.triggerOrNot} >
+                                                                                {
+                                                                                    this.state.showDropdown ? (
+                                                                                        <div className = 'diff-image-dropdown'>
+                                                                                            <p>Upload a different image</p>
+                                                                                        </div>
+                                                                                )
+                                                                                : (
+                                                                                null
+                                                                                )
+                                                                                }
+                                                                                <i className="fas fa-upload"></i>
+                                                                            </label>
+                                                                            <input type='file' id='upload-another-image'onChange={this.handleFile} hidden/> 
+                                                                            <button><i className="fas fa-trash"></i></button>
+                                                                        </div>
+                                                                    </div>
                                                                 )
                                                             }
-                                                        </div>
                                                     </div>
                                             </div>
                                         </div>
