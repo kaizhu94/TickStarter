@@ -2368,7 +2368,6 @@ var Headers = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      // debugger
       var selected = this.props.selected;
       var headers = this.props.tabs.map(function (tab, index) {
         var title = tab.title;
@@ -2430,8 +2429,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       category_name: '',
       selectedMainCat: '',
       location: '',
-      modalOpen: false,
-      dontSave: false
+      photo: null,
+      photoURL: []
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2439,6 +2438,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
     _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
+    _this2.handleFile = _this2.handleFile.bind(_assertThisInitialized(_this2));
     return _this2;
   }
 
@@ -2481,6 +2481,27 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       });
     }
   }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      var _this4 = this;
+
+      debugger;
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        var URLs = _this4.state.photoURL;
+        URLs.push(fileReader.result);
+
+        _this4.setState({
+          photo: file,
+          photoURL: URLs
+        });
+      };
+
+      if (file) fileReader.readAsDataURL(file);
+    }
+  }, {
     key: "selectTab",
     value: function selectTab(num) {
       debugger;
@@ -2513,45 +2534,45 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "update",
     value: function update(key) {
-      var _this4 = this;
+      var _this5 = this;
 
       // debugger
       return function (e) {
-        var _this4$setState;
+        var _this5$setState;
 
-        return _this4.setState((_this4$setState = {}, _defineProperty(_this4$setState, key, e.currentTarget.value), _defineProperty(_this4$setState, 'isModified', true), _this4$setState));
+        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key, e.currentTarget.value), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
       };
     }
   }, {
     key: "updateMainCat",
     value: function updateMainCat(key1, key2) {
-      var _this5 = this;
+      var _this6 = this;
 
       return function (e) {
-        var _this5$setState;
+        var _this6$setState;
 
-        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, 'selectedMainCat', e.currentTarget.value), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
+        return _this6.setState((_this6$setState = {}, _defineProperty(_this6$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this6$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this6$setState, 'selectedMainCat', e.currentTarget.value), _defineProperty(_this6$setState, 'isModified', true), _this6$setState));
       };
     }
   }, {
     key: "updateSubCat",
     value: function updateSubCat(key) {
-      var _this6 = this;
+      var _this7 = this;
 
       // debugger
       return function (e) {
-        var _this6$setState;
+        var _this7$setState;
 
         // debugger
         var id = '';
 
         if (e.currentTarget.value === '0') {
-          id = _this6.state.selectedMainCat;
+          id = _this7.state.selectedMainCat;
         } else {
           id = e.currentTarget.value;
         }
 
-        return _this6.setState((_this6$setState = {}, _defineProperty(_this6$setState, key, parseInt(id)), _defineProperty(_this6$setState, 'maincatId', ''), _defineProperty(_this6$setState, 'isModified', true), _this6$setState));
+        return _this7.setState((_this7$setState = {}, _defineProperty(_this7$setState, key, parseInt(id)), _defineProperty(_this7$setState, 'maincatId', ''), _defineProperty(_this7$setState, 'isModified', true), _this7$setState));
       };
     }
   }, {
@@ -2710,12 +2731,12 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right-container"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "text",
           placeholder: "Alow Bub: Self-care pocket companion for iOS",
           value: this.state.project_name,
           onChange: this.update('project_name')
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Subtitle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Subtitle "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
           type: "text",
           placeholder: "Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.",
           value: this.state.subtitle,
@@ -2796,7 +2817,17 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "p-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add images that can clearly represent your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose an image that looks fine in different sizes. It will appear in different places in different sizes: on your project page, on the Kickstarter website and mobile apps, and (when sharing) on \u200B\u200Bsocial channels."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Try to avoid banners, badges, text materials, etc., because they may not be readable when they are small."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The image should be at least 1024x576 pixels. It will be cropped to a 16:9 ratio."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "image-right-conatiner"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "image-block",
+          onClick: this.handleFile
+        }, this.state.photoURL.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          id: "file",
+          src: window.file
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Select a file")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: this.state.photoURL[0]
+        })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-release-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-category-container"

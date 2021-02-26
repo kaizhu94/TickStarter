@@ -3,7 +3,6 @@ import React from 'react';
 
 class Headers extends React.Component {
     render() {
-        // debugger
       const selected = this.props.selected;
       const headers = this.props.tabs.map((tab, index) => {
         const title = tab.title;
@@ -57,15 +56,16 @@ class EditProjectForm extends React.Component{
             category_name: '',
             selectedMainCat: '',
             location: '',
-            modalOpen: false,
-            dontSave:false
+            photo: null,
+            photoURL: [],
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
         this.next = this.next.bind(this);
         this.previousButton = this.previousButton.bind(this);
         this.nextButton = this.nextButton.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFile = this.handleFile.bind(this);
     }
     componentDidUpdate(prevProps){
         debugger
@@ -98,6 +98,19 @@ class EditProjectForm extends React.Component{
                                 'location': this.props.project.location_id,
                             })
             })
+    }
+
+    handleFile(e){
+        debugger
+        const file = e.currentTarget.files[0];
+        const fileReader =new FileReader();
+        fileReader.onloadend = () =>{
+            const URLs = this.state.photoURL;
+            URLs.push(fileReader.result)
+            this.setState({ photo: file,
+                            photoURL: URLs})
+        }
+        if(file) fileReader.readAsDataURL(file);
     }
 
     selectTab(num) {
@@ -316,8 +329,7 @@ class EditProjectForm extends React.Component{
                                             <div className='right'>
                                                 <div className = 'right-container'>
                                                     <div>
-                                                        <label >name
-                                                        </label>
+                                                        <label >Title</label>
                                                             <input type="text" 
                                                                 placeholder='Alow Bub: Self-care pocket companion for iOS'
                                                                 value={this.state.project_name}
@@ -325,8 +337,7 @@ class EditProjectForm extends React.Component{
                                                                 />
                                                     </div>
                                                     <div>
-                                                        <label >Subtitle
-                                                        </label>
+                                                        <label >Subtitle </label>
                                                             <textarea type="text"
                                                                 placeholder='Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.'
                                                                 value={this.state.subtitle}
@@ -407,7 +418,20 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
-
+                                                    <div className = 'image-right-conatiner'>
+                                                        <div className = 'image-block' onClick={this.handleFile}>
+                                                            {
+                                                                this.state.photoURL.length === 0 ? (
+                                                                    <div>
+                                                                        <img id="file" src={window.file} ></img>
+                                                                        <p>Select a file</p>
+                                                                    </div>
+                                                                ):(
+                                                                    <img src={this.state.photoURL[0]} />
+                                                                )
+                                                            }
+                                                        </div>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
