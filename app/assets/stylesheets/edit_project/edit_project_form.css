@@ -297,6 +297,7 @@
     cursor: pointer;
 }
 
+
 #edit-next-button{
     margin-left: 15px;
     padding: 15px;
@@ -308,4 +309,27 @@
 #edit-next-button:hover{
     cursor: pointer;
     background-color: #016b46;
+}
+
+#edit-next-button:focus, #edit-pre-button:focus{
+    outline: none
+}
+
+#edit-save-button{
+    margin-left: 15px;
+    padding: 15px;
+    padding-left: 35px;
+    padding-right: 35px;
+    border: none;
+    color: white;
+    background-color: #028858;
+}
+
+#edit-save-button:hover{
+    cursor: pointer;
+    background-color: #016b46;
+}
+
+#edit-save-button:focus, #edit-pre-button:focus{
+    outline: none
 }

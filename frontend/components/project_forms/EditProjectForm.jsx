@@ -485,10 +485,8 @@ class EditProjectForm extends React.Component{
                                 {
                                     this.state.isModified? (
                                         <div className = 'edit-buttons'>
-                                            <div>
                                                 <div></div>
-                                                <button type='submit'>Save</button>
-                                            </div>
+                                                <button type='submit' id='edit-save-button'>Save</button>
                                         </div>
                                     ): (
                                         <div className = 'edit-buttons'>
