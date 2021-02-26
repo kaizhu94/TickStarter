@@ -2430,7 +2430,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       selectedMainCat: '',
       location: '',
       photo: [],
-      photoURL: null,
+      photoURL: [],
       showDropdown: false
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
@@ -2447,8 +2447,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   _createClass(EditProjectForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      debugger;
-
       if (prevProps.tabId !== this.props.tabId) {
         this.setState({
           tab: parseInt(this.props.match.params.id),
@@ -2478,7 +2476,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'selectedMainCat': _this3.props.project.category_id,
           'category_id': _this3.props.project.category_id,
           'category_name': _this3.props.project.category_name,
-          'location': _this3.props.project.location_id
+          'location': _this3.props.project.location_id,
+          'photoURL': _this3.props.project.photoUrl
         });
       });
     }
@@ -2493,13 +2492,15 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       debugger;
 
       fileReader.onloadend = function () {
-        var photoArray = _this4.state.photo;
-        photoArray.pop();
-        photoArray.push(file);
+        var photofiles = _this4.state.photo;
+        photofiles[0] = file;
+        var photoURLArray = _this4.state.photoURL;
+        photoURLArray[0] = fileReader.result;
 
         _this4.setState({
-          photo: photoArray,
-          photoURL: fileReader.result
+          photo: photofiles,
+          photoURL: photoURLArray,
+          'isModified': true
         });
       };
 
@@ -2509,7 +2510,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "triggerOrNot",
     value: function triggerOrNot() {
-      debugger;
       var newState = !this.state.showDropdown;
       this.setState({
         showDropdown: newState
@@ -2518,7 +2518,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "selectTab",
     value: function selectTab(num) {
-      debugger;
       var modalOpen = false;
 
       if (this.state.isModified && num !== this.state.tab) {
@@ -2542,7 +2541,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }
       }
 
-      debugger;
       if (!modalOpen) this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(num));
     }
   }, {
@@ -2550,7 +2548,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function update(key) {
       var _this5 = this;
 
-      // debugger
       return function (e) {
         var _this5$setState;
 
@@ -2719,8 +2716,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
         }
 
-        var locations = Object.values(this.props.locations);
-        debugger;
+        var locations = Object.values(this.props.locations); // debugger
+
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
@@ -2833,7 +2830,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "image-right-conatiner"
-        }, !this.state.photoURL ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, !this.state.photoURL[0] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "image-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
           id: "file",
@@ -2845,7 +2842,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "image-block-2"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          src: this.state.photoURL,
+          src: this.state.photoURL[0],
           id: "upload-image"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "buttons-container"

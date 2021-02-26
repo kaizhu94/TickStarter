@@ -57,7 +57,7 @@ class EditProjectForm extends React.Component{
             selectedMainCat: '',
             location: '',
             photo: [],
-            photoURL: null,
+            photoURL: [],
             showDropdown: false,
         }
         this.selectTab = this.selectTab.bind(this);
@@ -70,7 +70,6 @@ class EditProjectForm extends React.Component{
         this.triggerOrNot = this.triggerOrNot.bind(this);
     }
     componentDidUpdate(prevProps){
-        debugger
         if(prevProps.tabId !== this.props.tabId){
                 this.setState({
                     tab: parseInt(this.props.match.params.id),
@@ -98,6 +97,7 @@ class EditProjectForm extends React.Component{
                                 'category_id': this.props.project.category_id,
                                 'category_name': this.props.project.category_name,
                                 'location': this.props.project.location_id,
+                                'photoURL': this.props.project.photoUrl
                             })
             })
     }
@@ -108,23 +108,24 @@ class EditProjectForm extends React.Component{
         const fileReader =new FileReader();
         debugger
         fileReader.onloadend = () =>{
-            let photoArray = this.state.photo;
-            photoArray.pop();
-            photoArray.push(file);
-            this.setState({ photo: photoArray,
-                            photoURL: fileReader.result})
+            let photofiles = this.state.photo;
+            photofiles[0] = file;
+            let photoURLArray = this.state.photoURL;
+            photoURLArray[0] = fileReader.result
+            this.setState({ photo: photofiles,
+                            photoURL: photoURLArray,
+                            'isModified': true
+                        })
         }
         debugger
         if(file) fileReader.readAsDataURL(file);
     }
     triggerOrNot(){
-        debugger
         let newState = !this.state.showDropdown;
         this.setState({showDropdown: newState})
     }
 
     selectTab(num) {
-        debugger;
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -142,12 +143,10 @@ class EditProjectForm extends React.Component{
                     this.props.openModal('unsave-tab-3');
             }
         }
-        debugger
         if(!modalOpen) this.props.history.push(`/projects/${this.state.id}/edit/${num}`);
     }
 
     update(key){
-        // debugger
         return e => this.setState({[key]: e.currentTarget.value,
             'isModified': true}
             );
@@ -311,7 +310,7 @@ class EditProjectForm extends React.Component{
 
             const locations = Object.values(this.props.locations);
 
-            debugger
+            // debugger
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}
@@ -430,7 +429,7 @@ class EditProjectForm extends React.Component{
                                             <div className ='right'>
                                                     <div className = 'image-right-conatiner'>
                                                             {
-                                                                !this.state.photoURL ? (
+                                                                !this.state.photoURL[0] ? (
                                                                     <div className = 'image-block'>
                                                                         <img id="file" src={window.file} ></img>
                                                                         <p>Select a file</p>
@@ -438,7 +437,7 @@ class EditProjectForm extends React.Component{
                                                                     </div>
                                                                 ):( 
                                                                     <div className = 'image-block-2'>
-                                                                        <img src={this.state.photoURL} id='upload-image'/>
+                                                                        <img src={this.state.photoURL[0]} id='upload-image'/>
                                                                         <div className='buttons-container'>
                                                                             <label htmlFor="upload-another-image" onMouseEnter={this.triggerOrNot} onMouseLeave={this.triggerOrNot} >
                                                                                 {
