@@ -55,7 +55,7 @@ class EditProjectForm extends React.Component{
             category_id: '',
             category_name: '',
             selectedMainCat: '',
-            location: '',
+            location_id: '',
             photo: [],
             photoURL: [],
             showDropdown: false,
@@ -80,7 +80,7 @@ class EditProjectForm extends React.Component{
                     'selectedMainCat': this.props.project.category_id,
                     'category_id': this.props.project.category_id,
                     'category_name': this.props.project.category_name,
-                    'location': this.props.project.location_id,
+                    'location_id': this.props.project.location_id,
                 })
         }
     }
@@ -96,7 +96,7 @@ class EditProjectForm extends React.Component{
                                 'selectedMainCat': this.props.project.category_id,
                                 'category_id': this.props.project.category_id,
                                 'category_name': this.props.project.category_name,
-                                'location': this.props.project.location_id,
+                                'location_id': this.props.project.location_id,
                                 'photoURL': this.props.project.photoUrl
                             })
             })
@@ -180,7 +180,18 @@ class EditProjectForm extends React.Component{
     handleSubmit(e){
         e.preventDefault();
         // debugger
-        this.props.updateProject(this.state);
+        let formData = new FormData();
+        debugger
+        formData.append('project[id]', this.state.id);
+        formData.append('project[project_name]', this.state.project_name);
+        formData.append('project[subtitle]', this.state.subtitle);
+        formData.append('project[category_id]', this.state.category_id);
+        formData.append('project[location_id]', this.state.location_id);
+        debugger
+        if (this.state.photo.length !== 0) {
+            formData.append('project[photo]', this.state.photo);
+          }
+        this.props.updateProject(formData);
         this.setState({
             'isModified': false
         })
@@ -316,7 +327,7 @@ class EditProjectForm extends React.Component{
                     <Headers selected = {this.state.tab}
                              tabs={tabs}
                              selectTab={this.selectTab}/>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} id = 'edit-form'>
                         {
                             this.state.tab == 0? (
                                 <div>

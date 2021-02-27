@@ -2428,7 +2428,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       category_id: '',
       category_name: '',
       selectedMainCat: '',
-      location: '',
+      location_id: '',
       photo: [],
       photoURL: [],
       showDropdown: false
@@ -2457,7 +2457,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'selectedMainCat': this.props.project.category_id,
           'category_id': this.props.project.category_id,
           'category_name': this.props.project.category_name,
-          'location': this.props.project.location_id
+          'location_id': this.props.project.location_id
         });
       }
     }
@@ -2476,7 +2476,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'selectedMainCat': _this3.props.project.category_id,
           'category_id': _this3.props.project.category_id,
           'category_name': _this3.props.project.category_name,
-          'location': _this3.props.project.location_id,
+          'location_id': _this3.props.project.location_id,
           'photoURL': _this3.props.project.photoUrl
         });
       });
@@ -2591,7 +2591,20 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function handleSubmit(e) {
       e.preventDefault(); // debugger
 
-      this.props.updateProject(this.state);
+      var formData = new FormData();
+      debugger;
+      formData.append('project[id]', this.state.id);
+      formData.append('project[project_name]', this.state.project_name);
+      formData.append('project[subtitle]', this.state.subtitle);
+      formData.append('project[category_id]', this.state.category_id);
+      formData.append('project[location_id]', this.state.location_id);
+      debugger;
+
+      if (this.state.photo.length !== 0) {
+        formData.append('project[photo]', this.state.photo);
+      }
+
+      this.props.updateProject(formData);
       this.setState({
         'isModified': false
       });
@@ -2725,7 +2738,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           tabs: tabs,
           selectTab: this.selectTab
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-          onSubmit: this.handleSubmit
+          onSubmit: this.handleSubmit,
+          id: "edit-form"
         }, this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4694,9 +4708,7 @@ var updateProject = function updateProject(project) {
   return $.ajax({
     method: 'PATCH',
     url: "api/projects/".concat(project.id),
-    data: {
-      project: project
-    }
+    data: project
   });
 };
 
