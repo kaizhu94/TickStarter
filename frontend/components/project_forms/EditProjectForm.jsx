@@ -203,6 +203,7 @@ class EditProjectForm extends React.Component{
         this.setState({
             tab: currentTab
         })
+        this.props.history.push(`/projects/${this.state.id}/edit/${currentTab}`);
     }
 
     next(){
@@ -211,6 +212,7 @@ class EditProjectForm extends React.Component{
         this.setState({
             tab: currentTab
         })
+        this.props.history.push(`/projects/${this.state.id}/edit/${currentTab}`);
     }
 
     previousButton(){

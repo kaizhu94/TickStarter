@@ -2617,6 +2617,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       this.setState({
         tab: currentTab
       });
+      this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(currentTab));
     }
   }, {
     key: "next",
@@ -2626,6 +2627,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       this.setState({
         tab: currentTab
       });
+      this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(currentTab));
     }
   }, {
     key: "previousButton",
