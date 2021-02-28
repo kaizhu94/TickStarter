@@ -7,7 +7,7 @@ import { openModal, closeModal } from '../../actions/modal_actions';
 import EditProjectForm from './EditProjectForm'
 
 const msp = (state, ownprops) =>{
-    debugger
+    // debugger
     return ({
         founderId: state.session.id,
         locations: state.entities.locations,

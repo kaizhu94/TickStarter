@@ -1,5 +1,6 @@
 import React from 'react';
 
+import EditTitleImage from './EditTitleImage'
 
 class Headers extends React.Component {
     render() {
@@ -66,8 +67,8 @@ class EditProjectForm extends React.Component{
         this.previousButton = this.previousButton.bind(this);
         this.nextButton = this.nextButton.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleFile = this.handleFile.bind(this);
-        this.triggerOrNot = this.triggerOrNot.bind(this);
+        // this.handleFile = this.handleFile.bind(this);
+        // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
     componentDidUpdate(prevProps){
         if(prevProps.tabId !== this.props.tabId){
@@ -102,28 +103,28 @@ class EditProjectForm extends React.Component{
             })
     }
 
-    handleFile(e){
-        debugger
-        const file = e.currentTarget.files[0];
-        const fileReader =new FileReader();
-        debugger
-        fileReader.onloadend = () =>{
-            let photofiles = this.state.photo;
-            photofiles[0] = file;
-            let photoURLArray = this.state.photoURL;
-            photoURLArray[0] = fileReader.result
-            this.setState({ photo: photofiles,
-                            photoURL: photoURLArray,
-                            'isModified': true
-                        })
-        }
-        debugger
-        if(file) fileReader.readAsDataURL(file);
-    }
-    triggerOrNot(){
-        let newState = !this.state.showDropdown;
-        this.setState({showDropdown: newState})
-    }
+    // handleFile(e){
+    //     // debugger
+    //     const file = e.currentTarget.files[0];
+    //     const fileReader =new FileReader();
+    //     // debugger
+    //     fileReader.onloadend = () =>{
+    //         let photofiles = this.state.photo;
+    //         photofiles[0] = file;
+    //         let photoURLArray = this.state.photoURL;
+    //         photoURLArray[0] = fileReader.result
+    //         this.setState({ photo: photofiles,
+    //                         photoURL: photoURLArray,
+    //                         'isModified': true
+    //                     })
+    //     }
+    //     // debugger
+    //     if(file) fileReader.readAsDataURL(file);
+    // }
+    // triggerOrNot(){
+    //     let newState = !this.state.showDropdown;
+    //     this.setState({showDropdown: newState})
+    // }
 
     selectTab(num) {
         let modalOpen = false;
@@ -180,18 +181,18 @@ class EditProjectForm extends React.Component{
     handleSubmit(e){
         e.preventDefault();
         // debugger
-        let formData = new FormData();
-        debugger
-        formData.append('project[id]', this.state.id);
-        formData.append('project[project_name]', this.state.project_name);
-        formData.append('project[subtitle]', this.state.subtitle);
-        formData.append('project[category_id]', this.state.category_id);
-        formData.append('project[location_id]', this.state.location_id);
-        debugger
-        if (this.state.photo.length !== 0) {
-            formData.append('project[photo]', this.state.photo);
-          }
-        this.props.updateProject(formData);
+        // let formData = new FormData();
+        // // debugger
+        // formData.append('project[id]', this.state.id);
+        // formData.append('project[project_name]', this.state.project_name);
+        // formData.append('project[subtitle]', this.state.subtitle);
+        // formData.append('project[category_id]', this.state.category_id);
+        // formData.append('project[location_id]', this.state.location_id);
+        // // debugger
+        // if (this.state.photo.length !== 0) {
+        //     formData.append('project[photo]', this.state.photo);
+        //   }
+        this.props.updateProject(this.state);
         this.setState({
             'isModified': false
         })
@@ -440,38 +441,7 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
-                                                    <div className = 'image-right-conatiner'>
-                                                            {
-                                                                !this.state.photoURL[0] ? (
-                                                                    <div className = 'image-block'>
-                                                                        <img id="file" src={window.file} ></img>
-                                                                        <p>Select a file</p>
-                                                                        <input type='file' id='upload-image' onChange={this.handleFile}/> 
-                                                                    </div>
-                                                                ):( 
-                                                                    <div className = 'image-block-2'>
-                                                                        <img src={this.state.photoURL[0]} id='upload-image'/>
-                                                                        <div className='buttons-container'>
-                                                                            <label htmlFor="upload-another-image" onMouseEnter={this.triggerOrNot} onMouseLeave={this.triggerOrNot} >
-                                                                                {
-                                                                                    this.state.showDropdown ? (
-                                                                                        <div className = 'diff-image-dropdown'>
-                                                                                            <p>Upload a different image</p>
-                                                                                        </div>
-                                                                                )
-                                                                                : (
-                                                                                null
-                                                                                )
-                                                                                }
-                                                                                <i className="fas fa-upload"></i>
-                                                                            </label>
-                                                                            <input type='file' id='upload-another-image'onChange={this.handleFile} hidden/> 
-                                                                            <button><i className="fas fa-trash"></i></button>
-                                                                        </div>
-                                                                    </div>
-                                                                )
-                                                            }
-                                                    </div>
+                                                        <EditTitleImage project = {this.props.project}/>
                                             </div>
                                         </div>
                                     </div>

@@ -1410,8 +1410,7 @@ function Modal(props) {
   var modal = props.modal,
       closeModal = props.closeModal,
       errors = props.errors,
-      projectId = props.projectId;
-  debugger;
+      projectId = props.projectId; // debugger
 
   function redirect(projectId, tab) {
     props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
@@ -1447,7 +1446,7 @@ function Modal(props) {
       })));
 
     case 'unsave-tab-0':
-      debugger;
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -1466,7 +1465,7 @@ function Modal(props) {
       }, "Go back and save"))));
 
     case 'unsave-tab-1':
-      debugger;
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -1485,7 +1484,7 @@ function Modal(props) {
       }, "Go back and save"))));
 
     case 'unsave-tab-2':
-      debugger;
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -1504,7 +1503,7 @@ function Modal(props) {
       }, "Go back and save"))));
 
     case 'unsave-tab-3':
-      debugger;
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -1528,7 +1527,7 @@ function Modal(props) {
 }
 
 var msp = function msp(state) {
-  debugger;
+  // debugger
   return {
     modal: state.ui.modal,
     errors: state.errors.session,
@@ -2276,7 +2275,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
+  // debugger
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
@@ -2326,6 +2325,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _EditTitleImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditTitleImage */ "./frontend/components/project_forms/EditTitleImage.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2349,6 +2349,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2438,9 +2439,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.next = _this2.next.bind(_assertThisInitialized(_this2));
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
-    _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
-    _this2.handleFile = _this2.handleFile.bind(_assertThisInitialized(_this2));
-    _this2.triggerOrNot = _this2.triggerOrNot.bind(_assertThisInitialized(_this2));
+    _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
+    // this.triggerOrNot = this.triggerOrNot.bind(this);
+
     return _this2;
   }
 
@@ -2480,41 +2481,29 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'photoURL': _this3.props.project.photoUrl
         });
       });
-    }
-  }, {
-    key: "handleFile",
-    value: function handleFile(e) {
-      var _this4 = this;
+    } // handleFile(e){
+    //     // debugger
+    //     const file = e.currentTarget.files[0];
+    //     const fileReader =new FileReader();
+    //     // debugger
+    //     fileReader.onloadend = () =>{
+    //         let photofiles = this.state.photo;
+    //         photofiles[0] = file;
+    //         let photoURLArray = this.state.photoURL;
+    //         photoURLArray[0] = fileReader.result
+    //         this.setState({ photo: photofiles,
+    //                         photoURL: photoURLArray,
+    //                         'isModified': true
+    //                     })
+    //     }
+    //     // debugger
+    //     if(file) fileReader.readAsDataURL(file);
+    // }
+    // triggerOrNot(){
+    //     let newState = !this.state.showDropdown;
+    //     this.setState({showDropdown: newState})
+    // }
 
-      debugger;
-      var file = e.currentTarget.files[0];
-      var fileReader = new FileReader();
-      debugger;
-
-      fileReader.onloadend = function () {
-        var photofiles = _this4.state.photo;
-        photofiles[0] = file;
-        var photoURLArray = _this4.state.photoURL;
-        photoURLArray[0] = fileReader.result;
-
-        _this4.setState({
-          photo: photofiles,
-          photoURL: photoURLArray,
-          'isModified': true
-        });
-      };
-
-      debugger;
-      if (file) fileReader.readAsDataURL(file);
-    }
-  }, {
-    key: "triggerOrNot",
-    value: function triggerOrNot() {
-      var newState = !this.state.showDropdown;
-      this.setState({
-        showDropdown: newState
-      });
-    }
   }, {
     key: "selectTab",
     value: function selectTab(num) {
@@ -2546,65 +2535,63 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "update",
     value: function update(key) {
-      var _this5 = this;
+      var _this4 = this;
 
       return function (e) {
-        var _this5$setState;
+        var _this4$setState;
 
-        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key, e.currentTarget.value), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
+        return _this4.setState((_this4$setState = {}, _defineProperty(_this4$setState, key, e.currentTarget.value), _defineProperty(_this4$setState, 'isModified', true), _this4$setState));
       };
     }
   }, {
     key: "updateMainCat",
     value: function updateMainCat(key1, key2) {
-      var _this6 = this;
+      var _this5 = this;
 
       return function (e) {
-        var _this6$setState;
+        var _this5$setState;
 
-        return _this6.setState((_this6$setState = {}, _defineProperty(_this6$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this6$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this6$setState, 'selectedMainCat', e.currentTarget.value), _defineProperty(_this6$setState, 'isModified', true), _this6$setState));
+        return _this5.setState((_this5$setState = {}, _defineProperty(_this5$setState, key1, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, key2, parseInt(e.currentTarget.value)), _defineProperty(_this5$setState, 'selectedMainCat', e.currentTarget.value), _defineProperty(_this5$setState, 'isModified', true), _this5$setState));
       };
     }
   }, {
     key: "updateSubCat",
     value: function updateSubCat(key) {
-      var _this7 = this;
+      var _this6 = this;
 
       // debugger
       return function (e) {
-        var _this7$setState;
+        var _this6$setState;
 
         // debugger
         var id = '';
 
         if (e.currentTarget.value === '0') {
-          id = _this7.state.selectedMainCat;
+          id = _this6.state.selectedMainCat;
         } else {
           id = e.currentTarget.value;
         }
 
-        return _this7.setState((_this7$setState = {}, _defineProperty(_this7$setState, key, parseInt(id)), _defineProperty(_this7$setState, 'maincatId', ''), _defineProperty(_this7$setState, 'isModified', true), _this7$setState));
+        return _this6.setState((_this6$setState = {}, _defineProperty(_this6$setState, key, parseInt(id)), _defineProperty(_this6$setState, 'maincatId', ''), _defineProperty(_this6$setState, 'isModified', true), _this6$setState));
       };
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault(); // debugger
+      // let formData = new FormData();
+      // // debugger
+      // formData.append('project[id]', this.state.id);
+      // formData.append('project[project_name]', this.state.project_name);
+      // formData.append('project[subtitle]', this.state.subtitle);
+      // formData.append('project[category_id]', this.state.category_id);
+      // formData.append('project[location_id]', this.state.location_id);
+      // // debugger
+      // if (this.state.photo.length !== 0) {
+      //     formData.append('project[photo]', this.state.photo);
+      //   }
 
-      var formData = new FormData();
-      debugger;
-      formData.append('project[id]', this.state.id);
-      formData.append('project[project_name]', this.state.project_name);
-      formData.append('project[subtitle]', this.state.subtitle);
-      formData.append('project[category_id]', this.state.category_id);
-      formData.append('project[location_id]', this.state.location_id);
-      debugger;
-
-      if (this.state.photo.length !== 0) {
-        formData.append('project[photo]', this.state.photo);
-      }
-
-      this.props.updateProject(formData);
+      this.props.updateProject(this.state);
       this.setState({
         'isModified': false
       });
@@ -2844,40 +2831,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "p-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add images that can clearly represent your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose an image that looks fine in different sizes. It will appear in different places in different sizes: on your project page, on the Kickstarter website and mobile apps, and (when sharing) on \u200B\u200Bsocial channels."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Try to avoid banners, badges, text materials, etc., because they may not be readable when they are small."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The image should be at least 1024x576 pixels. It will be cropped to a 16:9 ratio."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "image-right-conatiner"
-        }, !this.state.photoURL[0] ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "image-block"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          id: "file",
-          src: window.file
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Select a file"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "file",
-          id: "upload-image",
-          onChange: this.handleFile
-        })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "image-block-2"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          src: this.state.photoURL[0],
-          id: "upload-image"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "buttons-container"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-          htmlFor: "upload-another-image",
-          onMouseEnter: this.triggerOrNot,
-          onMouseLeave: this.triggerOrNot
-        }, this.state.showDropdown ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "diff-image-dropdown"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Upload a different image")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          className: "fas fa-upload"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "file",
-          id: "upload-another-image",
-          onChange: this.handleFile,
-          hidden: true
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          className: "fas fa-trash"
-        })))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditTitleImage__WEBPACK_IMPORTED_MODULE_1__.default, {
+          project: this.props.project
+        })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-release-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-category-container"
@@ -2935,6 +2891,144 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditProjectForm);
+
+/***/ }),
+
+/***/ "./frontend/components/project_forms/EditTitleImage.jsx":
+/*!**************************************************************!*\
+  !*** ./frontend/components/project_forms/EditTitleImage.jsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var EditTitleImage = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditTitleImage, _React$Component);
+
+  var _super = _createSuper(EditTitleImage);
+
+  function EditTitleImage(props) {
+    var _this;
+
+    _classCallCheck(this, EditTitleImage);
+
+    _this = _super.call(this, props);
+    debugger;
+    _this.state = {
+      project: props.project,
+      photo: null,
+      photoUrl: props.project.photoUrl[0]
+    };
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
+    _this.triggerOrNot = _this.triggerOrNot.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(EditTitleImage, [{
+    key: "handleFile",
+    value: function handleFile(e) {
+      var _this2 = this;
+
+      debugger;
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+      debugger;
+
+      fileReader.onloadend = function () {
+        // let photofiles = this.state.photo;
+        // photofiles[0] = file;
+        // let photoURLArray = this.state.photoURL;
+        // photoURLArray[0] = fileReader.result
+        _this2.setState({
+          photo: file,
+          photoUrl: fileReader.result
+        });
+      }; // debugger
+
+
+      if (file) fileReader.readAsDataURL(file);
+    }
+  }, {
+    key: "triggerOrNot",
+    value: function triggerOrNot() {
+      var newState = !this.state.showDropdown;
+      this.setState({
+        showDropdown: newState
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "image-right-conatiner"
+      }, "     ", !this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "image-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        id: "file",
+        src: window.file
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Select a file"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "file",
+        id: "upload-image",
+        onChange: this.handleFile
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "image-block-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: this.state.photoUrl,
+        id: "upload-image"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "buttons-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        htmlFor: "upload-another-image",
+        onMouseEnter: this.triggerOrNot,
+        onMouseLeave: this.triggerOrNot
+      }, this.state.showDropdown ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "diff-image-dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Upload a different image")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-upload"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "file",
+        id: "upload-another-image",
+        onChange: this.handleFile,
+        hidden: true
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-trash"
+      })))));
+    }
+  }]);
+
+  return EditTitleImage;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditTitleImage);
 
 /***/ }),
 
@@ -4710,7 +4804,9 @@ var updateProject = function updateProject(project) {
   return $.ajax({
     method: 'PATCH',
     url: "api/projects/".concat(project.id),
-    data: project
+    data: {
+      project: project
+    }
   });
 };
 
