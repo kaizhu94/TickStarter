@@ -86,7 +86,7 @@ class EditProjectForm extends React.Component{
         }
     }
     componentDidMount(){
-        debugger
+        // debugger
         this.props.receiveCategories();
         this.props.receiveLocations();
         this.props.receiveProject(this.props.match.params.projectId)

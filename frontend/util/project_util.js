@@ -36,7 +36,7 @@ export const updateProject = project =>{
 }
 
 export const updateProjectImage = (id, formData) => {
-  debugger
+  // debugger
  return  $.ajax({
     method: "PATCH",
     url: `/api/projects/${id}`,

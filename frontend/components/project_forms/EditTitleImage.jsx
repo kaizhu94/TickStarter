@@ -40,8 +40,8 @@ class EditTitleImage extends React.Component{
         this.setState({showDropdown: newState})
     }
     render(){
-        let photoUrl = this.props.project.photoUrl[0];
-        debugger
+        let photoUrl = this.props.project.photoUrl[0].url;
+        // debugger
         return(
             <div className = 'image-right-conatiner'>     {
                     !photoUrl ? (

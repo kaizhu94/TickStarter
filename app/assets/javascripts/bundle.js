@@ -266,7 +266,7 @@ var deleteProject = function deleteProject(projectId) {
 };
 var updateProject = function updateProject(project) {
   return function (dispatch) {
-    debugger;
+    // debugger
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(project).then(function (project) {
       return dispatch(receiveProject(project));
     });
@@ -274,7 +274,7 @@ var updateProject = function updateProject(project) {
 };
 var updateProjectImage = function updateProjectImage(id, formdata) {
   return function (dispatch) {
-    debugger;
+    // debugger
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProjectImage(id, formdata).then(function (project) {
       return dispatch(receiveProject(project));
     });
@@ -2479,7 +2479,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function componentDidMount() {
       var _this3 = this;
 
-      debugger;
+      // debugger
       this.props.receiveCategories();
       this.props.receiveLocations();
       this.props.receiveProject(this.props.match.params.projectId).then(function () {
@@ -3000,8 +3000,8 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var photoUrl = this.props.project.photoUrl[0];
-      debugger;
+      var photoUrl = this.props.project.photoUrl[0].url; // debugger
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "image-right-conatiner"
       }, "     ", !photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4453,7 +4453,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var projectReducer = function projectReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
+  // debugger
   Object.freeze(state);
 
   switch (action.type) {
@@ -4461,9 +4461,9 @@ var projectReducer = function projectReducer() {
       return action.projects;
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PROJECT:
-      var newProject = _defineProperty({}, action.project.id, action.project);
+      var newProject = _defineProperty({}, action.project.id, action.project); // debugger
 
-      debugger;
+
       return newProject;
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_PROJECT:
@@ -4824,7 +4824,7 @@ var updateProject = function updateProject(project) {
   });
 };
 var updateProjectImage = function updateProjectImage(id, formData) {
-  debugger;
+  // debugger
   return $.ajax({
     method: "PATCH",
     url: "/api/projects/".concat(id),
