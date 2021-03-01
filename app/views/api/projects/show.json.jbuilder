@@ -5,7 +5,7 @@
 json.extract! @project, :id, :project_name, :title, :subtitle, :description, :risks, :goal, :end_date, :location_id, :launch_date, :published, :founder_id, :category_id
 json.category_name  @project.category.category_name
 if @project.title_image.attached?
-    json.title_image url_for(@project.title_image)
+    json.title_image_url url_for(@project.title_image)
 end
 # json.title_image_url do
 #     if @project.title_image.attached?

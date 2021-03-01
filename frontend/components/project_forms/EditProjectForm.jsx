@@ -57,9 +57,7 @@ class EditProjectForm extends React.Component{
             category_name: '',
             selectedMainCat: '',
             location_id: '',
-            photo: [],
-            photoURL: [],
-            showDropdown: false,
+            title_image: null,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -67,6 +65,7 @@ class EditProjectForm extends React.Component{
         this.previousButton = this.previousButton.bind(this);
         this.nextButton = this.nextButton.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.updateTitleImage = this.updateTitleImage.bind(this);
         // this.handleFile = this.handleFile.bind(this);
         // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
@@ -82,6 +81,7 @@ class EditProjectForm extends React.Component{
                     'category_id': this.props.project.category_id,
                     'category_name': this.props.project.category_name,
                     'location_id': this.props.project.location_id,
+                    
                 })
         }
     }
@@ -99,7 +99,7 @@ class EditProjectForm extends React.Component{
                                 'category_id': this.props.project.category_id,
                                 'category_name': this.props.project.category_name,
                                 'location_id': this.props.project.location_id,
-                                'photoURL': this.props.project.photoUrl
+                                
                             })
             })
     }
@@ -126,8 +126,12 @@ class EditProjectForm extends React.Component{
     //     let newState = !this.state.showDropdown;
     //     this.setState({showDropdown: newState})
     // }
-
+    updateTitleImage(file){
+        this.setState({ title_image: file
+                    })
+    }
     selectTab(num) {
+        debugger
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -182,18 +186,19 @@ class EditProjectForm extends React.Component{
     handleSubmit(e){
         e.preventDefault();
         // debugger
-        // let formData = new FormData();
-        // // debugger
+        let formData = new FormData();
+        debugger
         // formData.append('project[id]', this.state.id);
-        // formData.append('project[project_name]', this.state.project_name);
-        // formData.append('project[subtitle]', this.state.subtitle);
-        // formData.append('project[category_id]', this.state.category_id);
-        // formData.append('project[location_id]', this.state.location_id);
+        formData.append('project[project_name]', this.state.project_name);
+        formData.append('project[subtitle]', this.state.subtitle);
+        formData.append('project[category_id]', this.state.category_id);
+        formData.append('project[location_id]', this.state.location_id);
+        // formData.append('project[title_image]', this.state.title_image);
         // // debugger
         // if (this.state.photo.length !== 0) {
         //     formData.append('project[photo]', this.state.photo);
         //   }
-        this.props.updateProject(this.state);
+        this.props.updateProject(this.state.id, formData);
         this.setState({
             'isModified': false
         })
@@ -443,7 +448,10 @@ class EditProjectForm extends React.Component{
                                             </div>
                                             <div className ='right'>
                                                         <EditTitleImage project = {this.props.project} 
-                                                                        updateProject = {this.props.updateProjectImage}/>
+                                                                        updateProject = {this.props.updateProjectImage}
+                                                                        updateTitleImage = {this.updateTitleImage}
+                                                                        openModal = {this.props.openModal}
+                                                                        />
                                             </div>
                                         </div>
                                     </div>

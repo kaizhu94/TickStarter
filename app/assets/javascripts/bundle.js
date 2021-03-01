@@ -264,10 +264,10 @@ var deleteProject = function deleteProject(projectId) {
     });
   };
 };
-var updateProject = function updateProject(project) {
+var updateProject = function updateProject(id, project) {
   return function (dispatch) {
     // debugger
-    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(project).then(function (project) {
+    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(id, project).then(function (project) {
       return dispatch(receiveProject(project));
     });
   };
@@ -1409,7 +1409,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
+
 
 
 
@@ -1419,10 +1421,19 @@ function Modal(props) {
   var modal = props.modal,
       closeModal = props.closeModal,
       errors = props.errors,
-      projectId = props.projectId; // debugger
+      projectId = props.projectId,
+      updateProjectImage = props.updateProjectImage; // debugger
 
   function redirect(projectId, tab) {
     props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
+  }
+
+  function deleteImage() {
+    var formData = new FormData();
+    formData.append('project[title_image]', 'delete');
+    updateProjectImage(projectId, formData).then(function () {
+      return closeModal();
+    });
   }
 
   if (!modal) {
@@ -1453,6 +1464,25 @@ function Modal(props) {
         id: "xIcon",
         src: window.xIcon
       })));
+
+    case 'delete-file':
+      // debugger
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Are you sure?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return deleteImage();
+        }
+      }, "Delete Image")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Close"))));
 
     case 'unsave-tab-0':
       // debugger
@@ -1548,11 +1578,14 @@ var mdp = function mdp(dispatch) {
   return {
     closeModal: function closeModal() {
       return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__.closeModal)());
+    },
+    updateProjectImage: function updateProjectImage(id, FormData) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProjectImage)(id, FormData));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal)));
 
 /***/ }),
 
@@ -2303,8 +2336,8 @@ var mdp = function mdp(dispatch) {
     receiveCategories: function receiveCategories() {
       return dispatch((0,_actions_category_actions__WEBPACK_IMPORTED_MODULE_2__.fetchCategories)());
     },
-    updateProject: function updateProject(project) {
-      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProject)(project));
+    updateProject: function updateProject(id, project) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProject)(id, project));
     },
     receiveProject: function receiveProject(projectId) {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.fetchProject)(projectId));
@@ -2442,16 +2475,15 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       category_name: '',
       selectedMainCat: '',
       location_id: '',
-      photo: [],
-      photoURL: [],
-      showDropdown: false
+      title_image: null
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
     _this2.next = _this2.next.bind(_assertThisInitialized(_this2));
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
-    _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
+    _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
+    _this2.updateTitleImage = _this2.updateTitleImage.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
     // this.triggerOrNot = this.triggerOrNot.bind(this);
 
     return _this2;
@@ -2490,8 +2522,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'selectedMainCat': _this3.props.project.category_id,
           'category_id': _this3.props.project.category_id,
           'category_name': _this3.props.project.category_name,
-          'location_id': _this3.props.project.location_id,
-          'photoURL': _this3.props.project.photoUrl
+          'location_id': _this3.props.project.location_id
         });
       });
     } // handleFile(e){
@@ -2518,8 +2549,16 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     // }
 
   }, {
+    key: "updateTitleImage",
+    value: function updateTitleImage(file) {
+      this.setState({
+        title_image: file
+      });
+    }
+  }, {
     key: "selectTab",
     value: function selectTab(num) {
+      debugger;
       var modalOpen = false;
 
       if (this.state.isModified && num !== this.state.tab) {
@@ -2592,19 +2631,20 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault(); // debugger
-      // let formData = new FormData();
-      // // debugger
-      // formData.append('project[id]', this.state.id);
-      // formData.append('project[project_name]', this.state.project_name);
-      // formData.append('project[subtitle]', this.state.subtitle);
-      // formData.append('project[category_id]', this.state.category_id);
-      // formData.append('project[location_id]', this.state.location_id);
+
+      var formData = new FormData();
+      debugger; // formData.append('project[id]', this.state.id);
+
+      formData.append('project[project_name]', this.state.project_name);
+      formData.append('project[subtitle]', this.state.subtitle);
+      formData.append('project[category_id]', this.state.category_id);
+      formData.append('project[location_id]', this.state.location_id); // formData.append('project[title_image]', this.state.title_image);
       // // debugger
       // if (this.state.photo.length !== 0) {
       //     formData.append('project[photo]', this.state.photo);
       //   }
 
-      this.props.updateProject(this.state);
+      this.props.updateProject(this.state.id, formData);
       this.setState({
         'isModified': false
       });
@@ -2846,7 +2886,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditTitleImage__WEBPACK_IMPORTED_MODULE_1__.default, {
           project: this.props.project,
-          updateProject: this.props.updateProjectImage
+          updateProject: this.props.updateProjectImage,
+          updateTitleImage: this.updateTitleImage,
+          openModal: this.props.openModal
         })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-release-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2964,6 +3006,7 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     _this.triggerOrNot = _this.triggerOrNot.bind(_assertThisInitialized(_this));
+    _this.deleteFile = _this.deleteFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2986,8 +3029,14 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
       var formData = new FormData();
       formData.append('project[title_image]', file);
       debugger;
+      this.props.updateTitleImage(file);
       this.props.updateProject(this.props.project.id, formData);
       if (file) fileReader.readAsDataURL(file);
+    }
+  }, {
+    key: "deleteFile",
+    value: function deleteFile() {
+      this.props.openModal('delete-file');
     }
   }, {
     key: "triggerOrNot",
@@ -3000,7 +3049,7 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var photoUrl = this.props.project.title_image; // debugger
+      var photoUrl = this.props.project.title_image_url; // debugger
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "image-right-conatiner"
@@ -3033,7 +3082,9 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
         id: "upload-another-image",
         onChange: this.handleFile,
         hidden: true
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.deleteFile
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-trash"
       })))));
     }
@@ -4814,13 +4865,14 @@ var deleteProject = function deleteProject(projectID) {
     url: "api/projects/".concat(projectID)
   });
 };
-var updateProject = function updateProject(project) {
+var updateProject = function updateProject(id, project) {
+  debugger;
   return $.ajax({
     method: 'PATCH',
-    url: "api/projects/".concat(project.id),
-    data: {
-      project: project
-    }
+    url: "api/projects/".concat(id),
+    data: project,
+    contentType: false,
+    processData: false
   });
 };
 var updateProjectImage = function updateProjectImage(id, formData) {

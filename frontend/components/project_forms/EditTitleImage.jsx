@@ -12,6 +12,7 @@ class EditTitleImage extends React.Component{
         }
         this.handleFile = this.handleFile.bind(this);
         this.triggerOrNot = this.triggerOrNot.bind(this);
+        this.deleteFile = this.deleteFile.bind(this);
     }
     handleFile(e){
         debugger
@@ -30,9 +31,14 @@ class EditTitleImage extends React.Component{
         let formData = new FormData();
         formData.append('project[title_image]', file);
         debugger
+        this.props.updateTitleImage(file);
         this.props.updateProject(this.props.project.id, formData);
         
         if(file) fileReader.readAsDataURL(file);
+    }
+
+    deleteFile(){
+        this.props.openModal('delete-file');
     }
 
     triggerOrNot(){
@@ -40,7 +46,7 @@ class EditTitleImage extends React.Component{
         this.setState({showDropdown: newState})
     }
     render(){
-        let photoUrl = this.props.project.title_image;
+        let photoUrl = this.props.project.title_image_url;
         // debugger
         return(
             <div className = 'image-right-conatiner'>     {
@@ -68,7 +74,7 @@ class EditTitleImage extends React.Component{
                                     <i className="fas fa-upload"></i>
                                 </label>
                                 <input type='file' id='upload-another-image'onChange={this.handleFile} hidden/> 
-                                <button ><i className="fas fa-trash"></i></button>
+                                <button onClick={this.deleteFile}><i className="fas fa-trash"></i></button>
                             </div>
                         </div>
                     )
