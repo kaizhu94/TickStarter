@@ -5,7 +5,7 @@ import { Link, Redirect, withRouter } from 'react-router-dom'
 
 function Modal( props ){
     const {modal, closeModal, errors, projectId} = props
-    debugger
+    // debugger
     function redirect(projectId, tab){
         props.history.push(`/projects/${projectId}/edit/${tab}`)
     } 
@@ -32,7 +32,7 @@ function Modal( props ){
             </div> 
             );
         case 'unsave-tab-0':
-        debugger
+        // debugger
         return (
             <div className='modal-background' onClick={closeModal}>
                 <div className='unsave-modal-continer'>
@@ -50,7 +50,7 @@ function Modal( props ){
             </div>
         )
         case 'unsave-tab-1':
-            debugger
+            // debugger
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
@@ -68,7 +68,7 @@ function Modal( props ){
                 </div>
             )
         case 'unsave-tab-2':
-            debugger
+            // debugger
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
@@ -86,7 +86,7 @@ function Modal( props ){
                 </div>
             )
         case 'unsave-tab-3':
-            debugger
+            // debugger
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
@@ -112,7 +112,7 @@ function Modal( props ){
 
 
 const msp =state =>{
-    debugger
+    // debugger
     return {
         modal: state.ui.modal,
         errors: state.errors.session,

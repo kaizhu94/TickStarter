@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import {fetchLocations} from '../../actions/location_actions'
 import {fetchCategories } from '../../actions/category_actions'
-import { fetchProject, updateProject} from '../../actions/project_actions'
+import { fetchProject, updateProject, updateProjectImage} from '../../actions/project_actions'
 import { openModal, closeModal } from '../../actions/modal_actions';
 
 import EditProjectForm from './EditProjectForm'
 
 const msp = (state, ownprops) =>{
-    debugger
+    // debugger
     return ({
         founderId: state.session.id,
         locations: state.entities.locations,
@@ -24,6 +24,7 @@ const mdp = dispatch=>{
         receiveCategories: ()=> dispatch(fetchCategories()),
         updateProject: (project) => dispatch(updateProject(project)),
         receiveProject: projectId => dispatch(fetchProject(projectId)),
+        updateProjectImage: (id, FormData) => dispatch(updateProjectImage(id, FormData)),
         openModal: (modal) => dispatch(openModal(modal)),
         closeModal: () => dispatch(closeModal())
     })

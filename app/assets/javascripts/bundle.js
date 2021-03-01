@@ -209,7 +209,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchProject": () => /* binding */ fetchProject,
 /* harmony export */   "createProject": () => /* binding */ createProject,
 /* harmony export */   "deleteProject": () => /* binding */ deleteProject,
-/* harmony export */   "updateProject": () => /* binding */ updateProject
+/* harmony export */   "updateProject": () => /* binding */ updateProject,
+/* harmony export */   "updateProjectImage": () => /* binding */ updateProjectImage
 /* harmony export */ });
 /* harmony import */ var _util_project_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/project_util */ "./frontend/util/project_util.js");
 
@@ -265,8 +266,16 @@ var deleteProject = function deleteProject(projectId) {
 };
 var updateProject = function updateProject(project) {
   return function (dispatch) {
-    debugger;
+    // debugger
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(project).then(function (project) {
+      return dispatch(receiveProject(project));
+    });
+  };
+};
+var updateProjectImage = function updateProjectImage(id, formdata) {
+  return function (dispatch) {
+    // debugger
+    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProjectImage(id, formdata).then(function (project) {
       return dispatch(receiveProject(project));
     });
   };
@@ -1410,8 +1419,7 @@ function Modal(props) {
   var modal = props.modal,
       closeModal = props.closeModal,
       errors = props.errors,
-      projectId = props.projectId;
-  debugger;
+      projectId = props.projectId; // debugger
 
   function redirect(projectId, tab) {
     props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
@@ -1447,7 +1455,7 @@ function Modal(props) {
       })));
 
     case 'unsave-tab-0':
-      debugger;
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -1466,7 +1474,7 @@ function Modal(props) {
       }, "Go back and save"))));
 
     case 'unsave-tab-1':
-      debugger;
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -1485,7 +1493,7 @@ function Modal(props) {
       }, "Go back and save"))));
 
     case 'unsave-tab-2':
-      debugger;
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -1504,7 +1512,7 @@ function Modal(props) {
       }, "Go back and save"))));
 
     case 'unsave-tab-3':
-      debugger;
+      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -1528,7 +1536,7 @@ function Modal(props) {
 }
 
 var msp = function msp(state) {
-  debugger;
+  // debugger
   return {
     modal: state.ui.modal,
     errors: state.errors.session,
@@ -2276,7 +2284,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
+  // debugger
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
@@ -2300,6 +2308,9 @@ var mdp = function mdp(dispatch) {
     },
     receiveProject: function receiveProject(projectId) {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.fetchProject)(projectId));
+    },
+    updateProjectImage: function updateProjectImage(id, FormData) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProjectImage)(id, FormData));
     },
     openModal: function openModal(modal) {
       return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.openModal)(modal));
@@ -2326,6 +2337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _EditTitleImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditTitleImage */ "./frontend/components/project_forms/EditTitleImage.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2352,6 +2364,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Headers = /*#__PURE__*/function (_React$Component) {
   _inherits(Headers, _React$Component);
 
@@ -2368,7 +2381,6 @@ var Headers = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      // debugger
       var selected = this.props.selected;
       var headers = this.props.tabs.map(function (tab, index) {
         var title = tab.title;
@@ -2429,24 +2441,25 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       category_id: '',
       category_name: '',
       selectedMainCat: '',
-      location: '',
-      modalOpen: false,
-      dontSave: false
+      location_id: '',
+      photo: [],
+      photoURL: [],
+      showDropdown: false
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
     _this2.next = _this2.next.bind(_assertThisInitialized(_this2));
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
-    _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
+    _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
+    // this.triggerOrNot = this.triggerOrNot.bind(this);
+
     return _this2;
   }
 
   _createClass(EditProjectForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      debugger;
-
       if (prevProps.tabId !== this.props.tabId) {
         this.setState({
           tab: parseInt(this.props.match.params.id),
@@ -2457,7 +2470,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'selectedMainCat': this.props.project.category_id,
           'category_id': this.props.project.category_id,
           'category_name': this.props.project.category_name,
-          'location': this.props.project.location_id
+          'location_id': this.props.project.location_id
         });
       }
     }
@@ -2466,6 +2479,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function componentDidMount() {
       var _this3 = this;
 
+      // debugger
       this.props.receiveCategories();
       this.props.receiveLocations();
       this.props.receiveProject(this.props.match.params.projectId).then(function () {
@@ -2476,14 +2490,36 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'selectedMainCat': _this3.props.project.category_id,
           'category_id': _this3.props.project.category_id,
           'category_name': _this3.props.project.category_name,
-          'location': _this3.props.project.location_id
+          'location_id': _this3.props.project.location_id,
+          'photoURL': _this3.props.project.photoUrl
         });
       });
-    }
+    } // handleFile(e){
+    //     // debugger
+    //     const file = e.currentTarget.files[0];
+    //     const fileReader =new FileReader();
+    //     // debugger
+    //     fileReader.onloadend = () =>{
+    //         let photofiles = this.state.photo;
+    //         photofiles[0] = file;
+    //         let photoURLArray = this.state.photoURL;
+    //         photoURLArray[0] = fileReader.result
+    //         this.setState({ photo: photofiles,
+    //                         photoURL: photoURLArray,
+    //                         'isModified': true
+    //                     })
+    //     }
+    //     // debugger
+    //     if(file) fileReader.readAsDataURL(file);
+    // }
+    // triggerOrNot(){
+    //     let newState = !this.state.showDropdown;
+    //     this.setState({showDropdown: newState})
+    // }
+
   }, {
     key: "selectTab",
     value: function selectTab(num) {
-      debugger;
       var modalOpen = false;
 
       if (this.state.isModified && num !== this.state.tab) {
@@ -2507,7 +2543,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }
       }
 
-      debugger;
       if (!modalOpen) this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(num));
     }
   }, {
@@ -2515,7 +2550,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function update(key) {
       var _this4 = this;
 
-      // debugger
       return function (e) {
         var _this4$setState;
 
@@ -2558,6 +2592,17 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault(); // debugger
+      // let formData = new FormData();
+      // // debugger
+      // formData.append('project[id]', this.state.id);
+      // formData.append('project[project_name]', this.state.project_name);
+      // formData.append('project[subtitle]', this.state.subtitle);
+      // formData.append('project[category_id]', this.state.category_id);
+      // formData.append('project[location_id]', this.state.location_id);
+      // // debugger
+      // if (this.state.photo.length !== 0) {
+      //     formData.append('project[photo]', this.state.photo);
+      //   }
 
       this.props.updateProject(this.state);
       this.setState({
@@ -2572,6 +2617,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       this.setState({
         tab: currentTab
       });
+      this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(currentTab));
     }
   }, {
     key: "next",
@@ -2581,6 +2627,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       this.setState({
         tab: currentTab
       });
+      this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(currentTab));
     }
   }, {
     key: "previousButton",
@@ -2684,8 +2731,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
         }
 
-        var locations = Object.values(this.props.locations);
-        debugger;
+        var locations = Object.values(this.props.locations); // debugger
+
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
@@ -2693,7 +2740,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           tabs: tabs,
           selectTab: this.selectTab
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-          onSubmit: this.handleSubmit
+          onSubmit: this.handleSubmit,
+          id: "edit-form"
         }, this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2710,12 +2758,12 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right-container"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "text",
           placeholder: "Alow Bub: Self-care pocket companion for iOS",
           value: this.state.project_name,
           onChange: this.update('project_name')
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Subtitle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Subtitle "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
           type: "text",
           placeholder: "Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.",
           value: this.state.subtitle,
@@ -2796,7 +2844,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "p-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add images that can clearly represent your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose an image that looks fine in different sizes. It will appear in different places in different sizes: on your project page, on the Kickstarter website and mobile apps, and (when sharing) on \u200B\u200Bsocial channels."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Try to avoid banners, badges, text materials, etc., because they may not be readable when they are small."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The image should be at least 1024x576 pixels. It will be cropped to a 16:9 ratio."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditTitleImage__WEBPACK_IMPORTED_MODULE_1__.default, {
+          project: this.props.project,
+          updateProject: this.props.updateProjectImage
+        })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-release-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-category-container"
@@ -2854,6 +2905,144 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditProjectForm);
+
+/***/ }),
+
+/***/ "./frontend/components/project_forms/EditTitleImage.jsx":
+/*!**************************************************************!*\
+  !*** ./frontend/components/project_forms/EditTitleImage.jsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var EditTitleImage = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditTitleImage, _React$Component);
+
+  var _super = _createSuper(EditTitleImage);
+
+  function EditTitleImage(props) {
+    var _this;
+
+    _classCallCheck(this, EditTitleImage);
+
+    _this = _super.call(this, props);
+    debugger;
+    _this.state = {
+      // project: props.project,
+      // photo: null,
+      // photoUrl: props.project.photoUrl[0]
+      showDropdown: false
+    };
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
+    _this.triggerOrNot = _this.triggerOrNot.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(EditTitleImage, [{
+    key: "handleFile",
+    value: function handleFile(e) {
+      debugger;
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+      debugger; // fileReader.onloadend = () =>{
+      //     // let photofiles = this.state.photo;
+      //     // photofiles[0] = file;
+      //     // let photoURLArray = this.state.photoURL;
+      //     // photoURLArray[0] = fileReader.result
+      //     this.setState({ photo: file,
+      //                     photoUrl: fileReader.result,
+      //                 })
+      // }
+
+      var formData = new FormData();
+      formData.append('project[photo]', file);
+      debugger;
+      this.props.updateProject(this.props.project.id, formData);
+      if (file) fileReader.readAsDataURL(file);
+    }
+  }, {
+    key: "triggerOrNot",
+    value: function triggerOrNot() {
+      var newState = !this.state.showDropdown;
+      this.setState({
+        showDropdown: newState
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var photoUrl = this.props.project.photoUrl[0].url; // debugger
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "image-right-conatiner"
+      }, "     ", !photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "image-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        id: "file",
+        src: window.file
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Select a file"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "file",
+        id: "upload-image",
+        onChange: this.handleFile
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "image-block-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: photoUrl,
+        id: "upload-image"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "buttons-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        htmlFor: "upload-another-image",
+        onMouseEnter: this.triggerOrNot,
+        onMouseLeave: this.triggerOrNot
+      }, this.state.showDropdown ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "diff-image-dropdown"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Upload a different image")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-upload"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "file",
+        id: "upload-another-image",
+        onChange: this.handleFile,
+        hidden: true
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-trash"
+      })))));
+    }
+  }]);
+
+  return EditTitleImage;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditTitleImage);
 
 /***/ }),
 
@@ -4264,7 +4453,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var projectReducer = function projectReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  //    
+  // debugger
   Object.freeze(state);
 
   switch (action.type) {
@@ -4272,14 +4461,14 @@ var projectReducer = function projectReducer() {
       return action.projects;
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PROJECT:
-      var newProject = _defineProperty({}, action.project.id, action.project);
+      var newProject = _defineProperty({}, action.project.id, action.project); // debugger
+
 
       return newProject;
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_PROJECT:
       var newProjects = Object.assign({}, state);
       delete newProjects[parseInt(action.projectId)];
-      debugger;
       return newProjects;
 
     default:
@@ -4595,7 +4784,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchProject": () => /* binding */ fetchProject,
 /* harmony export */   "createProject": () => /* binding */ createProject,
 /* harmony export */   "deleteProject": () => /* binding */ deleteProject,
-/* harmony export */   "updateProject": () => /* binding */ updateProject
+/* harmony export */   "updateProject": () => /* binding */ updateProject,
+/* harmony export */   "updateProjectImage": () => /* binding */ updateProjectImage
 /* harmony export */ });
 var fetchProjects = function fetchProjects() {
   return $.ajax({
@@ -4625,13 +4815,22 @@ var deleteProject = function deleteProject(projectID) {
   });
 };
 var updateProject = function updateProject(project) {
-  debugger;
   return $.ajax({
     method: 'PATCH',
     url: "api/projects/".concat(project.id),
     data: {
       project: project
     }
+  });
+};
+var updateProjectImage = function updateProjectImage(id, formData) {
+  // debugger
+  return $.ajax({
+    method: "PATCH",
+    url: "/api/projects/".concat(id),
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 

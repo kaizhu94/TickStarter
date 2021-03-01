@@ -28,10 +28,20 @@ export const deleteProject = projectID =>{
 }
 
 export const updateProject = project =>{
-  debugger
   return $.ajax({
       method: 'PATCH',
       url: `api/projects/${project.id}`,
       data: {project}
     })
 }
+
+export const updateProjectImage = (id, formData) => {
+  // debugger
+ return  $.ajax({
+    method: "PATCH",
+    url: `/api/projects/${id}`,
+    data: formData,
+    contentType: false,
+    processData: false,
+  });
+};

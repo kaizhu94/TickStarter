@@ -1,9 +1,9 @@
 import React from 'react';
 
+import EditTitleImage from './EditTitleImage'
 
 class Headers extends React.Component {
     render() {
-        // debugger
       const selected = this.props.selected;
       const headers = this.props.tabs.map((tab, index) => {
         const title = tab.title;
@@ -56,19 +56,21 @@ class EditProjectForm extends React.Component{
             category_id: '',
             category_name: '',
             selectedMainCat: '',
-            location: '',
-            modalOpen: false,
-            dontSave:false
+            location_id: '',
+            photo: [],
+            photoURL: [],
+            showDropdown: false,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
         this.next = this.next.bind(this);
         this.previousButton = this.previousButton.bind(this);
         this.nextButton = this.nextButton.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleFile = this.handleFile.bind(this);
+        // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
     componentDidUpdate(prevProps){
-        debugger
         if(prevProps.tabId !== this.props.tabId){
                 this.setState({
                     tab: parseInt(this.props.match.params.id),
@@ -79,11 +81,12 @@ class EditProjectForm extends React.Component{
                     'selectedMainCat': this.props.project.category_id,
                     'category_id': this.props.project.category_id,
                     'category_name': this.props.project.category_name,
-                    'location': this.props.project.location_id,
+                    'location_id': this.props.project.location_id,
                 })
         }
     }
     componentDidMount(){
+        // debugger
         this.props.receiveCategories();
         this.props.receiveLocations();
         this.props.receiveProject(this.props.match.params.projectId)
@@ -95,13 +98,36 @@ class EditProjectForm extends React.Component{
                                 'selectedMainCat': this.props.project.category_id,
                                 'category_id': this.props.project.category_id,
                                 'category_name': this.props.project.category_name,
-                                'location': this.props.project.location_id,
+                                'location_id': this.props.project.location_id,
+                                'photoURL': this.props.project.photoUrl
                             })
             })
     }
 
+    // handleFile(e){
+    //     // debugger
+    //     const file = e.currentTarget.files[0];
+    //     const fileReader =new FileReader();
+    //     // debugger
+    //     fileReader.onloadend = () =>{
+    //         let photofiles = this.state.photo;
+    //         photofiles[0] = file;
+    //         let photoURLArray = this.state.photoURL;
+    //         photoURLArray[0] = fileReader.result
+    //         this.setState({ photo: photofiles,
+    //                         photoURL: photoURLArray,
+    //                         'isModified': true
+    //                     })
+    //     }
+    //     // debugger
+    //     if(file) fileReader.readAsDataURL(file);
+    // }
+    // triggerOrNot(){
+    //     let newState = !this.state.showDropdown;
+    //     this.setState({showDropdown: newState})
+    // }
+
     selectTab(num) {
-        debugger;
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -119,12 +145,10 @@ class EditProjectForm extends React.Component{
                     this.props.openModal('unsave-tab-3');
             }
         }
-        debugger
         if(!modalOpen) this.props.history.push(`/projects/${this.state.id}/edit/${num}`);
     }
 
     update(key){
-        // debugger
         return e => this.setState({[key]: e.currentTarget.value,
             'isModified': true}
             );
@@ -158,6 +182,17 @@ class EditProjectForm extends React.Component{
     handleSubmit(e){
         e.preventDefault();
         // debugger
+        // let formData = new FormData();
+        // // debugger
+        // formData.append('project[id]', this.state.id);
+        // formData.append('project[project_name]', this.state.project_name);
+        // formData.append('project[subtitle]', this.state.subtitle);
+        // formData.append('project[category_id]', this.state.category_id);
+        // formData.append('project[location_id]', this.state.location_id);
+        // // debugger
+        // if (this.state.photo.length !== 0) {
+        //     formData.append('project[photo]', this.state.photo);
+        //   }
         this.props.updateProject(this.state);
         this.setState({
             'isModified': false
@@ -170,6 +205,7 @@ class EditProjectForm extends React.Component{
         this.setState({
             tab: currentTab
         })
+        this.props.history.push(`/projects/${this.state.id}/edit/${currentTab}`);
     }
 
     next(){
@@ -178,6 +214,7 @@ class EditProjectForm extends React.Component{
         this.setState({
             tab: currentTab
         })
+        this.props.history.push(`/projects/${this.state.id}/edit/${currentTab}`);
     }
 
     previousButton(){
@@ -288,13 +325,13 @@ class EditProjectForm extends React.Component{
 
             const locations = Object.values(this.props.locations);
 
-            debugger
+            // debugger
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}
                              tabs={tabs}
                              selectTab={this.selectTab}/>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} id = 'edit-form'>
                         {
                             this.state.tab == 0? (
                                 <div>
@@ -316,8 +353,7 @@ class EditProjectForm extends React.Component{
                                             <div className='right'>
                                                 <div className = 'right-container'>
                                                     <div>
-                                                        <label >name
-                                                        </label>
+                                                        <label >Title</label>
                                                             <input type="text" 
                                                                 placeholder='Alow Bub: Self-care pocket companion for iOS'
                                                                 value={this.state.project_name}
@@ -325,8 +361,7 @@ class EditProjectForm extends React.Component{
                                                                 />
                                                     </div>
                                                     <div>
-                                                        <label >Subtitle
-                                                        </label>
+                                                        <label >Subtitle </label>
                                                             <textarea type="text"
                                                                 placeholder='Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame.'
                                                                 value={this.state.subtitle}
@@ -407,7 +442,8 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
-
+                                                        <EditTitleImage project = {this.props.project} 
+                                                                        updateProject = {this.props.updateProjectImage}/>
                                             </div>
                                         </div>
                                     </div>
