@@ -28,7 +28,7 @@ class EditTitleImage extends React.Component{
         //                 })
         // }
         let formData = new FormData();
-        formData.append('project[photo]', file);
+        formData.append('project[title_image]', file);
         debugger
         this.props.updateProject(this.props.project.id, formData);
         
@@ -40,7 +40,7 @@ class EditTitleImage extends React.Component{
         this.setState({showDropdown: newState})
     }
     render(){
-        let photoUrl = this.props.project.photoUrl[0].url;
+        let photoUrl = this.props.project.title_image;
         // debugger
         return(
             <div className = 'image-right-conatiner'>     {
@@ -68,7 +68,7 @@ class EditTitleImage extends React.Component{
                                     <i className="fas fa-upload"></i>
                                 </label>
                                 <input type='file' id='upload-another-image'onChange={this.handleFile} hidden/> 
-                                <button><i className="fas fa-trash"></i></button>
+                                <button ><i className="fas fa-trash"></i></button>
                             </div>
                         </div>
                     )

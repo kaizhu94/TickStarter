@@ -4,12 +4,21 @@
 
 json.extract! @project, :id, :project_name, :title, :subtitle, :description, :risks, :goal, :end_date, :location_id, :launch_date, :published, :founder_id, :category_id
 json.category_name  @project.category.category_name
-json.photoUrl do 
-    json.array! @project.photo do |p|
-        # debugger
-        json.url url_for(p)
-    end
+if @project.title_image.attached?
+    json.title_image url_for(@project.title_image)
 end
+# json.title_image_url do
+#     if @project.title_image.attached?
+#         debugger
+#        url_for(@project.title_image)
+#     end
+# end
+# json.photoUrl do 
+#     json.array! @project.photo do |p|
+#         # debugger
+#         json.url url_for(p)
+#     end
+# end
 # @project.photo.each do |photo|
 #     json.photoUrl url_for(photo)
 # end

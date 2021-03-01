@@ -274,7 +274,7 @@ var updateProject = function updateProject(project) {
 };
 var updateProjectImage = function updateProjectImage(id, formdata) {
   return function (dispatch) {
-    // debugger
+    debugger;
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProjectImage(id, formdata).then(function (project) {
       return dispatch(receiveProject(project));
     });
@@ -2984,7 +2984,7 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
       // }
 
       var formData = new FormData();
-      formData.append('project[photo]', file);
+      formData.append('project[title_image]', file);
       debugger;
       this.props.updateProject(this.props.project.id, formData);
       if (file) fileReader.readAsDataURL(file);
@@ -3000,7 +3000,7 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var photoUrl = this.props.project.photoUrl[0].url; // debugger
+      var photoUrl = this.props.project.title_image; // debugger
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "image-right-conatiner"
@@ -4824,7 +4824,7 @@ var updateProject = function updateProject(project) {
   });
 };
 var updateProjectImage = function updateProjectImage(id, formData) {
-  // debugger
+  debugger;
   return $.ajax({
     method: "PATCH",
     url: "/api/projects/".concat(id),

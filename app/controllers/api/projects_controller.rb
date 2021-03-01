@@ -21,6 +21,10 @@ class Api::ProjectsController < ApplicationController
 
     def update
         @project = Project.find(params[:id])
+
+        if @project.title_image.attached? && params[:project][:title_image] 
+            @project.title_image.purge
+        end
         # debugger
         if @project
             @project.update(project_params)
@@ -44,6 +48,6 @@ class Api::ProjectsController < ApplicationController
     def project_params
         params.require(:project).permit(:project_name, :title, :subtitle, :description, 
             :risks, :goal, :end_date, :location_id, :launch_date, :published, 
-            :founder_id, :category_id, :photo)
+            :founder_id, :category_id, :title_image)
     end
 end

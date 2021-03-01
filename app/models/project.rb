@@ -33,5 +33,6 @@ class Project < ApplicationRecord
         foreign_key: :project_id,
         class_name: :Item
 
-    has_many_attached :photo
+    has_one_attached :title_image
+    has_many_attached :background_images
 end

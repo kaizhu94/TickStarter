@@ -60,7 +60,7 @@ export const updateProject = (project) => dispatch =>{
 }
 
 export const updateProjectImage = (id, formdata) => dispatch =>{
-    // debugger
+    debugger
     return ProjectAPIUtil.updateProjectImage(id, formdata).then(
         (project) => dispatch(receiveProject(project))
         )
