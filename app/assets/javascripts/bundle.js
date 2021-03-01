@@ -209,7 +209,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchProject": () => /* binding */ fetchProject,
 /* harmony export */   "createProject": () => /* binding */ createProject,
 /* harmony export */   "deleteProject": () => /* binding */ deleteProject,
-/* harmony export */   "updateProject": () => /* binding */ updateProject
+/* harmony export */   "updateProject": () => /* binding */ updateProject,
+/* harmony export */   "updateProjectImage": () => /* binding */ updateProjectImage
 /* harmony export */ });
 /* harmony import */ var _util_project_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/project_util */ "./frontend/util/project_util.js");
 
@@ -267,6 +268,14 @@ var updateProject = function updateProject(project) {
   return function (dispatch) {
     debugger;
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(project).then(function (project) {
+      return dispatch(receiveProject(project));
+    });
+  };
+};
+var updateProjectImage = function updateProjectImage(id, formdata) {
+  return function (dispatch) {
+    debugger;
+    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProjectImage(id, formdata).then(function (project) {
       return dispatch(receiveProject(project));
     });
   };
@@ -2300,6 +2309,9 @@ var mdp = function mdp(dispatch) {
     receiveProject: function receiveProject(projectId) {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.fetchProject)(projectId));
     },
+    updateProjectImage: function updateProjectImage(id, FormData) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProjectImage)(id, FormData));
+    },
     openModal: function openModal(modal) {
       return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.openModal)(modal));
     },
@@ -2467,6 +2479,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function componentDidMount() {
       var _this3 = this;
 
+      debugger;
       this.props.receiveCategories();
       this.props.receiveLocations();
       this.props.receiveProject(this.props.match.params.projectId).then(function () {
@@ -2832,7 +2845,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add images that can clearly represent your project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Choose an image that looks fine in different sizes. It will appear in different places in different sizes: on your project page, on the Kickstarter website and mobile apps, and (when sharing) on \u200B\u200Bsocial channels."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Try to avoid banners, badges, text materials, etc., because they may not be readable when they are small."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The image should be at least 1024x576 pixels. It will be cropped to a 16:9 ratio."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditTitleImage__WEBPACK_IMPORTED_MODULE_1__.default, {
-          project: this.props.project
+          project: this.props.project,
+          updateProject: this.props.updateProjectImage
         })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-release-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2943,9 +2957,10 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     debugger;
     _this.state = {
-      project: props.project,
-      photo: null,
-      photoUrl: props.project.photoUrl[0]
+      // project: props.project,
+      // photo: null,
+      // photoUrl: props.project.photoUrl[0]
+      showDropdown: false
     };
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     _this.triggerOrNot = _this.triggerOrNot.bind(_assertThisInitialized(_this));
@@ -2955,25 +2970,23 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
   _createClass(EditTitleImage, [{
     key: "handleFile",
     value: function handleFile(e) {
-      var _this2 = this;
-
       debugger;
       var file = e.currentTarget.files[0];
       var fileReader = new FileReader();
+      debugger; // fileReader.onloadend = () =>{
+      //     // let photofiles = this.state.photo;
+      //     // photofiles[0] = file;
+      //     // let photoURLArray = this.state.photoURL;
+      //     // photoURLArray[0] = fileReader.result
+      //     this.setState({ photo: file,
+      //                     photoUrl: fileReader.result,
+      //                 })
+      // }
+
+      var formData = new FormData();
+      formData.append('project[photo]', file);
       debugger;
-
-      fileReader.onloadend = function () {
-        // let photofiles = this.state.photo;
-        // photofiles[0] = file;
-        // let photoURLArray = this.state.photoURL;
-        // photoURLArray[0] = fileReader.result
-        _this2.setState({
-          photo: file,
-          photoUrl: fileReader.result
-        });
-      }; // debugger
-
-
+      this.props.updateProject(this.props.project.id, formData);
       if (file) fileReader.readAsDataURL(file);
     }
   }, {
@@ -2987,10 +3000,11 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var photoUrl = this.props.project.photoUrl[0];
       debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "image-right-conatiner"
-      }, "     ", !this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "     ", !photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "image-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         id: "file",
@@ -3002,7 +3016,7 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
       })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "image-block-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: this.state.photoUrl,
+        src: photoUrl,
         id: "upload-image"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "buttons-container"
@@ -4439,7 +4453,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var projectReducer = function projectReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  //    
+  debugger;
   Object.freeze(state);
 
   switch (action.type) {
@@ -4449,12 +4463,12 @@ var projectReducer = function projectReducer() {
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PROJECT:
       var newProject = _defineProperty({}, action.project.id, action.project);
 
+      debugger;
       return newProject;
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_PROJECT:
       var newProjects = Object.assign({}, state);
       delete newProjects[parseInt(action.projectId)];
-      debugger;
       return newProjects;
 
     default:
@@ -4770,7 +4784,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchProject": () => /* binding */ fetchProject,
 /* harmony export */   "createProject": () => /* binding */ createProject,
 /* harmony export */   "deleteProject": () => /* binding */ deleteProject,
-/* harmony export */   "updateProject": () => /* binding */ updateProject
+/* harmony export */   "updateProject": () => /* binding */ updateProject,
+/* harmony export */   "updateProjectImage": () => /* binding */ updateProjectImage
 /* harmony export */ });
 var fetchProjects = function fetchProjects() {
   return $.ajax({
@@ -4800,13 +4815,22 @@ var deleteProject = function deleteProject(projectID) {
   });
 };
 var updateProject = function updateProject(project) {
-  debugger;
   return $.ajax({
     method: 'PATCH',
     url: "api/projects/".concat(project.id),
     data: {
       project: project
     }
+  });
+};
+var updateProjectImage = function updateProjectImage(id, formData) {
+  debugger;
+  return $.ajax({
+    method: "PATCH",
+    url: "/api/projects/".concat(id),
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 

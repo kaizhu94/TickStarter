@@ -6,6 +6,7 @@ json.extract! @project, :id, :project_name, :title, :subtitle, :description, :ri
 json.category_name  @project.category.category_name
 json.photoUrl do 
     json.array! @project.photo do |p|
+        # debugger
         json.url url_for(p)
     end
 end

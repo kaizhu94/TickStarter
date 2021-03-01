@@ -5,9 +5,10 @@ class EditTitleImage extends React.Component{
         super(props);
         debugger
         this.state= {
-            project: props.project,
-            photo: null,
-            photoUrl: props.project.photoUrl[0]
+            // project: props.project,
+            // photo: null,
+            // photoUrl: props.project.photoUrl[0]
+            showDropdown: false
         }
         this.handleFile = this.handleFile.bind(this);
         this.triggerOrNot = this.triggerOrNot.bind(this);
@@ -17,16 +18,20 @@ class EditTitleImage extends React.Component{
         const file = e.currentTarget.files[0];
         const fileReader =new FileReader();
         debugger
-        fileReader.onloadend = () =>{
-            // let photofiles = this.state.photo;
-            // photofiles[0] = file;
-            // let photoURLArray = this.state.photoURL;
-            // photoURLArray[0] = fileReader.result
-            this.setState({ photo: file,
-                            photoUrl: fileReader.result,
-                        })
-        }
-        // debugger
+        // fileReader.onloadend = () =>{
+        //     // let photofiles = this.state.photo;
+        //     // photofiles[0] = file;
+        //     // let photoURLArray = this.state.photoURL;
+        //     // photoURLArray[0] = fileReader.result
+        //     this.setState({ photo: file,
+        //                     photoUrl: fileReader.result,
+        //                 })
+        // }
+        let formData = new FormData();
+        formData.append('project[photo]', file);
+        debugger
+        this.props.updateProject(this.props.project.id, formData);
+        
         if(file) fileReader.readAsDataURL(file);
     }
 
@@ -35,10 +40,11 @@ class EditTitleImage extends React.Component{
         this.setState({showDropdown: newState})
     }
     render(){
+        let photoUrl = this.props.project.photoUrl[0];
         debugger
         return(
             <div className = 'image-right-conatiner'>     {
-                    !this.state.photoUrl ? (
+                    !photoUrl ? (
                         <div className = 'image-block'>
                             <img id="file" src={window.file} ></img>
                             <p>Select a file</p>
@@ -46,7 +52,7 @@ class EditTitleImage extends React.Component{
                         </div>
                     ):( 
                         <div className = 'image-block-2'>
-                            <img src={this.state.photoUrl} id='upload-image'/>
+                            <img src={photoUrl} id='upload-image'/>
                             <div className='buttons-container'>
                                 <label htmlFor="upload-another-image" onMouseEnter={this.triggerOrNot} onMouseLeave={this.triggerOrNot} >
                                     {

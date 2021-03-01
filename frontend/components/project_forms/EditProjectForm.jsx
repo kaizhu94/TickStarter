@@ -86,6 +86,7 @@ class EditProjectForm extends React.Component{
         }
     }
     componentDidMount(){
+        debugger
         this.props.receiveCategories();
         this.props.receiveLocations();
         this.props.receiveProject(this.props.match.params.projectId)
@@ -441,7 +442,8 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
-                                                        <EditTitleImage project = {this.props.project}/>
+                                                        <EditTitleImage project = {this.props.project} 
+                                                                        updateProject = {this.props.updateProjectImage}/>
                                             </div>
                                         </div>
                                     </div>
