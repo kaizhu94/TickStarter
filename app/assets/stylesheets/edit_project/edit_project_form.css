@@ -440,6 +440,19 @@
     margin-bottom: 50px;
 }
 
+#risks{
+    padding: 15px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    border-color: gainsboro;
+}
+#risks:hover{
+    border-color:  limegreen;
+}
+#risks:focus{
+    border-color:  limegreen;
+    outline: none;
+}
 
 
 

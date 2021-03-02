@@ -58,6 +58,7 @@ class EditProjectForm extends React.Component{
             selectedMainCat: '',
             location_id: '',
             goal: null,
+            risks: null,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -100,6 +101,7 @@ class EditProjectForm extends React.Component{
                                 'category_name': this.props.project.category_name,
                                 'location_id': this.props.project.location_id,
                                 'goal': this.props.project.goal,
+                                'risks': this.props.project.risks,
                             })
             })
     }
@@ -195,6 +197,7 @@ class EditProjectForm extends React.Component{
         formData.append('project[category_id]', this.state.category_id);
         formData.append('project[location_id]', this.state.location_id);
         formData.append('project[goal]', this.state.goal);
+        formData.append('project[risks]', this.state.risks);
         // // debugger
         // if (this.state.photo.length !== 0) {
         //     formData.append('project[photo]', this.state.photo);
@@ -533,7 +536,9 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
-
+                                                <div className='location-right-container'>
+                                                    <textarea  id="risks" cols="30" rows="10" onChange={this.update('risks')}></textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

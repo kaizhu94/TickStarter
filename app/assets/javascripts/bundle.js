@@ -2475,7 +2475,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       category_name: '',
       selectedMainCat: '',
       location_id: '',
-      goal: null
+      goal: null,
+      risks: null
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2523,7 +2524,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'category_id': _this3.props.project.category_id,
           'category_name': _this3.props.project.category_name,
           'location_id': _this3.props.project.location_id,
-          'goal': _this3.props.project.goal
+          'goal': _this3.props.project.goal,
+          'risks': _this3.props.project.risks
         });
       });
     }
@@ -2643,7 +2645,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       formData.append('project[subtitle]', this.state.subtitle);
       formData.append('project[category_id]', this.state.category_id);
       formData.append('project[location_id]', this.state.location_id);
-      formData.append('project[goal]', this.state.goal); // // debugger
+      formData.append('project[goal]', this.state.goal);
+      formData.append('project[risks]', this.state.risks); // // debugger
       // if (this.state.photo.length !== 0) {
       //     formData.append('project[photo]', this.state.photo);
       //   }
@@ -2947,7 +2950,14 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "p-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Be honest about the potential risks and challenges of this project, and how you plan to overcome these risks and challenges to complete it."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
-        })))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "location-right-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+          id: "risks",
+          cols: "30",
+          rows: "10",
+          onChange: this.update('risks')
+        })))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-container"
