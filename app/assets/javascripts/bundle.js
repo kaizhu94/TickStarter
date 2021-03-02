@@ -2475,7 +2475,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       category_name: '',
       selectedMainCat: '',
       location_id: '',
-      title_image: null
+      goal: null
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2495,14 +2495,14 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       if (prevProps.tabId !== this.props.tabId) {
         this.setState({
           tab: parseInt(this.props.match.params.id),
-          isModified: false,
-          'id': this.props.project.id,
-          'project_name': this.props.project.project_name,
-          'subtitle': this.props.project.subtitle,
-          'selectedMainCat': this.props.project.category_id,
-          'category_id': this.props.project.category_id,
-          'category_name': this.props.project.category_name,
-          'location_id': this.props.project.location_id
+          isModified: false // 'id': this.props.project.id,
+          // 'project_name': this.props.project.project_name,
+          // 'subtitle': this.props.project.subtitle,
+          // 'selectedMainCat': this.props.project.category_id,
+          // 'category_id': this.props.project.category_id,
+          // 'category_name': this.props.project.category_name,
+          // 'location_id': this.props.project.location_id,
+
         });
       }
     }
@@ -2522,32 +2522,11 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'selectedMainCat': _this3.props.project.category_id,
           'category_id': _this3.props.project.category_id,
           'category_name': _this3.props.project.category_name,
-          'location_id': _this3.props.project.location_id
+          'location_id': _this3.props.project.location_id,
+          'goal': _this3.props.project.goal
         });
       });
-    } // handleFile(e){
-    //     // debugger
-    //     const file = e.currentTarget.files[0];
-    //     const fileReader =new FileReader();
-    //     // debugger
-    //     fileReader.onloadend = () =>{
-    //         let photofiles = this.state.photo;
-    //         photofiles[0] = file;
-    //         let photoURLArray = this.state.photoURL;
-    //         photoURLArray[0] = fileReader.result
-    //         this.setState({ photo: photofiles,
-    //                         photoURL: photoURLArray,
-    //                         'isModified': true
-    //                     })
-    //     }
-    //     // debugger
-    //     if(file) fileReader.readAsDataURL(file);
-    // }
-    // triggerOrNot(){
-    //     let newState = !this.state.showDropdown;
-    //     this.setState({showDropdown: newState})
-    // }
-
+    }
   }, {
     key: "updateTitleImage",
     value: function updateTitleImage(file) {
@@ -2628,6 +2607,31 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       };
     }
   }, {
+    key: "updateFunding",
+    value: function updateFunding(key) {
+      var _this7 = this;
+
+      return function (e) {
+        // debugger
+        // const regexp = /^[0-9\b]+(.[0-9\b]+)$/;
+        var value = e.currentTarget.value; // if(regexp.test(value)){
+        //     debugger
+        // }
+
+        debugger;
+
+        if (value === '') {
+          var _this7$setState;
+
+          return _this7.setState((_this7$setState = {}, _defineProperty(_this7$setState, key, value), _defineProperty(_this7$setState, 'maincatId', ''), _defineProperty(_this7$setState, 'isModified', true), _this7$setState));
+        } else {
+          var _this7$setState2;
+
+          return _this7.setState((_this7$setState2 = {}, _defineProperty(_this7$setState2, key, Math.round(value)), _defineProperty(_this7$setState2, 'maincatId', ''), _defineProperty(_this7$setState2, 'isModified', true), _this7$setState2));
+        }
+      };
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault(); // debugger
@@ -2638,8 +2642,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       formData.append('project[project_name]', this.state.project_name);
       formData.append('project[subtitle]', this.state.subtitle);
       formData.append('project[category_id]', this.state.category_id);
-      formData.append('project[location_id]', this.state.location_id); // formData.append('project[title_image]', this.state.title_image);
-      // // debugger
+      formData.append('project[location_id]', this.state.location_id);
+      formData.append('project[goal]', this.state.goal); // // debugger
       // if (this.state.photo.length !== 0) {
       //     formData.append('project[photo]', this.state.photo);
       //   }
@@ -2900,16 +2904,32 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Publish your project, and set a time limit for your promotion. After the project is published, you will not be able to change this time limit."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
         })))) : null, this.state.tab == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "start-from-basic"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "start-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Set your funding goal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Let people know how much support you need."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-funding-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "project-category-container"
+          className: "project-funding-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "left"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Fundraising goal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "p-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Set an achievable goal that covers what is needed to complete the project."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The fundraising activity is \"all-or-nothing\". If you do not reach your goal, you will not receive any funds."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
-        })))) : null, this.state.tab == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "funding-right-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Goal amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "funding-div"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          id: "dollar-sign"
+        }, "US$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "number",
+          placeholder: "500",
+          id: "founding-input",
+          value: this.state.goal,
+          onChange: this.updateFunding('goal')
+        }))))))) : null, this.state.tab == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-block"

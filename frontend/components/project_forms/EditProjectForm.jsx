@@ -57,7 +57,7 @@ class EditProjectForm extends React.Component{
             category_name: '',
             selectedMainCat: '',
             location_id: '',
-            title_image: null,
+            goal: null,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -74,13 +74,13 @@ class EditProjectForm extends React.Component{
                 this.setState({
                     tab: parseInt(this.props.match.params.id),
                     isModified: false,
-                    'id': this.props.project.id,
-                    'project_name': this.props.project.project_name,
-                    'subtitle': this.props.project.subtitle,
-                    'selectedMainCat': this.props.project.category_id,
-                    'category_id': this.props.project.category_id,
-                    'category_name': this.props.project.category_name,
-                    'location_id': this.props.project.location_id,
+                    // 'id': this.props.project.id,
+                    // 'project_name': this.props.project.project_name,
+                    // 'subtitle': this.props.project.subtitle,
+                    // 'selectedMainCat': this.props.project.category_id,
+                    // 'category_id': this.props.project.category_id,
+                    // 'category_name': this.props.project.category_name,
+                    // 'location_id': this.props.project.location_id,
                     
                 })
         }
@@ -99,33 +99,11 @@ class EditProjectForm extends React.Component{
                                 'category_id': this.props.project.category_id,
                                 'category_name': this.props.project.category_name,
                                 'location_id': this.props.project.location_id,
-                                
+                                'goal': this.props.project.goal,
                             })
             })
     }
 
-    // handleFile(e){
-    //     // debugger
-    //     const file = e.currentTarget.files[0];
-    //     const fileReader =new FileReader();
-    //     // debugger
-    //     fileReader.onloadend = () =>{
-    //         let photofiles = this.state.photo;
-    //         photofiles[0] = file;
-    //         let photoURLArray = this.state.photoURL;
-    //         photoURLArray[0] = fileReader.result
-    //         this.setState({ photo: photofiles,
-    //                         photoURL: photoURLArray,
-    //                         'isModified': true
-    //                     })
-    //     }
-    //     // debugger
-    //     if(file) fileReader.readAsDataURL(file);
-    // }
-    // triggerOrNot(){
-    //     let newState = !this.state.showDropdown;
-    //     this.setState({showDropdown: newState})
-    // }
     updateTitleImage(file){
         this.setState({ title_image: file
                     })
@@ -183,6 +161,29 @@ class EditProjectForm extends React.Component{
         }
     }
 
+    updateFunding(key){
+        return e =>{  
+            // debugger
+        // const regexp = /^[0-9\b]+(.[0-9\b]+)$/;
+        let value = e.currentTarget.value; 
+        // if(regexp.test(value)){
+        //     debugger
+        // }
+        debugger
+        if(value === ''){
+            return this.setState({[key]:  value,
+                'maincatId':'',
+                'isModified': true}
+                );
+        }else{
+            return this.setState({[key]:  Math.round(value),
+            'maincatId':'',
+            'isModified': true}
+            );
+        }
+    }
+    }
+
     handleSubmit(e){
         e.preventDefault();
         // debugger
@@ -193,7 +194,7 @@ class EditProjectForm extends React.Component{
         formData.append('project[subtitle]', this.state.subtitle);
         formData.append('project[category_id]', this.state.category_id);
         formData.append('project[location_id]', this.state.location_id);
-        // formData.append('project[title_image]', this.state.title_image);
+        formData.append('project[goal]', this.state.goal);
         // // debugger
         // if (this.state.photo.length !== 0) {
         //     formData.append('project[photo]', this.state.photo);
@@ -475,8 +476,14 @@ class EditProjectForm extends React.Component{
                         {
                             this.state.tab == 1? ( 
                                 <div>
+                                    <div className='start-from-basic'>
+                                        <div className= 'start-block'>
+                                            <h1>Set your funding goal</h1>
+                                            <p>Let people know how much support you need.</p>
+                                        </div>
+                                    </div>
                                      <div className= 'project-funding-section'>
-                                        <div className= 'project-category-container'>
+                                        <div className= 'project-funding-container'>
                                             <div className = 'left'>
                                                 <h2>Fundraising goal</h2>
                                                 <div className='p-block'>
@@ -486,7 +493,16 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
-
+                                                <div className='funding-right-container'>
+                                                    <label>Goal amount</label>
+                                                    <div className='funding-div'>
+                                                        <label id='dollar-sign'>US$</label>
+                                                        <input type='number' placeholder='500'
+                                                         id='founding-input' 
+                                                         value={this.state.goal}
+                                                         onChange={this.updateFunding('goal')}/> 
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

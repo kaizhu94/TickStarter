@@ -360,6 +360,65 @@
     line-height: 18px;
     transition-delay: 2s;
 }
+.project-funding-container{
+    width: 90%;
+    margin: auto;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 32px;
+}
+.funding-right-container{
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+.funding-right-container label{
+    padding-bottom: 15px;
+}
+.funding-right-container .funding-div{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid gainsboro;
+} 
+.funding-right-container .funding-div:hover{
+    border-color: limegreen;
+}
+.funding-right-container .funding-div #dollar-sign{
+    width: 20%;
+    display: flex;
+    /* border: 1px solid gainsboro; */
+    padding-bottom: 0px;
+    justify-content: center;
+    padding-top: 10px;
+}
+.funding-right-container .funding-div #founding-input{
+    width: 80%;
+    padding-left: 15px;
+    border: none;
+    border-left: 1px solid gainsboro;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+
+.funding-div:hover #founding-input{
+    border-color: limegreen;
+}
+
+
+
+#founding-input:focus{
+    outline: none;
+}
+
 
 .project-release-section{
     width: 100%;
