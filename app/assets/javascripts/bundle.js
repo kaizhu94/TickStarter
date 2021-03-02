@@ -2956,7 +2956,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           id: "risks",
           cols: "30",
           rows: "10",
-          onChange: this.update('risks')
+          onChange: this.update('risks'),
+          value: this.state.risks,
+          placeholder: "Common risks and challenges you may wangt to address"
         })))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

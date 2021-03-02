@@ -537,7 +537,13 @@ class EditProjectForm extends React.Component{
                                             </div>
                                             <div className ='right'>
                                                 <div className='location-right-container'>
-                                                    <textarea  id="risks" cols="30" rows="10" onChange={this.update('risks')}></textarea>
+                                                    <textarea  id="risks" cols="30" rows="10" 
+                                                    onChange={this.update('risks')}
+                                                    value = {this.state.risks}
+                                                    placeholder = "Common risks and challenges you may wangt to address"
+                                                    >
+
+                                                    </textarea>
                                                 </div>
                                             </div>
                                         </div>
