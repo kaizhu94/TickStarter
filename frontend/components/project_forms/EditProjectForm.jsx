@@ -1,6 +1,7 @@
 import React from 'react';
 
 import EditTitleImage from './EditTitleImage'
+import EditPromotionDate from './EditPromotionDate'
 
 class Headers extends React.Component {
     render() {
@@ -59,7 +60,8 @@ class EditProjectForm extends React.Component{
             location_id: '',
             goal: null,
             risks: null,
-            description: null
+            description: null,
+            selectedDateTab: false,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -68,6 +70,7 @@ class EditProjectForm extends React.Component{
         this.nextButton = this.nextButton.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateTitleImage = this.updateTitleImage.bind(this);
+        this.updateDateTab =this.updateDateTab.bind(this);
         // this.handleFile = this.handleFile.bind(this);
         // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
@@ -112,8 +115,17 @@ class EditProjectForm extends React.Component{
         this.setState({ title_image: file
                     })
     }
+
+    updateDateTab(){
+        // debugger
+        const value = !this.state.selectedDateTab;
+        this.setState({'selectedDateTab': value,
+            'isModified': true}
+            );
+    }
+
     selectTab(num) {
-        debugger
+        // debugger
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -173,7 +185,7 @@ class EditProjectForm extends React.Component{
         // if(regexp.test(value)){
         //     debugger
         // }
-        debugger
+        // debugger
         if(value === ''){
             return this.setState({[key]:  value,
                 'maincatId':'',
@@ -192,7 +204,7 @@ class EditProjectForm extends React.Component{
         e.preventDefault();
         // debugger
         let formData = new FormData();
-        debugger
+        // debugger
         // formData.append('project[id]', this.state.id);
         formData.append('project[project_name]', this.state.project_name);
         formData.append('project[subtitle]', this.state.subtitle);
@@ -308,6 +320,7 @@ class EditProjectForm extends React.Component{
     }
 
     render(){
+        // debugger
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project || !this.props.maincategories || !this.props.subcategories
@@ -472,7 +485,9 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
-
+                                                <EditPromotionDate 
+                                                    selectTab={this.state.selectedDateTab}
+                                                    updateDateTab={this.updateDateTab}/>
                                             </div>
                                         </div>
                                     </div>

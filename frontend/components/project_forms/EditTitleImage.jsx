@@ -3,7 +3,6 @@ import React from 'react';
 class EditTitleImage extends React.Component{
     constructor(props){
         super(props);
-        debugger
         this.state= {
             // project: props.project,
             // photo: null,
@@ -30,7 +29,6 @@ class EditTitleImage extends React.Component{
         // }
         let formData = new FormData();
         formData.append('project[title_image]', file);
-        debugger
         this.props.updateTitleImage(file);
         this.props.updateProject(this.props.project.id, formData);
         

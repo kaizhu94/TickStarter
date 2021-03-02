@@ -2371,6 +2371,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _EditTitleImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditTitleImage */ "./frontend/components/project_forms/EditTitleImage.jsx");
+/* harmony import */ var _EditPromotionDate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditPromotionDate */ "./frontend/components/project_forms/EditPromotionDate.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2394,6 +2395,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2477,7 +2479,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       location_id: '',
       goal: null,
       risks: null,
-      description: null
+      description: null,
+      selectedDateTab: false
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2485,7 +2488,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.previousButton = _this2.previousButton.bind(_assertThisInitialized(_this2));
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
     _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
-    _this2.updateTitleImage = _this2.updateTitleImage.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
+    _this2.updateTitleImage = _this2.updateTitleImage.bind(_assertThisInitialized(_this2));
+    _this2.updateDateTab = _this2.updateDateTab.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
     // this.triggerOrNot = this.triggerOrNot.bind(this);
 
     return _this2;
@@ -2539,9 +2543,19 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       });
     }
   }, {
+    key: "updateDateTab",
+    value: function updateDateTab() {
+      // debugger
+      var value = !this.state.selectedDateTab;
+      this.setState({
+        'selectedDateTab': value,
+        'isModified': true
+      });
+    }
+  }, {
     key: "selectTab",
     value: function selectTab(num) {
-      debugger;
+      // debugger
       var modalOpen = false;
 
       if (this.state.isModified && num !== this.state.tab) {
@@ -2621,8 +2635,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         var value = e.currentTarget.value; // if(regexp.test(value)){
         //     debugger
         // }
-
-        debugger;
+        // debugger
 
         if (value === '') {
           var _this7$setState;
@@ -2640,8 +2653,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function handleSubmit(e) {
       e.preventDefault(); // debugger
 
-      var formData = new FormData();
-      debugger; // formData.append('project[id]', this.state.id);
+      var formData = new FormData(); // debugger
+      // formData.append('project[id]', this.state.id);
 
       formData.append('project[project_name]', this.state.project_name);
       formData.append('project[subtitle]', this.state.subtitle);
@@ -2744,6 +2757,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
+      // debugger
       var tabs = [{
         title: 'Basics'
       }, {
@@ -2909,7 +2923,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "p-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Publish your project, and set a time limit for your promotion. After the project is published, you will not be able to change this time limit."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
-        })))) : null, this.state.tab == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditPromotionDate__WEBPACK_IMPORTED_MODULE_2__.default, {
+          selectTab: this.state.selectedDateTab,
+          updateDateTab: this.updateDateTab
+        }))))) : null, this.state.tab == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-block"
@@ -2999,6 +3016,154 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
 
 /***/ }),
 
+/***/ "./frontend/components/project_forms/EditPromotionDate.jsx":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/project_forms/EditPromotionDate.jsx ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditPromotionDate, _React$Component);
+
+  var _super = _createSuper(EditPromotionDate);
+
+  function EditPromotionDate(props) {
+    var _this;
+
+    _classCallCheck(this, EditPromotionDate);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      year: null,
+      month: null,
+      day: null,
+      hour: null,
+      minute: null
+    };
+    return _this;
+  }
+
+  _createClass(EditPromotionDate, [{
+    key: "render",
+    value: function render() {
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "project-promotion-container"
+      }, this.props.selectTab ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-dot-circle",
+        id: "selected-dot"
+      }), " Fixed number of days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-lower-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter number of days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number",
+        defaultValue: "30",
+        id: "days"
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-block",
+        onClick: this.props.updateDateTab
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "circle-dot"
+      }), " End on a specific date & time")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-block",
+        onClick: this.props.updateDateTab
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "circle-dot"
+      }), " Fixed number of days"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-dot-circle",
+        id: "selected-dot"
+      }), "  End on a specific date & time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-date-lower-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "date-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "date-block-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Day"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Year")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "date-block-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "far fa-calendar-alt"
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "date-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "date-block-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Time")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "date-block-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Eastern Daylight Time")))))))));
+    }
+  }]);
+
+  return EditPromotionDate;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditPromotionDate);
+
+/***/ }),
+
 /***/ "./frontend/components/project_forms/EditTitleImage.jsx":
 /*!**************************************************************!*\
   !*** ./frontend/components/project_forms/EditTitleImage.jsx ***!
@@ -3046,7 +3211,6 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, EditTitleImage);
 
     _this = _super.call(this, props);
-    debugger;
     _this.state = {
       // project: props.project,
       // photo: null,
@@ -3077,7 +3241,6 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
 
       var formData = new FormData();
       formData.append('project[title_image]', file);
-      debugger;
       this.props.updateTitleImage(file);
       this.props.updateProject(this.props.project.id, formData);
       if (file) fileReader.readAsDataURL(file);

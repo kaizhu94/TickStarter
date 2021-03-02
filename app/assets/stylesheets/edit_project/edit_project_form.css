@@ -417,12 +417,158 @@
     border-color: limegreen;
 }
 
+.project-promotion-container{
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+
+/* .project-promotion-container label{
+    border: 1px solid gainsboro;
+    margin-bottom: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+.project-promotion-container label div{
+    margin-right: 15px;
+}
 
 
+.project-promotion-container label:hover{
+    border-color: limegreen;
+}
+
+.project-promotion-container label:focus{
+    border-color: limegreen;
+}
 #founding-input:focus{
     outline: none;
 }
+#circle-dot{
+    display: flex;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 20px;
+    width: 15px;
+    height: 15px;
+    box-shadow: 0px 2px 0px 0px #dddddd;
+}
+#selected-dot{
+    color: green;
+    padding-right: 15px;
+} */
+.project-promotion-container{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+.selected-date-container{
+    width: 100%;
+    display: flex;
+    border: 1px solid gainsboro;
+    flex-direction: column;
+}
+.selected-date-container:hover{
+    cursor: pointer;
+}
+.selected-date-block{
+    margin-bottom: 10px;
+}
+.selected-date-container .selected-date-upper{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+}
 
+.selected-date-container .selected-date-lower{
+    width: 100%;
+    height: 80%;
+    border-top: 1px solid gainsboro ;
+}
+
+.selected-date-container .selected-date-lower .selected-date-lower-container{
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.selected-date-lower-container h3{
+    margin-bottom: 10px;
+}
+.selected-date-lower-container #days{
+    height: 35px;
+    padding-left: 15px;
+}
+.selected-date-lower-container #days:hover{
+    cursor: unset;
+    border-color: limegreen;
+}
+.selected-date-lower-container input:focus{
+    outline: none;
+}
+.selected-date-lower-container  .date-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+.date-block .date-block-upper{
+    display: flex;
+    flex-direction: row;
+}
+.date-block .date-block-upper h3{
+    width: 68px;
+}
+.date-block .date-block-lower{
+    display: flex;
+}
+.date-block .date-block-lower input{
+    width: 50px;
+    height: 35px;
+    margin-right: 10px;
+    text-align: center;
+    border-color: gainsboro;
+}
+.date-block .date-block-lower h3{
+    align-self: center;
+    margin-bottom: 0px;
+}
+.date-block .date-block-lower button{
+    width: 42px;
+    height: 42px;
+    border: none;
+}
+.date-block .date-block-lower button:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 2px 1px #dddddd;
+}
+.date-block .date-block-lower button:focus{
+    outline: none;
+}
+
+#circle-dot{
+    display: flex;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 20px;
+    width: 15px;
+    height: 15px;
+    box-shadow: 0px 2px 0px 0px #dddddd;
+    margin-right: 15px;
+}
+#selected-dot{
+    margin-right: 15px;
+    color: green;
+}
 
 .project-release-section{
     width: 100%;
@@ -463,7 +609,7 @@
 .edit-button-block{
     width: 100%;
     border-bottom: 1px solid gainsboro;
-    padding-top: 40px;
+    padding-top: 60px;
     padding-bottom: 70px;
     font-family: 'Open Sans', sans-serif;
 }
