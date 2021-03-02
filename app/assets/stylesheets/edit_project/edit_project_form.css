@@ -153,10 +153,12 @@
 .right-container div input{
     height: 35px;
     padding-left: 15px;
+    border-color: gainsboro;
 }
 .right-container div textarea{
     height: 40px;
     padding: 15px;
+    border-color: gainsboro;
 }
 .right-container div input:hover, .right-container div textarea:hover{
     border-color: green;
@@ -198,6 +200,7 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     padding-left: 15px;
+    border-color: gainsboro;
 }
 
 .category-right-container select:focus{
@@ -230,6 +233,7 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     padding-left: 15px;
+    border-color: gainsboro;
 }
 
 .location-right-container select:focus{

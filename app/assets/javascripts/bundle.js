@@ -2476,7 +2476,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       selectedMainCat: '',
       location_id: '',
       goal: null,
-      risks: null
+      risks: null,
+      description: null
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2525,7 +2526,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'category_name': _this3.props.project.category_name,
           'location_id': _this3.props.project.location_id,
           'goal': _this3.props.project.goal,
-          'risks': _this3.props.project.risks
+          'risks': _this3.props.project.risks,
+          'description': _this3.props.project.description
         });
       });
     }
@@ -2646,7 +2648,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       formData.append('project[category_id]', this.state.category_id);
       formData.append('project[location_id]', this.state.location_id);
       formData.append('project[goal]', this.state.goal);
-      formData.append('project[risks]', this.state.risks); // // debugger
+      formData.append('project[risks]', this.state.risks);
+      formData.append('project[description]', this.state.description); // // debugger
       // if (this.state.photo.length !== 0) {
       //     formData.append('project[photo]', this.state.photo);
       //   }
@@ -2940,7 +2943,21 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "project-description-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-category-container"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "left"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Project description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "p-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Describe what you're raising funds to do, why you care about it, how you plan to make it happen, and who you are. Your description should tell backers everything they need to know."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "right"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "location-right-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+          id: "risks",
+          cols: "30",
+          rows: "10",
+          onChange: this.update('description'),
+          value: this.state.description
+        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-risk-section"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-category-container"
