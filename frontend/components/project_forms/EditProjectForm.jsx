@@ -74,6 +74,7 @@ class EditProjectForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateTitleImage = this.updateTitleImage.bind(this);
         this.updateDateTab =this.updateDateTab.bind(this);
+        this.updateEndDate = this.updateEndDate.bind(this);
         // this.handleFile = this.handleFile.bind(this);
         // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
@@ -130,6 +131,12 @@ class EditProjectForm extends React.Component{
         this.setState({'selectedDateTab': value,
             'isModified': true}
             );
+    }
+
+    updateEndDate(endDate){
+        this.setState({
+            'end_date': endDate
+        })
     }
 
     selectTab(num) {
@@ -498,6 +505,7 @@ class EditProjectForm extends React.Component{
                                                     updateDateTab={this.updateDateTab}
                                                     startDate = {this.state.launch_date}
                                                     endDate = {this.state.end_date} 
+                                                    updateEndDate={this.updateEndDate}
                                                     />
                                             </div>
                                         </div>

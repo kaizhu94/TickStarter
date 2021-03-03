@@ -72,7 +72,7 @@ class EditTitleImage extends React.Component{
                                     <i className="fas fa-upload"></i>
                                 </label>
                                 <input type='file' id='upload-another-image'onChange={this.handleFile} hidden/> 
-                                <button onClick={this.deleteFile}><i className="fas fa-trash"></i></button>
+                                <button type='button' onClick={this.deleteFile}><i className="fas fa-trash"></i></button>
                             </div>
                         </div>
                     )

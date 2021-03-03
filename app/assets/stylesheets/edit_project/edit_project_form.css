@@ -540,6 +540,10 @@
     text-align: center;
     border-color: gainsboro;
 }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { 
+	-webkit-appearance: none;
+}
 .date-block .date-block-lower select{
     width: 58px;
     height: 42px;

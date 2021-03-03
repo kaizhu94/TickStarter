@@ -2491,7 +2491,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.nextButton = _this2.nextButton.bind(_assertThisInitialized(_this2));
     _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
     _this2.updateTitleImage = _this2.updateTitleImage.bind(_assertThisInitialized(_this2));
-    _this2.updateDateTab = _this2.updateDateTab.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
+    _this2.updateDateTab = _this2.updateDateTab.bind(_assertThisInitialized(_this2));
+    _this2.updateEndDate = _this2.updateEndDate.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
     // this.triggerOrNot = this.triggerOrNot.bind(this);
 
     return _this2;
@@ -2558,6 +2559,13 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       this.setState({
         'selectedDateTab': value,
         'isModified': true
+      });
+    }
+  }, {
+    key: "updateEndDate",
+    value: function updateEndDate(endDate) {
+      this.setState({
+        'end_date': endDate
       });
     }
   }, {
@@ -2935,7 +2943,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           selectTab: this.state.selectedDateTab,
           updateDateTab: this.updateDateTab,
           startDate: this.state.launch_date,
-          endDate: this.state.end_date
+          endDate: this.state.end_date,
+          updateEndDate: this.updateEndDate
         }))))) : null, this.state.tab == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3077,14 +3086,17 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       startDate: '',
-      endDate: '',
-      year: '',
-      month: '',
-      day: '',
-      hour: '',
-      minute: '',
-      am: ''
+      endDate: null,
+      limitDate: '',
+      // year: '',
+      // month: '',
+      // day: '',
+      // hour: '',
+      // minute:'',
+      // am: '',
+      error: ''
     };
+    _this.update = _this.update.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3093,15 +3105,18 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var date = this.props.startDate;
       var endDate = this.props.endDate;
+      var limitDate = new Date();
+      limitDate.setDate(date.getDate() + 60);
       this.setState({
         'startDate': date,
         'endDate': endDate,
-        'year': endDate.getFullYear(),
-        'month': endDate.getMonth(),
-        'day': endDate.getUTCDate(),
-        'hour': endDate.getHours() > 11 ? endDate.getHours() - 13 : endDate.getHours(),
-        'minute': endDate.getMinutes(),
-        'am': endDate.getHours() > 11 ? false : true
+        'limitDate': limitDate // 'year': endDate.getFullYear(),
+        // 'month': endDate.getMonth(),
+        // 'day': endDate.getUTCDate(),
+        // 'hour': endDate.getHours() > 11? (endDate.getHours() % 12) : endDate.getHours(),
+        // 'minute': endDate.getMinutes(),
+        // 'am': endDate.getHours() > 11? false : true
+
       });
     }
   }, {
@@ -3110,6 +3125,56 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       return function (e) {
+        // let startDate = this.state.startDate;
+        // let limitDate = this.state.limitDate;
+        // let year = this.state.year;
+        var newDate = new Date();
+        var _this2$state = _this2.state,
+            startDate = _this2$state.startDate,
+            endDate = _this2$state.endDate,
+            limitDate = _this2$state.limitDate;
+
+        if (key === 'year') {
+          debugger;
+          newDate = endDate;
+          newDate.setFullYear(endDate.getFullYear() + (e.currentTarget.value - endDate.getFullYear()));
+          debugger;
+          return _this2.setState({
+            'endDate': newDate,
+            'error': newDate.getTime() > limitDate.getTime() || newDate.getTime() < startDate.getTime() ? "Date must be in the next 60 days!" : ''
+          });
+        }
+
+        if (key === 'month') {
+          newDate = endDate;
+          newDate.setMonth(startDate.getMonth() + (e.currentTarget.value - 1 - startDate.getMonth()));
+          debugger;
+          console.log('month: ' + e.currentTarget.value);
+
+          if (newDate.getTime() > limitDate.getTime() || newDate.getTime() < startDate.getTime()) {
+            if (e.currentTarget.value < 1 || e.currentTarget.value > 12) {
+              return _this2.setState({
+                // [key]: parseInt(e.currentTarget.value ) - 1,
+                'endDate': newDate,
+                'error': "Invalid month"
+              });
+            }
+
+            return _this2.setState({
+              // [key]: parseInt(e.currentTarget.value ) - 1,
+              'endDate': newDate,
+              'error': "Date must be in the next 60 days!"
+            });
+          } else {
+            debugger;
+            return _this2.setState({
+              // [key]: parseInt(e.currentTarget.value ) - 1,
+              'endDate': newDate,
+              'error': ""
+            });
+          }
+        }
+
         return _this2.setState(_defineProperty({}, key, parseInt(e.currentTarget.value)));
       };
     }
@@ -3126,126 +3191,140 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "project-promotion-container"
-      }, this.props.selectTab ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "fas fa-dot-circle",
-        id: "selected-dot"
-      }), " Fixed number of days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-lower"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-lower-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter number of days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number",
-        defaultValue: 30,
-        id: "days"
-      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-block",
-        onClick: this.props.updateDateTab
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "circle-dot"
-      }), " End on a specific date & time")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-block",
-        onClick: this.props.updateDateTab
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        id: "circle-dot"
-      }), " Fixed number of days"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "fas fa-dot-circle",
-        id: "selected-dot"
-      }), "  End on a specific date & time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-lower"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "selected-date-lower-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "date-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "date-block-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Day"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Year")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "date-block-lower"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number",
-        value: this.state.day,
-        onChange: this.update('day')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number",
-        value: this.state.month + 1,
-        onChange: this.update('month')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number",
-        value: this.state.year,
-        onChange: this.update('year')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "far fa-calendar-alt"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "date-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "date-block-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Time")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "date-block-lower"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-        name: "hour",
-        id: "hour",
-        value: this.state.hour,
-        onChange: this.update('hour')
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-        value: "",
-        disabled: true
-      }, " HH "), Array.from({
-        length: 12
-      }, function (_, i) {
-        return i;
-      }).map(function (num) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-          value: num,
-          key: num
-        }, num < 0 ? "0".concat(num + 1) : num + 1);
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-        name: "minute",
-        id: "minute",
-        value: this.state.minute,
-        onChange: this.update('munite')
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-        value: "",
-        disabled: true
-      }, " MM "), Array.from({
-        length: 60
-      }, function (_, i) {
-        return i;
-      }).map(function (num) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-          value: num,
-          key: num
-        }, num < 10 ? "0".concat(num) : num);
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-        name: "am",
-        id: "am",
-        value: this.state.am,
-        onChange: this.updateAM('am')
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-        value: "true"
-      }, " AM "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-        value: "false"
-      }, " PM ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Eastern Daylight Time")))))))));
+
+      if (!this.state.endDate) {
+        return null;
+      } else {
+        var year = this.state.endDate.getFullYear() === 0 ? '' : this.state.endDate.getFullYear();
+        var month = this.state.endDate.getMonth() + 1;
+        var day = this.state.endDate.getDate();
+        var hour = this.state.endDate.getHours() > 11 ? this.state.endDate.getHours() % 12 : this.state.endDate.getHours();
+        var minute = this.state.endDate.getMinutes();
+        var am = this.state.endDate.getHours() > 11 ? false : true;
+        console.log('endDate: ' + this.state.endDate);
+        debugger;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "project-promotion-container"
+        }, this.props.selectTab ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-upper"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-dot-circle",
+          id: "selected-dot"
+        }), " Fixed number of days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-lower"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-lower-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter number of days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "number",
+          defaultValue: 30,
+          id: "days"
+        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-block",
+          onClick: this.props.updateDateTab
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-upper"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "circle-dot"
+        }), " End on a specific date & time")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-block",
+          onClick: this.props.updateDateTab
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-upper"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          id: "circle-dot"
+        }), " Fixed number of days"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-upper"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-dot-circle",
+          id: "selected-dot"
+        }), "  End on a specific date & time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-lower"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "selected-date-lower-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "date-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "date-block-upper"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Day"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Year")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "date-block-lower"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "number",
+          value: day,
+          onChange: this.update('day')
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "number",
+          value: month,
+          onChange: this.update('month')
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "number",
+          value: year,
+          placeholder: "",
+          onChange: this.update('year')
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "far fa-calendar-alt"
+        }))), this.state.error), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "date-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "date-block-upper"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Time")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "date-block-lower"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "hour",
+          id: "hour",
+          value: hour,
+          onChange: this.update('hour')
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "",
+          disabled: true
+        }, " HH "), Array.from({
+          length: 12
+        }, function (_, i) {
+          return i;
+        }).map(function (num) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            value: num,
+            key: num
+          }, num < 9 ? "0".concat(num) : num);
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "minute",
+          id: "minute",
+          value: minute,
+          onChange: this.update('munite')
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "",
+          disabled: true
+        }, " MM "), Array.from({
+          length: 60
+        }, function (_, i) {
+          return i;
+        }).map(function (num) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+            value: num,
+            key: num
+          }, num < 10 ? "0".concat(num) : num);
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+          name: "am",
+          id: "am",
+          value: am,
+          onChange: this.updateAM('am')
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "true"
+        }, " AM "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: "false"
+        }, " PM ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Eastern Daylight Time")))))))));
+      }
     }
   }]);
 
@@ -3387,6 +3466,7 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleFile,
         hidden: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
         onClick: this.deleteFile
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-trash"
