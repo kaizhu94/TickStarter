@@ -2525,7 +2525,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       this.props.receiveProject(this.props.match.params.projectId).then(function () {
         var startDate = new Date();
         var endDate = new Date();
-        endDate.setDate(startDate.getDate() + 60);
+        endDate.setDate(startDate.getDate() + 30);
 
         _this3.setState({
           'id': _this3.props.project.id,
