@@ -62,6 +62,9 @@ class EditProjectForm extends React.Component{
             risks: null,
             description: null,
             selectedDateTab: false,
+
+            launch_date: null,
+            end_date: null,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -96,6 +99,9 @@ class EditProjectForm extends React.Component{
         this.props.receiveLocations();
         this.props.receiveProject(this.props.match.params.projectId)
             .then(() => {
+                let startDate = new Date();
+                let endDate = new Date();
+                endDate.setDate(startDate.getDate() + 30);
                 this.setState({
                                 'id': this.props.project.id,
                                 'project_name': this.props.project.project_name,
@@ -107,6 +113,8 @@ class EditProjectForm extends React.Component{
                                 'goal': this.props.project.goal,
                                 'risks': this.props.project.risks,
                                 'description': this.props.project.description,
+                                'launch_date': this.props.project.launch_date ? this.props.project.launch_date : startDate,
+                                'end_date': this.props.project.end_date ? this.props.project.end_date : endDate
                             })
             })
     }
@@ -487,7 +495,10 @@ class EditProjectForm extends React.Component{
                                             <div className ='right'>
                                                 <EditPromotionDate 
                                                     selectTab={this.state.selectedDateTab}
-                                                    updateDateTab={this.updateDateTab}/>
+                                                    updateDateTab={this.updateDateTab}
+                                                    startDate = {this.state.launch_date}
+                                                    endDate = {this.state.end_date} 
+                                                    />
                                             </div>
                                         </div>
                                     </div>

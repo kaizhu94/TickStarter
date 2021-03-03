@@ -2480,7 +2480,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       goal: null,
       risks: null,
       description: null,
-      selectedDateTab: false
+      selectedDateTab: false,
+      launch_date: null,
+      end_date: null
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2521,6 +2523,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       this.props.receiveCategories();
       this.props.receiveLocations();
       this.props.receiveProject(this.props.match.params.projectId).then(function () {
+        var startDate = new Date();
+        var endDate = new Date();
+        endDate.setDate(startDate.getDate() + 60);
+
         _this3.setState({
           'id': _this3.props.project.id,
           'project_name': _this3.props.project.project_name,
@@ -2531,7 +2537,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'location_id': _this3.props.project.location_id,
           'goal': _this3.props.project.goal,
           'risks': _this3.props.project.risks,
-          'description': _this3.props.project.description
+          'description': _this3.props.project.description,
+          'launch_date': _this3.props.project.launch_date ? _this3.props.project.launch_date : startDate,
+          'end_date': _this3.props.project.end_date ? _this3.props.project.end_date : endDate
         });
       });
     }
@@ -2925,7 +2933,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditPromotionDate__WEBPACK_IMPORTED_MODULE_2__.default, {
           selectTab: this.state.selectedDateTab,
-          updateDateTab: this.updateDateTab
+          updateDateTab: this.updateDateTab,
+          startDate: this.state.launch_date,
+          endDate: this.state.end_date
         }))))) : null, this.state.tab == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3030,6 +3040,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3064,16 +3076,53 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      year: null,
-      month: null,
-      day: null,
-      hour: null,
-      minute: null
+      startDate: '',
+      endDate: '',
+      year: '',
+      month: '',
+      day: '',
+      hour: '',
+      minute: '',
+      am: ''
     };
     return _this;
   }
 
   _createClass(EditPromotionDate, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var date = this.props.startDate;
+      var endDate = this.props.endDate;
+      this.setState({
+        'startDate': date,
+        'endDate': endDate,
+        'year': endDate.getFullYear(),
+        'month': endDate.getMonth(),
+        'day': endDate.getUTCDate(),
+        'hour': endDate.getHours() > 11 ? endDate.getHours() - 13 : endDate.getHours(),
+        'minute': endDate.getMinutes(),
+        'am': endDate.getHours() > 11 ? false : true
+      });
+    }
+  }, {
+    key: "update",
+    value: function update(key) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, key, parseInt(e.currentTarget.value)));
+      };
+    }
+  }, {
+    key: "updateAM",
+    value: function updateAM(key) {
+      var _this3 = this;
+
+      return function (e) {
+        return _this3.setState(_defineProperty({}, key, e.currentTarget.value === 'true'));
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
       debugger;
@@ -3094,7 +3143,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         className: "selected-date-lower-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter number of days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "number",
-        defaultValue: "30",
+        defaultValue: 30,
         id: "days"
       }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "selected-date-block",
@@ -3134,11 +3183,17 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Day"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Year")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "date-block-lower"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number"
+        type: "number",
+        value: this.state.day,
+        onChange: this.update('day')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number"
+        type: "number",
+        value: this.state.month + 1,
+        onChange: this.update('month')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number"
+        type: "number",
+        value: this.state.year,
+        onChange: this.update('year')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "far fa-calendar-alt"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3147,13 +3202,50 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         className: "date-block-upper"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Time")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "date-block-lower"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "number"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Eastern Daylight Time")))))))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        name: "hour",
+        id: "hour",
+        value: this.state.hour,
+        onChange: this.update('hour')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: true
+      }, " HH "), Array.from({
+        length: 12
+      }, function (_, i) {
+        return i;
+      }).map(function (num) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: num,
+          key: num
+        }, num < 0 ? "0".concat(num + 1) : num + 1);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        name: "minute",
+        id: "minute",
+        value: this.state.minute,
+        onChange: this.update('munite')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: true
+      }, " MM "), Array.from({
+        length: 60
+      }, function (_, i) {
+        return i;
+      }).map(function (num) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: num,
+          key: num
+        }, num < 10 ? "0".concat(num) : num);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        name: "am",
+        id: "am",
+        value: this.state.am,
+        onChange: this.updateAM('am')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "true"
+      }, " AM "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "false"
+      }, " PM ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Eastern Daylight Time")))))))));
     }
   }]);
 

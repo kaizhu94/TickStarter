@@ -476,6 +476,7 @@
 }
 .selected-date-container:hover{
     cursor: pointer;
+    border-color: limegreen;
 }
 .selected-date-block{
     margin-bottom: 10px;
@@ -535,6 +536,13 @@
 .date-block .date-block-lower input{
     width: 50px;
     height: 35px;
+    margin-right: 10px;
+    text-align: center;
+    border-color: gainsboro;
+}
+.date-block .date-block-lower select{
+    width: 58px;
+    height: 42px;
     margin-right: 10px;
     text-align: center;
     border-color: gainsboro;
