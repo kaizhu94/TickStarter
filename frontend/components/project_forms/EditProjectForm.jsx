@@ -101,7 +101,7 @@ class EditProjectForm extends React.Component{
         this.props.receiveProject(this.props.match.params.projectId)
             .then(() => {
                 let startDate = new Date();
-                let endDate = new Date();
+                let endDate = new Date(startDate.getTime());
                 endDate.setDate(startDate.getDate() + 30);
                 this.setState({
                                 'id': this.props.project.id,

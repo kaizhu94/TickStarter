@@ -2525,7 +2525,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       this.props.receiveLocations();
       this.props.receiveProject(this.props.match.params.projectId).then(function () {
         var startDate = new Date();
-        var endDate = new Date();
+        var endDate = new Date(startDate.getTime());
         endDate.setDate(startDate.getDate() + 30);
 
         _this3.setState({
@@ -3088,12 +3088,13 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       startDate: '',
       endDate: null,
       limitDate: '',
-      // year: '',
-      // month: '',
-      // day: '',
-      // hour: '',
-      // minute:'',
-      // am: '',
+      year: '',
+      month: '',
+      day: '',
+      hour: '',
+      minute: '',
+      second: '',
+      am: '',
       error: ''
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
@@ -3103,21 +3104,29 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   _createClass(EditPromotionDate, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
       var date = this.props.startDate;
       var endDate = this.props.endDate;
-      var limitDate = new Date();
+      var limitDate = new Date(date.getTime());
       limitDate.setDate(date.getDate() + 60);
       this.setState({
         'startDate': date,
         'endDate': endDate,
-        'limitDate': limitDate // 'year': endDate.getFullYear(),
-        // 'month': endDate.getMonth(),
-        // 'day': endDate.getUTCDate(),
-        // 'hour': endDate.getHours() > 11? (endDate.getHours() % 12) : endDate.getHours(),
-        // 'minute': endDate.getMinutes(),
-        // 'am': endDate.getHours() > 11? false : true
-
+        'limitDate': limitDate,
+        'year': endDate.getFullYear(),
+        'month': endDate.getMonth() + 1,
+        'day': endDate.getUTCDate(),
+        'hour': endDate.getHours() > 11 ? endDate.getHours() % 12 : endDate.getHours(),
+        'minute': endDate.getMinutes(),
+        'second': endDate.getSeconds(),
+        'am': endDate.getHours() > 11 ? false : true
       });
+    }
+  }, {
+    key: "isValidDate",
+    value: function isValidDate(newDate) {
+      // debugger
+      return newDate.getTime() <= this.state.limitDate.getTime() && newDate.getTime() > this.state.startDate.getTime();
     }
   }, {
     key: "update",
@@ -3128,49 +3137,78 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         // let startDate = this.state.startDate;
         // let limitDate = this.state.limitDate;
         // let year = this.state.year;
-        var newDate = new Date();
         var _this2$state = _this2.state,
             startDate = _this2$state.startDate,
             endDate = _this2$state.endDate,
-            limitDate = _this2$state.limitDate;
+            year = _this2$state.year,
+            month = _this2$state.month,
+            day = _this2$state.day,
+            hour = _this2$state.hour,
+            minute = _this2$state.minute,
+            second = _this2$state.second;
+        var MM = month < 10 ? "0".concat(month) : month;
+        var DD = day < 10 ? "0".concat(day) : day;
+        var HR = hour < 10 ? "0".concat(hour) : hour;
+        var MT = minute < 10 ? "0".concat(minute) : minute;
+        var SD = second < 10 ? "0".concat(second) : second;
+        var newDateFormat = "".concat(year, "-").concat(MM, "-").concat(DD, "T").concat(HR, ":").concat(MT, ":").concat(SD);
+        debugger;
+        var newDate = new Date(newDateFormat);
+        debugger;
+        console.log('newDate: ' + newDate);
+        console.log('endDate: ' + endDate);
 
         if (key === 'year') {
-          debugger;
-          newDate = endDate;
+          // debugger
+          // newDate = endDate;
           newDate.setFullYear(endDate.getFullYear() + (e.currentTarget.value - endDate.getFullYear()));
+          console.log('newDate: ' + newDate);
+          console.log('endDate: ' + endDate);
+
+          var isValid = _this2.isValidDate(newDate);
+
           debugger;
           return _this2.setState({
-            'endDate': newDate,
-            'error': newDate.getTime() > limitDate.getTime() || newDate.getTime() < startDate.getTime() ? "Date must be in the next 60 days!" : ''
+            'endDate': isValid ? newDate : endDate,
+            'year': newDate.getFullYear(),
+            'error': isValid ? '' : "Date must be in the next 60 days!"
           });
         }
 
         if (key === 'month') {
-          newDate = endDate;
-          newDate.setMonth(startDate.getMonth() + (e.currentTarget.value - 1 - startDate.getMonth()));
-          debugger;
+          newDate.setMonth(e.currentTarget.value - 1);
+
+          var _isValid = _this2.isValidDate(newDate);
+
+          console.log('newDate: ' + newDate);
+          console.log('endDate: ' + endDate);
+          debugger; // if(e.currentTarget.value === ''){
+          //     return this.setState({
+          //         'month': e.currentTarget.value
+          //                     });
+          // }
+
+          console.log('this.month: ' + _this2.state.month);
           console.log('month: ' + e.currentTarget.value);
 
-          if (newDate.getTime() > limitDate.getTime() || newDate.getTime() < startDate.getTime()) {
+          if (_isValid) {
+            return _this2.setState({
+              'endDate': _isValid ? newDate : endDate,
+              'month': e.currentTarget.value,
+              'error': _isValid ? '' : "Date must be in the next 60 days!"
+            });
+          } else {
             if (e.currentTarget.value < 1 || e.currentTarget.value > 12) {
+              debugger;
               return _this2.setState({
-                // [key]: parseInt(e.currentTarget.value ) - 1,
-                'endDate': newDate,
-                'error': "Invalid month"
+                'month': e.currentTarget.value,
+                'error': _isValid ? '' : "Invalid Month!"
               });
             }
 
             return _this2.setState({
-              // [key]: parseInt(e.currentTarget.value ) - 1,
-              'endDate': newDate,
-              'error': "Date must be in the next 60 days!"
-            });
-          } else {
-            debugger;
-            return _this2.setState({
-              // [key]: parseInt(e.currentTarget.value ) - 1,
-              'endDate': newDate,
-              'error': ""
+              'month': e.currentTarget.value,
+              'error': _isValid ? '' : "Date must be in the next 60 days!"
             });
           }
         }
@@ -3190,18 +3228,17 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
-
+      // debugger
       if (!this.state.endDate) {
         return null;
       } else {
-        var year = this.state.endDate.getFullYear() === 0 ? '' : this.state.endDate.getFullYear();
-        var month = this.state.endDate.getMonth() + 1;
-        var day = this.state.endDate.getDate();
-        var hour = this.state.endDate.getHours() > 11 ? this.state.endDate.getHours() % 12 : this.state.endDate.getHours();
-        var minute = this.state.endDate.getMinutes();
-        var am = this.state.endDate.getHours() > 11 ? false : true;
-        console.log('endDate: ' + this.state.endDate);
+        var year = this.state.year === 0 ? '' : this.state.year;
+        var month = this.state.month;
+        var day = this.state.day;
+        var hour = this.state.hour;
+        var minute = this.state.minute;
+        var am = this.state.am; // console.log('endDate: '+this.state.endDate);
+
         debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-promotion-container"
@@ -3270,7 +3307,6 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "number",
           value: year,
-          placeholder: "",
           onChange: this.update('year')
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "far fa-calendar-alt"
