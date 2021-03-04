@@ -1,4 +1,7 @@
 import React from 'react';
+import DatePicker from "react-datepicker";
+
+// import "react-datepicker/dist/react-datepicker.css";
 
 class EditPromotionDate extends React.Component{
     constructor(props){
@@ -226,6 +229,16 @@ class EditPromotionDate extends React.Component{
         }
     }
 
+    updateByCalendar(newDate){
+        debugger
+        this.setState({
+            'year': newDate.getFullYear(),
+            'month': newDate.getMonth()+1,
+            'day': newDate.getDate()
+        })
+        this.props.updateEndDate(newDate);
+    }
+
     triggerBorderColor(){
         return this.state.error === ''? 'origin' : 'display'
     }
@@ -303,6 +316,12 @@ class EditPromotionDate extends React.Component{
                                                                                             <input type="number" value={year}   onChange={this.update('year')} 
                                                                                                id={`date-element-${this.triggerBorderColor()}`}/>
                                                                                             <button     ><i className="far fa-calendar-alt"></i></button>
+                                                                                            <DatePicker selected={this.state.endDate}
+                                                                                                        onChange={date => this.updateByCalendar(date)} 
+                                                                                                        minDate={this.state.startDate}
+                                                                                                        maxDate={this.state.limitDate}
+                                                                                                        showDisabledMonthNavigation  
+                                                                                                            />
                                                                                         </div>
                                                                                         <div className='date-error'>{this.state.error}</div>
                                                                                     </div>
