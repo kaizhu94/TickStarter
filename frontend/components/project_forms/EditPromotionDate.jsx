@@ -218,7 +218,7 @@ class EditPromotionDate extends React.Component{
                                                                                 <div className='selected-date-lower-container'>
                                                                                     <h3>Enter number of days</h3>
                                                                                     <input type="number" value={this.state.days} placeholder='30' id='days' onChange={this.updateByDay('days')}/>
-                                                                                    <div>{this.state.limitMessage}</div>
+                                                                                    <div className='limitMessage'>{this.state.limitMessage}</div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -259,7 +259,7 @@ class EditPromotionDate extends React.Component{
                                                                                             <input type="number" value={year}   onChange={this.update('year')}/>
                                                                                             <button><i className="far fa-calendar-alt"></i></button>
                                                                                         </div>
-                                                                                        {this.state.error}
+                                                                                        <div className='date-error'>{this.state.error}</div>
                                                                                     </div>
                                                                                     <div className='date-block'>
                                                                                         <div className='date-block-upper'>
