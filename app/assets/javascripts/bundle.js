@@ -2482,7 +2482,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       description: null,
       selectedDateTab: false,
       launch_date: null,
-      end_date: null
+      end_date: null,
+      published: null
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2539,8 +2540,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'goal': _this3.props.project.goal,
           'risks': _this3.props.project.risks,
           'description': _this3.props.project.description,
-          'launch_date': _this3.props.project.launch_date ? _this3.props.project.launch_date : startDate,
-          'end_date': _this3.props.project.end_date ? _this3.props.project.end_date : endDate
+          'launch_date': _this3.props.project.launch_date ? new Date(_this3.props.project.launch_date) : startDate,
+          'end_date': _this3.props.project.end_date ? new Date(_this3.props.project.end_date) : endDate,
+          'published': _this3.props.project.published
         });
       });
     }
@@ -2564,8 +2566,11 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "updateEndDate",
     value: function updateEndDate(endDate) {
+      debugger;
       this.setState({
-        'end_date': endDate
+        'end_date': endDate,
+        'published': true,
+        'isModified': true
       });
     }
   }, {
@@ -2678,10 +2683,17 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       formData.append('project[location_id]', this.state.location_id);
       formData.append('project[goal]', this.state.goal);
       formData.append('project[risks]', this.state.risks);
-      formData.append('project[description]', this.state.description); // // debugger
+      formData.append('project[description]', this.state.description);
+
+      if (this.state.published) {
+        formData.append('project[published]', this.state.published);
+        formData.append('project[launch_date]', this.state.launch_date);
+        formData.append('project[end_date]', this.state.end_date);
+      } // // debugger
       // if (this.state.photo.length !== 0) {
       //     formData.append('project[photo]', this.state.photo);
       //   }
+
 
       this.props.updateProject(this.state.id, formData);
       this.setState({
@@ -2937,7 +2949,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "left"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Project release"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "p-block"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Publish your project, and set a time limit for your promotion. After the project is published, you will not be able to change this time limit."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Publish your project, and set a time limit for your promotion. After set a date, use publish button to update the date then save the form."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditPromotionDate__WEBPACK_IMPORTED_MODULE_2__.default, {
           selectTab: this.state.selectedDateTab,
@@ -3096,9 +3108,11 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       second: '',
       am: '',
       error: '',
-      limitMessage: ''
+      limitMessage: '',
+      publishMessage: ''
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
+    _this.handlePublish = _this.handlePublish.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3292,21 +3306,20 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           var _this3$setState;
 
           return _this3.setState((_this3$setState = {}, _defineProperty(_this3$setState, key, e.currentTarget.value), _defineProperty(_this3$setState, 'limitMessage', ''), _this3$setState));
-        }
+        } // let newDate = new Date(this.state.startDate.getTime());
 
-        var newDate = new Date(_this3.state.startDate.getTime());
 
         if (e.currentTarget.value < 1 || e.currentTarget.value > 60) {
           var _this3$setState2;
 
           debugger;
-          var value = e.currentTarget.value < 1 ? 1 : 60;
-          newDate.setDate(newDate.getDate() + value);
+          var value = e.currentTarget.value < 1 ? 1 : 60; // newDate.setDate(newDate.getDate() + value);
+
           debugger;
-          return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, value), _defineProperty(_this3$setState2, 'endDate', newDate), _defineProperty(_this3$setState2, 'limitMessage', 'Days for funding duration must be between 1 and 60.'), _this3$setState2));
+          return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, value), _defineProperty(_this3$setState2, 'limitMessage', 'Days for funding duration must be between 1 and 60.'), _this3$setState2));
         }
 
-        return _this3.setState((_this3$setState3 = {}, _defineProperty(_this3$setState3, key, e.currentTarget.value), _defineProperty(_this3$setState3, 'endDate', newDate), _defineProperty(_this3$setState3, 'limitMessage', ''), _this3$setState3));
+        return _this3.setState((_this3$setState3 = {}, _defineProperty(_this3$setState3, key, e.currentTarget.value), _defineProperty(_this3$setState3, 'limitMessage', ''), _this3$setState3));
       };
     }
   }, {
@@ -3317,6 +3330,54 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       return function (e) {
         return _this4.setState(_defineProperty({}, key, e.currentTarget.value === 'true'));
       };
+    }
+  }, {
+    key: "handlePublish",
+    value: function handlePublish() {
+      var newDate = new Date(this.state.startDate.getTime());
+      debugger;
+
+      if (this.props.selectTab) {
+        debugger;
+        newDate.setDate(newDate.getDate() + parseInt(this.state.days));
+        debugger;
+      } else {
+        var _this$state = this.state,
+            startDate = _this$state.startDate,
+            endDate = _this$state.endDate,
+            year = _this$state.year,
+            month = _this$state.month,
+            day = _this$state.day,
+            hour = _this$state.hour,
+            minute = _this$state.minute,
+            second = _this$state.second;
+        var MM = month < 10 ? "0".concat(month) : month;
+        var DD = day < 10 ? "0".concat(day) : day;
+        var HR = hour < 10 ? "0".concat(hour) : hour;
+        var MT = minute < 10 ? "0".concat(minute) : minute;
+        var SD = second < 10 ? "0".concat(second) : second;
+        var newDayFormat = "".concat(year, "-").concat(MM, "-").concat(DD, "T").concat(HR, ":").concat(MT, ":").concat(SD);
+        newDate = new Date(newDayFormat);
+        debugger;
+      }
+
+      debugger;
+
+      if (this.isValidDate(newDate)) {
+        this.props.updateEndDate(newDate);
+        this.setState({
+          'publishMessage': 'Your project is published! Use save to sumbit the form.'
+        });
+      } else {
+        this.setState({
+          'publishMessage': 'Invalid date'
+        });
+      }
+    }
+  }, {
+    key: "triggerBorderColor",
+    value: function triggerBorderColor() {
+      return this.state.error === '' ? 'origin' : 'display';
     }
   }, {
     key: "render",
@@ -3365,7 +3426,13 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           className: "selected-date-upper"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           id: "circle-dot"
-        }), " End on a specific date & time")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }), " End on a specific date & time"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "button",
+          className: "publish-button",
+          onClick: this.handlePublish
+        }, "Publish")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "publishMessage"
+        }, this.state.publishMessage)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "selected-date-block",
           onClick: this.props.updateDateTab
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3396,15 +3463,18 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "number",
           value: day,
-          onChange: this.update('day')
+          onChange: this.update('day'),
+          id: "date-element-".concat(this.triggerBorderColor())
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "number",
           value: month,
-          onChange: this.update('month')
+          onChange: this.update('month'),
+          id: "date-element-".concat(this.triggerBorderColor())
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "number",
           value: year,
-          onChange: this.update('year')
+          onChange: this.update('year'),
+          id: "date-element-".concat(this.triggerBorderColor())
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "far fa-calendar-alt"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3458,7 +3528,13 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           value: "true"
         }, " AM "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
           value: "false"
-        }, " PM ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Eastern Daylight Time")))))))));
+        }, " PM ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Eastern Daylight Time"))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "button",
+          className: "publish-button",
+          onClick: this.handlePublish
+        }, "Publish")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "publishMessage"
+        }, this.state.publishMessage)));
       }
     }
   }]);

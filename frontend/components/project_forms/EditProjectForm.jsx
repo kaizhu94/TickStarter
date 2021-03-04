@@ -65,6 +65,7 @@ class EditProjectForm extends React.Component{
 
             launch_date: null,
             end_date: null,
+            published: null,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -114,8 +115,9 @@ class EditProjectForm extends React.Component{
                                 'goal': this.props.project.goal,
                                 'risks': this.props.project.risks,
                                 'description': this.props.project.description,
-                                'launch_date': this.props.project.launch_date ? this.props.project.launch_date : startDate,
-                                'end_date': this.props.project.end_date ? this.props.project.end_date : endDate
+                                'launch_date': this.props.project.launch_date ? new Date(this.props.project.launch_date) : startDate,
+                                'end_date': this.props.project.end_date ? new Date(this.props.project.end_date): endDate,
+                                'published': this.props.project.published
                             })
             })
     }
@@ -134,8 +136,11 @@ class EditProjectForm extends React.Component{
     }
 
     updateEndDate(endDate){
+        debugger
         this.setState({
-            'end_date': endDate
+            'end_date': endDate,
+            'published': true,
+            'isModified': true
         })
     }
 
@@ -228,6 +233,11 @@ class EditProjectForm extends React.Component{
         formData.append('project[goal]', this.state.goal);
         formData.append('project[risks]', this.state.risks);
         formData.append('project[description]', this.state.description);
+        if(this.state.published){
+            formData.append('project[published]', this.state.published);
+            formData.append('project[launch_date]', this.state.launch_date);
+            formData.append('project[end_date]', this.state.end_date);
+        }
         // // debugger
         // if (this.state.photo.length !== 0) {
         //     formData.append('project[photo]', this.state.photo);
@@ -495,7 +505,7 @@ class EditProjectForm extends React.Component{
                                             <div className = 'left'>
                                                 <h2>Project release</h2>
                                                 <div className='p-block'>
-                                                    <p>Publish your project, and set a time limit for your promotion. After the project is published, you will not be able to change this time limit.</p>
+                                                    <p>Publish your project, and set a time limit for your promotion. After set a date, use publish button to update the date then save the form.</p>
                                                     <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
                                                 </div>
                                             </div>

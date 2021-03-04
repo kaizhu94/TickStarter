@@ -584,18 +584,63 @@ input[type=number]::-webkit-outer-spin-button {
 
 .project-release-section{
     width: 100%;
-    height: 350px;
+    height: 400px;
     margin-bottom: 50px;
 }
 .limitMessage{
     margin-top: 10px;
     color: limegreen;
 }
-
+.publishMessage{
+    margin-top: 10px;
+    color: red;
+}
 .date-error{
     margin-top: 10px;
     color: red;
 }
+
+.publish-button{
+    width: 100px;
+    height: 35px;
+    border: none;
+    background: gainsboro;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+.publish-button:hover{
+    cursor: pointer;
+    background: rgb(153, 153, 153);
+}
+button, select{
+    outline: none;
+}
+.date-block-lower #date-element-origin{
+    border-color: gainsboro;
+}
+.date-block-lower #date-element-display{
+    border-color: red;
+}
+.date-block-lower #date-element-origin:hover{
+    border-color: limegreen;
+}
+.date-block-lower #date-element-origin:focus{
+    border-color: limegreen;
+}
+.date-block-lower #date-element-display:hover{
+    border-color: limegreen;
+}
+.date-block-lower #date-element-display:focus{
+    border-color: limegreen;
+}
+.date-block-lower select:hover{
+    border-color: limegreen;
+}
+.date-block-lower input:focus{
+    border-color: limegreen;
+}
+
 
 .project-description-section{
     width: 100%;

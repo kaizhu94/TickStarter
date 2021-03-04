@@ -15,9 +15,11 @@ class EditPromotionDate extends React.Component{
             second:'',
             am: '',
             error: '',
-            limitMessage:''
+            limitMessage:'',
+            publishMessage:''
         }
         this.update = this.update.bind(this);
+        this.handlePublish = this.handlePublish.bind(this);
     }
     componentDidMount(){
         debugger
@@ -171,19 +173,19 @@ class EditPromotionDate extends React.Component{
                 return this.setState({[key]: e.currentTarget.value,
                     'limitMessage': ''});
             }
-            let newDate = new Date(this.state.startDate.getTime());
+            // let newDate = new Date(this.state.startDate.getTime());
             if(e.currentTarget.value < 1 || e.currentTarget.value > 60){
                 debugger
                 let value = e.currentTarget.value < 1 ? 1 : 60;
-                newDate.setDate(newDate.getDate() + value);
+                // newDate.setDate(newDate.getDate() + value);
                 debugger
                 return this.setState({[key]: value,
-                                'endDate': newDate,
+                                // 'endDate': newDate,
                                 'limitMessage': 'Days for funding duration must be between 1 and 60.'        
                 });
             }
             return this.setState({[key]: e.currentTarget.value,
-                                'endDate': newDate,
+                                // 'endDate': newDate,
                                 'limitMessage': ''});
         }
     }
@@ -191,6 +193,42 @@ class EditPromotionDate extends React.Component{
         return e => this.setState({[key]: e.currentTarget.value === 'true'}
             );
         }
+
+
+    handlePublish(){
+        let newDate = new Date(this.state.startDate.getTime());
+        debugger
+        if(this.props.selectTab){
+            debugger
+            newDate.setDate(newDate.getDate() + parseInt(this.state.days));
+            debugger
+        }else{
+            const {startDate, endDate,  year, month, day, hour, minute, second} = this.state;
+            let MM = month < 10 ? `0${month}`: month;
+            let DD = day < 10 ? `0${day}`: day;
+            let HR = hour < 10 ? `0${hour}`: hour;
+            let MT = minute < 10 ? `0${minute}`: minute;
+            let SD = second < 10 ? `0${second}`: second;
+            let newDayFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
+            newDate = new Date(newDayFormat);
+            debugger
+        }
+        debugger
+        if(this.isValidDate(newDate)){
+            this.props.updateEndDate(newDate);
+            this.setState({
+                'publishMessage': 'Your project is published! Use save to sumbit the form.'
+            })
+        }else{
+            this.setState({
+                'publishMessage': 'Invalid date'
+            })
+        }
+    }
+
+    triggerBorderColor(){
+        return this.state.error === ''? 'origin' : 'display'
+    }
     render(){
         // debugger
         if(!this.state.endDate){
@@ -230,6 +268,10 @@ class EditPromotionDate extends React.Component{
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div>
+                                                                        <button type='button' className='publish-button' onClick={this.handlePublish}>Publish</button>
+                                                                    </div>
+                                                                    <div className='publishMessage'>{this.state.publishMessage}</div>
                                                                 </div>
                                                             ):(
                                                                 <div >
@@ -254,10 +296,13 @@ class EditPromotionDate extends React.Component{
                                                                                             <h3>Year</h3>
                                                                                         </div>
                                                                                         <div className='date-block-lower'>
-                                                                                            <input type="number" value={day}  onChange={this.update('day')}/>
-                                                                                            <input type="number" value={month}   onChange={this.update('month')}/>
-                                                                                            <input type="number" value={year}   onChange={this.update('year')}/>
-                                                                                            <button><i className="far fa-calendar-alt"></i></button>
+                                                                                            <input type="number" value={day}  onChange={this.update('day')} 
+                                                                                               id={`date-element-${this.triggerBorderColor()}`} />
+                                                                                            <input type="number" value={month}   onChange={this.update('month')} 
+                                                                                               id={`date-element-${this.triggerBorderColor()}`} />
+                                                                                            <input type="number" value={year}   onChange={this.update('year')} 
+                                                                                               id={`date-element-${this.triggerBorderColor()}`}/>
+                                                                                            <button     ><i className="far fa-calendar-alt"></i></button>
                                                                                         </div>
                                                                                         <div className='date-error'>{this.state.error}</div>
                                                                                     </div>
@@ -301,7 +346,10 @@ class EditPromotionDate extends React.Component{
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    
+                                                                    <div>
+                                                                        <button type='button' className='publish-button' onClick={this.handlePublish}>Publish</button>
+                                                                    </div>
+                                                                    <div className='publishMessage'>{this.state.publishMessage}</div>
                                                                 </div>
                                                             )
                                                         }
