@@ -32,7 +32,7 @@ class EditPromotionDate extends React.Component{
             'year': endDate.getFullYear(),
             'month': endDate.getMonth() + 1,
             'day': endDate.getUTCDate(),
-            'hour': endDate.getHours() > 11? (endDate.getHours() % 12) : endDate.getHours(),
+            'hour': endDate.getHours() ,
             'minute': endDate.getMinutes(),
             'second': endDate.getSeconds(),
             'am': endDate.getHours() > 11? false : true,
@@ -114,27 +114,27 @@ class EditPromotionDate extends React.Component{
             }
             if(key === 'day'){
                 let DA = e.currentTarget.value < 10 ? `0${e.currentTarget.value}`: e.currentTarget.value;
-                let newDateFormat = `${year}-${MM}-${DA}T${HR}:${MT}:${SD}`;
-                let newDate = new Date(newDateFormat);
+                let newDayFormat = `${year}-${MM}-${DA}T${HR}:${MT}:${SD}`;
+                let newDayDate = new Date(newDayFormat);
                 debugger
-                newDate.setDate(e.currentTarget.value);
                 let isValid = false;
-                if(newDate){
-                    isValid = this.isValidDate(newDate);
+                if(newDayDate){
+                    newDayDate.setDate(e.currentTarget.value);
+                    isValid = this.isValidDate(newDayDate);
                 }
-                console.log('newDate: '+newDate);
+                console.log('newDayDate: '+newDayDate);
                 console.log('endDate: '+endDate);
                 debugger
                 if(isValid){
                     debugger
                     return this.setState({
-                        'endDate': isValid ? newDate : endDate,
+                        'endDate': isValid ? newDayDate : endDate,
                         'day': e.currentTarget.value,
                         'error': isValid ? '' : "Date must be in the next 60 days!"
                                     });
                 }else{
                     debugger
-                    if(newDate === undefined){
+                    if(isNaN(newDayDate.getDate())){
                         debugger    
                         return this.setState({
                             'day': e.currentTarget.value,
@@ -146,6 +146,20 @@ class EditPromotionDate extends React.Component{
                         'error': "Date must be in the next 60 days!"
                                     });
                 }
+            }
+            if(key === 'hour'){
+                debugger
+                let ho = e.currentTarget.value;
+                if(!this.state.am) ho = parseInt(ho) + 12;
+                debugger
+                let HO = ho < 10 ? `0${ho}`: ho;
+                let newFormat = `${year}-${MM}-${DD}T${HO}:${MT}:${SD}`;
+                let newHourDate = new Date(newFormat);
+                console.log('newDate: '+newHourDate);
+                console.log('endDate: '+endDate);
+                debugger
+                return this.setState({[key]: newHourDate.getHours()})
+                
             }
             return this.setState({[key]: e.currentTarget.value});
             
@@ -185,7 +199,7 @@ class EditPromotionDate extends React.Component{
             const year = this.state.year === 0 ? '':  this.state.year;
             const month =   this.state.month;
             const day = this.state.day;
-            const hour = this.state.hour;
+            const hour = this.state.hour > 11? (this.state.hour % 12) : this.state.hour;
             const minute = this.state.minute;
             const am = this.state.am
             // console.log('endDate: '+this.state.endDate);
@@ -257,7 +271,7 @@ class EditPromotionDate extends React.Component{
                                                                                                 {
                                                                                                     Array.from({length: 12}, (_, i) => i ).map(num=> {
                                                                                                         return <option value={num}  key={num}> 
-                                                                                                            {num < 9 ? `0${num}`: num}
+                                                                                                            {num < 10 ? `0${num}`: num}
                                                                                                         </option>
                                                                                                     })
                                                                                                 }

@@ -3117,7 +3117,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         'year': endDate.getFullYear(),
         'month': endDate.getMonth() + 1,
         'day': endDate.getUTCDate(),
-        'hour': endDate.getHours() > 11 ? endDate.getHours() % 12 : endDate.getHours(),
+        'hour': endDate.getHours(),
         'minute': endDate.getMinutes(),
         'second': endDate.getSeconds(),
         'am': endDate.getHours() > 11 ? false : true,
@@ -3224,36 +3224,31 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
 
         if (key === 'day') {
           var DA = e.currentTarget.value < 10 ? "0".concat(e.currentTarget.value) : e.currentTarget.value;
-
-          var _newDateFormat2 = "".concat(year, "-").concat(MM, "-").concat(DA, "T").concat(HR, ":").concat(MT, ":").concat(SD);
-
-          var _newDate2 = new Date(_newDateFormat2);
-
+          var newDayFormat = "".concat(year, "-").concat(MM, "-").concat(DA, "T").concat(HR, ":").concat(MT, ":").concat(SD);
+          var newDayDate = new Date(newDayFormat);
           debugger;
-
-          _newDate2.setDate(e.currentTarget.value);
-
           var _isValid2 = false;
 
-          if (_newDate2) {
-            _isValid2 = _this2.isValidDate(_newDate2);
+          if (newDayDate) {
+            newDayDate.setDate(e.currentTarget.value);
+            _isValid2 = _this2.isValidDate(newDayDate);
           }
 
-          console.log('newDate: ' + _newDate2);
+          console.log('newDayDate: ' + newDayDate);
           console.log('endDate: ' + endDate);
           debugger;
 
           if (_isValid2) {
             debugger;
             return _this2.setState({
-              'endDate': _isValid2 ? _newDate2 : endDate,
+              'endDate': _isValid2 ? newDayDate : endDate,
               'day': e.currentTarget.value,
               'error': _isValid2 ? '' : "Date must be in the next 60 days!"
             });
           } else {
             debugger;
 
-            if (_newDate2 === undefined) {
+            if (isNaN(newDayDate.getDate())) {
               debugger;
               return _this2.setState({
                 'day': e.currentTarget.value,
@@ -3266,6 +3261,20 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
               'error': "Date must be in the next 60 days!"
             });
           }
+        }
+
+        if (key === 'hour') {
+          debugger;
+          var ho = e.currentTarget.value;
+          if (!_this2.state.am) ho = parseInt(ho) + 12;
+          debugger;
+          var HO = ho < 10 ? "0".concat(ho) : ho;
+          var newFormat = "".concat(year, "-").concat(MM, "-").concat(DD, "T").concat(HO, ":").concat(MT, ":").concat(SD);
+          var newHourDate = new Date(newFormat);
+          console.log('newDate: ' + newHourDate);
+          console.log('endDate: ' + endDate);
+          debugger;
+          return _this2.setState(_defineProperty({}, key, newHourDate.getHours()));
         }
 
         return _this2.setState(_defineProperty({}, key, e.currentTarget.value));
@@ -3319,7 +3328,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         var year = this.state.year === 0 ? '' : this.state.year;
         var month = this.state.month;
         var day = this.state.day;
-        var hour = this.state.hour;
+        var hour = this.state.hour > 11 ? this.state.hour % 12 : this.state.hour;
         var minute = this.state.minute;
         var am = this.state.am; // console.log('endDate: '+this.state.endDate);
 
@@ -3418,7 +3427,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
             value: num,
             key: num
-          }, num < 9 ? "0".concat(num) : num);
+          }, num < 10 ? "0".concat(num) : num);
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
           name: "minute",
           id: "minute",
