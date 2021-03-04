@@ -52,20 +52,22 @@ class EditPromotionDate extends React.Component{
             let HR = hour < 10 ? `0${hour}`: hour;
             let MT = minute < 10 ? `0${minute}`: minute;
             let SD = second < 10 ? `0${second}`: second;
-            let newDateFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
-            debugger
-            let newDate = new Date(newDateFormat);
-            debugger
-            console.log('newDate: '+newDate);
-            console.log('endDate: '+endDate);
+            // debugger
+            // let newDateFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
+            // let newDate = new Date(newDateFormat);
+            // debugger
+            // console.log('newDate: '+newDate);
+            // console.log('endDate: '+endDate);
             if(key === 'year'){
                 // debugger
                 // newDate = endDate;
+                let newDateFormat = `${e.currentTarget.value}-${MM}-${DD}T${HR}:${MT}:${SD}`;
+                let newDate = new Date(newDateFormat);
                 newDate.setFullYear(endDate.getFullYear() + (e.currentTarget.value - endDate.getFullYear()));
                 console.log('newDate: '+newDate);
                 console.log('endDate: '+endDate);
                 const isValid = this.isValidDate(newDate);
-                debugger
+                // debugger
                 return this.setState({
                     'endDate': isValid ? newDate : endDate,
                     'year': newDate.getFullYear(),
@@ -73,11 +75,14 @@ class EditPromotionDate extends React.Component{
                                 });
             }
             if(key === 'month'){
+                let MT = e.currentTarget.value < 10 ? `0${e.currentTarget.value}`: e.currentTarget.value;
+                let newDateFormat = `${year}-${MT}-${DD}T${HR}:${MT}:${SD}`;
+                let newDate = new Date(newDateFormat);
                 newDate.setMonth(e.currentTarget.value-1);
-                const isValid = this.isValidDate(newDate);
+                let isValid = this.isValidDate(newDate);
                 console.log('newDate: '+newDate);
                 console.log('endDate: '+endDate);
-                debugger
+                // debugger
                 // if(e.currentTarget.value === ''){
                 //     return this.setState({
                 //         'month': e.currentTarget.value
@@ -93,7 +98,7 @@ class EditPromotionDate extends React.Component{
                                     });
                 }else{
                     if(e.currentTarget.value < 1 || e.currentTarget.value >12){
-                        debugger
+                        // debugger
                         return this.setState({
                             'month': e.currentTarget.value,
                             'error': isValid ? '' : "Invalid Month!"
@@ -105,7 +110,42 @@ class EditPromotionDate extends React.Component{
                                     });
                 }
             }
-            return this.setState({[key]: parseInt(e.currentTarget.value)});
+            if(key === 'day'){
+                let DA = e.currentTarget.value < 10 ? `0${e.currentTarget.value}`: e.currentTarget.value;
+                let newDateFormat = `${year}-${MM}-${DA}T${HR}:${MT}:${SD}`;
+                let newDate = new Date(newDateFormat);
+                debugger
+                newDate.setDate(e.currentTarget.value);
+                let isValid = false;
+                if(newDate){
+                    isValid = this.isValidDate(newDate);
+                }
+                console.log('newDate: '+newDate);
+                console.log('endDate: '+endDate);
+                debugger
+                if(isValid){
+                    debugger
+                    return this.setState({
+                        'endDate': isValid ? newDate : endDate,
+                        'day': e.currentTarget.value,
+                        'error': isValid ? '' : "Date must be in the next 60 days!"
+                                    });
+                }else{
+                    debugger
+                    if(newDate === undefined){
+                        debugger    
+                        return this.setState({
+                            'day': e.currentTarget.value,
+                            'error': "Invalid Date!"
+                                        });
+                    }
+                    return this.setState({
+                        'day': e.currentTarget.value,
+                        'error': "Date must be in the next 60 days!"
+                                    });
+                }
+            }
+            return this.setState({[key]: e.currentTarget.value});
             
         } 
         }

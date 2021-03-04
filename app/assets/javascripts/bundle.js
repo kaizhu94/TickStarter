@@ -3150,24 +3150,25 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         var DD = day < 10 ? "0".concat(day) : day;
         var HR = hour < 10 ? "0".concat(hour) : hour;
         var MT = minute < 10 ? "0".concat(minute) : minute;
-        var SD = second < 10 ? "0".concat(second) : second;
-        var newDateFormat = "".concat(year, "-").concat(MM, "-").concat(DD, "T").concat(HR, ":").concat(MT, ":").concat(SD);
-        debugger;
-        var newDate = new Date(newDateFormat);
-        debugger;
-        console.log('newDate: ' + newDate);
-        console.log('endDate: ' + endDate);
+        var SD = second < 10 ? "0".concat(second) : second; // debugger
+        // let newDateFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
+        // let newDate = new Date(newDateFormat);
+        // debugger
+        // console.log('newDate: '+newDate);
+        // console.log('endDate: '+endDate);
 
         if (key === 'year') {
           // debugger
           // newDate = endDate;
+          var newDateFormat = "".concat(e.currentTarget.value, "-").concat(MM, "-").concat(DD, "T").concat(HR, ":").concat(MT, ":").concat(SD);
+          var newDate = new Date(newDateFormat);
           newDate.setFullYear(endDate.getFullYear() + (e.currentTarget.value - endDate.getFullYear()));
           console.log('newDate: ' + newDate);
           console.log('endDate: ' + endDate);
 
-          var isValid = _this2.isValidDate(newDate);
+          var isValid = _this2.isValidDate(newDate); // debugger
 
-          debugger;
+
           return _this2.setState({
             'endDate': isValid ? newDate : endDate,
             'year': newDate.getFullYear(),
@@ -3176,13 +3177,19 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         }
 
         if (key === 'month') {
-          newDate.setMonth(e.currentTarget.value - 1);
+          var _MT = e.currentTarget.value < 10 ? "0".concat(e.currentTarget.value) : e.currentTarget.value;
 
-          var _isValid = _this2.isValidDate(newDate);
+          var _newDateFormat = "".concat(year, "-").concat(_MT, "-").concat(DD, "T").concat(HR, ":").concat(_MT, ":").concat(SD);
 
-          console.log('newDate: ' + newDate);
-          console.log('endDate: ' + endDate);
-          debugger; // if(e.currentTarget.value === ''){
+          var _newDate = new Date(_newDateFormat);
+
+          _newDate.setMonth(e.currentTarget.value - 1);
+
+          var _isValid = _this2.isValidDate(_newDate);
+
+          console.log('newDate: ' + _newDate);
+          console.log('endDate: ' + endDate); // debugger
+          // if(e.currentTarget.value === ''){
           //     return this.setState({
           //         'month': e.currentTarget.value
           //                     });
@@ -3193,13 +3200,13 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
 
           if (_isValid) {
             return _this2.setState({
-              'endDate': _isValid ? newDate : endDate,
+              'endDate': _isValid ? _newDate : endDate,
               'month': e.currentTarget.value,
               'error': _isValid ? '' : "Date must be in the next 60 days!"
             });
           } else {
             if (e.currentTarget.value < 1 || e.currentTarget.value > 12) {
-              debugger;
+              // debugger
               return _this2.setState({
                 'month': e.currentTarget.value,
                 'error': _isValid ? '' : "Invalid Month!"
@@ -3213,7 +3220,53 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           }
         }
 
-        return _this2.setState(_defineProperty({}, key, parseInt(e.currentTarget.value)));
+        if (key === 'day') {
+          var DA = e.currentTarget.value < 10 ? "0".concat(e.currentTarget.value) : e.currentTarget.value;
+
+          var _newDateFormat2 = "".concat(year, "-").concat(MM, "-").concat(DA, "T").concat(HR, ":").concat(MT, ":").concat(SD);
+
+          var _newDate2 = new Date(_newDateFormat2);
+
+          debugger;
+
+          _newDate2.setDate(e.currentTarget.value);
+
+          var _isValid2 = false;
+
+          if (_newDate2) {
+            _isValid2 = _this2.isValidDate(_newDate2);
+          }
+
+          console.log('newDate: ' + _newDate2);
+          console.log('endDate: ' + endDate);
+          debugger;
+
+          if (_isValid2) {
+            debugger;
+            return _this2.setState({
+              'endDate': _isValid2 ? _newDate2 : endDate,
+              'day': e.currentTarget.value,
+              'error': _isValid2 ? '' : "Date must be in the next 60 days!"
+            });
+          } else {
+            debugger;
+
+            if (_newDate2 === undefined) {
+              debugger;
+              return _this2.setState({
+                'day': e.currentTarget.value,
+                'error': "Invalid Date!"
+              });
+            }
+
+            return _this2.setState({
+              'day': e.currentTarget.value,
+              'error': "Date must be in the next 60 days!"
+            });
+          }
+        }
+
+        return _this2.setState(_defineProperty({}, key, e.currentTarget.value));
       };
     }
   }, {
