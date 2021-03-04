@@ -14,7 +14,8 @@ class EditPromotionDate extends React.Component{
             minute:'',
             second:'',
             am: '',
-            error: ''
+            error: '',
+            limitMessage:''
         }
         this.update = this.update.bind(this);
     }
@@ -34,7 +35,8 @@ class EditPromotionDate extends React.Component{
             'hour': endDate.getHours() > 11? (endDate.getHours() % 12) : endDate.getHours(),
             'minute': endDate.getMinutes(),
             'second': endDate.getSeconds(),
-            'am': endDate.getHours() > 11? false : true
+            'am': endDate.getHours() > 11? false : true,
+            'days': 30
         })
     }
     isValidDate(newDate){
@@ -149,6 +151,28 @@ class EditPromotionDate extends React.Component{
             
         } 
         }
+    updateByDay(key){
+        return e => {
+            if(e.currentTarget.value === ''){
+                return this.setState({[key]: e.currentTarget.value,
+                    'limitMessage': ''});
+            }
+            let newDate = new Date(this.state.startDate.getTime());
+            if(e.currentTarget.value < 1 || e.currentTarget.value > 60){
+                debugger
+                let value = e.currentTarget.value < 1 ? 1 : 60;
+                newDate.setDate(newDate.getDate() + value);
+                debugger
+                return this.setState({[key]: value,
+                                'endDate': newDate,
+                                'limitMessage': 'Days for funding duration must be between 1 and 60.'        
+                });
+            }
+            return this.setState({[key]: e.currentTarget.value,
+                                'endDate': newDate,
+                                'limitMessage': ''});
+        }
+    }
     updateAM(key){
         return e => this.setState({[key]: e.currentTarget.value === 'true'}
             );
@@ -179,7 +203,8 @@ class EditPromotionDate extends React.Component{
                                                                             <div className='selected-date-lower'>
                                                                                 <div className='selected-date-lower-container'>
                                                                                     <h3>Enter number of days</h3>
-                                                                                    <input type="number" defaultValue={30} id='days'/>
+                                                                                    <input type="number" value={this.state.days} placeholder='30' id='days' onChange={this.updateByDay('days')}/>
+                                                                                    <div>{this.state.limitMessage}</div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

@@ -3095,7 +3095,8 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       minute: '',
       second: '',
       am: '',
-      error: ''
+      error: '',
+      limitMessage: ''
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     return _this;
@@ -3119,7 +3120,8 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         'hour': endDate.getHours() > 11 ? endDate.getHours() % 12 : endDate.getHours(),
         'minute': endDate.getMinutes(),
         'second': endDate.getSeconds(),
-        'am': endDate.getHours() > 11 ? false : true
+        'am': endDate.getHours() > 11 ? false : true,
+        'days': 30
       });
     }
   }, {
@@ -3270,12 +3272,41 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
-    key: "updateAM",
-    value: function updateAM(key) {
+    key: "updateByDay",
+    value: function updateByDay(key) {
       var _this3 = this;
 
       return function (e) {
-        return _this3.setState(_defineProperty({}, key, e.currentTarget.value === 'true'));
+        var _this3$setState3;
+
+        if (e.currentTarget.value === '') {
+          var _this3$setState;
+
+          return _this3.setState((_this3$setState = {}, _defineProperty(_this3$setState, key, e.currentTarget.value), _defineProperty(_this3$setState, 'limitMessage', ''), _this3$setState));
+        }
+
+        var newDate = new Date(_this3.state.startDate.getTime());
+
+        if (e.currentTarget.value < 1 || e.currentTarget.value > 60) {
+          var _this3$setState2;
+
+          debugger;
+          var value = e.currentTarget.value < 1 ? 1 : 60;
+          newDate.setDate(newDate.getDate() + value);
+          debugger;
+          return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, value), _defineProperty(_this3$setState2, 'endDate', newDate), _defineProperty(_this3$setState2, 'limitMessage', 'Days for funding duration must be between 1 and 60.'), _this3$setState2));
+        }
+
+        return _this3.setState((_this3$setState3 = {}, _defineProperty(_this3$setState3, key, e.currentTarget.value), _defineProperty(_this3$setState3, 'endDate', newDate), _defineProperty(_this3$setState3, 'limitMessage', ''), _this3$setState3));
+      };
+    }
+  }, {
+    key: "updateAM",
+    value: function updateAM(key) {
+      var _this4 = this;
+
+      return function (e) {
+        return _this4.setState(_defineProperty({}, key, e.currentTarget.value === 'true'));
       };
     }
   }, {
@@ -3310,9 +3341,11 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           className: "selected-date-lower-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter number of days"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "number",
-          defaultValue: 30,
-          id: "days"
-        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          value: this.state.days,
+          placeholder: "30",
+          id: "days",
+          onChange: this.updateByDay('days')
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.limitMessage))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "selected-date-block",
           onClick: this.props.updateDateTab
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
