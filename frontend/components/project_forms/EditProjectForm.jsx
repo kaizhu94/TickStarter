@@ -560,6 +560,21 @@ class EditProjectForm extends React.Component{
                             ) : (null)
                         }
                         {
+                            this.state.tab == 2? (
+                                <div>
+                                     <div className='add-rewards-section'>
+                                        <div className= 'start-block'>
+                                            <h1>Add your rewards</h1>
+                                            <p>Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life.</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            ):(null) 
+                        }
+                        {
                             this.state.tab == 3? ( 
                                 <div>
                                     <div className='start-from-basic'>
