@@ -1,0 +1,23 @@
+#calendar{
+    display: none;
+    outline: none;
+}
+
+.react-datepicker__header {
+    text-align: center;
+    background-color: white;
+    border-bottom: 1px solid #aeaeae;
+    border-top-left-radius: 0.3rem;
+    padding-top: 8px;
+    position: relative;
+}
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--selected, .react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range{
+    background-color: rgb(236, 236, 236);
+}
+.react-datepicker__week *{
+    border: 1px solid gainsboro;
+}
+.react-datepicker__week *:focus{
+    outline: none;
+}
+

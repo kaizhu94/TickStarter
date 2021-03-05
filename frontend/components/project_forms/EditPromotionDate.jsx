@@ -2,6 +2,7 @@ import React from 'react';
 import DatePicker from "react-datepicker";
 
 // import "react-datepicker/dist/react-datepicker.css";
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 class EditPromotionDate extends React.Component{
     constructor(props){
@@ -19,10 +20,12 @@ class EditPromotionDate extends React.Component{
             am: '',
             error: '',
             limitMessage:'',
-            publishMessage:''
+            publishMessage:'',
+            showCalender: false,
         }
         this.update = this.update.bind(this);
         this.handlePublish = this.handlePublish.bind(this);
+        this.displayCalender = this.displayCalender.bind(this); 
     }
     componentDidMount(){
         debugger
@@ -42,6 +45,12 @@ class EditPromotionDate extends React.Component{
             'second': endDate.getSeconds(),
             'am': endDate.getHours() > 11? false : true,
             'days': 30
+        })
+    }
+    displayCalender(){
+        const flag = !this.state.showCalender;
+        this.setState({
+            'showCalender': flag
         })
     }
     isValidDate(newDate){
@@ -234,9 +243,10 @@ class EditPromotionDate extends React.Component{
         this.setState({
             'year': newDate.getFullYear(),
             'month': newDate.getMonth()+1,
-            'day': newDate.getDate()
+            'day': newDate.getDate(),
+            'showCalender': false
         })
-        this.props.updateEndDate(newDate);
+        // this.props.updateEndDate(newDate);
     }
 
     triggerBorderColor(){
@@ -314,13 +324,25 @@ class EditPromotionDate extends React.Component{
                                                                                                id={`date-element-${this.triggerBorderColor()}`} />
                                                                                             <input type="number" value={year}   onChange={this.update('year')} 
                                                                                                id={`date-element-${this.triggerBorderColor()}`}/>
-                                                                                            <button     ><i className="far fa-calendar-alt"></i></button>
-                                                                                            <DatePicker selected={this.state.endDate}
-                                                                                                        onChange={date => this.updateByCalendar(date)} 
-                                                                                                        minDate={this.state.startDate}
-                                                                                                        maxDate={this.state.limitDate}
-                                                                                                        showDisabledMonthNavigation  
-                                                                                                            />
+                                                                                            {
+                                                                                                this.state.showCalender? (
+                                                                                                    <label    htmlFor='calendar' onClick={this.displayCalender} id='x-lable'>x</label>
+                                                                                                ):(
+                                                                                                    <label    htmlFor='calendar' onClick={this.displayCalender}><i className="far fa-calendar-alt"></i></label>
+                                                                                                )
+                                                                                            }
+                                                                                            {
+                                                                                                this.state.showCalender? (
+                                                                                                    <DatePicker selected={this.state.endDate}
+                                                                                                                onChange={date => this.updateByCalendar(date)} 
+                                                                                                                minDate={this.state.startDate}
+                                                                                                                maxDate={this.state.limitDate}
+                                                                                                                showDisabledMonthNavigation  
+                                                                                                                className= 'calendar'
+                                                                                                                id = 'calendar'
+                                                                                                                    />
+                                                                                                ):(null)
+                                                                                            }
                                                                                         </div>
                                                                                         <div className='date-error'>{this.state.error}</div>
                                                                                     </div>

@@ -3431,6 +3431,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
  // import "react-datepicker/dist/react-datepicker.css";
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   _inherits(EditPromotionDate, _React$Component);
@@ -3456,10 +3457,12 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       am: '',
       error: '',
       limitMessage: '',
-      publishMessage: ''
+      publishMessage: '',
+      showCalender: false
     };
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handlePublish = _this.handlePublish.bind(_assertThisInitialized(_this));
+    _this.displayCalender = _this.displayCalender.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3483,6 +3486,14 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         'second': endDate.getSeconds(),
         'am': endDate.getHours() > 11 ? false : true,
         'days': 30
+      });
+    }
+  }, {
+    key: "displayCalender",
+    value: function displayCalender() {
+      var flag = !this.state.showCalender;
+      this.setState({
+        'showCalender': flag
       });
     }
   }, {
@@ -3728,9 +3739,9 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       this.setState({
         'year': newDate.getFullYear(),
         'month': newDate.getMonth() + 1,
-        'day': newDate.getDate()
-      });
-      this.props.updateEndDate(newDate);
+        'day': newDate.getDate(),
+        'showCalender': false
+      }); // this.props.updateEndDate(newDate);
     }
   }, {
     key: "triggerBorderColor",
@@ -3834,17 +3845,26 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           value: year,
           onChange: this.update('year'),
           id: "date-element-".concat(this.triggerBorderColor())
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        }), this.state.showCalender ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          htmlFor: "calendar",
+          onClick: this.displayCalender,
+          id: "x-lable"
+        }, "x") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          htmlFor: "calendar",
+          onClick: this.displayCalender
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "far fa-calendar-alt"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement((react_datepicker__WEBPACK_IMPORTED_MODULE_1___default()), {
+        })), this.state.showCalender ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement((react_datepicker__WEBPACK_IMPORTED_MODULE_1___default()), {
           selected: this.state.endDate,
           onChange: function onChange(date) {
             return _this5.updateByCalendar(date);
           },
           minDate: this.state.startDate,
           maxDate: this.state.limitDate,
-          showDisabledMonthNavigation: true
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          showDisabledMonthNavigation: true,
+          className: "calendar",
+          id: "calendar"
+        }) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "date-error"
         }, this.state.error)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "date-block"
