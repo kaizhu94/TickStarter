@@ -243,7 +243,6 @@ class EditPromotionDate extends React.Component{
         return this.state.error === ''? 'origin' : 'display'
     }
     render(){
-        // debugger
         if(!this.state.endDate){
             return null;
         }else{
