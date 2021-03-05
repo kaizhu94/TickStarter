@@ -694,6 +694,10 @@ button, select{
     font-family: 'Open Sans', sans-serif;
 }
 
+.edit-button-block-hide{
+    display: none;
+}
+
 .edit-button-container{
     width: 90%;
     margin: auto;
@@ -721,6 +725,7 @@ button, select{
     border: none;
     color: white;
     background-color: #028858;
+    width: 180px;
 }
 
 #edit-next-button:hover{
@@ -740,6 +745,7 @@ button, select{
     border: none;
     color: white;
     background-color: #028858;
+    width: 180px;
 }
 
 #edit-save-button:hover{
@@ -749,4 +755,30 @@ button, select{
 
 #edit-save-button:focus, #edit-pre-button:focus{
     outline: none
+}
+
+#edit-next-button-top{
+    margin-left: 15px;
+    padding: 15px;
+    border: none;
+    color: white;
+    background-color: #028858;
+    width: 226px;
+    font-size: 17px;
+}
+
+.top-button-conatiner{
+    position: fixed;
+    top: 11px;
+    right: 10px;
+    z-index: 20;
+}
+
+.top-button-conatiner #edit-next-button-top:hover{
+    cursor: pointer;
+    background-color: #016b46;
+}
+
+#add-space-in-button{
+    padding-left: 5px;
 }

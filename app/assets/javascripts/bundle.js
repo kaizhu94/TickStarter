@@ -2827,7 +2827,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       selectedDateTab: false,
       launch_date: null,
       end_date: null,
-      published: null
+      published: null,
+      openNewReward: false,
+      openNewItem: false
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2837,7 +2839,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.handleSubmit = _this2.handleSubmit.bind(_assertThisInitialized(_this2));
     _this2.updateTitleImage = _this2.updateTitleImage.bind(_assertThisInitialized(_this2));
     _this2.updateDateTab = _this2.updateDateTab.bind(_assertThisInitialized(_this2));
-    _this2.updateEndDate = _this2.updateEndDate.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
+    _this2.updateEndDate = _this2.updateEndDate.bind(_assertThisInitialized(_this2));
+    _this2.redirectToBoard = _this2.redirectToBoard.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
     // this.triggerOrNot = this.triggerOrNot.bind(this);
 
     return _this2;
@@ -3045,6 +3048,11 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       });
     }
   }, {
+    key: "hidebutton",
+    value: function hidebutton() {
+      return this.state.openNewItem || this.state.openNewReward ? '-hide' : '';
+    }
+  }, {
     key: "previous",
     value: function previous() {
       var currentTab = this.state.tab;
@@ -3103,27 +3111,88 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           id: "edit-next-button",
           type: "button",
           onClick: this.next
-        }, "Next step: funding ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        }, "Next step: funding ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          id: "add-space-in-button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-chevron-right"
-        })));
+        }))));
       } else if (this.state.tab === 1) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "No unsaved changes    "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           id: "edit-next-button",
           type: "button",
           onClick: this.next
-        }, "Next step: rewards ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        }, "Next step: rewards ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          id: "add-space-in-button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-chevron-right"
-        })));
+        }))));
       } else if (this.state.tab === 2) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "No unsaved changes    "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           id: "edit-next-button",
           type: "button",
           onClick: this.next
-        }, "Next step: background ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        }, "Next step: background ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          id: "add-space-in-button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-chevron-right"
-        })));
+        }))));
       } else {
         return null;
+      }
+    }
+  }, {
+    key: "redirectToBoard",
+    value: function redirectToBoard() {
+      debugger;
+      this.props.history.push("/projects/".concat(this.state.id, "/dashboard"));
+    }
+  }, {
+    key: "nextButtonOnTop",
+    value: function nextButtonOnTop() {
+      if (this.state.tab === 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "top-button-conatiner"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-next-button-top",
+          type: "button",
+          onClick: this.next
+        }, "Next step: funding ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          id: "add-space-in-button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-chevron-right"
+        }))));
+      } else if (this.state.tab === 1) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "top-button-conatiner"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-next-button-top",
+          type: "button",
+          onClick: this.next
+        }, "Next step: rewards ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          id: "add-space-in-button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-chevron-right"
+        }))));
+      } else if (this.state.tab === 2) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "top-button-conatiner"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-next-button-top",
+          type: "button",
+          onClick: this.next
+        }, "Next step: background ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          id: "add-space-in-button"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-chevron-right"
+        }))));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "top-button-conatiner"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-next-button-top",
+          type: "button",
+          onClick: this.redirectToBoard
+        }, "Exit"));
       }
     }
   }, {
@@ -3178,7 +3247,14 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
           onSubmit: this.handleSubmit,
           id: "edit-form"
-        }, this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, this.state.openNewReward || this.state.openNewItem ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Save item")) : this.state.isModified ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "top-button-conatiner"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "submit",
+          id: "edit-next-button-top"
+        }, "Save")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-buttons"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.nextButtonOnTop())), this.state.tab == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-block"
@@ -3373,7 +3449,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           value: this.state.risks,
           placeholder: "Common risks and challenges you may wangt to address"
         })))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "edit-button-block"
+          className: "edit-button-block".concat(this.hidebutton())
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-container"
         }, this.state.isModified ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4728,7 +4804,7 @@ var ProjectDashboard = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "delete-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        "class": "fas fa-trash",
+        className: "fas fa-trash",
         onClick: this.handleDelete
       }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Delete Project"), " "))));
     }

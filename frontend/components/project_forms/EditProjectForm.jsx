@@ -66,6 +66,9 @@ class EditProjectForm extends React.Component{
             launch_date: null,
             end_date: null,
             published: null,
+
+            openNewReward: false,
+            openNewItem: false
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -76,6 +79,7 @@ class EditProjectForm extends React.Component{
         this.updateTitleImage = this.updateTitleImage.bind(this);
         this.updateDateTab =this.updateDateTab.bind(this);
         this.updateEndDate = this.updateEndDate.bind(this);
+        this.redirectToBoard = this.redirectToBoard.bind(this);
         // this.handleFile = this.handleFile.bind(this);
         // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
@@ -248,6 +252,10 @@ class EditProjectForm extends React.Component{
         })
     }
 
+    hidebutton(){
+        return (this.state.openNewItem || this.state.openNewReward) ? '-hide': '';
+    }
+
     previous(){
         let currentTab = this.state.tab;
         currentTab = currentTab < 1 ? 0 : currentTab-1;
@@ -309,7 +317,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: funding <i className="fas fa-chevron-right"></i>
+                    Next step: funding <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
                 </button>
                 </div>
             )
@@ -322,7 +330,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: rewards <i className="fas fa-chevron-right"></i>
+                    Next step: rewards <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
                 </button>
                 </div>
             )
@@ -335,12 +343,69 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: background <i className="fas fa-chevron-right"></i>
+                    Next step: background <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
                 </button>
                 </div>
             )
         }else{
             return null
+        }
+    }
+
+    redirectToBoard(){
+        debugger
+        this.props.history.push(`/projects/${this.state.id}/dashboard`);
+    }
+
+    nextButtonOnTop(){
+        if(this.state.tab === 0){
+            return(
+                <div className='top-button-conatiner'>
+                    <button
+                    id='edit-next-button-top'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: funding <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
+                </button>
+                </div>
+            )
+        }else if(this.state.tab === 1){
+            return(
+                <div className='top-button-conatiner'>
+                    <button
+                    id='edit-next-button-top'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: rewards <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
+                </button>
+                </div>
+            )
+        }else if(this.state.tab === 2){
+            return(
+                <div className='top-button-conatiner'>
+                    <button
+                    id='edit-next-button-top'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: background <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
+                </button>
+                </div>
+            )
+        }else{
+            return(
+                <div className='top-button-conatiner'>
+                    <button
+                    id='edit-next-button-top'
+                    type ='button'
+                    onClick={this.redirectToBoard}
+                >
+                    Exit
+                    </button>
+                </div>
+            )
         }
     }
 
@@ -382,6 +447,26 @@ class EditProjectForm extends React.Component{
                              tabs={tabs}
                              selectTab={this.selectTab}/>
                     <form onSubmit={this.handleSubmit} id = 'edit-form'>
+                        {
+                            ( this.state.openNewReward || this.state.openNewItem) ? (
+                                <div>
+                                    <button>Cancel</button>
+                                    <button>Save item</button>
+                                </div>
+                            ) : (
+                                this.state.isModified? (
+                                    <div className='top-button-conatiner'>
+                                            <button type='submit' id='edit-next-button-top'>Save</button>
+                                    </div>
+                                ): (
+                                    <div className = 'edit-buttons'>
+                                        <div>
+                                            {this.nextButtonOnTop()} 
+                                        </div>
+                                    </div>
+                                )
+                            )
+                        }
                         {
                             this.state.tab == 0? (
                                 <div>
@@ -569,7 +654,7 @@ class EditProjectForm extends React.Component{
                                         </div>
                                     </div>
                                     <div>
-                                        
+
                                     </div>
                                 </div>
                             ):(null) 
@@ -628,7 +713,7 @@ class EditProjectForm extends React.Component{
                                 </div>
                             ) : (null)
                         }
-                        <div className='edit-button-block'>
+                        <div className={`edit-button-block${this.hidebutton()}`}>
                             <div className = 'edit-button-container'> 
                                 {
                                     this.state.isModified? (

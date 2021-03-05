@@ -56,7 +56,7 @@ class ProjectDashboard extends React.Component{
                 </div>
                 <div className='delete-project'>
                     <div className='delete-block'>
-                        <i class="fas fa-trash" onClick={this.handleDelete}> <span>Delete Project</span> </i>
+                        <i className="fas fa-trash" onClick={this.handleDelete}> <span>Delete Project</span> </i>
                     </div>
                 </div>
             </div>
