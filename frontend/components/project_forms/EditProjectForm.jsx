@@ -2,6 +2,7 @@ import React from 'react';
 
 import EditTitleImage from './EditTitleImage'
 import EditPromotionDate from './EditPromotionDate'
+import Rewards from './Rewards'
 
 class Headers extends React.Component {
     render() {
@@ -366,7 +367,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: funding <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
+                    Next step: funding 
                 </button>
                 </div>
             )
@@ -378,7 +379,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: rewards <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
+                    Next step: rewards 
                 </button>
                 </div>
             )
@@ -390,7 +391,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: background <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
+                    Next step: background 
                 </button>
                 </div>
             )
@@ -653,8 +654,8 @@ class EditProjectForm extends React.Component{
                                             <p>Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life.</p>
                                         </div>
                                     </div>
-                                    <div>
-
+                                    <div className='rewards-items-section'>
+                                        <Rewards />
                                     </div>
                                 </div>
                             ):(null) 

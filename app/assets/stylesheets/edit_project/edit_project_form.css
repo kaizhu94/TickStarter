@@ -725,7 +725,7 @@ button, select{
     border: none;
     color: white;
     background-color: #028858;
-    width: 180px;
+    width: 181px;
 }
 
 #edit-next-button:hover{
@@ -745,7 +745,7 @@ button, select{
     border: none;
     color: white;
     background-color: #028858;
-    width: 180px;
+    width: 181px;
 }
 
 #edit-save-button:hover{
@@ -779,6 +779,3 @@ button, select{
     background-color: #016b46;
 }
 
-#add-space-in-button{
-    padding-left: 5px;
-}

@@ -1,0 +1,56 @@
+.rewards-items-section{
+    width: 100%;
+}
+.rewards-items-container{
+    width: 80%;
+    margin: auto;
+}
+.rewards-items-header{
+    display: flex;
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 12px;
+}
+
+.rewards-items-header ul{
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    justify-content: space-between;
+    margin-right: 50px;
+    padding-bottom: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    /* cursor: pointer; */
+}
+.rewards-items-header ul li{
+    
+}
+#rewards-icon{
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+} 
+.reward-header-element-active #rewards-icon{
+    border-radius: 25px;
+    color: white;
+    background-color: limegreen;
+}
+/* .rewards-items-header .reward-header-element-active{
+    margin-right: 50px;
+    padding-bottom: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    cursor: pointer;
+}
+.rewards-items-header .reward-header-element-active #rewards-icon{
+    border-radius: 25px;
+    color: white;
+    background-color: limegreen;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#rewards-icon{
+    margin-right: 5px;
+} */
