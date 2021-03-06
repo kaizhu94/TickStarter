@@ -458,9 +458,9 @@ class EditProjectForm extends React.Component{
                     <form onSubmit={this.handleSubmit} id = 'edit-form'>
                         {
                             this.state.disabledBottomButton ? (
-                                <div>
-                                    <button>Cancel</button>
-                                    <button>Save item</button>
+                                <div className='top-button-conatiner'>
+                                    <button id = 'edit-cancel'>Cancel</button>
+                                    <button id = 'edit-next-button-top'>Save item</button>
                                 </div>
                             ) : (
                                 this.state.isModified? (
@@ -732,12 +732,14 @@ class EditProjectForm extends React.Component{
                                                 <button type='submit' id='edit-save-button'>Save</button>
                                         </div>
                                     ): (
-                                        <div className = 'edit-buttons'>
-                                            {this.previousButton()}
-                                            <div>
-                                                {this.nextButton()} 
+                                        this.state.disabledBottomButton?(null):(
+                                            <div className = 'edit-buttons'>
+                                                {this.previousButton()}
+                                                <div>
+                                                    {this.nextButton()} 
+                                                </div>
                                             </div>
-                                        </div>
+                                        )
                                     )
                                 }
                             </div>

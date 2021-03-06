@@ -766,6 +766,15 @@ button, select{
     width: 226px;
     font-size: 17px;
 }
+#edit-cancel{
+    margin-left: 15px;
+    padding: 15px;
+    border: 1px solid gainsboro;
+    color:rgb(82, 82, 82);
+    background-color:white;
+    width: 226px;
+    font-size: 17px;
+}
 
 .top-button-conatiner{
     position: fixed;

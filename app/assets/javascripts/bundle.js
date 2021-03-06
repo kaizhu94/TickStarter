@@ -3246,7 +3246,13 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
           onSubmit: this.handleSubmit,
           id: "edit-form"
-        }, this.state.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Save item")) : this.state.isModified ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, this.state.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "top-button-conatiner"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-cancel"
+        }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          id: "edit-next-button-top"
+        }, "Save item")) : this.state.isModified ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "top-button-conatiner"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           type: "submit",
@@ -3461,7 +3467,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           type: "submit",
           id: "edit-save-button"
-        }, "Save")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, "Save")) : this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-buttons"
         }, this.previousButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.nextButton()))))));
       }
