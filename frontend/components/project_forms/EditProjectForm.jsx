@@ -458,10 +458,7 @@ class EditProjectForm extends React.Component{
                     <form onSubmit={this.handleSubmit} id = 'edit-form'>
                         {
                             this.state.disabledBottomButton ? (
-                                <div className='top-button-conatiner'>
-                                    <button id = 'edit-cancel'>Cancel</button>
-                                    <button id = 'edit-next-button-top'>Save item</button>
-                                </div>
+                                null
                             ) : (
                                 this.state.isModified? (
                                     <div className='top-button-conatiner'>

@@ -82,6 +82,15 @@ class Rewards extends React.Component{
         debugger
         return (
             <div className='rewards-items-container'>
+                {
+                    this.props.disabledBottomButton ? (
+                        <div className='top-button-conatiner'>
+                            <button id = 'edit-cancel'>Cancel</button>
+                            <button id = 'edit-next-button-top'>Save item</button>
+                        </div>
+                    ) : (null
+                    )
+                }
                 <Headers selected = {this.state.tab}
                         tabs = {tabs}
                         updatetab = {this.updatetab}
