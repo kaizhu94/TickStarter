@@ -2,6 +2,7 @@ import React from 'react';
 
 class Headers extends React.Component {
     render() {
+        debugger
       const selected = this.props.selected;
       const headers = this.props.tabs.map((tab, index) => {
         const title = tab.title;
@@ -9,7 +10,7 @@ class Headers extends React.Component {
         return (
           <li
             key={`tabs-${index}`}
-            className={klass}
+            className={`${klass}${this.props.disable}`}
             onClick={() => this.props.updatetab(index)}>
                 {
                     index === 0 ? (
@@ -28,7 +29,7 @@ class Headers extends React.Component {
       });
       return (
         <div className='rewards-items-header'>
-            <ul>
+            <ul className={`reward${this.props.disable}`}>
                 {headers}
             </ul>
         </div>
@@ -42,8 +43,13 @@ class Rewards extends React.Component{
         super(props);
         this.state= {
             tab: 0,
+            // showRewardForm: false,
+            // showItemForm: false,
+            // updateDisabledBottomButton: this.props.disabledBottomButton,
         }
         this.updatetab = this.updatetab.bind(this);
+        this.showNewRewardForm = this.showNewRewardForm.bind(this);
+        debugger
     }
     updatetab(num){
         // let num = this.state.tab;
@@ -52,21 +58,59 @@ class Rewards extends React.Component{
         // }else{
         //     num--;
         // }
-        this.setState({
-            'tab': num
-        })
+        if(!this.props.disabledBottomButton){
+            this.setState({
+                'tab': num
+            })  
+        }
     }
-    activeTab(){
-        // if(this.)
+    disable(){
+        debugger
+        return this.props.disabledBottomButton ? '-disable': ''
+    }
+    showNewRewardForm(){
+        if(!this.props.disabledBottomButton){
+            this.props.updateDisabledBottomButton();
+        }
+        // this.setState({
+        //     'updateDisabledBottomButton': true
+        // })
     }
     render(){
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
+        const disable = this.disable();
+        debugger
         return (
             <div className='rewards-items-container'>
                 <Headers selected = {this.state.tab}
                         tabs = {tabs}
                         updatetab = {this.updatetab}
+                        disable = {disable}
                                 />
+                {
+                    this.state.tab === 0 ? (
+                        <div className='rewards-form-block'>
+                            <div className={`new-reward-button-section${this.disable()}`}>
+                                <p>Add rewards to your project, which can be physical items or special experiences</p>
+                                <button onClick={this.showNewRewardForm}>+ New reward</button>   
+                            </div>
+                            {
+                                this.props.disabledBottomButton ? (
+                                    <div>
+                                        hi
+                                    </div>
+                                ):(null)
+                            }
+                        </div>
+                    ): (
+                        <div className='rewards-form-block'>
+                            <div className='new-reward-button-section'>
+                                <p>We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you’re offering.</p>
+                                <button>+ New item</button>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
         )
     }

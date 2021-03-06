@@ -2830,8 +2830,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       launch_date: null,
       end_date: null,
       published: null,
-      openNewReward: false,
-      openNewItem: false
+      disabledBottomButton: false
     };
     _this2.selectTab = _this2.selectTab.bind(_assertThisInitialized(_this2));
     _this2.previous = _this2.previous.bind(_assertThisInitialized(_this2));
@@ -2842,7 +2841,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.updateTitleImage = _this2.updateTitleImage.bind(_assertThisInitialized(_this2));
     _this2.updateDateTab = _this2.updateDateTab.bind(_assertThisInitialized(_this2));
     _this2.updateEndDate = _this2.updateEndDate.bind(_assertThisInitialized(_this2));
-    _this2.redirectToBoard = _this2.redirectToBoard.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
+    _this2.redirectToBoard = _this2.redirectToBoard.bind(_assertThisInitialized(_this2));
+    _this2.updateDisabledBottomButton = _this2.updateDisabledBottomButton.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
     // this.triggerOrNot = this.triggerOrNot.bind(this);
 
     return _this2;
@@ -2913,9 +2913,18 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       });
     }
   }, {
+    key: "updateDisabledBottomButton",
+    value: function updateDisabledBottomButton() {
+      debugger;
+      var value = !this.state.disabledBottomButton;
+      this.setState({
+        'disabledBottomButton': value
+      });
+    }
+  }, {
     key: "updateEndDate",
     value: function updateEndDate(endDate) {
-      debugger;
+      // debugger
       this.setState({
         'end_date': endDate,
         'published': true,
@@ -3145,7 +3154,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "redirectToBoard",
     value: function redirectToBoard() {
-      debugger;
+      // debugger
       this.props.history.push("/projects/".concat(this.state.id, "/dashboard"));
     }
   }, {
@@ -3237,7 +3246,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
           onSubmit: this.handleSubmit,
           id: "edit-form"
-        }, this.state.openNewReward || this.state.openNewItem ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Save item")) : this.state.isModified ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, this.state.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Save item")) : this.state.isModified ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "top-button-conatiner"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           type: "submit",
@@ -3399,7 +3408,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "start-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Add your rewards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-items-section"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Rewards__WEBPACK_IMPORTED_MODULE_3__.default, null))) : null, this.state.tab == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Rewards__WEBPACK_IMPORTED_MODULE_3__.default, {
+          updateDisabledBottomButton: this.updateDisabledBottomButton,
+          disabledBottomButton: this.state.disabledBottomButton
+        }))) : null, this.state.tab == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-block"
@@ -4902,13 +4914,14 @@ var Headers = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
+      debugger;
       var selected = this.props.selected;
       var headers = this.props.tabs.map(function (tab, index) {
         var title = tab.title;
         var klass = index == selected ? 'reward-header-element-active' : 'reward-header-element';
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: "tabs-".concat(index),
-          className: klass,
+          className: "".concat(klass).concat(_this.props.disable),
           onClick: function onClick() {
             return _this.props.updatetab(index);
           }
@@ -4924,7 +4937,9 @@ var Headers = /*#__PURE__*/function (_React$Component) {
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "rewards-items-header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, headers));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "reward".concat(this.props.disable)
+      }, headers));
     }
   }]);
 
@@ -4943,9 +4958,14 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
 
     _this2 = _super2.call(this, props);
     _this2.state = {
-      tab: 0
+      tab: 0 // showRewardForm: false,
+      // showItemForm: false,
+      // updateDisabledBottomButton: this.props.disabledBottomButton,
+
     };
     _this2.updatetab = _this2.updatetab.bind(_assertThisInitialized(_this2));
+    _this2.showNewRewardForm = _this2.showNewRewardForm.bind(_assertThisInitialized(_this2));
+    debugger;
     return _this2;
   }
 
@@ -4958,13 +4978,27 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       // }else{
       //     num--;
       // }
-      this.setState({
-        'tab': num
-      });
+      if (!this.props.disabledBottomButton) {
+        this.setState({
+          'tab': num
+        });
+      }
     }
   }, {
-    key: "activeTab",
-    value: function activeTab() {// if(this.)
+    key: "disable",
+    value: function disable() {
+      debugger;
+      return this.props.disabledBottomButton ? '-disable' : '';
+    }
+  }, {
+    key: "showNewRewardForm",
+    value: function showNewRewardForm() {
+      if (!this.props.disabledBottomButton) {
+        this.props.updateDisabledBottomButton();
+      } // this.setState({
+      //     'updateDisabledBottomButton': true
+      // })
+
     }
   }, {
     key: "render",
@@ -4974,13 +5008,26 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       }, {
         title: 'Items'
       }];
+      var disable = this.disable();
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "rewards-items-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
         selected: this.state.tab,
         tabs: tabs,
-        updatetab: this.updatetab
-      }));
+        updatetab: this.updatetab,
+        disable: disable
+      }), this.state.tab === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "rewards-form-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "new-reward-button-section".concat(this.disable())
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add rewards to your project, which can be physical items or special experiences"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.showNewRewardForm
+      }, "+ New reward")), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "hi") : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "rewards-form-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "new-reward-button-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you\u2019re offering."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "+ New item"))));
     }
   }]);
 

@@ -68,8 +68,7 @@ class EditProjectForm extends React.Component{
             end_date: null,
             published: null,
 
-            openNewReward: false,
-            openNewItem: false
+            disabledBottomButton: false,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -81,6 +80,7 @@ class EditProjectForm extends React.Component{
         this.updateDateTab =this.updateDateTab.bind(this);
         this.updateEndDate = this.updateEndDate.bind(this);
         this.redirectToBoard = this.redirectToBoard.bind(this);
+        this.updateDisabledBottomButton = this.updateDisabledBottomButton.bind(this);
         // this.handleFile = this.handleFile.bind(this);
         // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
@@ -140,8 +140,16 @@ class EditProjectForm extends React.Component{
             );
     }
 
-    updateEndDate(endDate){
+    updateDisabledBottomButton(){
         debugger
+        const value = !this.state.disabledBottomButton;
+        this.setState({'disabledBottomButton': value,
+            }
+            );
+    }
+
+    updateEndDate(endDate){
+        // debugger
         this.setState({
             'end_date': endDate,
             'published': true,
@@ -354,7 +362,7 @@ class EditProjectForm extends React.Component{
     }
 
     redirectToBoard(){
-        debugger
+        // debugger
         this.props.history.push(`/projects/${this.state.id}/dashboard`);
     }
 
@@ -449,7 +457,7 @@ class EditProjectForm extends React.Component{
                              selectTab={this.selectTab}/>
                     <form onSubmit={this.handleSubmit} id = 'edit-form'>
                         {
-                            ( this.state.openNewReward || this.state.openNewItem) ? (
+                            this.state.disabledBottomButton ? (
                                 <div>
                                     <button>Cancel</button>
                                     <button>Save item</button>
@@ -655,7 +663,8 @@ class EditProjectForm extends React.Component{
                                         </div>
                                     </div>
                                     <div className='rewards-items-section'>
-                                        <Rewards />
+                                        <Rewards updateDisabledBottomButton = {this.updateDisabledBottomButton}
+                                                disabledBottomButton = {this.state.disabledBottomButton}/>
                                     </div>
                                 </div>
                             ):(null) 
