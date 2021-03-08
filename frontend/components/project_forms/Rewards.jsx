@@ -1,5 +1,8 @@
 import React from 'react';
 
+import NewRewardFormContainer from './NewRewardFormContainer'
+import NewItemFormContainer from './NewItemFormContainer'
+
 class Headers extends React.Component {
     render() {
         debugger
@@ -52,12 +55,6 @@ class Rewards extends React.Component{
         debugger
     }
     updatetab(num){
-        // let num = this.state.tab;
-        // if(this.num === 0){
-        //     num++;
-        // }else{
-        //     num--;
-        // }
         if(!this.props.disabledBottomButton){
             this.setState({
                 'tab': num
@@ -72,9 +69,10 @@ class Rewards extends React.Component{
         if(!this.props.disabledBottomButton){
             this.props.updateDisabledBottomButton();
         }
-        // this.setState({
-        //     'updateDisabledBottomButton': true
-        // })
+    }
+    cancel(){
+        debugger
+        this.props.updateDisabledBottomButton();
     }
     render(){
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
@@ -85,7 +83,7 @@ class Rewards extends React.Component{
                 {
                     this.props.disabledBottomButton ? (
                         <div className='top-button-conatiner'>
-                            <button id = 'edit-cancel'>Cancel</button>
+                            <button id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
                             <button id = 'edit-next-button-top'>Save item</button>
                         </div>
                     ) : (null
@@ -105,9 +103,7 @@ class Rewards extends React.Component{
                             </div>
                             {
                                 this.props.disabledBottomButton ? (
-                                    <div>
-                                        hi
-                                    </div>
+                                    <NewRewardFormContainer />
                                 ):(null)
                             }
                         </div>
@@ -115,8 +111,13 @@ class Rewards extends React.Component{
                         <div className='rewards-form-block'>
                             <div className='new-reward-button-section'>
                                 <p>We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you’re offering.</p>
-                                <button>+ New item</button>
+                                <button onClick={this.showNewRewardForm}>+ New item</button>
                             </div>
+                            {
+                                this.props.disabledBottomButton ? (
+                                    <NewItemFormContainer />
+                                ):(null)
+                            }
                         </div>
                     )
                 }

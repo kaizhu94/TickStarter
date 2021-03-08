@@ -46,11 +46,12 @@
     padding-bottom: 3px;
     font-size: 16px;
 } 
-.reward-header-element-active #rewards-icon{
+.reward-header-element-active #rewards-icon, .reward-header-element-active-disable #rewards-icon{
     border-radius: 25px;
     color: white;
     background-color: limegreen;
 }
+
 .rewards-form-block{
     width: 100%;
 }

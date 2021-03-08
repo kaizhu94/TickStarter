@@ -141,7 +141,7 @@ class EditProjectForm extends React.Component{
     }
 
     updateDisabledBottomButton(){
-        debugger
+        // debugger
         const value = !this.state.disabledBottomButton;
         this.setState({'disabledBottomButton': value,
             }
@@ -661,7 +661,8 @@ class EditProjectForm extends React.Component{
                                     </div>
                                     <div className='rewards-items-section'>
                                         <Rewards updateDisabledBottomButton = {this.updateDisabledBottomButton}
-                                                disabledBottomButton = {this.state.disabledBottomButton}/>
+                                                disabledBottomButton = {this.state.disabledBottomButton}
+                                                project= {this.props.project}/>
                                     </div>
                                 </div>
                             ):(null) 
