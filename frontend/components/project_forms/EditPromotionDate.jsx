@@ -28,7 +28,7 @@ class EditPromotionDate extends React.Component{
         this.displayCalender = this.displayCalender.bind(this); 
     }
     componentDidMount(){
-        debugger
+        // debugger
         let date = this.props.startDate;
         let endDate = this.props.endDate;
         let limitDate = new Date(date.getTime());
@@ -130,7 +130,7 @@ class EditPromotionDate extends React.Component{
                 let DA = e.currentTarget.value < 10 ? `0${e.currentTarget.value}`: e.currentTarget.value;
                 let newDayFormat = `${year}-${MM}-${DA}T${HR}:${MT}:${SD}`;
                 let newDayDate = new Date(newDayFormat);
-                debugger
+                // debugger
                 let isValid = false;
                 if(newDayDate){
                     newDayDate.setDate(e.currentTarget.value);
@@ -138,18 +138,18 @@ class EditPromotionDate extends React.Component{
                 }
                 console.log('newDayDate: '+newDayDate);
                 console.log('endDate: '+endDate);
-                debugger
+                // debugger
                 if(isValid){
-                    debugger
+                    // debugger
                     return this.setState({
                         'endDate': isValid ? newDayDate : endDate,
                         'day': e.currentTarget.value,
                         'error': isValid ? '' : "Date must be in the next 60 days!"
                                     });
                 }else{
-                    debugger
+                    // debugger
                     if(isNaN(newDayDate.getDate())){
-                        debugger    
+                        // debugger    
                         return this.setState({
                             'day': e.currentTarget.value,
                             'error': "Invalid Date!"
@@ -162,16 +162,16 @@ class EditPromotionDate extends React.Component{
                 }
             }
             if(key === 'hour'){
-                debugger
+                // debugger
                 let ho = e.currentTarget.value;
                 if(!this.state.am) ho = parseInt(ho) + 12;
-                debugger
+                // debugger
                 let HO = ho < 10 ? `0${ho}`: ho;
                 let newFormat = `${year}-${MM}-${DD}T${HO}:${MT}:${SD}`;
                 let newHourDate = new Date(newFormat);
                 console.log('newDate: '+newHourDate);
                 console.log('endDate: '+endDate);
-                debugger
+                // debugger
                 return this.setState({[key]: newHourDate.getHours()})
                 
             }
@@ -187,10 +187,10 @@ class EditPromotionDate extends React.Component{
             }
             // let newDate = new Date(this.state.startDate.getTime());
             if(e.currentTarget.value < 1 || e.currentTarget.value > 60){
-                debugger
+                // debugger
                 let value = e.currentTarget.value < 1 ? 1 : 60;
                 // newDate.setDate(newDate.getDate() + value);
-                debugger
+                // debugger
                 return this.setState({[key]: value,
                                 // 'endDate': newDate,
                                 'limitMessage': 'Days for funding duration must be between 1 and 60.'        
@@ -209,11 +209,11 @@ class EditPromotionDate extends React.Component{
 
     handlePublish(){
         let newDate = new Date(this.state.startDate.getTime());
-        debugger
+        // debugger
         if(this.props.selectTab){
-            debugger
+            // debugger
             newDate.setDate(newDate.getDate() + parseInt(this.state.days));
-            debugger
+            // debugger
         }else{
             const {startDate, endDate,  year, month, day, hour, minute, second} = this.state;
             let MM = month < 10 ? `0${month}`: month;
@@ -223,9 +223,9 @@ class EditPromotionDate extends React.Component{
             let SD = second < 10 ? `0${second}`: second;
             let newDayFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
             newDate = new Date(newDayFormat);
-            debugger
+            // debugger
         }
-        debugger
+        // debugger
         if(this.isValidDate(newDate)){
             this.props.updateEndDate(newDate);
             this.setState({
@@ -239,7 +239,7 @@ class EditPromotionDate extends React.Component{
     }
 
     updateByCalendar(newDate){
-        debugger
+        // debugger
         this.setState({
             'year': newDate.getFullYear(),
             'month': newDate.getMonth()+1,
@@ -263,7 +263,7 @@ class EditPromotionDate extends React.Component{
             const minute = this.state.minute;
             const am = this.state.am
             // console.log('endDate: '+this.state.endDate);
-            debugger
+            // debugger
             return (
                 <div className= 'project-promotion-container'>
                                                         {

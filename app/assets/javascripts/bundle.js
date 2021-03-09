@@ -472,6 +472,38 @@ var fetchCategory = function fetchCategory(categoryId) {
 
 /***/ }),
 
+/***/ "./frontend/actions/item_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/item_actions.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_ALL_ITEMS": () => /* binding */ RECEIVE_ALL_ITEMS,
+/* harmony export */   "receiveAllItems": () => /* binding */ receiveAllItems,
+/* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems
+/* harmony export */ });
+/* harmony import */ var _util_item_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/item_util */ "./frontend/util/item_util.js");
+
+var RECEIVE_ALL_ITEMS = 'RECEIVE_ALL_ITEMS';
+var receiveAllItems = function receiveAllItems(items) {
+  return {
+    type: RECEIVE_ALL_ITEMS,
+    items: items
+  };
+};
+var fetchAllItems = function fetchAllItems(project_id) {
+  return function (dispatch) {
+    return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.fetchAllItems(project_id).then(function (items) {
+      return dispatch(receiveAllItems(items));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/location_actions.js":
 /*!**********************************************!*\
   !*** ./frontend/actions/location_actions.js ***!
@@ -2636,6 +2668,130 @@ var Pages = /*#__PURE__*/function (_React$Component2) {
 
 /***/ }),
 
+/***/ "./frontend/components/project_forms/EditItemContainer.js":
+/*!****************************************************************!*\
+  !*** ./frontend/components/project_forms/EditItemContainer.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _EditItemForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditItemForm */ "./frontend/components/project_forms/EditItemForm.jsx");
+
+
+
+var msp = function msp(state) {
+  debugger;
+  return {};
+};
+
+var mdp = function mdp(dispatch) {
+  return {};
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditItemForm__WEBPACK_IMPORTED_MODULE_1__.default));
+
+/***/ }),
+
+/***/ "./frontend/components/project_forms/EditItemForm.jsx":
+/*!************************************************************!*\
+  !*** ./frontend/components/project_forms/EditItemForm.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var EditItemForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditItemForm, _React$Component);
+
+  var _super = _createSuper(EditItemForm);
+
+  function EditItemForm(props) {
+    _classCallCheck(this, EditItemForm);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(EditItemForm, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var item = this.props.item;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "top-button-conatiner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-cancel",
+        onClick: function onClick() {
+          return _this.props.cancel();
+        }
+      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit",
+        id: "edit-next-button-top"
+      }, "Save Item")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-item-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "item-name"
+      }, item.item_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "edit-item-blcok"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "edit-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "edit-item-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Include in "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "reward-number"
+      }, item.rewards, " rewards")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "edit-item-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-item-right-button"
+      }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-item-right-button"
+      }, "Delete"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Hi"));
+    }
+  }]);
+
+  return EditItemForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditItemForm);
+
+/***/ }),
+
 /***/ "./frontend/components/project_forms/EditProjectContainer.js":
 /*!*******************************************************************!*\
   !*** ./frontend/components/project_forms/EditProjectContainer.js ***!
@@ -2716,7 +2872,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _EditTitleImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditTitleImage */ "./frontend/components/project_forms/EditTitleImage.jsx");
 /* harmony import */ var _EditPromotionDate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditPromotionDate */ "./frontend/components/project_forms/EditPromotionDate.jsx");
-/* harmony import */ var _Rewards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Rewards */ "./frontend/components/project_forms/Rewards.jsx");
+/* harmony import */ var _RewardsContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RewardsContainer */ "./frontend/components/project_forms/RewardsContainer.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3489,7 +3645,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "start-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Add your rewards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-items-section"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Rewards__WEBPACK_IMPORTED_MODULE_3__.default, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_RewardsContainer__WEBPACK_IMPORTED_MODULE_3__.default, {
           updateDisabledBottomButton: this.updateDisabledBottomButton,
           disabledBottomButton: this.state.disabledBottomButton,
           project: this.props.project
@@ -3595,7 +3751,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   _createClass(EditPromotionDate, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
+      // debugger
       var date = this.props.startDate;
       var endDate = this.props.endDate;
       var limitDate = new Date(date.getTime());
@@ -3723,8 +3879,8 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         if (key === 'day') {
           var DA = e.currentTarget.value < 10 ? "0".concat(e.currentTarget.value) : e.currentTarget.value;
           var newDayFormat = "".concat(year, "-").concat(MM, "-").concat(DA, "T").concat(HR, ":").concat(MT, ":").concat(SD);
-          var newDayDate = new Date(newDayFormat);
-          debugger;
+          var newDayDate = new Date(newDayFormat); // debugger
+
           var _isValid2 = false;
 
           if (newDayDate) {
@@ -3733,21 +3889,19 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           }
 
           console.log('newDayDate: ' + newDayDate);
-          console.log('endDate: ' + endDate);
-          debugger;
+          console.log('endDate: ' + endDate); // debugger
 
           if (_isValid2) {
-            debugger;
+            // debugger
             return _this2.setState({
               'endDate': _isValid2 ? newDayDate : endDate,
               'day': e.currentTarget.value,
               'error': _isValid2 ? '' : "Date must be in the next 60 days!"
             });
           } else {
-            debugger;
-
+            // debugger
             if (isNaN(newDayDate.getDate())) {
-              debugger;
+              // debugger    
               return _this2.setState({
                 'day': e.currentTarget.value,
                 'error': "Invalid Date!"
@@ -3762,16 +3916,16 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         }
 
         if (key === 'hour') {
-          debugger;
+          // debugger
           var ho = e.currentTarget.value;
-          if (!_this2.state.am) ho = parseInt(ho) + 12;
-          debugger;
+          if (!_this2.state.am) ho = parseInt(ho) + 12; // debugger
+
           var HO = ho < 10 ? "0".concat(ho) : ho;
           var newFormat = "".concat(year, "-").concat(MM, "-").concat(DD, "T").concat(HO, ":").concat(MT, ":").concat(SD);
           var newHourDate = new Date(newFormat);
           console.log('newDate: ' + newHourDate);
-          console.log('endDate: ' + endDate);
-          debugger;
+          console.log('endDate: ' + endDate); // debugger
+
           return _this2.setState(_defineProperty({}, key, newHourDate.getHours()));
         }
 
@@ -3796,10 +3950,10 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         if (e.currentTarget.value < 1 || e.currentTarget.value > 60) {
           var _this3$setState2;
 
-          debugger;
+          // debugger
           var value = e.currentTarget.value < 1 ? 1 : 60; // newDate.setDate(newDate.getDate() + value);
+          // debugger
 
-          debugger;
           return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, value), _defineProperty(_this3$setState2, 'limitMessage', 'Days for funding duration must be between 1 and 60.'), _this3$setState2));
         }
 
@@ -3818,13 +3972,11 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handlePublish",
     value: function handlePublish() {
-      var newDate = new Date(this.state.startDate.getTime());
-      debugger;
+      var newDate = new Date(this.state.startDate.getTime()); // debugger
 
       if (this.props.selectTab) {
-        debugger;
-        newDate.setDate(newDate.getDate() + parseInt(this.state.days));
-        debugger;
+        // debugger
+        newDate.setDate(newDate.getDate() + parseInt(this.state.days)); // debugger
       } else {
         var _this$state = this.state,
             startDate = _this$state.startDate,
@@ -3841,11 +3993,9 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         var MT = minute < 10 ? "0".concat(minute) : minute;
         var SD = second < 10 ? "0".concat(second) : second;
         var newDayFormat = "".concat(year, "-").concat(MM, "-").concat(DD, "T").concat(HR, ":").concat(MT, ":").concat(SD);
-        newDate = new Date(newDayFormat);
-        debugger;
-      }
+        newDate = new Date(newDayFormat); // debugger
+      } // debugger
 
-      debugger;
 
       if (this.isValidDate(newDate)) {
         this.props.updateEndDate(newDate);
@@ -3861,7 +4011,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateByCalendar",
     value: function updateByCalendar(newDate) {
-      debugger;
+      // debugger
       this.setState({
         'year': newDate.getFullYear(),
         'month': newDate.getMonth() + 1,
@@ -3888,8 +4038,8 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         var hour = this.state.hour > 11 ? this.state.hour % 12 : this.state.hour;
         var minute = this.state.minute;
         var am = this.state.am; // console.log('endDate: '+this.state.endDate);
+        // debugger
 
-        debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-promotion-container"
         }, this.props.selectTab ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4121,10 +4271,10 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
   _createClass(EditTitleImage, [{
     key: "handleFile",
     value: function handleFile(e) {
-      debugger;
+      // debugger
       var file = e.currentTarget.files[0];
-      var fileReader = new FileReader();
-      debugger; // fileReader.onloadend = () =>{
+      var fileReader = new FileReader(); // debugger
+      // fileReader.onloadend = () =>{
       //     // let photofiles = this.state.photo;
       //     // photofiles[0] = file;
       //     // let photoURLArray = this.state.photoURL;
@@ -4284,12 +4434,11 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
 
       if (this.emptyInput()) {
-        debugger;
+        // debugger
         this.setState({
           'valid': false
         });
-      } else {
-        debugger;
+      } else {// debugger
       }
     }
   }, {
@@ -4301,7 +4450,7 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
         onSubmit: this.handleSumbit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "new-item-form"
-      }, this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "top-button-conatiner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
@@ -4312,7 +4461,7 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
       }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         id: "edit-next-button-top"
-      }, "Save item")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Add a new item"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "Save item")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Add a new item"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-new-item-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-new-item-section-word"
@@ -4709,8 +4858,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
     value: function update(key) {
       var _this2 = this;
 
-      var name = "valid" + "".concat(key);
-      debugger;
+      var name = "valid" + "".concat(key); // debugger
+
       return function (e) {
         var _this2$setState;
 
@@ -4737,7 +4886,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      debugger;
+      // debugger
       e.preventDefault();
       var validMonth = this.state.validmonth;
       var validYear = this.state.validyear;
@@ -4756,7 +4905,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       }
 
       if (this.state.year === '') {
-        debugger;
+        // debugger
         validYear = false;
         yearError = 'Year is required';
       }
@@ -4772,15 +4921,14 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       }
 
       if (this.state.amount < 1 || this.state.amount > 13000) {
-        debugger;
+        // debugger
         validAmount = false;
         amountError = 'Enter a value between $1 and $13,000.';
-      }
+      } // debugger
 
-      debugger;
 
       if (validMonth === false || validYear === false || validTitle === false || validDescription === false || validAmount === false) {
-        debugger;
+        // debugger
         this.setState({
           'validmonth': validMonth,
           'validyear': validYear,
@@ -4792,12 +4940,10 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           'titleErrorMessage': titleError,
           'descriptionErrorMessage': descriptionError,
           'amountErrorMessage': amountError
-        });
-        debugger;
+        }); // debugger
       } else {
         var Format = "".concat(this.state.year, "-").concat(this.state.month, "-'01'T'10':'00':'00'");
-        var date = new Date(Format);
-        debugger;
+        var date = new Date(Format); // debugger
       } // if()
 
     }
@@ -4814,14 +4960,14 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       var currentTime = new Date();
       var currentYear = currentTime.getFullYear();
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      var month = months[parseInt(this.state.month) - 1];
-      debugger;
+      var month = months[parseInt(this.state.month) - 1]; // debugger
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "add-reward-form"
-      }, this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "top-button-conatiner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
@@ -4832,7 +4978,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         id: "edit-next-button-top"
-      }, "Save reward")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "Save reward")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-container"
@@ -5420,7 +5566,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
+  // debugger
   return {
     user: state.entities.users[state.session.id],
     project: state.entities.projects[ownprops.match.params.projectId]
@@ -5456,6 +5602,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewRewardFormContainer */ "./frontend/components/project_forms/NewRewardFormContainer.js");
 /* harmony import */ var _NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NewItemFormContainer */ "./frontend/components/project_forms/NewItemFormContainer.js");
+/* harmony import */ var _EditItemContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditItemContainer */ "./frontend/components/project_forms/EditItemContainer.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5482,6 +5629,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Headers = /*#__PURE__*/function (_React$Component) {
   _inherits(Headers, _React$Component);
 
@@ -5498,7 +5646,7 @@ var Headers = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      debugger;
+      // debugger
       var selected = this.props.selected;
       var headers = this.props.tabs.map(function (tab, index) {
         var title = tab.title;
@@ -5542,19 +5690,25 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
 
     _this2 = _super2.call(this, props);
     _this2.state = {
-      tab: 0 // showRewardForm: false,
+      tab: 0,
+      showEditItem: false // showRewardForm: false,
       // showItemForm: false,
       // updateDisabledBottomButton: this.props.disabledBottomButton,
 
     };
     _this2.updatetab = _this2.updatetab.bind(_assertThisInitialized(_this2));
     _this2.showNewRewardForm = _this2.showNewRewardForm.bind(_assertThisInitialized(_this2)); // this.cancel = this.cancel.bind(this);
+    // debugger
 
-    debugger;
     return _this2;
   }
 
   _createClass(Rewards, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveAllItems(this.props.project.id);
+    }
+  }, {
     key: "updatetab",
     value: function updatetab(num) {
       if (!this.props.disabledBottomButton) {
@@ -5566,59 +5720,88 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "disable",
     value: function disable() {
-      debugger;
+      // debugger
       return this.props.disabledBottomButton ? '-disable' : '';
+    }
+  }, {
+    key: "editItem",
+    value: function editItem() {
+      if (this.disable() !== '-disable') {
+        this.setState({
+          'showEditItem': true
+        });
+      }
     }
   }, {
     key: "showNewRewardForm",
     value: function showNewRewardForm() {
       if (!this.props.disabledBottomButton) {
-        debugger;
+        // debugger
         this.props.updateDisabledBottomButton();
       }
     } // cancel(){
-    //     debugger
+    // debugger
     //     this.props.updateDisabledBottomButton();
     // }
 
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var tabs = [{
         title: 'Rewards'
       }, {
         title: 'Items'
       }];
       var disable = this.disable();
+      var items = this.props.items;
       debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "rewards-items-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
-        selected: this.state.tab,
-        tabs: tabs,
-        updatetab: this.updatetab,
-        disable: disable
-      }), this.state.tab === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "rewards-form-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "new-reward-button-section".concat(this.disable())
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add rewards to your project, which can be physical items or special experiences"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "button",
-        onClick: this.showNewRewardForm
-      }, "+ New reward")), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__.default, {
-        cancel: this.props.updateDisabledBottomButton,
-        disabledBottomButton: this.props.disabledBottomButton
-      }) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "rewards-form-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "new-reward-button-section".concat(this.disable())
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you\u2019re offering."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "button",
-        onClick: this.showNewRewardForm
-      }, "+ New item")), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__.default, {
-        cancel: this.props.updateDisabledBottomButton,
-        disabledBottomButton: this.props.disabledBottomButton
-      }) : null));
+
+      if (!items) {
+        debugger;
+        return null;
+      } else {
+        var arrayItems = Object.values(items).map(function (item, index) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditItemContainer__WEBPACK_IMPORTED_MODULE_3__.default, {
+            key: index,
+            item: item,
+            cancel: _this3.props.updateDisabledBottomButton,
+            disabledBottomButton: _this3.props.disabledBottomButton
+          });
+        });
+        debugger;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "rewards-items-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
+          selected: this.state.tab,
+          tabs: tabs,
+          updatetab: this.updatetab,
+          disable: disable
+        }), this.state.tab === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "rewards-form-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "new-reward-button-section".concat(this.disable())
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add rewards to your project, which can be physical items or special experiences"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "button",
+          onClick: this.showNewRewardForm
+        }, "+ New reward")), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__.default, {
+          cancel: this.props.updateDisabledBottomButton,
+          disabledBottomButton: this.props.disabledBottomButton
+        }) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "rewards-form-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "new-reward-button-section".concat(this.disable())
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you\u2019re offering."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "button",
+          onClick: this.showNewRewardForm
+        }, "+ New item")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "items-array".concat(this.disable())
+        }, arrayItems), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__.default, {
+          cancel: this.props.updateDisabledBottomButton,
+          disabledBottomButton: this.props.disabledBottomButton
+        }) : null));
+      }
     }
   }]);
 
@@ -5626,6 +5809,43 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Rewards);
+
+/***/ }),
+
+/***/ "./frontend/components/project_forms/RewardsContainer.js":
+/*!***************************************************************!*\
+  !*** ./frontend/components/project_forms/RewardsContainer.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
+/* harmony import */ var _Rewards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Rewards */ "./frontend/components/project_forms/Rewards.jsx");
+
+
+
+
+var msp = function msp(state) {
+  debugger;
+  return {
+    items: state.entities.items
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    receiveAllItems: function receiveAllItems(project_id) {
+      return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_1__.fetchAllItems)(project_id));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_Rewards__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -6232,21 +6452,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _projects_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projects_reducer */ "./frontend/reducers/projects_reducer.js");
 /* harmony import */ var _locations_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./locations_reducer */ "./frontend/reducers/locations_reducer.js");
 /* harmony import */ var _categories_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./categories_reducer */ "./frontend/reducers/categories_reducer.js");
+/* harmony import */ var _items_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./items_reducer */ "./frontend/reducers/items_reducer.js");
 
 
 
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
   projects: _projects_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
   locations: _locations_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
-  categories: _categories_reducer__WEBPACK_IMPORTED_MODULE_3__.default
+  categories: _categories_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
+  items: _items_reducer__WEBPACK_IMPORTED_MODULE_4__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -6271,6 +6494,39 @@ var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
   session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (errorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/items_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/items_reducer.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/item_actions */ "./frontend/actions/item_actions.js");
+
+
+var itemsReducer = function itemsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  // debugger
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_ITEMS:
+      return action.items;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (itemsReducer);
 
 /***/ }),
 
@@ -6653,6 +6909,29 @@ var fetchCategory = function fetchCategory(categoryId) {
   return $.ajax({
     method: 'GET',
     url: "api/categories/".concat(categoryId)
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/item_util.js":
+/*!************************************!*\
+  !*** ./frontend/util/item_util.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems
+/* harmony export */ });
+var fetchAllItems = function fetchAllItems(project_id) {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/items',
+    data: {
+      project_id: project_id
+    }
   });
 };
 

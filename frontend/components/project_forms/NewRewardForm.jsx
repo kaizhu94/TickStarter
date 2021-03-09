@@ -24,7 +24,7 @@ class NewRewrdForm extends React.Component{
     }
     update(key){
         const name = `valid` + `${key}`;
-        debugger
+        // debugger
         return e => this.setState({[key]: e.currentTarget.value,
                                [name]: true }
             );
@@ -46,7 +46,7 @@ class NewRewrdForm extends React.Component{
     }
 
     handleSubmit(e){
-        debugger
+        // debugger
         e.preventDefault();
         let validMonth = this.state.validmonth;
         let validYear= this.state.validyear;
@@ -64,7 +64,7 @@ class NewRewrdForm extends React.Component{
             monthError = 'Month is required';
         }
         if(this.state.year === ''){
-            debugger
+            // debugger
             validYear = false;
             yearError = 'Year is required';
         }
@@ -77,13 +77,13 @@ class NewRewrdForm extends React.Component{
             descriptionError = 'Please enter a description or at least one item.'
         }
         if(this.state.amount < 1 || this.state.amount > 13000){
-            debugger
+            // debugger
             validAmount = false;
             amountError='Enter a value between $1 and $13,000.'
         }
-        debugger
+        // debugger
         if(validMonth===false || validYear===false || validTitle===false || validDescription===false || validAmount===false){
-            debugger
+            // debugger
             this.setState({
                 'validmonth': validMonth,
                 'validyear': validYear,
@@ -96,12 +96,12 @@ class NewRewrdForm extends React.Component{
                 'descriptionErrorMessage': descriptionError,
                 'amountErrorMessage': amountError
             })
-            debugger
+            // debugger
         }else{
             let Format = `${this.state.year}-${this.state.month}-'01'T'10':'00':'00'`;
             let date = new Date(Format);
 
-            debugger
+            // debugger
         }
         // if()
     }
@@ -114,18 +114,22 @@ class NewRewrdForm extends React.Component{
         const months = [ "January", "February", "March", "April", "May", "June", 
                "July", "August", "September", "October", "November", "December" ];
         const month = months[parseInt(this.state.month)-1]
-        debugger
+        // debugger
         return(
             <div className = 'reward-form-section'>
                 <form onSubmit={this.handleSubmit} className='add-reward-form'>
-                    {
+                    <div className='top-button-conatiner'>
+                        <button type = 'button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
+                        <button type = 'submit' id = 'edit-next-button-top'>Save reward</button>
+                    </div>
+                    {/* {
                         this.props.disabledBottomButton ? (
                                 <div className='top-button-conatiner'>
                                     <button type = 'button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
                                     <button type = 'submit' id = 'edit-next-button-top'>Save reward</button>
                                 </div>
                             ):(null)
-                    }
+                    } */}
                     <div className = 'reward-form-block'>
                         <div className = 'reward-form-container'>
                             <div className='form-section'>

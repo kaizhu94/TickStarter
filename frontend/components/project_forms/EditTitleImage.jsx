@@ -14,10 +14,10 @@ class EditTitleImage extends React.Component{
         this.deleteFile = this.deleteFile.bind(this);
     }
     handleFile(e){
-        debugger
+        // debugger
         const file = e.currentTarget.files[0];
         const fileReader =new FileReader();
-        debugger
+        // debugger
         // fileReader.onloadend = () =>{
         //     // let photofiles = this.state.photo;
         //     // photofiles[0] = file;

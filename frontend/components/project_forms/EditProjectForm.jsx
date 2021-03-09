@@ -2,7 +2,7 @@ import React from 'react';
 
 import EditTitleImage from './EditTitleImage'
 import EditPromotionDate from './EditPromotionDate'
-import Rewards from './Rewards'
+import Rewards from './RewardsContainer'
 
 class Headers extends React.Component {
     render() {
