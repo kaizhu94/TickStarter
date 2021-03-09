@@ -779,6 +779,11 @@ button, select{
     font-size: 17px;
 }
 
+#edit-cancel:hover{
+    cursor: pointer;
+    border-color: black;
+}
+
 .top-button-conatiner{
     position: fixed;
     top: 11px;

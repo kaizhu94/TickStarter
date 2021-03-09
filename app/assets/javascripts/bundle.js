@@ -4944,7 +4944,18 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         id: "rewrd-error-message"
       }, this.state.monthErrorMessage), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "rewrd-error-message"
-      }, this.state.yearErrorMessage))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, this.state.yearErrorMessage))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reward-save-bot"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit",
+        id: "edit-next-button-top"
+      }, "Save reward"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-cancel",
+        onClick: function onClick() {
+          return _this4.props.cancel();
+        }
+      }, "Cancel")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Reward preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Get a glimpse of how this reward will look on your project page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-block"
@@ -4960,7 +4971,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         className: "preview-date-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date"
-      }, this.state.month === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Month") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, month), this.state.year === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Year") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, this.state.year))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null)))));
+      }, this.state.month === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Month") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, month), this.state.year === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Year") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, this.state.year)))))));
     }
   }]);
 

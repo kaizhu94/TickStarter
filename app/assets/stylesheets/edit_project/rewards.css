@@ -148,6 +148,10 @@
     font-size: 20px;
     margin-bottom: 30px;
 }
+.preview-block h3{
+    font-size: 16px;
+    margin-right: 5px;
+}
 .preview-block p{
     line-height: 25px;
     margin-bottom: 10px;
@@ -156,7 +160,8 @@
     color: rgb(165 165 165);
 }
 #preview-title{
-    color: rgb(43, 43, 43)
+    color: rgb(43, 43, 43);
+    max-width: 380px;
 }
 .preview-date{
     display: flex;
@@ -339,6 +344,48 @@
 }
 #reward-description:hover, #month-invalid:hover, #year-invalid:hover{
     border-color: limegreen;
+}
+
+.reward-save-bot{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reward-save-bot #edit-next-button-top{
+    width: 100%;
+    height: 50px;
+    border: none;
+    color: white;
+    background-color: #028858;
+    font-size: 17px;
+    margin-left: 0px;
+    margin-top: 25px;
+}
+.reward-save-bot  #edit-next-button-top:hover{
+    cursor: pointer;
+    background-color: #016b46;
+}
+
+.reward-save-bot  #edit-next-button-top:focus{
+    outline: none;
+    background-color: #016b46;
+}
+
+.reward-save-bot #edit-cancel{
+    margin-top: 15px;
+    padding-left: 0px;
+    border: none;
+    color: rgb(82, 82, 82);
+    background-color: white;
+    width: 226px;
+    font-size: 17px;
+    text-decoration: underline;
+}
+
+.reward-save-bot #edit-cancel:hover{
+    color:rgb(44, 44, 44);
+    cursor: pointer;
 }
 
 

@@ -206,6 +206,10 @@ class NewRewrdForm extends React.Component{
                                     <p id='rewrd-error-message'>{this.state.yearErrorMessage}</p>
                                 </div>
                             </div>
+                            <div className='reward-save-bot'>
+                                    <button type = 'submit' id = 'edit-next-button-top'>Save reward</button>
+                                    <button type = 'button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
+                            </div>
                         </div>
                     </div>
                     <div className = 'preview'>
@@ -234,23 +238,21 @@ class NewRewrdForm extends React.Component{
                                 <div className='preview-date'>
                                     {
                                         this.state.month ===''? (
-                                            <h2>Month</h2>
+                                            <h3>Month</h3>
                                         ): (
-                                            <h2>{month}</h2>
+                                            <h3>{month}</h3>
                                         )
                                     }
                                     {
                                         this.state.year ===''? (
-                                            <h2>Year</h2>
+                                            <h3>Year</h3>
                                         ): (
-                                            <h2>{this.state.year}</h2>
+                                            <h3>{this.state.year}</h3>
                                         )
                                     }
                                 </div>
                             </div>
-                            <div>
-
-                            </div>
+                            
                         </div>
                     </div>
                 </form>
