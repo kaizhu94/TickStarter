@@ -141,9 +141,12 @@ class EditProjectForm extends React.Component{
     }
 
     updateDisabledBottomButton(){
-        // debugger
+        debugger
+        // e.preventDefault();
         const value = !this.state.disabledBottomButton;
+        const isModified = !this.state.isModified;
         this.setState({'disabledBottomButton': value,
+                        'isModified': isModified
             }
             );
     }
@@ -158,7 +161,7 @@ class EditProjectForm extends React.Component{
     }
 
     selectTab(num) {
-        // debugger
+        debugger
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -176,6 +179,11 @@ class EditProjectForm extends React.Component{
                     this.props.openModal('unsave-tab-3');
             }
         }
+        this.setState({
+            'isModified': false,
+            'disabledBottomButton': false
+
+        })
         if(!modalOpen) this.props.history.push(`/projects/${this.state.id}/edit/${num}`);
     }
 
@@ -449,7 +457,7 @@ class EditProjectForm extends React.Component{
 
             const locations = Object.values(this.props.locations);
 
-            // debugger
+            debugger
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}
@@ -611,6 +619,29 @@ class EditProjectForm extends React.Component{
                                             </div>
                                         </div>
                                     </div>
+                                    <div className={`edit-button-block${this.hidebutton()}`}>
+                                        <div className = 'edit-button-container'> 
+                                            {
+                                                this.state.isModified? (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                                <div></div>
+                                                                <button type='submit' id='edit-save-button'>Save</button>
+                                                        </div>
+                                                    )
+                                                ): (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                            {this.previousButton()}
+                                                            <div>
+                                                                {this.nextButton()} 
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                )
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             ):(null)
                         }
@@ -647,26 +678,33 @@ class EditProjectForm extends React.Component{
                                             </div>
                                         </div>
                                     </div>
+                                    <div className={`edit-button-block${this.hidebutton()}`}>
+                                        <div className = 'edit-button-container'> 
+                                            {
+                                                this.state.isModified? (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                                <div></div>
+                                                                <button type='submit' id='edit-save-button'>Save</button>
+                                                        </div>
+                                                    )
+                                                ): (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                            {this.previousButton()}
+                                                            <div>
+                                                                {this.nextButton()} 
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                )
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             ) : (null)
                         }
-                        {
-                            this.state.tab == 2? (
-                                <div>
-                                     <div className='add-rewards-section'>
-                                        <div className= 'start-block'>
-                                            <h1>Add your rewards</h1>
-                                            <p>Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life.</p>
-                                        </div>
-                                    </div>
-                                    <div className='rewards-items-section'>
-                                        <Rewards updateDisabledBottomButton = {this.updateDisabledBottomButton}
-                                                disabledBottomButton = {this.state.disabledBottomButton}
-                                                project= {this.props.project}/>
-                                    </div>
-                                </div>
-                            ):(null) 
-                        }
+                       
                         {
                             this.state.tab == 3? ( 
                                 <div>
@@ -718,31 +756,76 @@ class EditProjectForm extends React.Component{
                                             </div>
                                         </div>
                                     </div>
+                                    <div className={`edit-button-block${this.hidebutton()}`}>
+                                        <div className = 'edit-button-container'> 
+                                            {
+                                                this.state.isModified? (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                                <div></div>
+                                                                <button type='submit' id='edit-save-button'>Save</button>
+                                                        </div>
+                                                    )
+                                                ): (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                            {this.previousButton()}
+                                                            <div>
+                                                                {this.nextButton()} 
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                )
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             ) : (null)
+                        }
+                      
+                    </form>
+                        {
+                            this.state.tab == 2? (
+                                <div>
+                                     <div className='add-rewards-section'>
+                                        <div className= 'start-block'>
+                                            <h1>Add your rewards</h1>
+                                            <p>Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life.</p>
+                                        </div>
+                                    </div>
+                                    <div className='rewards-items-section'>
+                                        <Rewards updateDisabledBottomButton = {this.updateDisabledBottomButton}
+                                                disabledBottomButton = {this.state.disabledBottomButton}
+                                                project= {this.props.project}/>
+                                    </div>
+                                </div>
+                            ):(null) 
                         }
                         <div className={`edit-button-block${this.hidebutton()}`}>
                             <div className = 'edit-button-container'> 
                                 {
-                                    this.state.isModified? (
-                                        <div className = 'edit-buttons'>
-                                                <div></div>
-                                                <button type='submit' id='edit-save-button'>Save</button>
-                                        </div>
+                                    this.state.isModified? ( null
+                                        // this.state.disabledBottomButton?(null):(
+                                        //     <div className = 'edit-buttons'>
+                                        //             <div></div>
+                                        //             <button type='submit' id='edit-save-button'>Save</button>
+                                        //     </div>
+                                        // )
                                     ): (
-                                        this.state.disabledBottomButton?(null):(
-                                            <div className = 'edit-buttons'>
-                                                {this.previousButton()}
-                                                <div>
-                                                    {this.nextButton()} 
+                                        this.state.tab === 2? (
+                                            this.state.disabledBottomButton?(null):(
+                                                <div className = 'edit-buttons'>
+                                                    {this.previousButton()}
+                                                    <div>
+                                                        {this.nextButton()} 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
+                                            )
+                                        ):(null)
                                     )
                                 }
                             </div>
                         </div>
-                    </form>
                 </div>
             )
         }

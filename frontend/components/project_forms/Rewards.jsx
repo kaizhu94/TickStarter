@@ -52,6 +52,7 @@ class Rewards extends React.Component{
         }
         this.updatetab = this.updatetab.bind(this);
         this.showNewRewardForm = this.showNewRewardForm.bind(this);
+        // this.cancel = this.cancel.bind(this);
         debugger
     }
     updatetab(num){
@@ -67,28 +68,36 @@ class Rewards extends React.Component{
     }
     showNewRewardForm(){
         if(!this.props.disabledBottomButton){
+            debugger
             this.props.updateDisabledBottomButton();
         }
     }
-    cancel(){
-        debugger
-        this.props.updateDisabledBottomButton();
-    }
+    // cancel(){
+    //     debugger
+    //     this.props.updateDisabledBottomButton();
+    // }
     render(){
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
         const disable = this.disable();
         debugger
         return (
             <div className='rewards-items-container'>
-                {
+                {/* {
                     this.props.disabledBottomButton ? (
-                        <div className='top-button-conatiner'>
-                            <button id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
-                            <button id = 'edit-next-button-top'>Save item</button>
-                        </div>
+                        this.state.tab === 0 ? (
+                            <div className='top-button-conatiner'>
+                                <button id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
+                                <button id = 'edit-next-button-top'>Save reward</button>
+                            </div>
+                        ):(
+                            <div className='top-button-conatiner'>
+                                <button id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
+                                <button id = 'edit-next-button-top'>Save item</button>
+                            </div>
+                        )
                     ) : (null
                     )
-                }
+                } */}
                 <Headers selected = {this.state.tab}
                         tabs = {tabs}
                         updatetab = {this.updatetab}
@@ -99,23 +108,25 @@ class Rewards extends React.Component{
                         <div className='rewards-form-block'>
                             <div className={`new-reward-button-section${this.disable()}`}>
                                 <p>Add rewards to your project, which can be physical items or special experiences</p>
-                                <button onClick={this.showNewRewardForm}>+ New reward</button>   
+                                <button type='button' onClick={this.showNewRewardForm}>+ New reward</button>   
                             </div>
                             {
                                 this.props.disabledBottomButton ? (
-                                    <NewRewardFormContainer />
+                                    <NewRewardFormContainer cancel={this.props.updateDisabledBottomButton}
+                                                            disabledBottomButton = {this.props.disabledBottomButton}/>
                                 ):(null)
                             }
                         </div>
                     ): (
                         <div className='rewards-form-block'>
-                            <div className='new-reward-button-section'>
+                            <div className={`new-reward-button-section${this.disable()}`}>
                                 <p>We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you’re offering.</p>
-                                <button onClick={this.showNewRewardForm}>+ New item</button>
+                                <button type='button' onClick={this.showNewRewardForm}>+ New item</button>
                             </div>
                             {
                                 this.props.disabledBottomButton ? (
-                                    <NewItemFormContainer />
+                                    <NewItemFormContainer cancel={this.props.updateDisabledBottomButton}
+                                    disabledBottomButton = {this.props.disabledBottomButton}/>
                                 ):(null)
                             }
                         </div>

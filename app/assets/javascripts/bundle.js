@@ -2915,10 +2915,13 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "updateDisabledBottomButton",
     value: function updateDisabledBottomButton() {
-      // debugger
+      debugger; // e.preventDefault();
+
       var value = !this.state.disabledBottomButton;
+      var isModified = !this.state.isModified;
       this.setState({
-        'disabledBottomButton': value
+        'disabledBottomButton': value,
+        'isModified': isModified
       });
     }
   }, {
@@ -2934,7 +2937,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "selectTab",
     value: function selectTab(num) {
-      // debugger
+      debugger;
       var modalOpen = false;
 
       if (this.state.isModified && num !== this.state.tab) {
@@ -2958,6 +2961,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         }
       }
 
+      this.setState({
+        'isModified': false,
+        'disabledBottomButton': false
+      });
       if (!modalOpen) this.props.history.push("/projects/".concat(this.state.id, "/edit/").concat(num));
     }
   }, {
@@ -3235,8 +3242,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
         }
 
-        var locations = Object.values(this.props.locations); // debugger
-
+        var locations = Object.values(this.props.locations);
+        debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
@@ -3376,7 +3383,18 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           startDate: this.state.launch_date,
           endDate: this.state.end_date,
           updateEndDate: this.updateEndDate
-        }))))) : null, this.state.tab == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-button-block".concat(this.hidebutton())
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-button-container"
+        }, this.state.isModified ? this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-buttons"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "submit",
+          id: "edit-save-button"
+        }, "Save")) : this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-buttons"
+        }, this.previousButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.nextButton()))))) : null, this.state.tab == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-block"
@@ -3402,17 +3420,18 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           id: "founding-input",
           value: this.state.goal,
           onChange: this.updateFunding('goal')
-        }))))))) : null, this.state.tab == 2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "add-rewards-section"
+        })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-button-block".concat(this.hidebutton())
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "start-block"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Add your rewards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "rewards-items-section"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Rewards__WEBPACK_IMPORTED_MODULE_3__.default, {
-          updateDisabledBottomButton: this.updateDisabledBottomButton,
-          disabledBottomButton: this.state.disabledBottomButton,
-          project: this.props.project
-        }))) : null, this.state.tab == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-button-container"
+        }, this.state.isModified ? this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-buttons"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "submit",
+          id: "edit-save-button"
+        }, "Save")) : this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-buttons"
+        }, this.previousButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.nextButton()))))) : null, this.state.tab == 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-from-basic"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "start-block"
@@ -3453,18 +3472,40 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           onChange: this.update('risks'),
           value: this.state.risks,
           placeholder: "Common risks and challenges you may wangt to address"
-        })))))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-block".concat(this.hidebutton())
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-container"
-        }, this.state.isModified ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, this.state.isModified ? this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-buttons"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           type: "submit",
           id: "edit-save-button"
         }, "Save")) : this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-buttons"
-        }, this.previousButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.nextButton()))))));
+        }, this.previousButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.nextButton()))))) : null), this.state.tab == 2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "add-rewards-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "start-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Add your rewards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "rewards-items-section"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Rewards__WEBPACK_IMPORTED_MODULE_3__.default, {
+          updateDisabledBottomButton: this.updateDisabledBottomButton,
+          disabledBottomButton: this.state.disabledBottomButton,
+          project: this.props.project
+        }))) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-button-block".concat(this.hidebutton())
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-button-container"
+        }, this.state.isModified ? null // this.state.disabledBottomButton?(null):(
+        //     <div className = 'edit-buttons'>
+        //             <div></div>
+        //             <button type='submit' id='edit-save-button'>Save</button>
+        //     </div>
+        // )
+        : this.state.tab === 2 ? this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "edit-buttons"
+        }, this.previousButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.nextButton())) : null)));
       }
     }
   }]);
@@ -4178,6 +4219,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -4205,16 +4248,85 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(NewItemForm);
 
-  function NewItemForm() {
+  function NewItemForm(props) {
+    var _this;
+
     _classCallCheck(this, NewItemForm);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      item_name: '',
+      valid: true
+    };
+    _this.handleSumbit = _this.handleSumbit.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(NewItemForm, [{
+    key: "update",
+    value: function update(key) {
+      var _this2 = this;
+
+      return function (e) {
+        var _this2$setState;
+
+        return _this2.setState((_this2$setState = {}, _defineProperty(_this2$setState, key, e.currentTarget.value), _defineProperty(_this2$setState, 'valid', true), _this2$setState));
+      };
+    }
+  }, {
+    key: "emptyInput",
+    value: function emptyInput() {
+      return this.state.item_name === '';
+    }
+  }, {
+    key: "handleSumbit",
+    value: function handleSumbit(e) {
+      e.preventDefault();
+
+      if (this.emptyInput()) {
+        debugger;
+        this.setState({
+          'valid': false
+        });
+      } else {
+        debugger;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Hey");
+      var _this3 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSumbit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "new-item-form"
+      }, this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "top-button-conatiner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-cancel",
+        onClick: function onClick() {
+          return _this3.props.cancel();
+        }
+      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit",
+        id: "edit-next-button-top"
+      }, "Save item")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Add a new item"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "add-new-item-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "add-new-item-section-word"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Item title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add a title that quickly and clearly describes this item")), this.state.valid ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        id: "item-name-input",
+        onChange: this.update('item_name'),
+        placeholder: "Digital photo"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        id: "item-name-input-invalid",
+        onChange: this.update('item_name'),
+        placeholder: "Digital photo"
+      }))));
     }
   }]);
 
@@ -4536,6 +4648,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -4563,31 +4677,290 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(NewRewrdForm);
 
-  function NewRewrdForm() {
+  function NewRewrdForm(props) {
+    var _this;
+
     _classCallCheck(this, NewRewrdForm);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.state = {
+      month: '',
+      year: '',
+      title: '',
+      description: '',
+      amount: 1,
+      validmonth: true,
+      validyear: true,
+      validtitle: true,
+      validdescription: true,
+      validamount: true,
+      monthErrorMessage: '',
+      yearErrorMessage: '',
+      titleErrorMessage: '',
+      descriptionErrorMessage: '',
+      amountErrorMessage: ''
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(NewRewrdForm, [{
+    key: "update",
+    value: function update(key) {
+      var _this2 = this;
+
+      var name = "valid" + "".concat(key);
+      debugger;
+      return function (e) {
+        var _this2$setState;
+
+        return _this2.setState((_this2$setState = {}, _defineProperty(_this2$setState, key, e.currentTarget.value), _defineProperty(_this2$setState, name, true), _this2$setState));
+      };
+    }
+  }, {
+    key: "updateAmount",
+    value: function updateAmount(key) {
+      var _this3 = this;
+
+      return function (e) {
+        var value = e.currentTarget.value;
+
+        if (value === '') {
+          return _this3.setState(_defineProperty({}, key, value));
+        } else {
+          var _this3$setState2;
+
+          return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, Math.round(value)), _defineProperty(_this3$setState2, 'validamount', true), _this3$setState2));
+        }
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      debugger;
+      e.preventDefault();
+      var validMonth = this.state.validmonth;
+      var validYear = this.state.validyear;
+      var validTitle = this.state.validtitle;
+      var validDescription = this.state.validdescription;
+      var validAmount = this.state.validamount;
+      var monthError = '';
+      var yearError = '';
+      var titleError = '';
+      var descriptionError = '';
+      var amountError = '';
+
+      if (this.state.month === '') {
+        validMonth = false;
+        monthError = 'Month is required';
+      }
+
+      if (this.state.year === '') {
+        debugger;
+        validYear = false;
+        yearError = 'Year is required';
+      }
+
+      if (this.state.title === '') {
+        validTitle = false;
+        titleError = 'Title is required';
+      }
+
+      if (this.state.description === '') {
+        validDescription = false;
+        descriptionError = 'Please enter a description or at least one item.';
+      }
+
+      if (this.state.amount < 1 || this.state.amount > 13000) {
+        debugger;
+        validAmount = false;
+        amountError = 'Enter a value between $1 and $13,000.';
+      }
+
+      debugger;
+
+      if (validMonth === false || validYear === false || validTitle === false || validDescription === false || validAmount === false) {
+        debugger;
+        this.setState({
+          'validmonth': validMonth,
+          'validyear': validYear,
+          'validtitle': validTitle,
+          'validdescription': validDescription,
+          'validamount': validAmount,
+          'monthErrorMessage': monthError,
+          'yearErrorMessage': yearError,
+          'titleErrorMessage': titleError,
+          'descriptionErrorMessage': descriptionError,
+          'amountErrorMessage': amountError
+        });
+        debugger;
+      } else {
+        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-'01'T'10':'00':'00'");
+        var date = new Date(Format);
+        debugger;
+      } // if()
+
+    }
+  }, {
+    key: "isValid",
+    value: function isValid(key) {
+      return this.state[key] ? '' : '-invalid';
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
+      var currentTime = new Date();
+      var currentYear = currentTime.getFullYear();
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      var month = months[parseInt(this.state.month) - 1];
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-section"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit,
+        className: "add-reward-form"
+      }, this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "top-button-conatiner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-cancel",
+        onClick: function onClick() {
+          return _this4.props.cancel();
+        }
+      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit",
+        id: "edit-next-button-top"
+      }, "Save reward")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add a reward"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Offer tangible or intangible things that bring backers closer to your project.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add a reward"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Offer tangible or intangible things that bring backers closer to your project.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Title"), this.state.validtitle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         id: "reward-title",
-        placeholder: "single-limit-edition"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        placeholder: "single-limit-edition",
+        onChange: this.update('title')
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        id: "reward-title-invalid",
+        placeholder: "single-limit-edition",
+        onChange: this.update('title')
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.titleErrorMessage)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "amount-box"
+      }, this.state.validamount ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "amount-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        id: "amount-label"
+      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number",
+        id: "reward-amount",
+        value: this.state.amount,
+        onChange: this.updateAmount('amount')
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "amount-section-invalid"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        id: "amount-label"
+      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number",
+        id: "reward-amount",
+        value: this.state.amount,
+        onChange: this.updateAmount('amount')
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.amountErrorMessage))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Description"), this.state.validdescription ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         id: "reward-description",
-        placeholder: "Get an early copy - hot off the presses!"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        placeholder: "Get an early copy - hot off the presses!",
+        onChange: this.update('description')
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        id: "reward-description-invalid",
+        placeholder: "Get an early copy - hot off the presses!",
+        onChange: this.update('description')
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.descriptionErrorMessage)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Estimated delivery"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        id: "month".concat(this.isValid('validmonth')),
+        value: this.state.month,
+        onChange: this.update('month')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: true
+      }, " Month "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "01"
+      }, " January "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "02"
+      }, " Febuary "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "03"
+      }, " March "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "04"
+      }, " April "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "05"
+      }, " May "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "06"
+      }, " June "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "07"
+      }, " July "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "08"
+      }, " August "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "09"
+      }, " Septemper "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "10"
+      }, " October "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "11"
+      }, " November "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "12"
+      }, " December ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        id: "year".concat(this.isValid('validyear')),
+        value: this.state.year,
+        onChange: this.update('year')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: true
+      }, " Year "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear
+      }, " ", currentYear, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear + 1
+      }, " ", currentYear + 1, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear + 2
+      }, " ", currentYear + 2, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear + 3
+      }, " ", currentYear + 3, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear + 4
+      }, " ", currentYear + 4, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "date-errors"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.monthErrorMessage), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.yearErrorMessage))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Reward preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Get a glimpse of how this reward will look on your project page.")));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Reward preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Get a glimpse of how this reward will look on your project page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Pledge CA$ ", this.state.amount, " or more"), this.state.title === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "empty-preview"
+      }, "Signed limited-edition") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "preview-title"
+      }, this.state.title), this.state.description === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "empty-preview"
+      }, "Get an early copy \u2014 hot off the presses!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "preview-title"
+      }, this.state.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview-date-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview-date"
+      }, this.state.month === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Month") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, month), this.state.year === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Year") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, this.state.year))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null)))));
     }
   }]);
 
@@ -5164,7 +5537,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
 
     };
     _this2.updatetab = _this2.updatetab.bind(_assertThisInitialized(_this2));
-    _this2.showNewRewardForm = _this2.showNewRewardForm.bind(_assertThisInitialized(_this2));
+    _this2.showNewRewardForm = _this2.showNewRewardForm.bind(_assertThisInitialized(_this2)); // this.cancel = this.cancel.bind(this);
+
     debugger;
     return _this2;
   }
@@ -5188,20 +5562,17 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     key: "showNewRewardForm",
     value: function showNewRewardForm() {
       if (!this.props.disabledBottomButton) {
+        debugger;
         this.props.updateDisabledBottomButton();
       }
-    }
-  }, {
-    key: "cancel",
-    value: function cancel() {
-      debugger;
-      this.props.updateDisabledBottomButton();
-    }
+    } // cancel(){
+    //     debugger
+    //     this.props.updateDisabledBottomButton();
+    // }
+
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
       var tabs = [{
         title: 'Rewards'
       }, {
@@ -5211,16 +5582,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "rewards-items-container"
-      }, this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "top-button-conatiner"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        id: "edit-cancel",
-        onClick: function onClick() {
-          return _this3.cancel();
-        }
-      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        id: "edit-next-button-top"
-      }, "Save item")) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
         selected: this.state.tab,
         tabs: tabs,
         updatetab: this.updatetab,
@@ -5230,14 +5592,22 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "new-reward-button-section".concat(this.disable())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add rewards to your project, which can be physical items or special experiences"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
         onClick: this.showNewRewardForm
-      }, "+ New reward")), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__.default, null) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "+ New reward")), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__.default, {
+        cancel: this.props.updateDisabledBottomButton,
+        disabledBottomButton: this.props.disabledBottomButton
+      }) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "rewards-form-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "new-reward-button-section"
+        className: "new-reward-button-section".concat(this.disable())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you\u2019re offering."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
         onClick: this.showNewRewardForm
-      }, "+ New item")), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__.default, null) : null));
+      }, "+ New item")), this.props.disabledBottomButton ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__.default, {
+        cancel: this.props.updateDisabledBottomButton,
+        disabledBottomButton: this.props.disabledBottomButton
+      }) : null));
     }
   }]);
 

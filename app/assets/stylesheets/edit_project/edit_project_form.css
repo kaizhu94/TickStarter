@@ -416,6 +416,9 @@
 .funding-div:hover #founding-input{
     border-color: limegreen;
 }
+#founding-input:focus{
+    outline: none;
+}
 
 .project-promotion-container{
     width: 100%;
@@ -688,7 +691,7 @@ button, select{
 
 .edit-button-block{
     width: 100%;
-    border-bottom: 1px solid gainsboro;
+    /* border-bottom: 1px solid gainsboro; */
     padding-top: 60px;
     padding-bottom: 70px;
     font-family: 'Open Sans', sans-serif;
@@ -787,4 +790,5 @@ button, select{
     cursor: pointer;
     background-color: #016b46;
 }
+
 
