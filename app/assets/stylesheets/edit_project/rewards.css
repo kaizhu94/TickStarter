@@ -1,0 +1,443 @@
+.rewards-items-section{
+    width: 100%;
+}
+.add-reward-form{
+    display: flex;
+    flex-direction: row;
+}
+.rewards-items-container{
+    width: 80%;
+    margin: auto;
+    font-family: 'Open Sans', sans-serif;
+}
+.rewards-items-header{
+    display: flex;
+    border-bottom: 1px solid gainsboro;
+}
+
+.rewards-items-header ul{
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    justify-content: space-between;
+    margin-right: 50px;
+    font-weight: 500;
+    font-size: 22px;
+    color: rgb(90, 90, 90)
+    /* cursor: pointer; */
+}
+
+.reward-header-element-active, .reward-header-element-active-disable{
+    color: black;
+    border-bottom: 5px solid limegreen;
+    padding-bottom: 12px;
+}
+.reward-header-element:hover{
+    border-bottom: 5px solid rgb(148, 148, 148);
+    padding-bottom: 12px
+}
+.reward-header-element-active:hover, .reward-header-element:hover{
+    cursor: pointer;
+}
+.reward-header-element-active-disable:hover, .reward-header-element-disable:hover{
+    cursor: not-allowed;
+}
+#rewards-icon{
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 16px;
+} 
+.reward-header-element-active #rewards-icon, .reward-header-element-active-disable #rewards-icon{
+    border-radius: 25px;
+    color: white;
+    background-color: limegreen;
+}
+
+.rewards-form-block{
+    width: 100%;
+}
+.new-reward-button-section, .new-reward-button-section-disable{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.new-reward-button-section>p, .new-reward-button-section-disable>p{
+    width: 60%;
+    line-height: 25px;
+    font-size: 16px;
+    color: rgb(92, 92, 92);
+}
+.new-reward-button-section>button, .new-reward-button-section-disable>button{
+    width: 175px;
+    height: 50px;
+    border: none;
+    background-color: #464646;
+    color: white;
+    font-size: 18px;
+}
+.new-reward-button-section button:hover{
+    background-color: black;
+    cursor: pointer;
+}
+
+.new-reward-button-section-disable{
+    opacity: 0.7;
+}
+.new-reward-button-section-disable>button:hover{
+    cursor: not-allowed;
+}
+
+.reward-form-section{
+    display: flex;
+    flex-direction: row;
+}
+
+.reward-form-block{
+    width: 65%;
+}
+
+.reward-form-container{
+    display: flex;
+    flex-direction: column;
+}
+.reward-form-container .form-section{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid gainsboro;
+}
+.preview{
+    width: 35%;
+    padding-top: 150px;
+    padding-left: 80px;
+}
+
+.reward-form-container div h3, .preview h3{
+    color:rgb(44, 44, 44);
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.reward-form-container div p, .preview p{
+    color: rgb(167 166 166);
+    font-size: 17px;
+    line-height: 25px;
+}
+.preview-date-block{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.preview-date-block h5{
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+.preview-block{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(250, 235, 237);
+    border: 1px solid gainsboro;
+    padding: 24px;
+    margin-top: 20px;
+}
+.preview-block h2{
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.preview-block h3{
+    font-size: 16px;
+    margin-right: 5px;
+}
+.preview-block p{
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+#empty-preview{
+    color: rgb(165 165 165);
+}
+#preview-title{
+    color: rgb(43, 43, 43);
+    max-width: 380px;
+}
+.preview-date{
+    display: flex;
+    flex-direction: row;
+}
+.preview-date h2{
+    margin-right: 5px;
+}
+
+.reward-form-container .form-section input{
+    width: 98%;
+    height: 40px;
+    border-color: gainsboro;
+    padding-left: 10px;
+}
+.reward-form-container div input:focus{
+    outline: none;
+    border-color: limegreen;
+}
+.reward-form-container div input:hover{
+    border-color: limegreen;
+}
+
+#reward-description{
+    height: 98px;
+    width: 97%;
+    padding: 10px;
+    border-color: gainsboro;
+}
+
+#month{
+    padding: 10px;
+    height: 40px;
+    width: 50%;
+    margin-right: 5px;
+    border-color: gainsboro;
+}
+#year{
+    padding: 10px;
+    height: 40px;
+    width: 49%;
+    border-color: gainsboro;
+}
+
+#reward-description:focus, #month:focus, #year:focus{
+    outline: none;
+    border-color: limegreen;
+}
+#reward-description:hover, #month:hover, #year:hover{
+    border-color: limegreen;
+}
+.amount-box{
+    display: flex;
+    flex-direction: column;
+}
+.amount-section{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid gainsboro;
+}
+.amount-section #amount-label{
+    width: 20%;
+    display: flex;
+    border: 1px solid gainsboro;
+    border: none;
+    padding-bottom: 0px;
+    justify-content: center;
+    align-items: center;
+}
+.amount-section #reward-amount{
+    width: 80%;
+    padding-left: 15px;
+    border: none;
+    border-left: 1px solid gainsboro;
+    font-size: 18px;
+}
+.amount-section:hover{
+    border-color: limegreen;
+}
+.amount-section:focus{
+    border-color: limegreen;
+}
+
+.amount-section:hover #reward-amount{
+    border-color: limegreen;
+}
+.amount-section:focus #reward-amount{
+    border-color: limegreen;
+}
+
+#rewrd-error-message{
+    color: red;
+    margin-top: 5px;
+}
+.date-errors{
+    display: flex;
+}
+.date-errors p{
+    height: 40px;
+    width: 50%;
+    margin-right: 5px;
+    border-color: gainsboro;
+}
+
+#reward-title-invalid{
+    border-color: red;
+}
+
+#reward-title-invalid:hover, #reward-title-invalid:focus{
+    border-color:limegreen;
+}
+
+.amount-section-invalid{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
+}
+.amount-section-invalid #amount-label{
+    width: 20%;
+    display: flex;
+    border: 1px solid red;
+    border: none;
+    padding-bottom: 0px;
+    justify-content: center;
+    align-items: center;
+}
+.amount-section-invalid #reward-amount{
+    width: 80%;
+    padding-left: 15px;
+    border: none;
+    border-left: 1px solid red;
+    font-size: 18px;
+}
+.amount-section-invalid:hover{
+    border-color: limegreen;
+}
+.amount-section-invalid:focus{
+    border-color: limegreen;
+}
+
+.amount-section-invalid:hover #reward-amount{
+    border-color: limegreen;
+}
+.amount-section-invalid:focus #reward-amount{
+    border-color: limegreen;
+}
+
+
+#reward-description-invalid{
+    height: 98px;
+    width: 97%;
+    padding: 10px;
+    border-color: red;
+}
+#reward-description-invalid:hover{
+    border-color: limegreen;
+}
+#reward-description-invalid:focus{
+    outline: none;
+    border-color: limegreen;
+}
+
+#month-invalid{
+    padding: 10px;
+    height: 40px;
+    width: 50%;
+    margin-right: 5px;
+    border-color: red;
+}
+#year-invalid{
+    padding: 10px;
+    height: 40px;
+    width: 49%;
+    border-color: red;
+}
+
+#reward-description:focus, #month-invalid:focus, #year-invalid:focus{
+    outline: none;
+    border-color: limegreen;
+}
+#reward-description:hover, #month-invalid:hover, #year-invalid:hover{
+    border-color: limegreen;
+}
+
+.reward-save-bot{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reward-save-bot #edit-next-button-top{
+    width: 100%;
+    height: 50px;
+    border: none;
+    color: white;
+    background-color: #028858;
+    font-size: 17px;
+    margin-left: 0px;
+    margin-top: 25px;
+}
+.reward-save-bot  #edit-next-button-top:hover{
+    cursor: pointer;
+    background-color: #016b46;
+}
+
+.reward-save-bot  #edit-next-button-top:focus{
+    outline: none;
+    background-color: #016b46;
+}
+
+.reward-save-bot #edit-cancel{
+    margin-top: 15px;
+    padding-left: 0px;
+    border: none;
+    color: rgb(82, 82, 82);
+    background-color: white;
+    width: 226px;
+    font-size: 17px;
+    text-decoration: underline;
+}
+
+.reward-save-bot #edit-cancel:hover{
+    color:rgb(44, 44, 44);
+    cursor: pointer;
+}
+
+
+.new-item-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-item-form h1{
+    font-size: 20px;
+    margin-bottom: 80px;
+}
+
+.add-new-item-section{
+    display: flex;
+    flex-direction: row;
+}
+
+.add-new-item-section-word{
+    width: 45%;
+}
+.add-new-item-section-word h3{
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+.add-new-item-section-word p{
+    font-size: 16px;
+    color:rgb(97, 96, 96);
+}
+.add-new-item-section input{
+    width: 55%;
+    padding: 10px;
+}
+.add-new-item-section #item-name-input:hover{
+    border-color: limegreen;
+}
+.add-new-item-section #item-name-input:focus{
+    outline: none;
+    border-color: limegreen;
+}
+.add-new-item-section #item-name-input-invalid:hover{
+    border-color: limegreen;
+}
+.add-new-item-section #item-name-input-invalid:focus{
+    outline: none;
+    border-color: limegreen;
+}
+.add-new-item-section #item-name-input-invalid{
+    border-color: rgb(245, 67, 67);
+}
+
+.add-new-item-section #item-name-input{
+    border-color: gainsboro;
+}

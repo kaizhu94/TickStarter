@@ -1,6 +1,8 @@
 import React from 'react';
 
 import EditTitleImage from './EditTitleImage'
+import EditPromotionDate from './EditPromotionDate'
+import Rewards from './Rewards'
 
 class Headers extends React.Component {
     render() {
@@ -57,9 +59,16 @@ class EditProjectForm extends React.Component{
             category_name: '',
             selectedMainCat: '',
             location_id: '',
-            photo: [],
-            photoURL: [],
-            showDropdown: false,
+            goal: null,
+            risks: null,
+            description: null,
+            selectedDateTab: false,
+
+            launch_date: null,
+            end_date: null,
+            published: null,
+
+            disabledBottomButton: false,
         }
         this.selectTab = this.selectTab.bind(this);
         this.previous = this.previous.bind(this);
@@ -67,6 +76,11 @@ class EditProjectForm extends React.Component{
         this.previousButton = this.previousButton.bind(this);
         this.nextButton = this.nextButton.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.updateTitleImage = this.updateTitleImage.bind(this);
+        this.updateDateTab =this.updateDateTab.bind(this);
+        this.updateEndDate = this.updateEndDate.bind(this);
+        this.redirectToBoard = this.redirectToBoard.bind(this);
+        this.updateDisabledBottomButton = this.updateDisabledBottomButton.bind(this);
         // this.handleFile = this.handleFile.bind(this);
         // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
@@ -75,13 +89,14 @@ class EditProjectForm extends React.Component{
                 this.setState({
                     tab: parseInt(this.props.match.params.id),
                     isModified: false,
-                    'id': this.props.project.id,
-                    'project_name': this.props.project.project_name,
-                    'subtitle': this.props.project.subtitle,
-                    'selectedMainCat': this.props.project.category_id,
-                    'category_id': this.props.project.category_id,
-                    'category_name': this.props.project.category_name,
-                    'location_id': this.props.project.location_id,
+                    // 'id': this.props.project.id,
+                    // 'project_name': this.props.project.project_name,
+                    // 'subtitle': this.props.project.subtitle,
+                    // 'selectedMainCat': this.props.project.category_id,
+                    // 'category_id': this.props.project.category_id,
+                    // 'category_name': this.props.project.category_name,
+                    // 'location_id': this.props.project.location_id,
+                    
                 })
         }
     }
@@ -91,6 +106,9 @@ class EditProjectForm extends React.Component{
         this.props.receiveLocations();
         this.props.receiveProject(this.props.match.params.projectId)
             .then(() => {
+                let startDate = new Date();
+                let endDate = new Date(startDate.getTime());
+                endDate.setDate(startDate.getDate() + 30);
                 this.setState({
                                 'id': this.props.project.id,
                                 'project_name': this.props.project.project_name,
@@ -99,35 +117,51 @@ class EditProjectForm extends React.Component{
                                 'category_id': this.props.project.category_id,
                                 'category_name': this.props.project.category_name,
                                 'location_id': this.props.project.location_id,
-                                'photoURL': this.props.project.photoUrl
+                                'goal': this.props.project.goal,
+                                'risks': this.props.project.risks,
+                                'description': this.props.project.description,
+                                'launch_date': this.props.project.launch_date ? new Date(this.props.project.launch_date) : startDate,
+                                'end_date': this.props.project.end_date ? new Date(this.props.project.end_date): endDate,
+                                'published': this.props.project.published
                             })
             })
     }
 
-    // handleFile(e){
-    //     // debugger
-    //     const file = e.currentTarget.files[0];
-    //     const fileReader =new FileReader();
-    //     // debugger
-    //     fileReader.onloadend = () =>{
-    //         let photofiles = this.state.photo;
-    //         photofiles[0] = file;
-    //         let photoURLArray = this.state.photoURL;
-    //         photoURLArray[0] = fileReader.result
-    //         this.setState({ photo: photofiles,
-    //                         photoURL: photoURLArray,
-    //                         'isModified': true
-    //                     })
-    //     }
-    //     // debugger
-    //     if(file) fileReader.readAsDataURL(file);
-    // }
-    // triggerOrNot(){
-    //     let newState = !this.state.showDropdown;
-    //     this.setState({showDropdown: newState})
-    // }
+    updateTitleImage(file){
+        this.setState({ title_image: file
+                    })
+    }
+
+    updateDateTab(){
+        // debugger
+        const value = !this.state.selectedDateTab;
+        this.setState({'selectedDateTab': value,
+            'isModified': true}
+            );
+    }
+
+    updateDisabledBottomButton(){
+        debugger
+        // e.preventDefault();
+        const value = !this.state.disabledBottomButton;
+        const isModified = !this.state.isModified;
+        this.setState({'disabledBottomButton': value,
+                        'isModified': isModified
+            }
+            );
+    }
+
+    updateEndDate(endDate){
+        // debugger
+        this.setState({
+            'end_date': endDate,
+            'published': true,
+            'isModified': true
+        })
+    }
 
     selectTab(num) {
+        debugger
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -145,6 +179,11 @@ class EditProjectForm extends React.Component{
                     this.props.openModal('unsave-tab-3');
             }
         }
+        this.setState({
+            'isModified': false,
+            'disabledBottomButton': false
+
+        })
         if(!modalOpen) this.props.history.push(`/projects/${this.state.id}/edit/${num}`);
     }
 
@@ -179,24 +218,59 @@ class EditProjectForm extends React.Component{
         }
     }
 
+    updateFunding(key){
+        return e =>{  
+            // debugger
+        // const regexp = /^[0-9\b]+(.[0-9\b]+)$/;
+        let value = e.currentTarget.value; 
+        // if(regexp.test(value)){
+        //     debugger
+        // }
+        // debugger
+        if(value === ''){
+            return this.setState({[key]:  value,
+                'maincatId':'',
+                'isModified': true}
+                );
+        }else{
+            return this.setState({[key]:  Math.round(value),
+            'maincatId':'',
+            'isModified': true}
+            );
+        }
+    }
+    }
+
     handleSubmit(e){
         e.preventDefault();
         // debugger
-        // let formData = new FormData();
-        // // debugger
+        let formData = new FormData();
+        // debugger
         // formData.append('project[id]', this.state.id);
-        // formData.append('project[project_name]', this.state.project_name);
-        // formData.append('project[subtitle]', this.state.subtitle);
-        // formData.append('project[category_id]', this.state.category_id);
-        // formData.append('project[location_id]', this.state.location_id);
+        formData.append('project[project_name]', this.state.project_name);
+        formData.append('project[subtitle]', this.state.subtitle);
+        formData.append('project[category_id]', this.state.category_id);
+        formData.append('project[location_id]', this.state.location_id);
+        formData.append('project[goal]', this.state.goal);
+        formData.append('project[risks]', this.state.risks);
+        formData.append('project[description]', this.state.description);
+        if(this.state.published){
+            formData.append('project[published]', this.state.published);
+            formData.append('project[launch_date]', this.state.launch_date);
+            formData.append('project[end_date]', this.state.end_date);
+        }
         // // debugger
         // if (this.state.photo.length !== 0) {
         //     formData.append('project[photo]', this.state.photo);
         //   }
-        this.props.updateProject(this.state);
+        this.props.updateProject(this.state.id, formData);
         this.setState({
             'isModified': false
         })
+    }
+
+    hidebutton(){
+        return (this.state.openNewItem || this.state.openNewReward) ? '-hide': '';
     }
 
     previous(){
@@ -260,7 +334,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: funding <i className="fas fa-chevron-right"></i>
+                    Next step: funding <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
                 </button>
                 </div>
             )
@@ -273,7 +347,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: rewards <i className="fas fa-chevron-right"></i>
+                    Next step: rewards <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
                 </button>
                 </div>
             )
@@ -286,7 +360,7 @@ class EditProjectForm extends React.Component{
                     type ='button'
                     onClick={this.next}
                 >
-                    Next step: background <i className="fas fa-chevron-right"></i>
+                    Next step: background <span id='add-space-in-button'><i className="fas fa-chevron-right"></i></span>
                 </button>
                 </div>
             )
@@ -295,7 +369,65 @@ class EditProjectForm extends React.Component{
         }
     }
 
+    redirectToBoard(){
+        // debugger
+        this.props.history.push(`/projects/${this.state.id}/dashboard`);
+    }
+
+    nextButtonOnTop(){
+        if(this.state.tab === 0){
+            return(
+                <div className='top-button-conatiner'>
+                    <button
+                    id='edit-next-button-top'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: funding 
+                </button>
+                </div>
+            )
+        }else if(this.state.tab === 1){
+            return(
+                <div className='top-button-conatiner'>
+                    <button
+                    id='edit-next-button-top'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: rewards 
+                </button>
+                </div>
+            )
+        }else if(this.state.tab === 2){
+            return(
+                <div className='top-button-conatiner'>
+                    <button
+                    id='edit-next-button-top'
+                    type ='button'
+                    onClick={this.next}
+                >
+                    Next step: background 
+                </button>
+                </div>
+            )
+        }else{
+            return(
+                <div className='top-button-conatiner'>
+                    <button
+                    id='edit-next-button-top'
+                    type ='button'
+                    onClick={this.redirectToBoard}
+                >
+                    Exit
+                    </button>
+                </div>
+            )
+        }
+    }
+
     render(){
+        // debugger
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project || !this.props.maincategories || !this.props.subcategories
@@ -325,13 +457,30 @@ class EditProjectForm extends React.Component{
 
             const locations = Object.values(this.props.locations);
 
-            // debugger
+            debugger
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}
                              tabs={tabs}
                              selectTab={this.selectTab}/>
                     <form onSubmit={this.handleSubmit} id = 'edit-form'>
+                        {
+                            this.state.disabledBottomButton ? (
+                                null
+                            ) : (
+                                this.state.isModified? (
+                                    <div className='top-button-conatiner'>
+                                            <button type='submit' id='edit-next-button-top'>Save</button>
+                                    </div>
+                                ): (
+                                    <div className = 'edit-buttons'>
+                                        <div>
+                                            {this.nextButtonOnTop()} 
+                                        </div>
+                                    </div>
+                                )
+                            )
+                        }
                         {
                             this.state.tab == 0? (
                                 <div>
@@ -443,7 +592,10 @@ class EditProjectForm extends React.Component{
                                             </div>
                                             <div className ='right'>
                                                         <EditTitleImage project = {this.props.project} 
-                                                                        updateProject = {this.props.updateProjectImage}/>
+                                                                        updateProject = {this.props.updateProjectImage}
+                                                                        updateTitleImage = {this.updateTitleImage}
+                                                                        openModal = {this.props.openModal}
+                                                                        />
                                             </div>
                                         </div>
                                     </div>
@@ -452,13 +604,42 @@ class EditProjectForm extends React.Component{
                                             <div className = 'left'>
                                                 <h2>Project release</h2>
                                                 <div className='p-block'>
-                                                    <p>Publish your project, and set a time limit for your promotion. After the project is published, you will not be able to change this time limit.</p>
+                                                    <p>Publish your project, and set a time limit for your promotion. After set a date, use publish button to update the date then save the form.</p>
                                                     <p>The final day of your campaign is as crucial as the first. Avoid overlapping either of them with a holiday. We believe Thursday is the best day to end your campaign, between the late morning and early afternoon.</p>
                                                 </div>
                                             </div>
                                             <div className ='right'>
-
+                                                <EditPromotionDate 
+                                                    selectTab={this.state.selectedDateTab}
+                                                    updateDateTab={this.updateDateTab}
+                                                    startDate = {this.state.launch_date}
+                                                    endDate = {this.state.end_date} 
+                                                    updateEndDate={this.updateEndDate}
+                                                    />
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div className={`edit-button-block${this.hidebutton()}`}>
+                                        <div className = 'edit-button-container'> 
+                                            {
+                                                this.state.isModified? (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                                <div></div>
+                                                                <button type='submit' id='edit-save-button'>Save</button>
+                                                        </div>
+                                                    )
+                                                ): (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                            {this.previousButton()}
+                                                            <div>
+                                                                {this.nextButton()} 
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -467,8 +648,14 @@ class EditProjectForm extends React.Component{
                         {
                             this.state.tab == 1? ( 
                                 <div>
+                                    <div className='start-from-basic'>
+                                        <div className= 'start-block'>
+                                            <h1>Set your funding goal</h1>
+                                            <p>Let people know how much support you need.</p>
+                                        </div>
+                                    </div>
                                      <div className= 'project-funding-section'>
-                                        <div className= 'project-category-container'>
+                                        <div className= 'project-funding-container'>
                                             <div className = 'left'>
                                                 <h2>Fundraising goal</h2>
                                                 <div className='p-block'>
@@ -478,13 +665,46 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
-
+                                                <div className='funding-right-container'>
+                                                    <label>Goal amount</label>
+                                                    <div className='funding-div'>
+                                                        <label id='dollar-sign'>US$</label>
+                                                        <input type='number' placeholder='500'
+                                                         id='founding-input' 
+                                                         value={this.state.goal}
+                                                         onChange={this.updateFunding('goal')}/> 
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div className={`edit-button-block${this.hidebutton()}`}>
+                                        <div className = 'edit-button-container'> 
+                                            {
+                                                this.state.isModified? (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                                <div></div>
+                                                                <button type='submit' id='edit-save-button'>Save</button>
+                                                        </div>
+                                                    )
+                                                ): (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                            {this.previousButton()}
+                                                            <div>
+                                                                {this.nextButton()} 
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             ) : (null)
                         }
+                       
                         {
                             this.state.tab == 3? ( 
                                 <div>
@@ -496,7 +716,22 @@ class EditProjectForm extends React.Component{
                                     </div>
                                     <div className= 'project-description-section'>
                                         <div className= 'project-category-container'>
-                                            
+                                            <div className = 'left'>
+                                                    <h2>Project description</h2>
+                                                    <div className='p-block'>
+                                                        <p>Describe what you're raising funds to do, why you care about it, how you plan to make it happen, and who you are. Your description should tell backers everything they need to know.</p>
+                                                    </div>
+                                            </div>
+                                            <div className ='right'>
+                                                <div className='location-right-container'>
+                                                    <textarea  id="risks" cols="30" rows="10" 
+                                                    onChange={this.update('description')}
+                                                    value = {this.state.description}
+                                                    >
+
+                                                    </textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className= 'project-risk-section'>
@@ -509,33 +744,88 @@ class EditProjectForm extends React.Component{
                                                 </div>
                                             </div>
                                             <div className ='right'>
+                                                <div className='location-right-container'>
+                                                    <textarea  id="risks" cols="30" rows="10" 
+                                                    onChange={this.update('risks')}
+                                                    value = {this.state.risks}
+                                                    placeholder = "Common risks and challenges you may wangt to address"
+                                                    >
 
+                                                    </textarea>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div className={`edit-button-block${this.hidebutton()}`}>
+                                        <div className = 'edit-button-container'> 
+                                            {
+                                                this.state.isModified? (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                                <div></div>
+                                                                <button type='submit' id='edit-save-button'>Save</button>
+                                                        </div>
+                                                    )
+                                                ): (
+                                                    this.state.disabledBottomButton?(null):(
+                                                        <div className = 'edit-buttons'>
+                                                            {this.previousButton()}
+                                                            <div>
+                                                                {this.nextButton()} 
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             ) : (null)
                         }
-                        <div className='edit-button-block'>
+                      
+                    </form>
+                        {
+                            this.state.tab == 2? (
+                                <div>
+                                     <div className='add-rewards-section'>
+                                        <div className= 'start-block'>
+                                            <h1>Add your rewards</h1>
+                                            <p>Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life.</p>
+                                        </div>
+                                    </div>
+                                    <div className='rewards-items-section'>
+                                        <Rewards updateDisabledBottomButton = {this.updateDisabledBottomButton}
+                                                disabledBottomButton = {this.state.disabledBottomButton}
+                                                project= {this.props.project}/>
+                                    </div>
+                                </div>
+                            ):(null) 
+                        }
+                        <div className={`edit-button-block${this.hidebutton()}`}>
                             <div className = 'edit-button-container'> 
                                 {
-                                    this.state.isModified? (
-                                        <div className = 'edit-buttons'>
-                                                <div></div>
-                                                <button type='submit' id='edit-save-button'>Save</button>
-                                        </div>
+                                    this.state.isModified? ( null
+                                        // this.state.disabledBottomButton?(null):(
+                                        //     <div className = 'edit-buttons'>
+                                        //             <div></div>
+                                        //             <button type='submit' id='edit-save-button'>Save</button>
+                                        //     </div>
+                                        // )
                                     ): (
-                                        <div className = 'edit-buttons'>
-                                            {this.previousButton()}
-                                            <div>
-                                                {this.nextButton()} 
-                                            </div>
-                                        </div>
+                                        this.state.tab === 2? (
+                                            this.state.disabledBottomButton?(null):(
+                                                <div className = 'edit-buttons'>
+                                                    {this.previousButton()}
+                                                    <div>
+                                                        {this.nextButton()} 
+                                                    </div>
+                                                </div>
+                                            )
+                                        ):(null)
                                     )
                                 }
                             </div>
                         </div>
-                    </form>
                 </div>
             )
         }

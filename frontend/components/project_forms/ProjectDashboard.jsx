@@ -14,6 +14,10 @@ class ProjectDashboard extends React.Component{
         this.props.deleteProject(this.props.match.params.projectId).then(()=> this.props.history.push('/'));
     }
 
+    redirect(tab){
+        this.props.history.push(`/projects/${this.props.project.id}/edit/${tab}`);
+    }
+
     render(){
         if(!this.props.project){
             return null
@@ -30,19 +34,19 @@ class ProjectDashboard extends React.Component{
                             <h1>Project overview</h1>
                             <div className='editform-links'>
                                 <ul>
-                                    <li>
+                                    <li onClick={() => this.redirect(0)}>
                                         <Link to={`/projects/${project.id}/edit/0`}>Basics</Link>
                                         <p>Name your project, upload an image, and estalish your campaign deatails.</p>  
                                     </li>
-                                    <li>
+                                    <li onClick={() => this.redirect(1)}>
                                         <Link to={`/projects/${project.id}/edit/1`}>Funding</Link>  
                                         <p>Setyour financial goals</p>
                                     </li>
-                                    <li>
+                                    <li onClick={() => this.redirect(2)}>
                                         <Link to={`/projects/${project.id}/edit/2`}>Rewards</Link>  
                                         <p>Set your rewards</p>
                                     </li>
-                                    <li>
+                                    <li onClick={() => this.redirect(3)}>
                                         <Link to={`/projects/${project.id}/edit/3`}>Story</Link>  
                                         <p>Add a detailed project description</p>
                                     </li>
@@ -52,7 +56,7 @@ class ProjectDashboard extends React.Component{
                 </div>
                 <div className='delete-project'>
                     <div className='delete-block'>
-                        <i class="fas fa-trash" onClick={this.handleDelete}> <span>Delete Project</span> </i>
+                        <i className="fas fa-trash" onClick={this.handleDelete}> <span>Delete Project</span> </i>
                     </div>
                 </div>
             </div>

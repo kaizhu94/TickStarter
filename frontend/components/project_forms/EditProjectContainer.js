@@ -22,7 +22,7 @@ const mdp = dispatch=>{
     return ({
         receiveLocations: ()=>dispatch(fetchLocations()),
         receiveCategories: ()=> dispatch(fetchCategories()),
-        updateProject: (project) => dispatch(updateProject(project)),
+        updateProject: (id, project) => dispatch(updateProject(id, project)),
         receiveProject: projectId => dispatch(fetchProject(projectId)),
         updateProjectImage: (id, FormData) => dispatch(updateProjectImage(id, FormData)),
         openModal: (modal) => dispatch(openModal(modal)),

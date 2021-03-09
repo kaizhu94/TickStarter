@@ -1,5 +1,6 @@
 class Api::ProjectsController < ApplicationController
     before_action :ensure_logged_in, only: [:create]
+
     def index
         @projects = Project.all
         render :index
@@ -22,12 +23,30 @@ class Api::ProjectsController < ApplicationController
     def update
         @project = Project.find(params[:id])
         # debugger
-        if @project
-            @project.update(project_params)
+        if @project.title_image.attached? && params[:project][:title_image] == 'delete'
+            # debugger
+            @project.title_image.purge
             render :show
         else
-            render json: @project.errors.full_messages, status: 404
+            # debugger
+            if @project.title_image.attached? && params[:project][:title_image] 
+                # debugger
+                @project.title_image.purge
+            # elsif @project.title_image.attached? && params[:project][:title_image] == 'delete'
+            #     debugger
+            #     @project.title_image.purge
+            end
+            
+            if @project 
+                # debugger
+                @project.update(project_params)
+                # debugger
+                render :show
+            else
+                render json: @project.errors.full_messages, status: 404
+            end
         end
+      
     end
 
     def destroy
@@ -44,6 +63,6 @@ class Api::ProjectsController < ApplicationController
     def project_params
         params.require(:project).permit(:project_name, :title, :subtitle, :description, 
             :risks, :goal, :end_date, :location_id, :launch_date, :published, 
-            :founder_id, :category_id, :photo)
+            :founder_id, :category_id, :title_image)
     end
 end

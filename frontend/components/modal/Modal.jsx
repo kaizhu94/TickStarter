@@ -2,13 +2,20 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {closeModal} from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom'
+import { updateProjectImage } from '../../actions/project_actions'
 
 function Modal( props ){
-    const {modal, closeModal, errors, projectId} = props
+    const {modal, closeModal, errors, projectId, updateProjectImage} = props
     // debugger
     function redirect(projectId, tab){
         props.history.push(`/projects/${projectId}/edit/${tab}`)
     } 
+    function deleteImage(){
+        let formData = new FormData();
+        formData.append('project[title_image]', 'delete');
+        updateProjectImage(projectId, formData)
+            .then(()=> closeModal());
+    }
     if(!modal){
         return null;
     }
@@ -31,6 +38,24 @@ function Modal( props ){
                 </div>
             </div> 
             );
+        case 'delete-file':
+            // debugger
+            return (
+                <div className='modal-background' onClick={closeModal}>
+                    <div className='unsave-modal-continer'>
+                        <div className = 'unsave-upper'>
+                            <h2>Are you sure?</h2>
+                            <p>This action cannot be undone.</p>
+                            <button onClick={()=>deleteImage()}>
+                                Delete Image
+                            </button>
+                        </div>
+                        <div className = 'unsave-lower'>
+                            <p onClick={closeModal}>Close</p>
+                        </div>
+                    </div>
+                </div>
+            )
         case 'unsave-tab-0':
         // debugger
         return (
@@ -122,7 +147,8 @@ const msp =state =>{
 
 const mdp =dispatch =>{
     return {
-        closeModal: ()=>dispatch(closeModal())
+        closeModal: ()=>dispatch(closeModal()),
+        updateProjectImage: (id, FormData) => dispatch(updateProjectImage(id, FormData)),
     }
 }
 

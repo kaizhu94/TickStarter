@@ -153,10 +153,12 @@
 .right-container div input{
     height: 35px;
     padding-left: 15px;
+    border-color: gainsboro;
 }
 .right-container div textarea{
     height: 40px;
     padding: 15px;
+    border-color: gainsboro;
 }
 .right-container div input:hover, .right-container div textarea:hover{
     border-color: green;
@@ -198,6 +200,7 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     padding-left: 15px;
+    border-color: gainsboro;
 }
 
 .category-right-container select:focus{
@@ -230,6 +233,7 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     padding-left: 15px;
+    border-color: gainsboro;
 }
 
 .location-right-container select:focus{
@@ -360,12 +364,300 @@
     line-height: 18px;
     transition-delay: 2s;
 }
+.project-funding-container{
+    width: 90%;
+    margin: auto;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 32px;
+}
+.funding-right-container{
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+.funding-right-container label{
+    padding-bottom: 15px;
+}
+.funding-right-container .funding-div{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid gainsboro;
+} 
+.funding-right-container .funding-div:hover{
+    border-color: limegreen;
+}
+.funding-right-container .funding-div #dollar-sign{
+    width: 20%;
+    display: flex;
+    /* border: 1px solid gainsboro; */
+    padding-bottom: 0px;
+    justify-content: center;
+    padding-top: 10px;
+}
+.funding-right-container .funding-div #founding-input{
+    width: 80%;
+    padding-left: 15px;
+    border: none;
+    border-left: 1px solid gainsboro;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+
+.funding-div:hover #founding-input{
+    border-color: limegreen;
+}
+#founding-input:focus{
+    outline: none;
+}
+
+.project-promotion-container{
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+
+/* .project-promotion-container label{
+    border: 1px solid gainsboro;
+    margin-bottom: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+}
+.project-promotion-container label div{
+    margin-right: 15px;
+}
+
+
+.project-promotion-container label:hover{
+    border-color: limegreen;
+}
+
+.project-promotion-container label:focus{
+    border-color: limegreen;
+}
+#founding-input:focus{
+    outline: none;
+}
+#circle-dot{
+    display: flex;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 20px;
+    width: 15px;
+    height: 15px;
+    box-shadow: 0px 2px 0px 0px #dddddd;
+}
+#selected-dot{
+    color: green;
+    padding-right: 15px;
+} */
+.project-promotion-container{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+.selected-date-container{
+    width: 100%;
+    display: flex;
+    border: 1px solid gainsboro;
+    flex-direction: column;
+}
+.selected-date-container:hover{
+    cursor: pointer;
+    border-color: limegreen;
+}
+.selected-date-block{
+    margin-bottom: 10px;
+}
+.selected-date-container .selected-date-upper{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+}
+
+.selected-date-container .selected-date-lower{
+    width: 100%;
+    height: 240px;
+    border-top: 1px solid gainsboro ;
+}
+
+.selected-date-container .selected-date-lower .selected-date-lower-container{
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.selected-date-lower-container h3{
+    margin-bottom: 10px;
+}
+.selected-date-lower-container #days{
+    height: 35px;
+    padding-left: 15px;
+}
+.selected-date-lower-container #days:hover{
+    cursor: unset;
+    border-color: limegreen;
+}
+.selected-date-lower-container input:focus{
+    outline: none;
+}
+.selected-date-lower-container  .date-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+.date-block .date-block-upper{
+    display: flex;
+    flex-direction: row;
+}
+.date-block .date-block-upper h3{
+    width: 68px;
+}
+.date-block .date-block-lower{
+    display: flex;
+}
+.date-block .date-block-lower input{
+    width: 50px;
+    height: 35px;
+    margin-right: 10px;
+    text-align: center;
+    border-color: gainsboro;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { 
+	-webkit-appearance: none;
+}
+.date-block .date-block-lower select{
+    width: 58px;
+    height: 42px;
+    margin-right: 10px;
+    text-align: center;
+    border-color: gainsboro;
+}
+.date-block .date-block-lower h3{
+    align-self: center;
+    margin-bottom: 0px;
+}
+.date-block .date-block-lower label{
+    width: 42px;
+    height: 42px;
+    border: none;
+    background-color: rgb(238, 237, 237);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.date-block .date-block-lower label:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 2px 1px #dddddd;
+}
+#x-lable{
+    font-size: 20px;
+    font-weight: 700;
+}
+.date-block .date-block-lower label:focus{
+    outline: none;
+}
+
+#circle-dot{
+    display: flex;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 20px;
+    width: 15px;
+    height: 15px;
+    box-shadow: 0px 2px 0px 0px #dddddd;
+    margin-right: 15px;
+}
+#selected-dot{
+    margin-right: 15px;
+    color: green;
+}
 
 .project-release-section{
     width: 100%;
-    height: 300px;
+    height: 400px;
     margin-bottom: 50px;
 }
+.limitMessage{
+    margin-top: 10px;
+    color: limegreen;
+}
+.publishMessage{
+    margin-top: 10px;
+    color: red;
+}
+.date-error{
+    margin-top: 10px;
+    color: red;
+}
+
+.publish-button{
+    width: 100px;
+    height: 35px;
+    border: none;
+    background: gainsboro;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+.publish-button:hover{
+    cursor: pointer;
+    background: rgb(153, 153, 153);
+}
+button, select{
+    outline: none;
+}
+.date-block-lower #date-element-origin{
+    border-color: gainsboro;
+}
+.date-block-lower #date-element-display{
+    border-color: red;
+}
+.date-block-lower #date-element-origin:hover{
+    border-color: limegreen;
+}
+.date-block-lower #date-element-origin:focus{
+    border-color: limegreen;
+}
+.date-block-lower #date-element-display:hover{
+    border-color: limegreen;
+}
+.date-block-lower #date-element-display:focus{
+    border-color: limegreen;
+}
+.date-block-lower select:hover{
+    border-color: limegreen;
+}
+.date-block-lower input:focus{
+    border-color: limegreen;
+}
+
+
+.add-rewards-section{
+    width: 100%;
+    height: 210px;
+}
+
 
 
 .project-description-section{
@@ -381,15 +673,32 @@
     margin-bottom: 50px;
 }
 
+#risks{
+    padding: 15px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    border-color: gainsboro;
+}
+#risks:hover{
+    border-color:  limegreen;
+}
+#risks:focus{
+    border-color:  limegreen;
+    outline: none;
+}
 
 
 
 .edit-button-block{
     width: 100%;
-    border-bottom: 1px solid gainsboro;
-    padding-top: 40px;
+    /* border-bottom: 1px solid gainsboro; */
+    padding-top: 60px;
     padding-bottom: 70px;
     font-family: 'Open Sans', sans-serif;
+}
+
+.edit-button-block-hide{
+    display: none;
 }
 
 .edit-button-container{
@@ -419,6 +728,7 @@
     border: none;
     color: white;
     background-color: #028858;
+    width: 181px;
 }
 
 #edit-next-button:hover{
@@ -438,6 +748,7 @@
     border: none;
     color: white;
     background-color: #028858;
+    width: 181px;
 }
 
 #edit-save-button:hover{
@@ -448,3 +759,41 @@
 #edit-save-button:focus, #edit-pre-button:focus{
     outline: none
 }
+
+#edit-next-button-top{
+    margin-left: 15px;
+    padding: 15px;
+    border: none;
+    color: white;
+    background-color: #028858;
+    width: 226px;
+    font-size: 17px;
+}
+#edit-cancel{
+    margin-left: 15px;
+    padding: 15px;
+    border: 1px solid gainsboro;
+    color:rgb(82, 82, 82);
+    background-color:white;
+    width: 226px;
+    font-size: 17px;
+}
+
+#edit-cancel:hover{
+    cursor: pointer;
+    border-color: black;
+}
+
+.top-button-conatiner{
+    position: fixed;
+    top: 11px;
+    right: 10px;
+    z-index: 20;
+}
+
+.top-button-conatiner #edit-next-button-top:hover{
+    cursor: pointer;
+    background-color: #016b46;
+}
+
+
