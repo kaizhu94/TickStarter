@@ -44,7 +44,10 @@ class EditItemForm extends React.Component{
            this.setState({
                 'showModal': true
             })
-            this.props.openModal('deleteItem')
+        this.props.showModal(this.state.item_name, this.props.item.rewards);
+        // this.setState({
+        //     'showModal': false
+        // });
         }
     }
     showingForm(){
@@ -67,11 +70,12 @@ class EditItemForm extends React.Component{
         debugger
         return (
             <div>
-                {
+                {/* {
                     this.state.showModal? (
-                        <Modal item_name={this.state.item_name}/>
+                        <Modal item_name={this.state.item_name}
+                                rewards={item.rewards}/>
                     ) :(null)
-                }
+                } */}
                 <div className={`show-item${this.showingForm()}`}>
                     <div className={`show-item-section`}>
                         <p id='item-name'>{item.item_name}</p>

@@ -1888,7 +1888,7 @@ function Modal(props) {
         className: "unsave-modal-continer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Delete this item?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.item_name, " is not used in any of your rewards."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete Item")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Delete this item?"), props.rewards === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.item_name, " is not used in any of your rewards."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete Item")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.item_name, " will be deleted from ", props.rewards, " of your rewards. This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete from ", props.rewards, " rewards"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-lower"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
@@ -2849,7 +2849,9 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
         this.setState({
           'showModal': true
         });
-        this.props.openModal('deleteItem');
+        this.props.showModal(this.state.item_name, this.props.item.rewards); // this.setState({
+        //     'showModal': false
+        // });
       }
     }
   }, {
@@ -2877,9 +2879,7 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
 
       var item = this.props.item;
       debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.showModal ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_1__.default, {
-        item_name: this.state.item_name
-      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-item".concat(this.showingForm())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-item-section"
@@ -5780,6 +5780,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewRewardFormContainer */ "./frontend/components/project_forms/NewRewardFormContainer.js");
 /* harmony import */ var _NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NewItemFormContainer */ "./frontend/components/project_forms/NewItemFormContainer.js");
 /* harmony import */ var _EditItemContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditItemContainer */ "./frontend/components/project_forms/EditItemContainer.js");
+/* harmony import */ var _modal_Modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modal/Modal */ "./frontend/components/modal/Modal.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5801,6 +5802,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -5870,13 +5872,16 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       tab: 0,
       showRewardForm: false,
       showItemForm: false,
-      showEditItemForm: false // updateDisabledBottomButton: this.props.disabledBottomButton,
+      showEditItemForm: false,
+      item_name: '',
+      rewards: 0 // updateDisabledBottomButton: this.props.disabledBottomButton,
 
     };
     _this2.updatetab = _this2.updatetab.bind(_assertThisInitialized(_this2));
     _this2.showNewRewardForm = _this2.showNewRewardForm.bind(_assertThisInitialized(_this2));
     _this2.cancel = _this2.cancel.bind(_assertThisInitialized(_this2));
-    _this2.openEditItemForm = _this2.openEditItemForm.bind(_assertThisInitialized(_this2)); // debugger
+    _this2.openEditItemForm = _this2.openEditItemForm.bind(_assertThisInitialized(_this2));
+    _this2.showModal = _this2.showModal.bind(_assertThisInitialized(_this2)); // debugger
 
     return _this2;
   }
@@ -5950,6 +5955,15 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       }
     }
   }, {
+    key: "showModal",
+    value: function showModal(item_name, rewards) {
+      this.setState({
+        'item_name': item_name,
+        'rewards': rewards
+      });
+      this.props.openModal('deleteItem');
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -5974,13 +5988,17 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             disabledBottomButton: _this3.props.disabledBottomButton,
             showItemForm: _this3.state.showItemForm,
             showEditItemForm: _this3.state.showEditItemForm,
-            openEditItemForm: _this3.openEditItemForm
+            openEditItemForm: _this3.openEditItemForm,
+            showModal: _this3.showModal
           });
         });
         debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-items-container"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_4__.default, {
+          item_name: this.state.item_name,
+          rewards: this.state.rewards
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
           selected: this.state.tab,
           tabs: tabs,
           updatetab: this.updatetab,
@@ -6033,7 +6051,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
-/* harmony import */ var _Rewards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Rewards */ "./frontend/components/project_forms/Rewards.jsx");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _Rewards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Rewards */ "./frontend/components/project_forms/Rewards.jsx");
+
 
 
 
@@ -6049,11 +6069,17 @@ var mdp = function mdp(dispatch) {
   return {
     receiveAllItems: function receiveAllItems(project_id) {
       return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_1__.fetchAllItems)(project_id));
+    },
+    openModal: function openModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__.openModal)(modal));
+    },
+    closeModal: function closeModal() {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__.closeModal)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_Rewards__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_Rewards__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 

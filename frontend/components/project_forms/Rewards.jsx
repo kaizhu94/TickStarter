@@ -1,8 +1,10 @@
 import React from 'react';
 
-import NewRewardFormContainer from './NewRewardFormContainer'
-import NewItemFormContainer from './NewItemFormContainer'
-import EditItemConatiner from './EditItemContainer'
+import NewRewardFormContainer from './NewRewardFormContainer';
+import NewItemFormContainer from './NewItemFormContainer';
+import EditItemConatiner from './EditItemContainer';
+
+import Modal from '../modal/Modal';
 
 class Headers extends React.Component {
     render() {
@@ -50,12 +52,15 @@ class Rewards extends React.Component{
             showRewardForm: false,
             showItemForm: false,
             showEditItemForm: false,
+            item_name: '',
+            rewards: 0,
             // updateDisabledBottomButton: this.props.disabledBottomButton,
         }
         this.updatetab = this.updatetab.bind(this);
         this.showNewRewardForm = this.showNewRewardForm.bind(this);
         this.cancel = this.cancel.bind(this);
         this.openEditItemForm = this.openEditItemForm.bind(this);
+        this.showModal = this.showModal.bind(this);
         // debugger
     }
 
@@ -114,6 +119,14 @@ class Rewards extends React.Component{
         }
     }
 
+    showModal(item_name, rewards){
+        this.setState({
+            'item_name': item_name,
+            'rewards': rewards
+        })
+        this.props.openModal('deleteItem');
+    }
+
     render(){
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
         const disable = this.disable();
@@ -131,12 +144,16 @@ class Rewards extends React.Component{
                                         disabledBottomButton = {this.props.disabledBottomButton}
                                         showItemForm={this.state.showItemForm}
                                         showEditItemForm={this.state.showEditItemForm}
-                                        openEditItemForm={this.openEditItemForm}/>
+                                        openEditItemForm={this.openEditItemForm}
+                                        showModal = {this.showModal}
+                                        />
                 )
             });
             debugger
             return (
                 <div className='rewards-items-container'>
+                    <Modal item_name={this.state.item_name}
+                                rewards={this.state.rewards}/>
                     {/* {
                         this.props.disabledBottomButton ? (
                             this.state.tab === 0 ? (

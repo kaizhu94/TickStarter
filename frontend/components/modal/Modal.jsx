@@ -64,10 +64,23 @@ function Modal( props ){
                         <div className='unsave-modal-continer'>
                             <div className = 'unsave-upper'>
                                 <h2>Delete this item?</h2>
-                                <p>{props.item_name} is not used in any of your rewards.</p>
-                                <button >
-                                    Delete Item
-                                </button>
+                                {
+                                    props.rewards === 0 ? (
+                                        <div>
+                                            <p>{props.item_name} is not used in any of your rewards.</p>
+                                            <button >
+                                                Delete Item
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <p>{props.item_name} will be deleted from {props.rewards} of your rewards. This action cannot be undone.</p>
+                                            <button >
+                                                Delete from {props.rewards} rewards
+                                            </button>
+                                        </div>
+                                    )
+                                }
                             </div>
                             <div className = 'unsave-lower'>
                                 <p onClick={closeModal}>No, never mind</p>
