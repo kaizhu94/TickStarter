@@ -2799,10 +2799,12 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       showEditItem: false,
       valid: true,
-      item_name: _this.props.item.item_name
+      item_name: _this.props.item.item_name,
+      showModal: false
     };
     _this.editItem = _this.editItem.bind(_assertThisInitialized(_this));
     _this.handleSumbit = _this.handleSumbit.bind(_assertThisInitialized(_this));
+    _this.handleModal = _this.handleModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2844,6 +2846,9 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
       debugger;
 
       if (!this.state.showEditItem && !this.props.showItemForm && !this.props.showEditItemForm) {
+        this.setState({
+          'showModal': true
+        });
         this.props.openModal('deleteItem');
       }
     }
@@ -2872,9 +2877,9 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
 
       var item = this.props.item;
       debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_1__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.showModal ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_1__.default, {
         item_name: this.state.item_name
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-item".concat(this.showingForm())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-item-section"
