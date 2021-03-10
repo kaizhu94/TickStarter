@@ -4580,6 +4580,19 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(EditRewardForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var reward = this.props.reward;
+      var date = new Date(reward.estimated_delivery);
+      this.setState({
+        'title': reward.title,
+        month: date.getMonth(),
+        year: '',
+        'description': reward.description,
+        'amount': reward.amount
+      });
+    }
+  }, {
     key: "editItem",
     value: function editItem() {
       if (!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm) {
@@ -4666,6 +4679,11 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       var currentTime = new Date();
       var currentYear = currentTime.getFullYear();
       var month = months[parseInt(this.state.month) - 1];
+      var itemsInclude = Object.values(reward.items).map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: index
+        }, item.item_name);
+      });
       debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-reward".concat(this.showingForm())
@@ -4695,9 +4713,9 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         id: "show-reward-p-two"
       }, "Estimated delivery: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, estimated_delivery)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "up-three"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        id: "show-reward-p-two"
-      }, "one")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "up-three-list"
+      }, itemsInclude))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-reward-section-lower-low"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-reward-section-lower-buttons"

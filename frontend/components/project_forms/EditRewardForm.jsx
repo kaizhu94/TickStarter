@@ -25,6 +25,18 @@ class EditRewardForm extends React.Component{
         }
     }
 
+    componentDidMount(){
+        const {reward} = this.props;
+        const date = new Date(reward.estimated_delivery);
+
+        this.setState({
+            'title': reward.title,
+            month: date.getMonth(),
+            year: '',
+            'description': reward.description,
+            'amount': reward.amount,
+        })
+    }
 
     editItem(){
         if(!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm){
@@ -96,6 +108,13 @@ class EditRewardForm extends React.Component{
         let currentTime = new Date();
         const currentYear = currentTime.getFullYear();
         const month = months[parseInt(this.state.month)-1]
+        const itemsInclude = Object.values(reward.items).map((item, index) =>{
+            return(
+                <li key = {index}>
+                    {item.item_name}
+                </li>
+            )
+        })
         debugger
         return(
             <div>
@@ -118,8 +137,8 @@ class EditRewardForm extends React.Component{
                                     </div>
                                 </div>
                                 <div className='up-three'>
-                                    <ul >
-                                        <li id='show-reward-p-two'>one</li>
+                                    <ul className='up-three-list'>
+                                        {itemsInclude}
                                     </ul>
                                 </div>
                             </div>
