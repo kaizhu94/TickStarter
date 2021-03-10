@@ -1,5 +1,5 @@
 export const fetchAllRewards = (project_id) =>{
-  debugger
+  // debugger
     return $.ajax({
         method: 'GET',
         url: 'api/rewards',

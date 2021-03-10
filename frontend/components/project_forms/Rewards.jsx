@@ -3,6 +3,7 @@ import React from 'react';
 import NewRewardFormContainer from './NewRewardFormContainer';
 import NewItemFormContainer from './NewItemFormContainer';
 import EditItemConatiner from './EditItemContainer';
+import EditRewardContainer from './EditRewardContainer'
 
 import Modal from '../modal/Modal';
 
@@ -52,6 +53,7 @@ class Rewards extends React.Component{
             showRewardForm: false,
             showItemForm: false,
             showEditItemForm: false,
+            showEditRewardForm:false,
             item_name: '',
             rewards: 0,
             itemId: ''
@@ -61,6 +63,7 @@ class Rewards extends React.Component{
         this.showNewRewardForm = this.showNewRewardForm.bind(this);
         this.cancel = this.cancel.bind(this);
         this.openEditItemForm = this.openEditItemForm.bind(this);
+        this.openEditRewardForm = this.openEditRewardForm.bind(this);
         this.showModal = this.showModal.bind(this);
         // debugger
     }
@@ -105,6 +108,11 @@ class Rewards extends React.Component{
     openEditItemForm(){
         this.setState({
             'showEditItemForm': !this.state.showEditItemForm
+        })
+    }
+    openEditRewardForm(){
+        this.setState({
+            'showEditRewardForm': !this.state.showEditRewardForm
         })
     }
     cancel(){
@@ -152,6 +160,18 @@ class Rewards extends React.Component{
                                         />
                 )
             });
+            const rewardsArray = Object.values(rewards).map((reward,index) => {
+                return(
+                    <EditRewardContainer key={index}
+                                        reward={reward}
+                                        updateDisabledBottomButton={this.props.updateDisabledBottomButton}
+                                        disabledBottomButton = {this.props.disabledBottomButton}
+                                        showRewardForm = {this.state.showRewardForm}
+                                        showEditRewardForm = {this.state.showEditRewardForm}
+                                        openEditRewardForm ={this.openEditRewardForm}
+                                        />
+                )
+            })
             debugger
             return (
                 <div className='rewards-items-container'>
@@ -186,11 +206,16 @@ class Rewards extends React.Component{
                                     <p>Add rewards to your project, which can be physical items or special experiences</p>
                                     <button type='button' onClick={this.showNewRewardForm}>+ New reward</button>   
                                 </div>
-                                
+                                <div className={`rewards-array`}>
+                                    {
+                                        rewardsArray
+                                    }
+                                </div>
                                 {
                                     (this.props.disabledBottomButton && this.state.showRewardForm) ? (
                                         <NewRewardFormContainer cancel={this.cancel}
-                                                                disabledBottomButton = {this.props.disabledBottomButton}/>
+                                                                disabledBottomButton = {this.props.disabledBottomButton}
+                                                                project={this.props.project}/>
                                     ):(
                                         null
                                     )
@@ -202,7 +227,7 @@ class Rewards extends React.Component{
                                     <p>We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you’re offering.</p>
                                     <button type='button' onClick={this.showNewRewardForm}>+ New item</button>
                                 </div>
-                                <div className={`items-array${this.disable()}`}>
+                                <div className={`items-array`}>
                                     {
                                         arrayItems
                                     }

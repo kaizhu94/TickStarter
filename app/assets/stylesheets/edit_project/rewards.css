@@ -542,3 +542,96 @@
     cursor: pointer;
     background-color: #016b46;
 } */
+
+
+
+/* .rewards-array-disable{
+    opacity: 0.7;
+} */
+
+.show-reward{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.show-reward-show{
+    margin-bottom: 50px;
+    margin-top: 50px;
+    opacity: 0.7;
+}
+
+.show-reward-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.show-reward-section-upper{
+    display: grid;
+    grid-template-columns: 3fr 5fr 4fr;
+    font-size: 14px;
+}
+#one{
+    grid-column: 1;
+    margin: 15px;
+}
+#two{
+    grid-column: 2;
+    margin: 15px;
+}
+
+#three{
+    grid-column: 3;
+    margin: 15px;
+}
+
+.show-reward-section-lower{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gainsboro;
+}
+.show-reward-section-lower-up{
+    padding-top: 24px;
+    padding-bottom: 40px;
+    display: grid;
+    grid-template-columns: 3fr 5fr 4fr;
+    border-bottom: 1px solid gainsboro;
+}
+
+.up-one{
+    grid-column: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#show-reward-p-one{
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+.up-two{
+    grid-column: 2;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#show-reward-p-two{
+    font-size: 14px;
+}
+.up-three{
+    grid-column: 3;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.show-reward-section-lower-low{
+    display: grid;
+}
+.show-reward-section-lower-buttons{
+    grid-column: 31/30;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.edit-reward-form{
+    display: flex;
+    flex-direction: row;
+    opacity: 1;
+}

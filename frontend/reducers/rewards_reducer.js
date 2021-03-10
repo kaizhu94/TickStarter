@@ -5,7 +5,7 @@ const rewardsReducer = (state = {}, action )=>{
     Object.freeze(state)
     switch(action.type){
         case REVEICE_ALL_REWARDS:
-            debugger
+            // debugger
             return action.rewards;
         default:
             return state;

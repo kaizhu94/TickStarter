@@ -728,7 +728,7 @@ var receiveAllRewards = function receiveAllRewards(rewards) {
 var fetchAllRewards = function fetchAllRewards(project_id) {
   return function (dispatch) {
     return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.fetchAllRewards(project_id).then(function (rewards) {
-      return dispatch(receiveAllItems(rewards));
+      return dispatch(receiveAllRewards(rewards));
     });
   };
 };
@@ -2868,18 +2868,16 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(EditItemForm);
 
   function EditItemForm(props) {
+    var _this$state;
+
     var _this;
 
     _classCallCheck(this, EditItemForm);
 
     _this = _super.call(this, props);
-    _this.state = {
-      showEditItem: false,
-      valid: true,
-      item_name: _this.props.item.item_name,
-      showModal: false,
-      id: _this.props.item.id
-    };
+    _this.state = (_this$state = {
+      showEditItem: false
+    }, _defineProperty(_this$state, "showEditItem", false), _defineProperty(_this$state, "valid", true), _defineProperty(_this$state, "item_name", _this.props.item.item_name), _defineProperty(_this$state, "showModal", false), _defineProperty(_this$state, "id", _this.props.item.id), _this$state);
     _this.editItem = _this.editItem.bind(_assertThisInitialized(_this));
     _this.handleSumbit = _this.handleSumbit.bind(_assertThisInitialized(_this));
     _this.handleModal = _this.handleModal.bind(_assertThisInitialized(_this));
@@ -2923,19 +2921,17 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
     value: function handleModal() {
       debugger;
 
-      if (!this.state.showEditItem && !this.props.showItemForm && !this.props.showEditItemForm) {
+      if (!this.props.disabledBottomButton && !this.props.showItemForm && !this.props.showEditItemForm) {
         this.setState({
           'showModal': true
         });
-        this.props.showModal(this.state.item_name, this.props.item.rewards, this.props.item.id); // this.setState({
-        //     'showModal': false
-        // });
+        this.props.showModal(this.state.item_name, this.props.item.rewards, this.props.item.id);
       }
     }
   }, {
     key: "showingForm",
     value: function showingForm() {
-      return this.state.showEditItem || this.props.showItemForm || this.props.showEditItemForm ? '-show' : '';
+      return this.props.disabledBottomButton || this.props.showItemForm || this.props.showEditItemForm ? '-show' : '';
     }
   }, {
     key: "handleSumbit",
@@ -3007,16 +3003,16 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
         onChange: this.update('item_name'),
         placeholder: "Digital photo"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "edit-item-top-button-conatiner"
+        className: "top-button-conatiner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
-        id: "edit-item-cancel",
+        id: "edit-cancel",
         onClick: function onClick() {
           return _this3.cancel();
         }
       }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
-        id: "edit-item-next-button-top"
+        id: "edit-next-button-top"
       }, "Save Item"))) : null);
     }
   }]);
@@ -4456,6 +4452,431 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/project_forms/EditRewardContainer.js":
+/*!******************************************************************!*\
+  !*** ./frontend/components/project_forms/EditRewardContainer.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _EditRewardForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditRewardForm */ "./frontend/components/project_forms/EditRewardForm.jsx");
+
+
+
+var msp = function msp(state) {
+  // debugger
+  return {};
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    openModal: function (_openModal) {
+      function openModal(_x) {
+        return _openModal.apply(this, arguments);
+      }
+
+      openModal.toString = function () {
+        return _openModal.toString();
+      };
+
+      return openModal;
+    }(function (modal) {
+      return dispatch(openModal(modal));
+    }),
+    closeModal: function (_closeModal) {
+      function closeModal() {
+        return _closeModal.apply(this, arguments);
+      }
+
+      closeModal.toString = function () {
+        return _closeModal.toString();
+      };
+
+      return closeModal;
+    }(function () {
+      return dispatch(closeModal());
+    })
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditRewardForm__WEBPACK_IMPORTED_MODULE_1__.default));
+
+/***/ }),
+
+/***/ "./frontend/components/project_forms/EditRewardForm.jsx":
+/*!**************************************************************!*\
+  !*** ./frontend/components/project_forms/EditRewardForm.jsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var EditRewardForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditRewardForm, _React$Component);
+
+  var _super = _createSuper(EditRewardForm);
+
+  function EditRewardForm(props) {
+    var _this;
+
+    _classCallCheck(this, EditRewardForm);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      showModal: false,
+      showEditReward: false,
+      month: '',
+      year: '',
+      title: '',
+      description: '',
+      amount: 1,
+      validmonth: true,
+      validyear: true,
+      validtitle: true,
+      validdescription: true,
+      validamount: true,
+      monthErrorMessage: '',
+      yearErrorMessage: '',
+      titleErrorMessage: '',
+      descriptionErrorMessage: '',
+      amountErrorMessage: ''
+    };
+    return _this;
+  }
+
+  _createClass(EditRewardForm, [{
+    key: "editItem",
+    value: function editItem() {
+      if (!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm) {
+        // debugger
+        this.props.updateDisabledBottomButton();
+        this.props.openEditRewardForm();
+        this.setState({
+          'showEditReward': !this.state.showEditReward
+        });
+      }
+    }
+  }, {
+    key: "showingForm",
+    value: function showingForm() {
+      return this.props.disabledBottomButton || this.props.showRewardForm || this.props.showEditRewardForm ? '-show' : '';
+    }
+  }, {
+    key: "cancel",
+    value: function cancel() {
+      this.props.updateDisabledBottomButton();
+      this.props.openEditRewardForm();
+      this.setState({
+        "showEditReward": false
+      });
+    }
+  }, {
+    key: "handleModal",
+    value: function handleModal() {
+      debugger;
+
+      if (!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm) {
+        this.setState({
+          'showModal': true
+        });
+        this.props.showModal(this.state.item_name, this.props.item.rewards, this.props.item.id); // this.setState({
+        //     'showModal': false
+        // });
+      }
+    }
+  }, {
+    key: "update",
+    value: function update(key) {
+      var _this2 = this;
+
+      var name = "valid" + "".concat(key); // debugger
+
+      return function (e) {
+        var _this2$setState;
+
+        return _this2.setState((_this2$setState = {}, _defineProperty(_this2$setState, key, e.currentTarget.value), _defineProperty(_this2$setState, name, true), _this2$setState));
+      };
+    }
+  }, {
+    key: "updateAmount",
+    value: function updateAmount(key) {
+      var _this3 = this;
+
+      return function (e) {
+        var value = e.currentTarget.value;
+
+        if (value === '') {
+          return _this3.setState(_defineProperty({}, key, value));
+        } else {
+          var _this3$setState2;
+
+          return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, Math.round(value)), _defineProperty(_this3$setState2, 'validamount', true), _this3$setState2));
+        }
+      };
+    }
+  }, {
+    key: "isValid",
+    value: function isValid(key) {
+      return this.state[key] ? '' : '-invalid';
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var reward = this.props.reward;
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var date = new Date(reward.estimated_delivery);
+      var estimated_delivery = "".concat(months[date.getMonth()], " ").concat(date.getFullYear());
+      var currentTime = new Date();
+      var currentYear = currentTime.getFullYear();
+      var month = months[parseInt(this.state.month) - 1];
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-reward".concat(this.showingForm())
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-reward-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-reward-section-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "one"
+      }, "PLEDGE AMOUNT"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "two"
+      }, "DETAILS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "three"
+      }, "INCLUDES")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-reward-section-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-reward-section-lower-up"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "up-one"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "show-reward-p-one"
+      }, "CA$ ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, reward.amount))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "up-two"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "show-reward-p-one"
+      }, reward.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "show-reward-p-two"
+      }, "Estimated delivery: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, estimated_delivery)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "up-three"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        id: "show-reward-p-two"
+      }, "one")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-reward-section-lower-low"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-reward-section-lower-buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-item-right-button",
+        onClick: function onClick() {
+          return _this4.editItem();
+        }
+      }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-item-right-button",
+        onClick: function onClick() {
+          return _this4.handleModal();
+        }
+      }, "Delete")))))), this.state.showEditReward ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit,
+        className: "edit-reward-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "top-button-conatiner"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-cancel",
+        onClick: function onClick() {
+          return _this4.cancel();
+        }
+      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit",
+        id: "edit-next-button-top"
+      }, "Save reward")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reward-form-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reward-form-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add a reward"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Offer tangible or intangible things that bring backers closer to your project.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Title"), this.state.validtitle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        id: "reward-title",
+        placeholder: "single-limit-edition",
+        onChange: this.update('title')
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        id: "reward-title-invalid",
+        placeholder: "single-limit-edition",
+        onChange: this.update('title')
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.titleErrorMessage)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "amount-box"
+      }, this.state.validamount ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "amount-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        id: "amount-label"
+      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number",
+        id: "reward-amount",
+        value: this.state.amount,
+        onChange: this.updateAmount('amount')
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "amount-section-invalid"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        id: "amount-label"
+      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number",
+        id: "reward-amount",
+        value: this.state.amount,
+        onChange: this.updateAmount('amount')
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.amountErrorMessage))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Description"), this.state.validdescription ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        id: "reward-description",
+        placeholder: "Get an early copy - hot off the presses!",
+        onChange: this.update('description')
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        id: "reward-description-invalid",
+        placeholder: "Get an early copy - hot off the presses!",
+        onChange: this.update('description')
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.descriptionErrorMessage)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Estimated delivery"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        id: "month".concat(this.isValid('validmonth')),
+        value: this.state.month,
+        onChange: this.update('month')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: true
+      }, " Month "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "01"
+      }, " January "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "02"
+      }, " Febuary "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "03"
+      }, " March "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "04"
+      }, " April "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "05"
+      }, " May "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "06"
+      }, " June "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "07"
+      }, " July "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "08"
+      }, " August "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "09"
+      }, " Septemper "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "10"
+      }, " October "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "11"
+      }, " November "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "12"
+      }, " December ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        id: "year".concat(this.isValid('validyear')),
+        value: this.state.year,
+        onChange: this.update('year')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: true
+      }, " Year "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear
+      }, " ", currentYear, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear + 1
+      }, " ", currentYear + 1, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear + 2
+      }, " ", currentYear + 2, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear + 3
+      }, " ", currentYear + 3, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: currentYear + 4
+      }, " ", currentYear + 4, " "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "date-errors"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.monthErrorMessage), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "rewrd-error-message"
+      }, this.state.yearErrorMessage))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reward-save-bot"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit",
+        id: "edit-next-button-top"
+      }, "Save reward"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "edit-cancel",
+        onClick: function onClick() {
+          return _this4.cancel();
+        }
+      }, "Cancel")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Reward preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Get a glimpse of how this reward will look on your project page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Pledge CA$ ", this.state.amount, " or more"), this.state.title === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "empty-preview"
+      }, "Signed limited-edition") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "preview-title"
+      }, this.state.title), this.state.description === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "empty-preview"
+      }, "Get an early copy \u2014 hot off the presses!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "preview-title"
+      }, this.state.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview-date-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview-date"
+      }, this.state.month === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Month") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, month), this.state.year === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Year") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, this.state.year)))))) : null);
+    }
+  }]);
+
+  return EditRewardForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditRewardForm);
+
+/***/ }),
+
 /***/ "./frontend/components/project_forms/EditTitleImage.jsx":
 /*!**************************************************************!*\
   !*** ./frontend/components/project_forms/EditTitleImage.jsx ***!
@@ -5860,7 +6281,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewRewardFormContainer */ "./frontend/components/project_forms/NewRewardFormContainer.js");
 /* harmony import */ var _NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NewItemFormContainer */ "./frontend/components/project_forms/NewItemFormContainer.js");
 /* harmony import */ var _EditItemContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditItemContainer */ "./frontend/components/project_forms/EditItemContainer.js");
-/* harmony import */ var _modal_Modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modal/Modal */ "./frontend/components/modal/Modal.jsx");
+/* harmony import */ var _EditRewardContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditRewardContainer */ "./frontend/components/project_forms/EditRewardContainer.js");
+/* harmony import */ var _modal_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modal/Modal */ "./frontend/components/modal/Modal.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5882,6 +6304,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -5953,6 +6376,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       showRewardForm: false,
       showItemForm: false,
       showEditItemForm: false,
+      showEditRewardForm: false,
       item_name: '',
       rewards: 0,
       itemId: '' // updateDisabledBottomButton: this.props.disabledBottomButton,
@@ -5962,6 +6386,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     _this2.showNewRewardForm = _this2.showNewRewardForm.bind(_assertThisInitialized(_this2));
     _this2.cancel = _this2.cancel.bind(_assertThisInitialized(_this2));
     _this2.openEditItemForm = _this2.openEditItemForm.bind(_assertThisInitialized(_this2));
+    _this2.openEditRewardForm = _this2.openEditRewardForm.bind(_assertThisInitialized(_this2));
     _this2.showModal = _this2.showModal.bind(_assertThisInitialized(_this2)); // debugger
 
     return _this2;
@@ -6021,6 +6446,13 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       });
     }
   }, {
+    key: "openEditRewardForm",
+    value: function openEditRewardForm() {
+      this.setState({
+        'showEditRewardForm': !this.state.showEditRewardForm
+      });
+    }
+  }, {
     key: "cancel",
     value: function cancel() {
       debugger;
@@ -6077,10 +6509,21 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             showModal: _this3.showModal
           });
         });
+        var rewardsArray = Object.values(rewards).map(function (reward, index) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_EditRewardContainer__WEBPACK_IMPORTED_MODULE_4__.default, {
+            key: index,
+            reward: reward,
+            updateDisabledBottomButton: _this3.props.updateDisabledBottomButton,
+            disabledBottomButton: _this3.props.disabledBottomButton,
+            showRewardForm: _this3.state.showRewardForm,
+            showEditRewardForm: _this3.state.showEditRewardForm,
+            openEditRewardForm: _this3.openEditRewardForm
+          });
+        });
         debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-items-container"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_4__.default, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_5__.default, {
           item_name: this.state.item_name,
           rewards: this.state.rewards,
           itemId: this.state.itemId
@@ -6096,9 +6539,12 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Add rewards to your project, which can be physical items or special experiences"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           type: "button",
           onClick: this.showNewRewardForm
-        }, "+ New reward")), this.props.disabledBottomButton && this.state.showRewardForm ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__.default, {
+        }, "+ New reward")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "rewards-array"
+        }, rewardsArray), this.props.disabledBottomButton && this.state.showRewardForm ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__.default, {
           cancel: this.cancel,
-          disabledBottomButton: this.props.disabledBottomButton
+          disabledBottomButton: this.props.disabledBottomButton,
+          project: this.props.project
         }) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-form-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -6107,7 +6553,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
           type: "button",
           onClick: this.showNewRewardForm
         }, "+ New item")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "items-array".concat(this.disable())
+          className: "items-array"
         }, arrayItems), this.props.disabledBottomButton && this.state.showItemForm ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__.default, {
           cancel: this.cancel,
           disabledBottomButton: this.props.disabledBottomButton,
@@ -7007,7 +7453,7 @@ var rewardsReducer = function rewardsReducer() {
 
   switch (action.type) {
     case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.REVEICE_ALL_REWARDS:
-      debugger;
+      // debugger
       return action.rewards;
 
     default:
@@ -7440,7 +7886,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards
 /* harmony export */ });
 var fetchAllRewards = function fetchAllRewards(project_id) {
-  debugger;
+  // debugger
   return $.ajax({
     method: 'GET',
     url: 'api/rewards',

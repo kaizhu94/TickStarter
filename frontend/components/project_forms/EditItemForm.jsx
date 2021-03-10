@@ -7,6 +7,7 @@ class EditItemForm extends React.Component{
         super(props);
         this.state= {
             showEditItem: false,
+            showEditItem: false,
             valid: true,
             item_name: this.props.item.item_name,
             showModal: false,
@@ -41,18 +42,15 @@ class EditItemForm extends React.Component{
     }
     handleModal(){
         debugger
-        if(!this.state.showEditItem && !this.props.showItemForm && !this.props.showEditItemForm){
+        if(!this.props.disabledBottomButton && !this.props.showItemForm && !this.props.showEditItemForm){
            this.setState({
                 'showModal': true
             })
         this.props.showModal(this.state.item_name, this.props.item.rewards,this.props.item.id);
-        // this.setState({
-        //     'showModal': false
-        // });
         }
     }
     showingForm(){
-        return (this.state.showEditItem || this.props.showItemForm || this.props.showEditItemForm)? '-show': '';
+        return (this.props.disabledBottomButton || this.props.showItemForm || this.props.showEditItemForm)? '-show': '';
     }
     handleSumbit(e){
         e.preventDefault();
@@ -72,12 +70,6 @@ class EditItemForm extends React.Component{
         debugger
         return (
             <div>
-                {/* {
-                    this.state.showModal? (
-                        <Modal item_name={this.state.item_name}
-                                rewards={item.rewards}/>
-                    ) :(null)
-                } */}
                 <div className={`show-item${this.showingForm()}`}>
                     <div className={`show-item-section`}>
                         <p id='item-name'>{item.item_name}</p>
@@ -115,9 +107,9 @@ class EditItemForm extends React.Component{
                                         )
                                     }
                                 </div>
-                                <div className='edit-item-top-button-conatiner'>
-                                    <button type = 'button' id = 'edit-item-cancel' onClick={()=>this.cancel()}>Cancel</button>
-                                    <button type = 'submit' id = 'edit-item-next-button-top' >Save Item</button>
+                                <div className='top-button-conatiner'>
+                                    <button type = 'button' id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
+                                    <button type = 'submit' id = 'edit-next-button-top' >Save Item</button>
                                 </div>
                             {/* </div> */}
                         </form>

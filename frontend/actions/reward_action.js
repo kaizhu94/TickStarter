@@ -11,6 +11,6 @@ export const receiveAllRewards = (rewards)=>{
 
 export const fetchAllRewards = (project_id) => dispatch =>{
     return RewardAPIUtil.fetchAllRewards(project_id).then(
-        (rewards) => dispatch(receiveAllItems(rewards))
+        (rewards) => dispatch(receiveAllRewards(rewards))
         )
 }
