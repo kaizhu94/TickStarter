@@ -3,9 +3,11 @@ import React from 'react';
 class NewItemForm extends React.Component{
     constructor(props){
         super(props);
+        debugger
         this.state={
             item_name:'',
-            valid: true
+            valid: true,
+            project_id: props.project.id
         }
         this.handleSumbit = this.handleSumbit.bind(this);
     }
@@ -28,7 +30,7 @@ class NewItemForm extends React.Component{
                 'valid': false
             })
         }else{
-            // debugger
+            this.props.createItem(this.state);
         }
     }
     render(){

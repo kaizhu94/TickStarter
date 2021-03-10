@@ -1,12 +1,14 @@
 import React from 'react';
 
+import Modal from '../modal/Modal'
+
 class EditItemForm extends React.Component{
     constructor(props){
         super(props);
         this.state= {
             showEditItem: false,
             valid: true,
-            item_name: this.props.item.item_name
+            item_name: this.props.item.item_name,
         };
         this.editItem = this.editItem.bind(this);
         this.handleSumbit = this.handleSumbit.bind(this);
@@ -32,9 +34,18 @@ class EditItemForm extends React.Component{
             "showEditItem": false
         })
     }
+    handleModal(){
+        if(!this.state.showEditItem){
+            this.props.openModal('deleteItem')
+        }
+    }
+    showingForm(){
+        return this.state.showEditItem? '-show': '';
+    }
     handleSumbit(e){
         e.preventDefault();
-        if(this.emptyInput()){
+        // debugger
+        if(this.state.item_name === ''){
             // debugger
             this.setState({
                 'valid': false
@@ -48,7 +59,8 @@ class EditItemForm extends React.Component{
         debugger
         return (
             <div>
-                <div className='show'>
+                <Modal item_name={this.state.item_name}/>
+                <div className={`show-item${this.showingForm()}`}>
                     <div className={`show-item-section`}>
                         <p id='item-name'>{item.item_name}</p>
                         <div className='edit-item-blcok'>
@@ -59,7 +71,7 @@ class EditItemForm extends React.Component{
                                 </div>
                                 <div className='edit-item-right'>
                                     <button type='button' id='edit-item-right-button' onClick={()=>this.editItem()}>Edit</button>
-                                    <button type='button' id='edit-item-right-button'>Delete</button>
+                                    <button type='button' id='edit-item-right-button' onClick={()=>this.handleModal()}>Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +99,7 @@ class EditItemForm extends React.Component{
                                 </div>
                                 <div className='edit-item-top-button-conatiner'>
                                     <button type = 'button' id = 'edit-item-cancel' onClick={()=>this.cancel()}>Cancel</button>
-                                    <button type = 'submit' id = 'edit-item-next-button-top'>Save Item</button>
+                                    <button type = 'submit' id = 'edit-item-next-button-top' >Save Item</button>
                                 </div>
                             {/* </div> */}
                         </form>

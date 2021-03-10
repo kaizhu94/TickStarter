@@ -4,6 +4,15 @@ class Api::ItemsController < ApplicationController
         render :index
     end
 
+    def create
+        @item = Item.new(item_params)
+        if @item.save
+            render :show
+        else
+            render json: @project.errors.full_messages, status: 404
+        end
+    end
+
     private
 
     def item_params

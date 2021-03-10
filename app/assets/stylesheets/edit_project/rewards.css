@@ -449,11 +449,20 @@
 .items-array-disable{
     margin-top: 40px;
     margin-bottom: 40px;
-    opacity: 0.7;
+    /* opacity: 0.7; */
 }
+/* .items-array-disable .new-item-form{
 
+    opacity: 1;
+} */
 .show-item{
     margin-bottom: 50px;
+    margin-top: 50px;
+}
+.show-item-show{
+    margin-bottom: 50px;
+    margin-top: 50px;
+    opacity: 0.7;
 }
 .show-item-section{
     width: 100%;

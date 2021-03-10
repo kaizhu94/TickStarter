@@ -6,7 +6,7 @@ import { updateProjectImage } from '../../actions/project_actions'
 
 function Modal( props ){
     const {modal, closeModal, errors, projectId, updateProjectImage} = props
-    // debugger
+    debugger
     function redirect(projectId, tab){
         props.history.push(`/projects/${projectId}/edit/${tab}`)
     } 
@@ -38,6 +38,7 @@ function Modal( props ){
                 </div>
             </div> 
             );
+            break;
         case 'delete-file':
             // debugger
             return (
@@ -56,6 +57,25 @@ function Modal( props ){
                     </div>
                 </div>
             )
+            break;
+        case 'deleteItem':
+                return (
+                    <div className='modal-background' onClick={closeModal}>
+                        <div className='unsave-modal-continer'>
+                            <div className = 'unsave-upper'>
+                                <h2>Delete this item?</h2>
+                                <p>{props.item_name} is not used in any of your rewards.</p>
+                                <button >
+                                    Delete Item
+                                </button>
+                            </div>
+                            <div className = 'unsave-lower'>
+                                <p onClick={closeModal}>No, never mind</p>
+                            </div>
+                        </div>
+                    </div>
+                )
+                break;
         case 'unsave-tab-0':
         // debugger
         return (
@@ -74,6 +94,7 @@ function Modal( props ){
                 </div>
             </div>
         )
+        break;
         case 'unsave-tab-1':
             // debugger
             return (
@@ -92,6 +113,7 @@ function Modal( props ){
                     </div>
                 </div>
             )
+            break;
         case 'unsave-tab-2':
             // debugger
             return (
@@ -110,6 +132,7 @@ function Modal( props ){
                     </div>
                 </div>
             )
+            break;
         case 'unsave-tab-3':
             // debugger
             return (
@@ -128,6 +151,7 @@ function Modal( props ){
                     </div>
                 </div>
             )
+            break;
         default:
             return null;
     }
@@ -136,8 +160,8 @@ function Modal( props ){
 }
 
 
-const msp =state =>{
-    // debugger
+const msp =(state, ownprops) =>{
+    debugger
     return {
         modal: state.ui.modal,
         errors: state.errors.session,

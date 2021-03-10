@@ -179,7 +179,9 @@ class Rewards extends React.Component{
                                 {
                                     (this.props.disabledBottomButton && this.state.showItemForm) ? (
                                         <NewItemFormContainer cancel={this.cancel}
-                                        disabledBottomButton = {this.props.disabledBottomButton}/>
+                                                            disabledBottomButton = {this.props.disabledBottomButton}
+                                                            project={this.props.project}
+                                        />
                                     ):(null)
                                 }
                             </div>

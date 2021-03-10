@@ -5,3 +5,12 @@ export const fetchAllItems = (project_id) =>{
         data: {project_id}
       })
 }
+
+export const createItem= item =>{
+  return $.ajax({
+      method: 'POST',
+      url: `api/items`,
+      data: {item}
+    })
+}
+

@@ -482,22 +482,39 @@ var fetchCategory = function fetchCategory(categoryId) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_ALL_ITEMS": () => /* binding */ RECEIVE_ALL_ITEMS,
+/* harmony export */   "RECEIVE_ITEM": () => /* binding */ RECEIVE_ITEM,
 /* harmony export */   "receiveAllItems": () => /* binding */ receiveAllItems,
-/* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems
+/* harmony export */   "receiveItem": () => /* binding */ receiveItem,
+/* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems,
+/* harmony export */   "createItem": () => /* binding */ createItem
 /* harmony export */ });
 /* harmony import */ var _util_item_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/item_util */ "./frontend/util/item_util.js");
 
 var RECEIVE_ALL_ITEMS = 'RECEIVE_ALL_ITEMS';
+var RECEIVE_ITEM = 'RECEIVE_ITEM';
 var receiveAllItems = function receiveAllItems(items) {
   return {
     type: RECEIVE_ALL_ITEMS,
     items: items
   };
 };
+var receiveItem = function receiveItem(item) {
+  return {
+    type: RECEIVE_ITEM,
+    item: item
+  };
+};
 var fetchAllItems = function fetchAllItems(project_id) {
   return function (dispatch) {
     return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.fetchAllItems(project_id).then(function (items) {
       return dispatch(receiveAllItems(items));
+    });
+  };
+};
+var createItem = function createItem(item) {
+  return function (dispatch) {
+    return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.createItem(item).then(function (item) {
+      return dispatch(receiveItem(item));
     });
   };
 };
@@ -779,7 +796,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_6__.default, {
+    test: "aaaa"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
     className: "header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
     path: "/signup",
@@ -1798,7 +1817,8 @@ function Modal(props) {
       closeModal = props.closeModal,
       errors = props.errors,
       projectId = props.projectId,
-      updateProjectImage = props.updateProjectImage; // debugger
+      updateProjectImage = props.updateProjectImage;
+  debugger;
 
   function redirect(projectId, tab) {
     props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
@@ -1840,6 +1860,7 @@ function Modal(props) {
         id: "xIcon",
         src: window.xIcon
       })));
+      break;
 
     case 'delete-file':
       // debugger
@@ -1859,6 +1880,22 @@ function Modal(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
       }, "Close"))));
+      break;
+
+    case 'deleteItem':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Delete this item?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.item_name, " is not used in any of your rewards."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete Item")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "No, never mind"))));
+      break;
 
     case 'unsave-tab-0':
       // debugger
@@ -1878,6 +1915,7 @@ function Modal(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
       }, "Go back and save"))));
+      break;
 
     case 'unsave-tab-1':
       // debugger
@@ -1897,6 +1935,7 @@ function Modal(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
       }, "Go back and save"))));
+      break;
 
     case 'unsave-tab-2':
       // debugger
@@ -1916,6 +1955,7 @@ function Modal(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
       }, "Go back and save"))));
+      break;
 
     case 'unsave-tab-3':
       // debugger
@@ -1935,14 +1975,15 @@ function Modal(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
       }, "Go back and save"))));
+      break;
 
     default:
       return null;
   }
 }
 
-var msp = function msp(state) {
-  // debugger
+var msp = function msp(state, ownprops) {
+  debugger;
   return {
     modal: state.ui.modal,
     errors: state.errors.session,
@@ -2680,7 +2721,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _EditItemForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditItemForm */ "./frontend/components/project_forms/EditItemForm.jsx");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _EditItemForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditItemForm */ "./frontend/components/project_forms/EditItemForm.jsx");
+
 
 
 
@@ -2690,10 +2733,17 @@ var msp = function msp(state) {
 };
 
 var mdp = function mdp(dispatch) {
-  return {};
+  return {
+    openModal: function openModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__.openModal)(modal));
+    },
+    closeModal: function closeModal() {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__.closeModal)());
+    }
+  };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditItemForm__WEBPACK_IMPORTED_MODULE_1__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditItemForm__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -2709,6 +2759,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _modal_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modal/Modal */ "./frontend/components/modal/Modal.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2732,6 +2783,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2787,11 +2839,23 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "handleModal",
+    value: function handleModal() {
+      if (!this.state.showEditItem) {
+        this.props.openModal('deleteItem');
+      }
+    }
+  }, {
+    key: "showingForm",
+    value: function showingForm() {
+      return this.state.showEditItem ? '-show' : '';
+    }
+  }, {
     key: "handleSumbit",
     value: function handleSumbit(e) {
-      e.preventDefault();
+      e.preventDefault(); // debugger
 
-      if (this.emptyInput()) {
+      if (this.state.item_name === '') {
         // debugger
         this.setState({
           'valid': false
@@ -2806,8 +2870,10 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
 
       var item = this.props.item;
       debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "show"
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_1__.default, {
+        item_name: this.state.item_name
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "show-item".concat(this.showingForm())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-item-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
@@ -2830,7 +2896,10 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
         }
       }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
-        id: "edit-item-right-button"
+        id: "edit-item-right-button",
+        onClick: function onClick() {
+          return _this3.handleModal();
+        }
       }, "Delete")))))), this.state.showEditItem ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSumbit,
         className: "new-item-form"
@@ -4495,9 +4564,11 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, NewItemForm);
 
     _this = _super.call(this, props);
+    debugger;
     _this.state = {
       item_name: '',
-      valid: true
+      valid: true,
+      project_id: props.project.id
     };
     _this.handleSumbit = _this.handleSumbit.bind(_assertThisInitialized(_this));
     return _this;
@@ -4529,7 +4600,8 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
         this.setState({
           'valid': false
         });
-      } else {// debugger
+      } else {
+        this.props.createItem(this.state);
       }
     }
   }, {
@@ -4589,7 +4661,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _NewItemForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewItemForm */ "./frontend/components/project_forms/NewItemForm.jsx");
+/* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
+/* harmony import */ var _NewItemForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NewItemForm */ "./frontend/components/project_forms/NewItemForm.jsx");
+
 
 
 
@@ -4599,10 +4673,14 @@ var msp = function msp(state) {
 };
 
 var mdp = function mdp(dispatch) {
-  return {};
+  return {
+    createItem: function createItem(item) {
+      return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_1__.createItem)(item));
+    }
+  };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NewItemForm__WEBPACK_IMPORTED_MODULE_1__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NewItemForm__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -5910,7 +5988,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
           className: "items-array".concat(this.disable())
         }, arrayItems), this.props.disabledBottomButton && this.state.showItemForm ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewItemFormContainer__WEBPACK_IMPORTED_MODULE_2__.default, {
           cancel: this.cancel,
-          disabledBottomButton: this.props.disabledBottomButton
+          disabledBottomButton: this.props.disabledBottomButton,
+          project: this.props.project
         }) : null));
       }
     }
@@ -6620,6 +6699,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/item_actions */ "./frontend/actions/item_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var itemsReducer = function itemsReducer() {
@@ -6631,6 +6712,11 @@ var itemsReducer = function itemsReducer() {
   switch (action.type) {
     case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_ITEMS:
       return action.items;
+
+    case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ITEM:
+      debugger;
+      var newItems = Object.assign({}, state, _defineProperty({}, action.item.id, action.item));
+      return newItems;
 
     default:
       return state;
@@ -7034,7 +7120,8 @@ var fetchCategory = function fetchCategory(categoryId) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems
+/* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems,
+/* harmony export */   "createItem": () => /* binding */ createItem
 /* harmony export */ });
 var fetchAllItems = function fetchAllItems(project_id) {
   return $.ajax({
@@ -7042,6 +7129,15 @@ var fetchAllItems = function fetchAllItems(project_id) {
     url: 'api/items',
     data: {
       project_id: project_id
+    }
+  });
+};
+var createItem = function createItem(item) {
+  return $.ajax({
+    method: 'POST',
+    url: "api/items",
+    data: {
+      item: item
     }
   });
 };
