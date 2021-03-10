@@ -2809,9 +2809,10 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
   _createClass(EditItemForm, [{
     key: "editItem",
     value: function editItem() {
-      if (!this.props.disabledBottomButton && !this.props.showItemForm) {
+      if (!this.props.disabledBottomButton && !this.props.showItemForm && !this.props.showEditItemForm) {
         // debugger
         this.props.updateDisabledBottomButton();
+        this.props.openEditItemForm();
         this.setState({
           'showEditItem': !this.state.showEditItem
         });
@@ -2832,6 +2833,7 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
     key: "cancel",
     value: function cancel() {
       this.props.updateDisabledBottomButton();
+      this.props.openEditItemForm();
       this.setState({
         "showEditItem": false
       });
@@ -2841,14 +2843,14 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
     value: function handleModal() {
       debugger;
 
-      if (!this.state.showEditItem && !this.props.showItemForm) {
+      if (!this.state.showEditItem && !this.props.showItemForm && !this.props.showEditItemForm) {
         this.props.openModal('deleteItem');
       }
     }
   }, {
     key: "showingForm",
     value: function showingForm() {
-      return this.state.showEditItem || this.props.showItemForm ? '-show' : '';
+      return this.state.showEditItem || this.props.showItemForm || this.props.showEditItemForm ? '-show' : '';
     }
   }, {
     key: "handleSumbit",
@@ -4602,6 +4604,7 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
         });
       } else {
         this.props.createItem(this.state);
+        this.props.cancel();
       }
     }
   }, {
@@ -5861,12 +5864,14 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     _this2.state = {
       tab: 0,
       showRewardForm: false,
-      showItemForm: false // updateDisabledBottomButton: this.props.disabledBottomButton,
+      showItemForm: false,
+      showEditItemForm: false // updateDisabledBottomButton: this.props.disabledBottomButton,
 
     };
     _this2.updatetab = _this2.updatetab.bind(_assertThisInitialized(_this2));
     _this2.showNewRewardForm = _this2.showNewRewardForm.bind(_assertThisInitialized(_this2));
-    _this2.cancel = _this2.cancel.bind(_assertThisInitialized(_this2)); // debugger
+    _this2.cancel = _this2.cancel.bind(_assertThisInitialized(_this2));
+    _this2.openEditItemForm = _this2.openEditItemForm.bind(_assertThisInitialized(_this2)); // debugger
 
     return _this2;
   }
@@ -5890,16 +5895,14 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     value: function disable() {
       // debugger
       return this.props.disabledBottomButton ? '-disable' : '';
-    }
-  }, {
-    key: "editItem",
-    value: function editItem() {
-      if (this.disable() !== '-disable') {
-        this.setState({
-          'showEditItem': true
-        });
-      }
-    }
+    } // editItem(){
+    //     if(this.disable() !== '-disable'){
+    //         this.setState({
+    //             'showEditItemForm': true
+    //         })
+    //     }
+    // }
+
   }, {
     key: "showNewRewardForm",
     value: function showNewRewardForm() {
@@ -5917,6 +5920,13 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
           });
         }
       }
+    }
+  }, {
+    key: "openEditItemForm",
+    value: function openEditItemForm() {
+      this.setState({
+        'showEditItemForm': !this.state.showEditItemForm
+      });
     }
   }, {
     key: "cancel",
@@ -5957,7 +5967,9 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             item: item,
             updateDisabledBottomButton: _this3.props.updateDisabledBottomButton,
             disabledBottomButton: _this3.props.disabledBottomButton,
-            showItemForm: _this3.state.showItemForm
+            showItemForm: _this3.state.showItemForm,
+            showEditItemForm: _this3.state.showEditItemForm,
+            openEditItemForm: _this3.openEditItemForm
           });
         });
         debugger;

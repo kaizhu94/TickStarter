@@ -31,6 +31,7 @@ class NewItemForm extends React.Component{
             })
         }else{
             this.props.createItem(this.state);
+            this.props.cancel();
         }
     }
     render(){

@@ -49,11 +49,13 @@ class Rewards extends React.Component{
             tab: 0,
             showRewardForm: false,
             showItemForm: false,
+            showEditItemForm: false,
             // updateDisabledBottomButton: this.props.disabledBottomButton,
         }
         this.updatetab = this.updatetab.bind(this);
         this.showNewRewardForm = this.showNewRewardForm.bind(this);
         this.cancel = this.cancel.bind(this);
+        this.openEditItemForm = this.openEditItemForm.bind(this);
         // debugger
     }
 
@@ -71,13 +73,13 @@ class Rewards extends React.Component{
         // debugger
         return this.props.disabledBottomButton ? '-disable': ''
     }
-    editItem(){
-        if(this.disable() !== '-disable'){
-            this.setState({
-                'showEditItem': true
-            })
-        }
-    }
+    // editItem(){
+    //     if(this.disable() !== '-disable'){
+    //         this.setState({
+    //             'showEditItemForm': true
+    //         })
+    //     }
+    // }
     showNewRewardForm(){
         if(!this.props.disabledBottomButton){
             // debugger
@@ -92,6 +94,11 @@ class Rewards extends React.Component{
                 })
             }
         }
+    }
+    openEditItemForm(){
+        this.setState({
+            'showEditItemForm': !this.state.showEditItemForm
+        })
     }
     cancel(){
         debugger
@@ -122,7 +129,9 @@ class Rewards extends React.Component{
                                         item={item}
                                         updateDisabledBottomButton={this.props.updateDisabledBottomButton}
                                         disabledBottomButton = {this.props.disabledBottomButton}
-                                        showItemForm={this.state.showItemForm}/>
+                                        showItemForm={this.state.showItemForm}
+                                        showEditItemForm={this.state.showEditItemForm}
+                                        openEditItemForm={this.openEditItemForm}/>
                 )
             });
             debugger
