@@ -47,14 +47,13 @@ class Rewards extends React.Component{
         super(props);
         this.state= {
             tab: 0,
-            showEditItem: false,
-            // showRewardForm: false,
-            // showItemForm: false,
+            showRewardForm: false,
+            showItemForm: false,
             // updateDisabledBottomButton: this.props.disabledBottomButton,
         }
         this.updatetab = this.updatetab.bind(this);
         this.showNewRewardForm = this.showNewRewardForm.bind(this);
-        // this.cancel = this.cancel.bind(this);
+        this.cancel = this.cancel.bind(this);
         // debugger
     }
 
@@ -83,27 +82,45 @@ class Rewards extends React.Component{
         if(!this.props.disabledBottomButton){
             // debugger
             this.props.updateDisabledBottomButton();
+            if(this.state.tab === 0){
+                this.setState({
+                    'showRewardForm': true
+                })
+            }else{
+                this.setState({
+                    'showItemForm': true
+                })
+            }
         }
     }
-    // cancel(){
-        // debugger
-    //     this.props.updateDisabledBottomButton();
-    // }
+    cancel(){
+        debugger
+        this.props.updateDisabledBottomButton();
+        if(this.state.tab === 0){
+            this.setState({
+                'showRewardForm': false
+            })
+        }else{
+            this.setState({
+                'showItemForm': false
+            })
+        }
+    }
 
     render(){
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
         const disable = this.disable();
         const {items} = this.props;
-        debugger
+        // debugger
         if(!items){
-            debugger
+            // debugger
             return null;
         }else{
             const arrayItems = Object.values(items).map((item, index) => {
                 return( 
                     <EditItemConatiner key={index}
                                         item={item}
-                                        cancel={this.props.updateDisabledBottomButton}
+                                        updateDisabledBottomButton={this.props.updateDisabledBottomButton}
                                         disabledBottomButton = {this.props.disabledBottomButton}/>
                 )
             });
@@ -140,10 +157,12 @@ class Rewards extends React.Component{
                                 </div>
                                 
                                 {
-                                    this.props.disabledBottomButton ? (
-                                        <NewRewardFormContainer cancel={this.props.updateDisabledBottomButton}
+                                    (this.props.disabledBottomButton && this.state.showRewardForm) ? (
+                                        <NewRewardFormContainer cancel={this.cancel}
                                                                 disabledBottomButton = {this.props.disabledBottomButton}/>
-                                    ):(null)
+                                    ):(
+                                        null
+                                    )
                                 }
                             </div>
                         ): (
@@ -158,8 +177,8 @@ class Rewards extends React.Component{
                                     }
                                 </div>
                                 {
-                                    this.props.disabledBottomButton ? (
-                                        <NewItemFormContainer cancel={this.props.updateDisabledBottomButton}
+                                    (this.props.disabledBottomButton && this.state.showItemForm) ? (
+                                        <NewItemFormContainer cancel={this.cancel}
                                         disabledBottomButton = {this.props.disabledBottomButton}/>
                                     ):(null)
                                 }

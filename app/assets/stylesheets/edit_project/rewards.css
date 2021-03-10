@@ -452,6 +452,9 @@
     opacity: 0.7;
 }
 
+.show-item{
+    margin-bottom: 50px;
+}
 .show-item-section{
     width: 100%;
     display: flex;
@@ -512,3 +515,17 @@
 #edit-item-right-button:hover{
     cursor: pointer;
 }
+
+
+
+/* .edit-top-button-conatiner{
+    position: fixed;
+    top: 11px;
+    right: 10px;
+    z-index: 30;
+}
+
+.edit-top-button-conatiner #edit-next-button-top:hover{
+    cursor: pointer;
+    background-color: #016b46;
+} */

@@ -141,7 +141,7 @@ class EditProjectForm extends React.Component{
     }
 
     updateDisabledBottomButton(){
-        debugger
+        // debugger
         // e.preventDefault();
         const value = !this.state.disabledBottomButton;
         const isModified = !this.state.isModified;
@@ -161,7 +161,7 @@ class EditProjectForm extends React.Component{
     }
 
     selectTab(num) {
-        debugger
+        // debugger
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -457,7 +457,7 @@ class EditProjectForm extends React.Component{
 
             const locations = Object.values(this.props.locations);
 
-            debugger
+            // debugger
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}

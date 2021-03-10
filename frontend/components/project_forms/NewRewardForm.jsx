@@ -114,7 +114,7 @@ class NewRewrdForm extends React.Component{
         const months = [ "January", "February", "March", "April", "May", "June", 
                "July", "August", "September", "October", "November", "December" ];
         const month = months[parseInt(this.state.month)-1]
-        // debugger
+        debugger
         return(
             <div className = 'reward-form-section'>
                 <form onSubmit={this.handleSubmit} className='add-reward-form'>

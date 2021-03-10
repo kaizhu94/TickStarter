@@ -5,7 +5,7 @@ import {fetchAllItems} from '../../actions/item_actions'
 import Rewards from './Rewards'
 
 const msp = state =>{
-    debugger
+    // debugger
     return ({
         items: state.entities.items
     })
