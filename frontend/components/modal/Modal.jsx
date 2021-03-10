@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {closeModal} from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom'
 import { updateProjectImage } from '../../actions/project_actions'
+import { deleteItem } from '../../actions/item_actions'
 
 function Modal( props ){
-    const {modal, closeModal, errors, projectId, updateProjectImage} = props
+    const {modal, closeModal, errors, projectId, updateProjectImage, deleteItem} = props
     debugger
     function redirect(projectId, tab){
         props.history.push(`/projects/${projectId}/edit/${tab}`)
@@ -68,14 +69,14 @@ function Modal( props ){
                                     props.rewards === 0 ? (
                                         <div>
                                             <p>{props.item_name} is not used in any of your rewards.</p>
-                                            <button >
+                                            <button onClick={()=>deleteItem(props.itemId)}>
                                                 Delete Item
                                             </button>
                                         </div>
                                     ) : (
                                         <div>
                                             <p>{props.item_name} will be deleted from {props.rewards} of your rewards. This action cannot be undone.</p>
-                                            <button >
+                                            <button onClick={()=>deleteItem(props.itemId)}>
                                                 Delete from {props.rewards} rewards
                                             </button>
                                         </div>
@@ -186,6 +187,7 @@ const mdp =dispatch =>{
     return {
         closeModal: ()=>dispatch(closeModal()),
         updateProjectImage: (id, FormData) => dispatch(updateProjectImage(id, FormData)),
+        deleteItem: (itemId) => dispatch(deleteItem(itemId)),
     }
 }
 

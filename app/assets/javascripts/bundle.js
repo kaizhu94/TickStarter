@@ -483,15 +483,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_ALL_ITEMS": () => /* binding */ RECEIVE_ALL_ITEMS,
 /* harmony export */   "RECEIVE_ITEM": () => /* binding */ RECEIVE_ITEM,
+/* harmony export */   "DELETE_ITEM": () => /* binding */ DELETE_ITEM,
 /* harmony export */   "receiveAllItems": () => /* binding */ receiveAllItems,
 /* harmony export */   "receiveItem": () => /* binding */ receiveItem,
+/* harmony export */   "removeItem": () => /* binding */ removeItem,
 /* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems,
-/* harmony export */   "createItem": () => /* binding */ createItem
+/* harmony export */   "createItem": () => /* binding */ createItem,
+/* harmony export */   "updateItem": () => /* binding */ updateItem,
+/* harmony export */   "deleteItem": () => /* binding */ deleteItem
 /* harmony export */ });
 /* harmony import */ var _util_item_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/item_util */ "./frontend/util/item_util.js");
 
 var RECEIVE_ALL_ITEMS = 'RECEIVE_ALL_ITEMS';
 var RECEIVE_ITEM = 'RECEIVE_ITEM';
+var DELETE_ITEM = 'DELETE_ITEM';
 var receiveAllItems = function receiveAllItems(items) {
   return {
     type: RECEIVE_ALL_ITEMS,
@@ -502,6 +507,12 @@ var receiveItem = function receiveItem(item) {
   return {
     type: RECEIVE_ITEM,
     item: item
+  };
+};
+var removeItem = function removeItem(itemId) {
+  return {
+    type: DELETE_ITEM,
+    itemId: itemId
   };
 };
 var fetchAllItems = function fetchAllItems(project_id) {
@@ -515,6 +526,22 @@ var createItem = function createItem(item) {
   return function (dispatch) {
     return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.createItem(item).then(function (item) {
       return dispatch(receiveItem(item));
+    });
+  };
+};
+var updateItem = function updateItem(item) {
+  return function (dispatch) {
+    // debugger
+    return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.updateItem(item).then(function (item) {
+      return dispatch(receiveItem(item));
+    });
+  };
+};
+var deleteItem = function deleteItem(itemId) {
+  return function (dispatch) {
+    debugger;
+    return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.deleteItem(itemId).then(function () {
+      return dispatch(removeItem(itemId));
     });
   };
 };
@@ -1802,8 +1829,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
+
 
 
 
@@ -1815,7 +1844,8 @@ function Modal(props) {
       closeModal = props.closeModal,
       errors = props.errors,
       projectId = props.projectId,
-      updateProjectImage = props.updateProjectImage;
+      updateProjectImage = props.updateProjectImage,
+      deleteItem = props.deleteItem;
   debugger;
 
   function redirect(projectId, tab) {
@@ -1888,7 +1918,15 @@ function Modal(props) {
         className: "unsave-modal-continer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Delete this item?"), props.rewards === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.item_name, " is not used in any of your rewards."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete Item")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.item_name, " will be deleted from ", props.rewards, " of your rewards. This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete from ", props.rewards, " rewards"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Delete this item?"), props.rewards === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.item_name, " is not used in any of your rewards."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return deleteItem(props.itemId);
+        }
+      }, "Delete Item")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, props.item_name, " will be deleted from ", props.rewards, " of your rewards. This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return deleteItem(props.itemId);
+        }
+      }, "Delete from ", props.rewards, " rewards"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-lower"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
@@ -1996,11 +2034,14 @@ var mdp = function mdp(dispatch) {
     },
     updateProjectImage: function updateProjectImage(id, FormData) {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_3__.updateProjectImage)(id, FormData));
+    },
+    deleteItem: function deleteItem(itemId) {
+      return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_4__.deleteItem)(itemId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal)));
 
 /***/ }),
 
@@ -2719,8 +2760,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-/* harmony import */ var _EditItemForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditItemForm */ "./frontend/components/project_forms/EditItemForm.jsx");
+/* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _EditItemForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditItemForm */ "./frontend/components/project_forms/EditItemForm.jsx");
+
 
 
 
@@ -2733,15 +2776,18 @@ var msp = function msp(state) {
 var mdp = function mdp(dispatch) {
   return {
     openModal: function openModal(modal) {
-      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__.openModal)(modal));
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__.openModal)(modal));
     },
     closeModal: function closeModal() {
-      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__.closeModal)());
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__.closeModal)());
+    },
+    updateItem: function updateItem(item) {
+      return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_1__.updateItem)(item));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditItemForm__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditItemForm__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 
@@ -2800,7 +2846,8 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
       showEditItem: false,
       valid: true,
       item_name: _this.props.item.item_name,
-      showModal: false
+      showModal: false,
+      id: _this.props.item.id
     };
     _this.editItem = _this.editItem.bind(_assertThisInitialized(_this));
     _this.handleSumbit = _this.handleSumbit.bind(_assertThisInitialized(_this));
@@ -2849,7 +2896,7 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
         this.setState({
           'showModal': true
         });
-        this.props.showModal(this.state.item_name, this.props.item.rewards); // this.setState({
+        this.props.showModal(this.state.item_name, this.props.item.rewards, this.props.item.id); // this.setState({
         //     'showModal': false
         // });
       }
@@ -2869,7 +2916,9 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
         this.setState({
           'valid': false
         });
-      } else {// debugger
+      } else {
+        this.props.updateItem(this.state);
+        this.cancel();
       }
     }
   }, {
@@ -5874,7 +5923,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       showItemForm: false,
       showEditItemForm: false,
       item_name: '',
-      rewards: 0 // updateDisabledBottomButton: this.props.disabledBottomButton,
+      rewards: 0,
+      itemId: '' // updateDisabledBottomButton: this.props.disabledBottomButton,
 
     };
     _this2.updatetab = _this2.updatetab.bind(_assertThisInitialized(_this2));
@@ -5956,10 +6006,11 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     }
   }, {
     key: "showModal",
-    value: function showModal(item_name, rewards) {
+    value: function showModal(item_name, rewards, itemId) {
       this.setState({
         'item_name': item_name,
-        'rewards': rewards
+        'rewards': rewards,
+        'itemId': itemId
       });
       this.props.openModal('deleteItem');
     }
@@ -5997,7 +6048,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
           className: "rewards-items-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_4__.default, {
           item_name: this.state.item_name,
-          rewards: this.state.rewards
+          rewards: this.state.rewards,
+          itemId: this.state.itemId
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
           selected: this.state.tab,
           tabs: tabs,
@@ -6762,6 +6814,12 @@ var itemsReducer = function itemsReducer() {
       var newItems = Object.assign({}, state, _defineProperty({}, action.item.id, action.item));
       return newItems;
 
+    case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_ITEM:
+      debugger;
+      var items = Object.assign({}, state);
+      delete items[action.itemId];
+      return items;
+
     default:
       return state;
   }
@@ -7166,7 +7224,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems,
 /* harmony export */   "createItem": () => /* binding */ createItem,
-/* harmony export */   "deleteItem": () => /* binding */ deleteItem
+/* harmony export */   "deleteItem": () => /* binding */ deleteItem,
+/* harmony export */   "updateItem": () => /* binding */ updateItem
 /* harmony export */ });
 var fetchAllItems = function fetchAllItems(project_id) {
   return $.ajax({
@@ -7187,9 +7246,20 @@ var createItem = function createItem(item) {
   });
 };
 var deleteItem = function deleteItem(itemId) {
+  debugger;
   return $.ajax({
     method: 'DELETE',
     url: "api/items/".concat(itemId)
+  });
+};
+var updateItem = function updateItem(item) {
+  debugger;
+  return $.ajax({
+    method: 'PATCH',
+    url: "api/items/".concat(item.id),
+    data: {
+      item: item
+    }
   });
 };
 

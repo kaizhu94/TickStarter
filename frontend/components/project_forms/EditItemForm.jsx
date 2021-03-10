@@ -10,6 +10,7 @@ class EditItemForm extends React.Component{
             valid: true,
             item_name: this.props.item.item_name,
             showModal: false,
+            id: this.props.item.id
         };
         this.editItem = this.editItem.bind(this);
         this.handleSumbit = this.handleSumbit.bind(this);
@@ -44,7 +45,7 @@ class EditItemForm extends React.Component{
            this.setState({
                 'showModal': true
             })
-        this.props.showModal(this.state.item_name, this.props.item.rewards);
+        this.props.showModal(this.state.item_name, this.props.item.rewards,this.props.item.id);
         // this.setState({
         //     'showModal': false
         // });
@@ -62,7 +63,8 @@ class EditItemForm extends React.Component{
                 'valid': false
             })
         }else{
-            // debugger
+            this.props.updateItem(this.state);
+            this.cancel();
         }
     }
     render(){

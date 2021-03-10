@@ -54,6 +54,7 @@ class Rewards extends React.Component{
             showEditItemForm: false,
             item_name: '',
             rewards: 0,
+            itemId: ''
             // updateDisabledBottomButton: this.props.disabledBottomButton,
         }
         this.updatetab = this.updatetab.bind(this);
@@ -119,10 +120,11 @@ class Rewards extends React.Component{
         }
     }
 
-    showModal(item_name, rewards){
+    showModal(item_name, rewards, itemId){
         this.setState({
             'item_name': item_name,
-            'rewards': rewards
+            'rewards': rewards,
+            'itemId': itemId,
         })
         this.props.openModal('deleteItem');
     }
@@ -153,7 +155,8 @@ class Rewards extends React.Component{
             return (
                 <div className='rewards-items-container'>
                     <Modal item_name={this.state.item_name}
-                                rewards={this.state.rewards}/>
+                                rewards={this.state.rewards}
+                                itemId={this.state.itemId}/>
                     {/* {
                         this.props.disabledBottomButton ? (
                             this.state.tab === 0 ? (
