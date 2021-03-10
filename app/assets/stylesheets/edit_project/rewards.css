@@ -123,7 +123,7 @@
 }
 
 .reward-form-container div p, .preview p{
-    color: rgb(167 166 166);
+    color: rgb(84 84 84);
     font-size: 17px;
     line-height: 25px;
 }
@@ -184,7 +184,9 @@
 .reward-form-container div input:hover{
     border-color: limegreen;
 }
-
+.reward-form-container .form-section p{
+    color: rgb(107 106 106);
+}
 #reward-description{
     height: 98px;
     width: 97%;

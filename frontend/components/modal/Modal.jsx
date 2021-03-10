@@ -7,7 +7,7 @@ import { deleteItem } from '../../actions/item_actions'
 
 function Modal( props ){
     const {modal, closeModal, errors, projectId, updateProjectImage, deleteItem} = props
-    debugger
+    // debugger
     function redirect(projectId, tab){
         props.history.push(`/projects/${projectId}/edit/${tab}`)
     } 
@@ -175,7 +175,7 @@ function Modal( props ){
 
 
 const msp =(state, ownprops) =>{
-    debugger
+    // debugger
     return {
         modal: state.ui.modal,
         errors: state.errors.session,

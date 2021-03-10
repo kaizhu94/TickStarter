@@ -67,6 +67,7 @@ class Rewards extends React.Component{
 
     componentDidMount(){
         this.props.receiveAllItems(this.props.project.id);
+        this.props.receiveAllRewards(this.props.project.id);
     }
     updatetab(num){
         if(!this.props.disabledBottomButton){
@@ -132,9 +133,9 @@ class Rewards extends React.Component{
     render(){
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
         const disable = this.disable();
-        const {items} = this.props;
+        const {items, rewards} = this.props;
         // debugger
-        if(!items){
+        if(!items || !rewards){
             // debugger
             return null;
         }else{

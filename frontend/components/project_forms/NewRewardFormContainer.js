@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 
+
+
 import NewRewrdForm from './NewRewardForm'
 
 const msp = state =>{
@@ -10,6 +12,7 @@ const msp = state =>{
 
 const mdp = dispatch=>{
     return ({
+       
     })
 }
 export default connect(msp, mdp)(NewRewrdForm);

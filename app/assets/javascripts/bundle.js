@@ -703,6 +703,38 @@ var updateProjectImage = function updateProjectImage(id, formdata) {
 
 /***/ }),
 
+/***/ "./frontend/actions/reward_action.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/reward_action.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "REVEICE_ALL_REWARDS": () => /* binding */ REVEICE_ALL_REWARDS,
+/* harmony export */   "receiveAllRewards": () => /* binding */ receiveAllRewards,
+/* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards
+/* harmony export */ });
+/* harmony import */ var _util_reward_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/reward_util */ "./frontend/util/reward_util.js");
+
+var REVEICE_ALL_REWARDS = 'REVEICE_ALL_REWARDS';
+var receiveAllRewards = function receiveAllRewards(rewards) {
+  return {
+    type: REVEICE_ALL_REWARDS,
+    rewards: rewards
+  };
+};
+var fetchAllRewards = function fetchAllRewards(project_id) {
+  return function (dispatch) {
+    return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.fetchAllRewards(project_id).then(function (rewards) {
+      return dispatch(receiveAllItems(rewards));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_action.js":
 /*!********************************************!*\
   !*** ./frontend/actions/session_action.js ***!
@@ -1845,8 +1877,7 @@ function Modal(props) {
       errors = props.errors,
       projectId = props.projectId,
       updateProjectImage = props.updateProjectImage,
-      deleteItem = props.deleteItem;
-  debugger;
+      deleteItem = props.deleteItem; // debugger
 
   function redirect(projectId, tab) {
     props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
@@ -2019,7 +2050,7 @@ function Modal(props) {
 }
 
 var msp = function msp(state, ownprops) {
-  debugger;
+  // debugger
   return {
     modal: state.ui.modal,
     errors: state.errors.session,
@@ -5940,6 +5971,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.receiveAllItems(this.props.project.id);
+      this.props.receiveAllRewards(this.props.project.id);
     }
   }, {
     key: "updatetab",
@@ -6025,9 +6057,11 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         title: 'Items'
       }];
       var disable = this.disable();
-      var items = this.props.items; // debugger
+      var _this$props = this.props,
+          items = _this$props.items,
+          rewards = _this$props.rewards; // debugger
 
-      if (!items) {
+      if (!items || !rewards) {
         // debugger
         return null;
       } else {
@@ -6103,8 +6137,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
-/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-/* harmony import */ var _Rewards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Rewards */ "./frontend/components/project_forms/Rewards.jsx");
+/* harmony import */ var _actions_reward_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/reward_action */ "./frontend/actions/reward_action.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _Rewards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Rewards */ "./frontend/components/project_forms/Rewards.jsx");
+
 
 
 
@@ -6113,7 +6149,8 @@ __webpack_require__.r(__webpack_exports__);
 var msp = function msp(state) {
   // debugger
   return {
-    items: state.entities.items
+    items: state.entities.items,
+    rewards: state.entities.rewards
   };
 };
 
@@ -6122,16 +6159,19 @@ var mdp = function mdp(dispatch) {
     receiveAllItems: function receiveAllItems(project_id) {
       return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_1__.fetchAllItems)(project_id));
     },
+    receiveAllRewards: function receiveAllRewards(proejctID) {
+      return dispatch((0,_actions_reward_action__WEBPACK_IMPORTED_MODULE_2__.fetchAllRewards)(proejctID));
+    },
     openModal: function openModal(modal) {
-      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__.openModal)(modal));
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__.openModal)(modal));
     },
     closeModal: function closeModal() {
-      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__.closeModal)());
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__.closeModal)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_Rewards__WEBPACK_IMPORTED_MODULE_3__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_Rewards__WEBPACK_IMPORTED_MODULE_4__.default));
 
 /***/ }),
 
@@ -6738,24 +6778,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _projects_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projects_reducer */ "./frontend/reducers/projects_reducer.js");
 /* harmony import */ var _locations_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./locations_reducer */ "./frontend/reducers/locations_reducer.js");
 /* harmony import */ var _categories_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./categories_reducer */ "./frontend/reducers/categories_reducer.js");
 /* harmony import */ var _items_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./items_reducer */ "./frontend/reducers/items_reducer.js");
+/* harmony import */ var _rewards_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./rewards_reducer */ "./frontend/reducers/rewards_reducer.js");
 
 
 
 
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
   projects: _projects_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
   locations: _locations_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
   categories: _categories_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
-  items: _items_reducer__WEBPACK_IMPORTED_MODULE_4__.default
+  items: _items_reducer__WEBPACK_IMPORTED_MODULE_4__.default,
+  rewards: _rewards_reducer__WEBPACK_IMPORTED_MODULE_5__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -6939,6 +6982,40 @@ var projectReducer = function projectReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (projectReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/rewards_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/rewards_reducer.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/reward_action */ "./frontend/actions/reward_action.js");
+
+
+var rewardsReducer = function rewardsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  // debugger
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.REVEICE_ALL_REWARDS:
+      debugger;
+      return action.rewards;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rewardsReducer);
 
 /***/ }),
 
@@ -7346,6 +7423,30 @@ var updateProjectImage = function updateProjectImage(id, formData) {
     data: formData,
     contentType: false,
     processData: false
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/reward_util.js":
+/*!**************************************!*\
+  !*** ./frontend/util/reward_util.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards
+/* harmony export */ });
+var fetchAllRewards = function fetchAllRewards(project_id) {
+  debugger;
+  return $.ajax({
+    method: 'GET',
+    url: 'api/rewards',
+    data: {
+      project_id: project_id
+    }
   });
 };
 
