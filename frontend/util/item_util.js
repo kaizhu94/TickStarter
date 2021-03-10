@@ -14,3 +14,10 @@ export const createItem= item =>{
     })
 }
 
+
+export const deleteItem = itemId =>{
+  return $.ajax({
+      method: 'DELETE',
+      url: `api/items/${itemId}`
+    })
+}

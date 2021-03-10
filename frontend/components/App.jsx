@@ -18,7 +18,7 @@ import EditProjectContainer from './project_forms/EditProjectContainer'
 const App = () => {
   return (
       <div>
-		  	<Modal test='aaaa'/>
+		  	<Modal />
 
 			<header className='header'>
 				<Switch>

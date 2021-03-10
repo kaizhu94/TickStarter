@@ -121,7 +121,8 @@ class Rewards extends React.Component{
                     <EditItemConatiner key={index}
                                         item={item}
                                         updateDisabledBottomButton={this.props.updateDisabledBottomButton}
-                                        disabledBottomButton = {this.props.disabledBottomButton}/>
+                                        disabledBottomButton = {this.props.disabledBottomButton}
+                                        showItemForm={this.state.showItemForm}/>
                 )
             });
             debugger

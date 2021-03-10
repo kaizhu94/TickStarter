@@ -9,7 +9,16 @@ class Api::ItemsController < ApplicationController
         if @item.save
             render :show
         else
-            render json: @project.errors.full_messages, status: 404
+            render json: @item.errors.full_messages, status: 404
+        end
+    end
+
+    def destroy
+        @item = Item.find(params[:id])
+        if @item
+            @item.destroy
+        else
+            render json: @item.errors.full_messages, status: 404
         end
     end
 

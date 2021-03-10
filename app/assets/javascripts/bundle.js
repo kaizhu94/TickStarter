@@ -796,9 +796,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_6__.default, {
-    test: "aaaa"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
     className: "header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
     path: "/signup",
@@ -2811,7 +2809,7 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
   _createClass(EditItemForm, [{
     key: "editItem",
     value: function editItem() {
-      if (!this.props.disabledBottomButton) {
+      if (!this.props.disabledBottomButton && !this.props.showItemForm) {
         // debugger
         this.props.updateDisabledBottomButton();
         this.setState({
@@ -2841,14 +2839,16 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleModal",
     value: function handleModal() {
-      if (!this.state.showEditItem) {
+      debugger;
+
+      if (!this.state.showEditItem && !this.props.showItemForm) {
         this.props.openModal('deleteItem');
       }
     }
   }, {
     key: "showingForm",
     value: function showingForm() {
-      return this.state.showEditItem ? '-show' : '';
+      return this.state.showEditItem || this.props.showItemForm ? '-show' : '';
     }
   }, {
     key: "handleSumbit",
@@ -5956,7 +5956,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             key: index,
             item: item,
             updateDisabledBottomButton: _this3.props.updateDisabledBottomButton,
-            disabledBottomButton: _this3.props.disabledBottomButton
+            disabledBottomButton: _this3.props.disabledBottomButton,
+            showItemForm: _this3.state.showItemForm
           });
         });
         debugger;
@@ -7121,7 +7122,8 @@ var fetchCategory = function fetchCategory(categoryId) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchAllItems": () => /* binding */ fetchAllItems,
-/* harmony export */   "createItem": () => /* binding */ createItem
+/* harmony export */   "createItem": () => /* binding */ createItem,
+/* harmony export */   "deleteItem": () => /* binding */ deleteItem
 /* harmony export */ });
 var fetchAllItems = function fetchAllItems(project_id) {
   return $.ajax({
@@ -7139,6 +7141,12 @@ var createItem = function createItem(item) {
     data: {
       item: item
     }
+  });
+};
+var deleteItem = function deleteItem(itemId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: "api/items/".concat(itemId)
   });
 };
 

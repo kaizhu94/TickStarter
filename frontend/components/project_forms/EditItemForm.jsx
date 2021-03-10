@@ -14,7 +14,7 @@ class EditItemForm extends React.Component{
         this.handleSumbit = this.handleSumbit.bind(this);
     }
     editItem(){
-        if(!this.props.disabledBottomButton){
+        if(!this.props.disabledBottomButton && !this.props.showItemForm){
             // debugger
             this.props.updateDisabledBottomButton();
             this.setState({
@@ -35,12 +35,13 @@ class EditItemForm extends React.Component{
         })
     }
     handleModal(){
-        if(!this.state.showEditItem){
+        debugger
+        if(!this.state.showEditItem && !this.props.showItemForm){
             this.props.openModal('deleteItem')
         }
     }
     showingForm(){
-        return this.state.showEditItem? '-show': '';
+        return (this.state.showEditItem || this.props.showItemForm)? '-show': '';
     }
     handleSumbit(e){
         e.preventDefault();
