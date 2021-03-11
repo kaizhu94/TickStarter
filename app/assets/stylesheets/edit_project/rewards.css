@@ -563,8 +563,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    
 }
+
 
 .show-reward-section-upper{
     display: grid;
@@ -586,6 +586,15 @@
 }
 
 .show-reward-section-lower{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gainsboro;
+}
+.show-reward-section-lower:hover{
+    box-shadow: -3px -3px 15px 4px #dddddd;
+}
+
+.show-reward-section-lower-show{
     display: flex;
     flex-direction: column;
     border: 1px solid gainsboro;

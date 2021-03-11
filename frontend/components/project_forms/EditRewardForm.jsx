@@ -190,13 +190,13 @@ class EditRewardForm extends React.Component{
         return(
             <div>
                 <div className={`show-reward${this.showingForm()}`}>
-                    <div className={`show-reward-section`}>
+                    <div className={`show-reward-section`} >
                         <div className={`show-reward-section-upper`}>
                             <p id='one'>PLEDGE AMOUNT</p>
                             <p id='two'>DETAILS</p>
                             <p id='three'>INCLUDES</p>
                         </div>
-                        <div className={`show-reward-section-lower`}>
+                        <div className={`show-reward-section-lower${this.showingForm()}`} onClick={()=>this.editItem()}>
                             <div className='show-reward-section-lower-up'>
                                 <div className='up-one'>
                                     <p id='show-reward-p-one'>CA$ <span>{reward.amount}</span></p> 

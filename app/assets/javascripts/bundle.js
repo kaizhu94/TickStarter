@@ -4771,7 +4771,10 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       }, "DETAILS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "three"
       }, "INCLUDES")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "show-reward-section-lower"
+        className: "show-reward-section-lower".concat(this.showingForm()),
+        onClick: function onClick() {
+          return _this4.editItem();
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-reward-section-lower-up"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
