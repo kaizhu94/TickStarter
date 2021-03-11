@@ -37,7 +37,7 @@ class EditRewardForm extends React.Component{
             year: date.getFullYear(),
             'description': reward.description,
             'amount': reward.amount,
-            'items': this.props.reward.items,
+            'items': this.props.reward.items ? this.props.reward.items : '',
         })
     }
 
@@ -171,13 +171,13 @@ class EditRewardForm extends React.Component{
         let currentTime = new Date();
         const currentYear = currentTime.getFullYear();
         const month = months[parseInt(this.state.month)-1]
-        const itemsInclude = Object.values(reward.items).map((item, index) =>{
+        const itemsInclude = reward.items?  Object.values(reward.items).map((item, index) =>{
             return(
                 <li key = {index}>
                     {item.item_name}
                 </li>
             )
-        })
+        }):'';
         debugger
         const itemsForEdit = Object.values(this.state.items).map((item, index) =>{
             return(
@@ -336,12 +336,16 @@ class EditRewardForm extends React.Component{
                                             <p id='preview-title'>{this.state.description}</p>
                                         )
                                     }
-                                    <div className='preview-include-block'>
-                                        <h5>INCLUDES</h5>
-                                        <ul className='preview-inlcude-items'>
-                                            {itemsForEdit}
-                                        </ul>
-                                    </div>
+                                    {
+                                        this.state.items === '' ?(
+                                            <div className='preview-include-block'>
+                                                <h5>INCLUDES</h5>
+                                                <ul className='preview-inlcude-items'>
+                                                    {itemsForEdit}
+                                                </ul>
+                                            </div>
+                                        ): (null)
+                                    }
                                     <div className='preview-date-block'>
                                         <h5>ESTIMATED DELIVERY</h5>
                                         <div className='preview-date'>

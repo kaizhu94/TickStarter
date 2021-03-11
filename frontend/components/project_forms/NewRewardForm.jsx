@@ -147,7 +147,8 @@ class NewRewrdForm extends React.Component{
 
     updateshowAddItem(){
         this.setState({
-            'showAddItem': !this.state.showAddItem
+            'showAddItem': !this.state.showAddItem,
+            'item_name': ''
         })
     }
     createNewItem(e){
@@ -158,12 +159,7 @@ class NewRewrdForm extends React.Component{
                 'validInputName': '-invalid'
             })
         }else{
-            // this.setState({
-            //     'validInputName': ''
-            // });
             const item = {'item_name': this.state.item_name, 'project_id': this.props.project.id}
-            debugger
-            const allItems = this.props.allItems;
             this.props.createItem(item)
             .then((item) =>{
                 debugger
@@ -173,7 +169,6 @@ class NewRewrdForm extends React.Component{
                     return this.setState({
                         'items': newItems,
                         'validInputName': '',
-                        'item_name': '',
                     })
                 })
             debugger

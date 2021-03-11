@@ -4592,7 +4592,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         year: date.getFullYear(),
         'description': reward.description,
         'amount': reward.amount,
-        'items': this.props.reward.items
+        'items': this.props.reward.items ? this.props.reward.items : ''
       });
     }
   }, {
@@ -4747,11 +4747,11 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       var currentTime = new Date();
       var currentYear = currentTime.getFullYear();
       var month = months[parseInt(this.state.month) - 1];
-      var itemsInclude = Object.values(reward.items).map(function (item, index) {
+      var itemsInclude = reward.items ? Object.values(reward.items).map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index
         }, item.item_name);
-      });
+      }) : '';
       debugger;
       var itemsForEdit = Object.values(this.state.items).map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -4959,11 +4959,11 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         id: "empty-preview"
       }, "Get an early copy \u2014 hot off the presses!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "preview-title"
-      }, this.state.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, this.state.description), this.state.items === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-include-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "INCLUDES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "preview-inlcude-items"
-      }, itemsForEdit)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, itemsForEdit)) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date"
@@ -5784,7 +5784,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
     key: "updateshowAddItem",
     value: function updateshowAddItem() {
       this.setState({
-        'showAddItem': !this.state.showAddItem
+        'showAddItem': !this.state.showAddItem,
+        'item_name': ''
       });
     }
   }, {
@@ -5800,15 +5801,10 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           'validInputName': '-invalid'
         });
       } else {
-        // this.setState({
-        //     'validInputName': ''
-        // });
         var item = {
           'item_name': this.state.item_name,
           'project_id': this.props.project.id
         };
-        debugger;
-        var allItems = this.props.allItems;
         this.props.createItem(item).then(function (item) {
           debugger;
           var newItem = item.item;
@@ -5816,8 +5812,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           debugger;
           return _this7.setState({
             'items': newItems,
-            'validInputName': '',
-            'item_name': ''
+            'validInputName': ''
           });
         });
         debugger;
