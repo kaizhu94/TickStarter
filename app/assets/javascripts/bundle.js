@@ -4743,6 +4743,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var date = new Date(reward.estimated_delivery);
       var estimated_delivery = "".concat(months[date.getMonth()], " ").concat(date.getFullYear());
+      debugger;
       var currentTime = new Date();
       var currentYear = currentTime.getFullYear();
       var month = months[parseInt(this.state.month) - 1];
@@ -5688,7 +5689,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         debugger;
 
         _this5.setState({
-          items: newItems
+          'items': newItems
         });
 
         _this5.updateshowAddItem();
@@ -5706,7 +5707,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         debugger;
 
         _this6.setState({
-          items: newItems
+          'items': newItems
         });
       };
     }
@@ -5789,6 +5790,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "createNewItem",
     value: function createNewItem(e) {
+      var _this7 = this;
+
       e.preventDefault();
       debugger;
 
@@ -5797,15 +5800,34 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           'validInputName': '-invalid'
         });
       } else {
-        this.setState({
-          'validInputName': ''
+        // this.setState({
+        //     'validInputName': ''
+        // });
+        var item = {
+          'item_name': this.state.item_name,
+          'project_id': this.props.project.id
+        };
+        debugger;
+        var allItems = this.props.allItems;
+        this.props.createItem(item).then(function (item) {
+          debugger;
+          var newItem = item.item;
+          var newItems = Object.assign({}, _this7.state.items, _defineProperty({}, newItem.id, newItem));
+          debugger;
+          return _this7.setState({
+            'items': newItems,
+            'validInputName': '',
+            'item_name': ''
+          });
         });
+        debugger;
+        this.updateshowAddItem();
       }
     }
   }, {
     key: "isNameExist",
     value: function isNameExist() {
-      var names = Object.values(this.state.items);
+      var names = Object.values(this.props.allItems);
 
       for (var i = 0; i < names.length; i++) {
         if (this.state.item_name === names[i].item_name) {
@@ -5818,7 +5840,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this7 = this;
+      var _this8 = this;
 
       debugger;
       var currentTime = new Date();
@@ -5841,7 +5863,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           id: "itemsArray-title"
         }, item.item_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
           id: "itemsArray-remove",
-          onClick: _this7.removeItem(item.id)
+          onClick: _this8.removeItem(item.id)
         }, "Remove"));
       });
       debugger;
@@ -5856,7 +5878,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         type: "button",
         id: "edit-cancel",
         onClick: function onClick() {
-          return _this7.props.cancel();
+          return _this8.props.cancel();
         }
       }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
@@ -6008,14 +6030,14 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         onClick: this.createNewItem
       }, " Save "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: function onClick() {
-          return _this7.updateshowAddItem();
+          return _this8.updateshowAddItem();
         },
         id: "newitem-cancel"
       }, "Cancel")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
         id: "new-item-button",
         onClick: function onClick() {
-          return _this7.updateshowAddItem();
+          return _this8.updateshowAddItem();
         }
       }, " + New item"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-save-bot"
@@ -6026,7 +6048,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         type: "button",
         id: "edit-cancel",
         onClick: function onClick() {
-          return _this7.props.cancel();
+          return _this8.props.cancel();
         }
       }, "Cancel")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview"
@@ -8017,6 +8039,7 @@ var fetchAllItems = function fetchAllItems(project_id) {
   });
 };
 var createItem = function createItem(item) {
+  debugger;
   return $.ajax({
     method: 'POST',
     url: "api/items",

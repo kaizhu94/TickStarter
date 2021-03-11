@@ -7,6 +7,7 @@ export const fetchAllItems = (project_id) =>{
 }
 
 export const createItem= item =>{
+  debugger
   return $.ajax({
       method: 'POST',
       url: `api/items`,

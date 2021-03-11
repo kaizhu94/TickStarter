@@ -64,7 +64,7 @@ class NewRewrdForm extends React.Component{
             const newItems = Object.assign({}, this.state.items,{[parseInt(e.currentTarget.value)]: newItem});
             debugger
             this.setState({
-                items: newItems
+                'items': newItems
             })
             this.updateshowAddItem();
         }
@@ -73,10 +73,10 @@ class NewRewrdForm extends React.Component{
         return e =>{
             // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
             const newItems = Object.assign({}, this.state.items);
-            delete newItems[parseInt(id)]
+            delete newItems[parseInt(id)];
             debugger
             this.setState({
-                items: newItems
+                'items': newItems
             })
         }
     }
@@ -158,14 +158,30 @@ class NewRewrdForm extends React.Component{
                 'validInputName': '-invalid'
             })
         }else{
-            this.setState({
-                'validInputName': ''
-            });
-
+            // this.setState({
+            //     'validInputName': ''
+            // });
+            const item = {'item_name': this.state.item_name, 'project_id': this.props.project.id}
+            debugger
+            const allItems = this.props.allItems;
+            this.props.createItem(item)
+            .then((item) =>{
+                debugger
+                const newItem = item.item;
+                const newItems = Object.assign({}, this.state.items, {[newItem.id]: newItem});
+                debugger
+                    return this.setState({
+                        'items': newItems,
+                        'validInputName': '',
+                        'item_name': '',
+                    })
+                })
+            debugger
+            this.updateshowAddItem();
         }
     }
     isNameExist(){
-        const names = Object.values(this.state.items);
+        const names = Object.values(this.props.allItems);
         for(let i =0; i< names.length; i++){
             if(this.state.item_name === names[i].item_name){
                 return false;
@@ -308,7 +324,7 @@ class NewRewrdForm extends React.Component{
                                                 <p id='new-item-or'>Or</p>
                                                 <h3 id='Add-Item-Block-h3'>Create a new item</h3>
                                                 <input type="text"  id={`item-name-input${this.state.validInputName}`} value={this.state.item_name}
-                                                onChange={this.updateItemName('item_name')} placeholder='Digital photo'/>
+                                                    onChange={this.updateItemName('item_name')} placeholder='Digital photo'/>
                                                 <button type='button' id='new-item-button' onClick={this.createNewItem}> Save </button>
                                                 <p onClick={()=>this.updateshowAddItem()} id='newitem-cancel'>Cancel</p>
                                             </div>

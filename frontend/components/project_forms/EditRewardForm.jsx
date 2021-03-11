@@ -167,7 +167,7 @@ class EditRewardForm extends React.Component{
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const date = new Date(reward.estimated_delivery)
         const estimated_delivery = `${months[date.getMonth()]} ${date.getFullYear()}`
-
+        debugger
         let currentTime = new Date();
         const currentYear = currentTime.getFullYear();
         const month = months[parseInt(this.state.month)-1]
