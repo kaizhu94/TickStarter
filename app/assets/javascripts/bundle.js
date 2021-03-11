@@ -712,23 +712,40 @@ var updateProjectImage = function updateProjectImage(id, formdata) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "REVEICE_ALL_REWARDS": () => /* binding */ REVEICE_ALL_REWARDS,
+/* harmony export */   "RECEIVE_ALL_REWARDS": () => /* binding */ RECEIVE_ALL_REWARDS,
+/* harmony export */   "RECEIVE_REWARD": () => /* binding */ RECEIVE_REWARD,
 /* harmony export */   "receiveAllRewards": () => /* binding */ receiveAllRewards,
-/* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards
+/* harmony export */   "receiveReward": () => /* binding */ receiveReward,
+/* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards,
+/* harmony export */   "createReward": () => /* binding */ createReward
 /* harmony export */ });
 /* harmony import */ var _util_reward_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/reward_util */ "./frontend/util/reward_util.js");
 
-var REVEICE_ALL_REWARDS = 'REVEICE_ALL_REWARDS';
+var RECEIVE_ALL_REWARDS = 'RECEIVE_ALL_REWARDS';
+var RECEIVE_REWARD = 'RECEIVE_REWARD';
 var receiveAllRewards = function receiveAllRewards(rewards) {
   return {
-    type: REVEICE_ALL_REWARDS,
+    type: RECEIVE_ALL_REWARDS,
     rewards: rewards
+  };
+};
+var receiveReward = function receiveReward(reward) {
+  return {
+    type: RECEIVE_REWARD,
+    reward: reward
   };
 };
 var fetchAllRewards = function fetchAllRewards(project_id) {
   return function (dispatch) {
     return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.fetchAllRewards(project_id).then(function (rewards) {
       return dispatch(receiveAllRewards(rewards));
+    });
+  };
+};
+var createReward = function createReward(reward) {
+  return function (dispatch) {
+    return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.createReward(reward).then(function (reward) {
+      return dispatch(receiveItem(reward));
     });
   };
 };
@@ -5617,6 +5634,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       title: '',
       description: '',
       amount: 1,
+      estimated_delivery: '',
       validmonth: true,
       validyear: true,
       validtitle: true,
@@ -5630,7 +5648,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       items: {},
       showAddItem: false,
       item_name: '',
-      validInputName: ''
+      validInputName: '',
+      project_id: props.project.id
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.createNewItem = _this.createNewItem.bind(_assertThisInitialized(_this));
@@ -5643,8 +5662,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
     value: function update(key) {
       var _this2 = this;
 
-      var name = "valid" + "".concat(key); // debugger
-
+      var name = "valid" + "".concat(key);
       return function (e) {
         var _this2$setState;
 
@@ -5726,6 +5744,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       var titleError = '';
       var descriptionError = '';
       var amountError = '';
+      debugger;
 
       if (this.state.month === '') {
         validMonth = false;
@@ -5770,8 +5789,13 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           'amountErrorMessage': amountError
         }); // debugger
       } else {
-        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-'01'T'10':'00':'00'");
-        var date = new Date(Format); // debugger
+        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00");
+        var date = new Date(Format);
+        var reward = {
+          project_id: this.state.project_id
+        };
+        debugger;
+        this.props.createReward(this.state); // debugger
       } // if()
 
     }
@@ -6085,7 +6109,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
-/* harmony import */ var _NewRewardForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NewRewardForm */ "./frontend/components/project_forms/NewRewardForm.jsx");
+/* harmony import */ var _actions_reward_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/reward_action */ "./frontend/actions/reward_action.js");
+/* harmony import */ var _NewRewardForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NewRewardForm */ "./frontend/components/project_forms/NewRewardForm.jsx");
+
 
 
 
@@ -6101,11 +6127,14 @@ var mdp = function mdp(dispatch) {
   return {
     createItem: function createItem(item) {
       return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_1__.createItem)(item));
+    },
+    createReward: function createReward(reward) {
+      return dispatch((0,_actions_reward_action__WEBPACK_IMPORTED_MODULE_2__.createReward)(reward));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NewRewardForm__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NewRewardForm__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 
@@ -7573,12 +7602,12 @@ var itemsReducer = function itemsReducer() {
       return action.items;
 
     case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ITEM:
-      debugger;
+      // debugger
       var newItems = Object.assign({}, state, _defineProperty({}, action.item.id, action.item));
       return newItems;
 
     case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_ITEM:
-      debugger;
+      // debugger
       var items = Object.assign({}, state);
       delete items[action.itemId];
       return items;
@@ -7717,6 +7746,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/reward_action */ "./frontend/actions/reward_action.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var rewardsReducer = function rewardsReducer() {
@@ -7726,9 +7757,14 @@ var rewardsReducer = function rewardsReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.REVEICE_ALL_REWARDS:
+    case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_REWARDS:
       // debugger
       return action.rewards;
+
+    case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_REWARD:
+      debugger;
+      var rewards = Object.assign({}, state, _defineProperty({}, action.reward.id, action.reward));
+      return rewards;
 
     default:
       return state;
@@ -8034,7 +8070,7 @@ var fetchAllItems = function fetchAllItems(project_id) {
   });
 };
 var createItem = function createItem(item) {
-  debugger;
+  // debugger
   return $.ajax({
     method: 'POST',
     url: "api/items",
@@ -8044,14 +8080,14 @@ var createItem = function createItem(item) {
   });
 };
 var deleteItem = function deleteItem(itemId) {
-  debugger;
+  // debugger
   return $.ajax({
     method: 'DELETE',
     url: "api/items/".concat(itemId)
   });
 };
 var updateItem = function updateItem(item) {
-  debugger;
+  // debugger
   return $.ajax({
     method: 'PATCH',
     url: "api/items/".concat(item.id),
@@ -8158,7 +8194,8 @@ var updateProjectImage = function updateProjectImage(id, formData) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards
+/* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards,
+/* harmony export */   "createReward": () => /* binding */ createReward
 /* harmony export */ });
 var fetchAllRewards = function fetchAllRewards(project_id) {
   // debugger
@@ -8167,6 +8204,16 @@ var fetchAllRewards = function fetchAllRewards(project_id) {
     url: 'api/rewards',
     data: {
       project_id: project_id
+    }
+  });
+};
+var createReward = function createReward(reward) {
+  debugger;
+  return $.ajax({
+    method: 'POST',
+    url: "api/rewards",
+    data: {
+      reward: reward
     }
   });
 };

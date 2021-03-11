@@ -9,7 +9,7 @@ class Api::ItemsController < ApplicationController
         if @item.save
             render :show
         else
-            render json: @item.errors.full_messages, status: 404
+            render json: @item.errors.full_messages, status: 422
         end
     end
 

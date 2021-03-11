@@ -8,7 +8,14 @@ class Api::RewardsController < ApplicationController
     end
 
     def create
-
+        @reward = Reward.new(reward_params)
+        @items = params[:items]
+        debugger
+        if @reward.save
+            render :show
+        else
+            render json: @reward.errors.full_messages, status: 422
+        end
     end
 
     private

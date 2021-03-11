@@ -7,7 +7,7 @@ export const fetchAllItems = (project_id) =>{
 }
 
 export const createItem= item =>{
-  debugger
+  // debugger
   return $.ajax({
       method: 'POST',
       url: `api/items`,
@@ -17,7 +17,7 @@ export const createItem= item =>{
 
 
 export const deleteItem = itemId =>{
-  debugger
+  // debugger
   return $.ajax({
       method: 'DELETE',
       url: `api/items/${itemId}`
@@ -25,7 +25,7 @@ export const deleteItem = itemId =>{
 }
 
 export const updateItem = (item) =>{
-  debugger
+  // debugger
   return $.ajax({
       method: 'PATCH',
       url: `api/items/${item.id}`,

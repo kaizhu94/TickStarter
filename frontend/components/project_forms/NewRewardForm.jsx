@@ -9,6 +9,7 @@ class NewRewrdForm extends React.Component{
             title: '',
             description: '',
             amount: 1,
+            estimated_delivery: '',
             validmonth: true,
             validyear: true,
             validtitle: true,
@@ -25,7 +26,9 @@ class NewRewrdForm extends React.Component{
 
 
             item_name: '',
-            validInputName: ''
+            validInputName: '',
+
+            project_id: props.project.id
         }
         this.handleSubmit= this.handleSubmit.bind(this);
         this.createNewItem = this.createNewItem.bind(this);
@@ -33,7 +36,7 @@ class NewRewrdForm extends React.Component{
     }
     update(key){
         const name = `valid` + `${key}`;
-        // debugger
+        
         return e => this.setState({[key]: e.currentTarget.value,
                                [name]: true }
             );
@@ -94,7 +97,7 @@ class NewRewrdForm extends React.Component{
         let titleError= '';
         let descriptionError= '';
         let amountError= '';
-        
+        debugger
         if(this.state.month === ''){
             validMonth = false;
             monthError = 'Month is required';
@@ -134,8 +137,12 @@ class NewRewrdForm extends React.Component{
             })
             // debugger
         }else{
-            let Format = `${this.state.year}-${this.state.month}-'01'T'10':'00':'00'`;
+            let Format = `${this.state.year}-${this.state.month}-01T10:00:00`;
             let date = new Date(Format);
+
+            const reward = { project_id: this.state.project_id}
+            debugger
+            this.props.createReward(this.state);
 
             // debugger
         }
