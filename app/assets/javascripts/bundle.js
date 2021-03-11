@@ -4560,6 +4560,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       showModal: false,
       showEditReward: false,
+      items: '',
       month: '',
       year: '',
       title: '',
@@ -4576,6 +4577,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       descriptionErrorMessage: '',
       amountErrorMessage: ''
     };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -4586,10 +4588,11 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       var date = new Date(reward.estimated_delivery);
       this.setState({
         'title': reward.title,
-        month: date.getMonth(),
-        year: '',
+        month: date.getMonth() + 1 < 10 ? "0".concat(date.getMonth() + 1) : "".concat(date.getMonth() + 1),
+        year: date.getFullYear(),
         'description': reward.description,
-        'amount': reward.amount
+        'amount': reward.amount,
+        'items': this.props.reward.items
       });
     }
   }, {
@@ -4668,6 +4671,70 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       return this.state[key] ? '' : '-invalid';
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      debugger;
+      e.preventDefault();
+      var validMonth = this.state.validmonth;
+      var validYear = this.state.validyear;
+      var validTitle = this.state.validtitle;
+      var validDescription = this.state.validdescription;
+      var validAmount = this.state.validamount;
+      var monthError = '';
+      var yearError = '';
+      var titleError = '';
+      var descriptionError = '';
+      var amountError = '';
+
+      if (this.state.month === '') {
+        validMonth = false;
+        monthError = 'Month is required';
+      }
+
+      if (this.state.year === '') {
+        // debugger
+        validYear = false;
+        yearError = 'Year is required';
+      }
+
+      if (this.state.title === '') {
+        validTitle = false;
+        titleError = 'Title is required';
+      }
+
+      if (this.state.description === '') {
+        validDescription = false;
+        descriptionError = 'Please enter a description or at least one item.';
+      }
+
+      if (this.state.amount < 1 || this.state.amount > 13000) {
+        // debugger
+        validAmount = false;
+        amountError = 'Enter a value between $1 and $13,000.';
+      } // debugger
+
+
+      if (validMonth === false || validYear === false || validTitle === false || validDescription === false || validAmount === false) {
+        // debugger
+        this.setState({
+          'validmonth': validMonth,
+          'validyear': validYear,
+          'validtitle': validTitle,
+          'validdescription': validDescription,
+          'validamount': validAmount,
+          'monthErrorMessage': monthError,
+          'yearErrorMessage': yearError,
+          'titleErrorMessage': titleError,
+          'descriptionErrorMessage': descriptionError,
+          'amountErrorMessage': amountError
+        }); // debugger
+      } else {
+        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-'01'T'10':'00':'00'");
+        var date = new Date(Format); // debugger
+      } // if()
+
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -4680,6 +4747,12 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       var currentYear = currentTime.getFullYear();
       var month = months[parseInt(this.state.month) - 1];
       var itemsInclude = Object.values(reward.items).map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: index
+        }, item.item_name);
+      });
+      debugger;
+      var itemsForEdit = Object.values(this.state.items).map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index
         }, item.item_name);
@@ -4757,11 +4830,13 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         type: "text",
         id: "reward-title",
         placeholder: "single-limit-edition",
+        value: this.state.title,
         onChange: this.update('title')
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         id: "reward-title-invalid",
         placeholder: "single-limit-edition",
+        value: this.state.title,
         onChange: this.update('title')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "rewrd-error-message"
@@ -4881,6 +4956,10 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       }, "Get an early copy \u2014 hot off the presses!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "preview-title"
       }, this.state.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview-include-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "INCLUDES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "preview-inlcude-items"
+      }, itemsForEdit)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date"
@@ -6537,8 +6616,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             showEditRewardForm: _this3.state.showEditRewardForm,
             openEditRewardForm: _this3.openEditRewardForm
           });
-        });
-        debugger;
+        }); // debugger
+
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-items-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_5__.default, {

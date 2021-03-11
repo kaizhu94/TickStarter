@@ -132,7 +132,7 @@
     flex-direction: column;
     margin-top: 30px;
 }
-.preview-date-block h5{
+.preview-date-block h5, .preview-include-block h5{
     font-size: 10px;
     margin-bottom: 5px;
 }
@@ -636,4 +636,11 @@
     display: flex;
     flex-direction: row;
     opacity: 1;
+}
+
+.preview-inlcude-items{
+    list-style: disc;
+    display: flex;
+    flex-direction: column;
+    margin-left: 19px;
 }

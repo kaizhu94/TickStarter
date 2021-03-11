@@ -7,6 +7,7 @@ class EditRewardForm extends React.Component{
             showModal: false,
             showEditReward: false,
 
+            items: '',
             month: '',
             year: '',
             title: '',
@@ -23,6 +24,7 @@ class EditRewardForm extends React.Component{
             descriptionErrorMessage: '',
             amountErrorMessage: '',
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -31,10 +33,11 @@ class EditRewardForm extends React.Component{
 
         this.setState({
             'title': reward.title,
-            month: date.getMonth(),
-            year: '',
+            month: (date.getMonth()+1)<10? `0${date.getMonth()+1}`: `${date.getMonth()+1}`,
+            year: date.getFullYear(),
             'description': reward.description,
             'amount': reward.amount,
+            'items': this.props.reward.items,
         })
     }
 
@@ -98,6 +101,66 @@ class EditRewardForm extends React.Component{
         return this.state[key] ? '': '-invalid';
     }
 
+    handleSubmit(e){
+        debugger
+        e.preventDefault();
+        let validMonth = this.state.validmonth;
+        let validYear= this.state.validyear;
+        let validTitle= this.state.validtitle;
+        let validDescription= this.state.validdescription;
+        let validAmount= this.state.validamount;
+        let monthError= '';
+        let yearError= '';
+        let titleError= '';
+        let descriptionError= '';
+        let amountError= '';
+        
+        if(this.state.month === ''){
+            validMonth = false;
+            monthError = 'Month is required';
+        }
+        if(this.state.year === ''){
+            // debugger
+            validYear = false;
+            yearError = 'Year is required';
+        }
+        if(this.state.title === ''){
+            validTitle = false;
+            titleError = 'Title is required';
+        }
+        if(this.state.description === ''){
+            validDescription = false;
+            descriptionError = 'Please enter a description or at least one item.'
+        }
+        if(this.state.amount < 1 || this.state.amount > 13000){
+            // debugger
+            validAmount = false;
+            amountError='Enter a value between $1 and $13,000.'
+        }
+        // debugger
+        if(validMonth===false || validYear===false || validTitle===false || validDescription===false || validAmount===false){
+            // debugger
+            this.setState({
+                'validmonth': validMonth,
+                'validyear': validYear,
+                'validtitle': validTitle,
+                'validdescription': validDescription,
+                'validamount':validAmount,
+                'monthErrorMessage': monthError,
+                'yearErrorMessage': yearError,
+                'titleErrorMessage': titleError,
+                'descriptionErrorMessage': descriptionError,
+                'amountErrorMessage': amountError
+            })
+            // debugger
+        }else{
+            let Format = `${this.state.year}-${this.state.month}-'01'T'10':'00':'00'`;
+            let date = new Date(Format);
+
+            // debugger
+        }
+        // if()
+    }
 
     render(){
         const {reward} = this.props;
@@ -109,6 +172,14 @@ class EditRewardForm extends React.Component{
         const currentYear = currentTime.getFullYear();
         const month = months[parseInt(this.state.month)-1]
         const itemsInclude = Object.values(reward.items).map((item, index) =>{
+            return(
+                <li key = {index}>
+                    {item.item_name}
+                </li>
+            )
+        })
+        debugger
+        const itemsForEdit = Object.values(this.state.items).map((item, index) =>{
             return(
                 <li key = {index}>
                     {item.item_name}
@@ -168,9 +239,9 @@ class EditRewardForm extends React.Component{
                                         <h3>Title</h3>
                                         {
                                             this.state.validtitle ? (
-                                                <input type="text" id="reward-title" placeholder='single-limit-edition' onChange={this.update('title')}/>
+                                                <input type="text" id="reward-title" placeholder='single-limit-edition' value={this.state.title} onChange={this.update('title')}/>
                                             ):(
-                                                <input type="text" id="reward-title-invalid" placeholder='single-limit-edition' onChange={this.update('title')}/>
+                                                <input type="text" id="reward-title-invalid" placeholder='single-limit-edition' value={this.state.title} onChange={this.update('title')}/>
                                             )
                                         }
                                         <p id='rewrd-error-message'>{this.state.titleErrorMessage}</p>
@@ -265,6 +336,12 @@ class EditRewardForm extends React.Component{
                                             <p id='preview-title'>{this.state.description}</p>
                                         )
                                     }
+                                    <div className='preview-include-block'>
+                                        <h5>INCLUDES</h5>
+                                        <ul className='preview-inlcude-items'>
+                                            {itemsForEdit}
+                                        </ul>
+                                    </div>
                                     <div className='preview-date-block'>
                                         <h5>ESTIMATED DELIVERY</h5>
                                         <div className='preview-date'>

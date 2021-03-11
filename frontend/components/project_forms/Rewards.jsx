@@ -172,7 +172,7 @@ class Rewards extends React.Component{
                                         />
                 )
             })
-            debugger
+            // debugger
             return (
                 <div className='rewards-items-container'>
                     <Modal item_name={this.state.item_name}
