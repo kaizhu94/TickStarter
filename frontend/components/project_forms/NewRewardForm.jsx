@@ -153,15 +153,25 @@ class NewRewrdForm extends React.Component{
     createNewItem(e){
         e.preventDefault();
         debugger
-        if(this.state.item_name === ''){
+        if(this.state.item_name === '' || !this.isNameExist()){
             this.setState({
                 'validInputName': '-invalid'
             })
         }else{
             this.setState({
                 'validInputName': ''
-            })
+            });
+
         }
+    }
+    isNameExist(){
+        const names = Object.values(this.state.items);
+        for(let i =0; i< names.length; i++){
+            if(this.state.item_name === names[i].item_name){
+                return false;
+            }
+        }
+        return true;
     }
     
     render(){

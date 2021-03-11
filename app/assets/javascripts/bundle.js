@@ -5792,7 +5792,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       debugger;
 
-      if (this.state.item_name === '') {
+      if (this.state.item_name === '' || !this.isNameExist()) {
         this.setState({
           'validInputName': '-invalid'
         });
@@ -5801,6 +5801,19 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           'validInputName': ''
         });
       }
+    }
+  }, {
+    key: "isNameExist",
+    value: function isNameExist() {
+      var names = Object.values(this.state.items);
+
+      for (var i = 0; i < names.length; i++) {
+        if (this.state.item_name === names[i].item_name) {
+          return false;
+        }
+      }
+
+      return true;
     }
   }, {
     key: "render",
@@ -6054,7 +6067,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _NewRewardForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewRewardForm */ "./frontend/components/project_forms/NewRewardForm.jsx");
+/* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
+/* harmony import */ var _NewRewardForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NewRewardForm */ "./frontend/components/project_forms/NewRewardForm.jsx");
+
 
 
 
@@ -6066,10 +6081,14 @@ var msp = function msp(state) {
 };
 
 var mdp = function mdp(dispatch) {
-  return {};
+  return {
+    createItem: function createItem(item) {
+      return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_1__.createItem)(item));
+    }
+  };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NewRewardForm__WEBPACK_IMPORTED_MODULE_1__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NewRewardForm__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
