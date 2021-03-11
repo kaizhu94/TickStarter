@@ -5625,9 +5625,15 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       yearErrorMessage: '',
       titleErrorMessage: '',
       descriptionErrorMessage: '',
-      amountErrorMessage: ''
+      amountErrorMessage: '',
+      items: {},
+      showAddItem: false,
+      item_name: '',
+      validInputName: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.createNewItem = _this.createNewItem.bind(_assertThisInitialized(_this));
+    _this.updateItems = _this.updateItems.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -5645,20 +5651,63 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "updateItemName",
+    value: function updateItemName(key) {
+      var _this3 = this;
+
+      return function (e) {
+        return _this3.setState(_defineProperty({}, key, e.currentTarget.value));
+      };
+    }
+  }, {
     key: "updateAmount",
     value: function updateAmount(key) {
-      var _this3 = this;
+      var _this4 = this;
 
       return function (e) {
         var value = e.currentTarget.value;
 
         if (value === '') {
-          return _this3.setState(_defineProperty({}, key, value));
+          return _this4.setState(_defineProperty({}, key, value));
         } else {
-          var _this3$setState2;
+          var _this4$setState2;
 
-          return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, Math.round(value)), _defineProperty(_this3$setState2, 'validamount', true), _this3$setState2));
+          return _this4.setState((_this4$setState2 = {}, _defineProperty(_this4$setState2, key, Math.round(value)), _defineProperty(_this4$setState2, 'validamount', true), _this4$setState2));
         }
+      };
+    }
+  }, {
+    key: "updateItems",
+    value: function updateItems() {
+      var _this5 = this;
+
+      return function (e) {
+        var newItem = _this5.props.allItems[parseInt(e.currentTarget.value)];
+
+        var newItems = Object.assign({}, _this5.state.items, _defineProperty({}, parseInt(e.currentTarget.value), newItem));
+        debugger;
+
+        _this5.setState({
+          items: newItems
+        });
+
+        _this5.updateshowAddItem();
+      };
+    }
+  }, {
+    key: "removeItem",
+    value: function removeItem(id) {
+      var _this6 = this;
+
+      return function (e) {
+        // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
+        var newItems = Object.assign({}, _this6.state.items);
+        delete newItems[parseInt(id)];
+        debugger;
+
+        _this6.setState({
+          items: newItems
+        });
       };
     }
   }, {
@@ -5731,14 +5780,57 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       return this.state[key] ? '' : '-invalid';
     }
   }, {
+    key: "updateshowAddItem",
+    value: function updateshowAddItem() {
+      this.setState({
+        'showAddItem': !this.state.showAddItem
+      });
+    }
+  }, {
+    key: "createNewItem",
+    value: function createNewItem(e) {
+      e.preventDefault();
+      debugger;
+
+      if (this.state.item_name === '') {
+        this.setState({
+          'validInputName': '-invalid'
+        });
+      } else {
+        this.setState({
+          'validInputName': ''
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this7 = this;
 
+      debugger;
       var currentTime = new Date();
       var currentYear = currentTime.getFullYear();
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       var month = months[parseInt(this.state.month) - 1];
+      var allItems = Object.values(this.props.allItems);
+      var allItemsArray = allItems.map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: item.id,
+          key: index
+        }, item.item_name);
+      });
+      var items = Object.values(this.state.items);
+      var itemsArray = items.map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: index,
+          className: "reward-items-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+          id: "itemsArray-title"
+        }, item.item_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+          id: "itemsArray-remove",
+          onClick: _this7.removeItem(item.id)
+        }, "Remove"));
+      });
       debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-section"
@@ -5751,7 +5843,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         type: "button",
         id: "edit-cancel",
         onClick: function onClick() {
-          return _this4.props.cancel();
+          return _this7.props.cancel();
         }
       }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
@@ -5869,6 +5961,50 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       }, this.state.monthErrorMessage), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "rewrd-error-message"
       }, this.state.yearErrorMessage))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Items"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Build out a list of what you're offering."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reward-add-item"
+      }, items.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reward-add-item-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "TITLE"
+      }, "TITLE"), itemsArray) : null, this.state.showAddItem ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "Add-Item-Block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "Add-Item-Block-h3"
+      }, "Add an existing item"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        id: "reward-select-item",
+        value: "",
+        onChange: this.updateItems()
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: true
+      }, " Choose one "), allItemsArray), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "new-item-or"
+      }, "Or"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "Add-Item-Block-h3"
+      }, "Create a new item"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        id: "item-name-input".concat(this.state.validInputName),
+        value: this.state.item_name,
+        onChange: this.updateItemName('item_name'),
+        placeholder: "Digital photo"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "new-item-button",
+        onClick: this.createNewItem
+      }, " Save "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: function onClick() {
+          return _this7.updateshowAddItem();
+        },
+        id: "newitem-cancel"
+      }, "Cancel")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "new-item-button",
+        onClick: function onClick() {
+          return _this7.updateshowAddItem();
+        }
+      }, " + New item"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-save-bot"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
@@ -5877,7 +6013,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         type: "button",
         id: "edit-cancel",
         onClick: function onClick() {
-          return _this4.props.cancel();
+          return _this7.props.cancel();
         }
       }, "Cancel")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview"
@@ -5923,8 +6059,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  //    
-  return {};
+  debugger;
+  return {
+    allItems: state.entities.items
+  };
 };
 
 var mdp = function mdp(dispatch) {

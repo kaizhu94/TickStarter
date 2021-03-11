@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import NewRewrdForm from './NewRewardForm'
 
 const msp = state =>{
-    //    
+    debugger
     return ({
+        allItems: state.entities.items
     })
 }
 

@@ -7,6 +7,10 @@ class Api::RewardsController < ApplicationController
         render :index
     end
 
+    def create
+
+    end
+
     private
 
     def reward_params

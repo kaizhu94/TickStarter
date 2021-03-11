@@ -172,7 +172,7 @@
 }
 
 .reward-form-container .form-section input{
-    width: 98%;
+    width: 97%;
     height: 40px;
     border-color: gainsboro;
     padding-left: 10px;
@@ -592,6 +592,7 @@
 }
 .show-reward-section-lower:hover{
     box-shadow: -3px -3px 15px 4px #dddddd;
+    cursor: pointer;
 }
 
 .show-reward-section-lower-show{
@@ -652,4 +653,121 @@
     display: flex;
     flex-direction: column;
     margin-left: 19px;
+}
+
+.reward-add-item{
+    margin-top: 20px;
+}
+.reward-add-item-block{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+#itemsArray-title{
+    display: block;
+    background: rgb(250, 235, 237);
+    width: 55%;
+    padding: 10px;
+}
+#itemsArray-remove{
+    padding-top: 10px;
+}
+#itemsArray-remove:hover{
+    cursor: pointer;
+}
+
+#TITLE{
+    margin-bottom: 10px;
+}
+.reward-items-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#new-item-button{
+    width: 100%;
+    height: 50px;
+    font-size: 17px;
+    border: none;
+    background: #484848;
+    color: white;
+}
+#new-item-button:hover{
+    background-color: black;
+    cursor: pointer;
+}
+#new-item-button:focus{
+    outline: none;
+}
+
+.Add-Item-Block{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gainsboro;
+    padding: 24px;
+    
+}
+.Add-Item-Block #Add-Item-Block-h3{
+    font-size: 17px;
+}
+.Add-Item-Block p{
+    color: rgb(100, 100, 100);
+}
+
+#new-item-or{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#newitem-cancel{
+    text-align: center;
+    margin-top: 15px;
+}
+#newitem-cancel:hover{
+    cursor: pointer;
+}
+
+.Add-Item-Block #item-name-input:hover{
+    border-color: limegreen;
+}
+.Add-Item-Block #item-name-input:focus{
+    outline: none;
+    border-color: limegreen;
+}
+.Add-Item-Block #item-name-input-invalid:hover{
+    border-color: limegreen;
+}
+.Add-Item-Block #item-name-input-invalid:focus{
+    outline: none;
+    border-color: limegreen;
+}
+
+.Add-Item-Block #item-name-input{
+    border-color: gainsboro;
+    width: 97%;
+    margin-bottom: 15px;
+}
+.Add-Item-Block #item-name-input-invalid{
+    border-color: rgb(245, 67, 67);
+    width: 97%;
+    margin-bottom: 15px;
+}
+
+#reward-select-item{
+    padding-left: 10px;
+    height: 40px;
+    border: 1px solid gainsboro;
+}
+#reward-select-item:hover{
+    padding-left: 10px;
+    height: 40px;
+    border-color: limegreen;
+    cursor: pointer;
+}
+#reward-select-item:focus{
+    border-color: limegreen;
 }
