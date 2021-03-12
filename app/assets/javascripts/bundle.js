@@ -4596,11 +4596,15 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // componentDidUpdate(prevProps, prevState) {
+  //     debugger
+  // }
+
 
   _createClass(EditRewardForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
       var reward = this.props.reward;
       var date = new Date(reward.estimated_delivery);
       this.setState({
@@ -5802,7 +5806,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         };
         debugger;
         this.props.createReward(reward);
-        this.props.cancel(); // debugger
+        this.props.cancel(); // this.props.
+        // debugger
       } // if()
 
     }
@@ -6786,7 +6791,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         'rewards': rewards,
         'itemId': itemId
       });
-      this.props.openModal('deleteItem');
+      this.props.openModal('deleteItem'); // this.props.receiveAllRewards();
+      // this.props.receiveAllItems();
     }
   }, {
     key: "render",
@@ -6854,7 +6860,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         }, rewardsArray), this.props.disabledBottomButton && this.state.showRewardForm ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__.default, {
           cancel: this.cancel,
           disabledBottomButton: this.props.disabledBottomButton,
-          project: this.props.project
+          project: this.props.project // receiveAllItems={this.props.receiveAllItems()}
+
         }) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-form-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

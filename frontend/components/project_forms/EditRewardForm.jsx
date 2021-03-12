@@ -26,8 +26,11 @@ class EditRewardForm extends React.Component{
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    // componentDidUpdate(prevProps, prevState) {
+    //     debugger
+    // }
     componentDidMount(){
+        debugger
         const {reward} = this.props;
         const date = new Date(reward.estimated_delivery);
 

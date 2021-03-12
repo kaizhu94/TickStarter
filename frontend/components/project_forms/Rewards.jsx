@@ -136,6 +136,8 @@ class Rewards extends React.Component{
             'itemId': itemId,
         })
         this.props.openModal('deleteItem');
+        // this.props.receiveAllRewards();
+        // this.props.receiveAllItems();
     }
 
     render(){
@@ -215,7 +217,9 @@ class Rewards extends React.Component{
                                     (this.props.disabledBottomButton && this.state.showRewardForm) ? (
                                         <NewRewardFormContainer cancel={this.cancel}
                                                                 disabledBottomButton = {this.props.disabledBottomButton}
-                                                                project={this.props.project}/>
+                                                                project={this.props.project}
+                                                                // receiveAllItems={this.props.receiveAllItems()}
+                                                                />
                                     ):(
                                         null
                                     )

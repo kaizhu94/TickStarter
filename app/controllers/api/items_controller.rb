@@ -26,6 +26,9 @@ class Api::ItemsController < ApplicationController
     def destroy
         @item = Item.find(params[:id])
         if @item
+            RewardsItem.where(items_id: @item.id).each do |rewarditem_join|
+                rewarditem_join.destroy
+            end
             @item.destroy
         else
             render json: @item.errors.full_messages, status: 404

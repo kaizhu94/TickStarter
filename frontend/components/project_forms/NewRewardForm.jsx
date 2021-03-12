@@ -149,7 +149,7 @@ class NewRewrdForm extends React.Component{
             debugger
             this.props.createReward(reward);
             this.props.cancel();
-
+            // this.props.
             // debugger
         }
         // if()
