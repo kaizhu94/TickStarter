@@ -154,7 +154,7 @@ class EditRewardForm extends React.Component{
             })
             // debugger
         }else{
-            let Format = `${this.state.year}-${this.state.month}-'01'T'10':'00':'00'`;
+            let Format = `${this.state.year}-${this.state.month}-01T10:00:00`;
             let date = new Date(Format);
 
             // debugger

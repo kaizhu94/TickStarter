@@ -4746,7 +4746,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
           'amountErrorMessage': amountError
         }); // debugger
       } else {
-        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-'01'T'10':'00':'00'");
+        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00");
         var date = new Date(Format); // debugger
       } // if()
 
@@ -5792,10 +5792,15 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00");
         var date = new Date(Format);
         var reward = {
-          project_id: this.state.project_id
+          project_id: this.state.project_id,
+          title: this.state.title,
+          description: this.state.description,
+          estimated_delivery: date,
+          amount: this.state.amount,
+          items: this.state.items
         };
         debugger;
-        this.props.createReward(this.state); // debugger
+        this.props.createReward(reward); // debugger
       } // if()
 
     }
