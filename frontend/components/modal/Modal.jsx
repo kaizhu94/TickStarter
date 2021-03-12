@@ -17,7 +17,6 @@ function Modal( props ){
         updateProjectImage(projectId, formData)
             .then(()=> closeModal());
     }
-    // function deleteItem(){}
     if(!modal){
         return null;
     }
@@ -51,6 +50,25 @@ function Modal( props ){
                             <p>This action cannot be undone.</p>
                             <button onClick={()=>deleteImage()}>
                                 Delete Image
+                            </button>
+                        </div>
+                        <div className = 'unsave-lower'>
+                            <p onClick={closeModal}>Close</p>
+                        </div>
+                    </div>
+                </div>
+            )
+            break;
+        case 'deleteReward':
+            // debugger
+            return (
+                <div className='modal-background' onClick={closeModal}>
+                    <div className='unsave-modal-continer'>
+                        <div className = 'unsave-upper'>
+                            <h2>Delete this reward?</h2>
+                            <p>This action cannot be undone.</p>
+                            <button >
+                                Delete Reward
                             </button>
                         </div>
                         <div className = 'unsave-lower'>

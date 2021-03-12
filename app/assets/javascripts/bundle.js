@@ -1907,8 +1907,7 @@ function Modal(props) {
     updateProjectImage(projectId, formData).then(function () {
       return closeModal();
     });
-  } // function deleteItem(){}
-
+  }
 
   if (!modal) {
     return null;
@@ -1954,6 +1953,22 @@ function Modal(props) {
           return deleteImage();
         }
       }, "Delete Image")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: closeModal
+      }, "Close"))));
+      break;
+
+    case 'deleteReward':
+      // debugger
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-background",
+        onClick: closeModal
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-modal-continer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unsave-upper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Delete this reward?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete Reward")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-lower"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
@@ -4582,6 +4597,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       amountErrorMessage: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleModal = _this.handleModal.bind(_assertThisInitialized(_this));
     return _this;
   } // componentDidUpdate(prevProps, prevState) {
   //     debugger
@@ -4630,14 +4646,15 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleModal",
-    value: function handleModal() {
+    value: function handleModal(e) {
+      e.stopPropagation();
       debugger;
 
       if (!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm) {
         this.setState({
           'showModal': true
         });
-        this.props.showModal(this.state.item_name, this.props.item.rewards, this.props.item.id); // this.setState({
+        this.props.deleteRewardModal(this.props.reward.id); // this.setState({
         //     'showModal': false
         // });
       }
@@ -4810,9 +4827,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
         id: "edit-item-right-button",
-        onClick: function onClick() {
-          return _this4.handleModal();
-        }
+        onClick: this.handleModal
       }, "Delete")))))), this.state.showEditReward ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "edit-reward-form"
@@ -6673,7 +6688,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       showEditRewardForm: false,
       item_name: '',
       rewards: 0,
-      itemId: '' // updateDisabledBottomButton: this.props.disabledBottomButton,
+      itemId: '',
+      rewardsId: '' // updateDisabledBottomButton: this.props.disabledBottomButton,
 
     };
     _this2.updatetab = _this2.updatetab.bind(_assertThisInitialized(_this2));
@@ -6681,7 +6697,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     _this2.cancel = _this2.cancel.bind(_assertThisInitialized(_this2));
     _this2.openEditItemForm = _this2.openEditItemForm.bind(_assertThisInitialized(_this2));
     _this2.openEditRewardForm = _this2.openEditRewardForm.bind(_assertThisInitialized(_this2));
-    _this2.showModal = _this2.showModal.bind(_assertThisInitialized(_this2)); // debugger
+    _this2.showModal = _this2.showModal.bind(_assertThisInitialized(_this2));
+    _this2.deleteRewardModal = _this2.deleteRewardModal.bind(_assertThisInitialized(_this2)); // debugger
 
     return _this2;
   }
@@ -6776,6 +6793,14 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       // this.props.receiveAllItems();
     }
   }, {
+    key: "deleteRewardModal",
+    value: function deleteRewardModal(rewardId) {
+      this.setState({
+        'rewardId': rewardId
+      });
+      this.props.openModal('deleteReward');
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -6814,7 +6839,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             disabledBottomButton: _this3.props.disabledBottomButton,
             showRewardForm: _this3.state.showRewardForm,
             showEditRewardForm: _this3.state.showEditRewardForm,
-            openEditRewardForm: _this3.openEditRewardForm
+            openEditRewardForm: _this3.openEditRewardForm,
+            deleteRewardModal: _this3.deleteRewardModal
           });
         }); // debugger
 
@@ -6823,7 +6849,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_5__.default, {
           item_name: this.state.item_name,
           rewards: this.state.rewards,
-          itemId: this.state.itemId
+          itemId: this.state.itemId,
+          rewardId: this.state.rewardId
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
           selected: this.state.tab,
           tabs: tabs,

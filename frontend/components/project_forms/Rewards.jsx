@@ -56,7 +56,8 @@ class Rewards extends React.Component{
             showEditRewardForm:false,
             item_name: '',
             rewards: 0,
-            itemId: ''
+            itemId: '',
+            rewardsId: ''
             // updateDisabledBottomButton: this.props.disabledBottomButton,
         }
         this.updatetab = this.updatetab.bind(this);
@@ -65,6 +66,7 @@ class Rewards extends React.Component{
         this.openEditItemForm = this.openEditItemForm.bind(this);
         this.openEditRewardForm = this.openEditRewardForm.bind(this);
         this.showModal = this.showModal.bind(this);
+        this.deleteRewardModal = this.deleteRewardModal.bind(this);
         // debugger
     }
 
@@ -141,7 +143,12 @@ class Rewards extends React.Component{
         // this.props.receiveAllRewards(this.props.project.id);
         // this.props.receiveAllItems();
     }
-
+    deleteRewardModal(rewardId){
+        this.setState({
+            'rewardId': rewardId,
+        })
+        this.props.openModal('deleteReward');
+    }
     render(){
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
         const disable = this.disable();
@@ -173,6 +180,7 @@ class Rewards extends React.Component{
                                         showRewardForm = {this.state.showRewardForm}
                                         showEditRewardForm = {this.state.showEditRewardForm}
                                         openEditRewardForm ={this.openEditRewardForm}
+                                        deleteRewardModal={this.deleteRewardModal}
                                         />
                 )
             })
@@ -181,23 +189,9 @@ class Rewards extends React.Component{
                 <div className='rewards-items-container'>
                     <Modal item_name={this.state.item_name}
                                 rewards={this.state.rewards}
-                                itemId={this.state.itemId}/>
-                    {/* {
-                        this.props.disabledBottomButton ? (
-                            this.state.tab === 0 ? (
-                                <div className='top-button-conatiner'>
-                                    <button id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
-                                    <button id = 'edit-next-button-top'>Save reward</button>
-                                </div>
-                            ):(
-                                <div className='top-button-conatiner'>
-                                    <button id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
-                                    <button id = 'edit-next-button-top'>Save item</button>
-                                </div>
-                            )
-                        ) : (null
-                        )
-                    } */}
+                                itemId={this.state.itemId}
+                                rewardId = {this.state.rewardId}/>
+                   
                     <Headers selected = {this.state.tab}
                             tabs = {tabs}
                             updatetab = {this.updatetab}

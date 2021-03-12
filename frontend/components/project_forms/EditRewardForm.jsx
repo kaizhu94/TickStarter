@@ -25,6 +25,7 @@ class EditRewardForm extends React.Component{
             amountErrorMessage: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleModal = this.handleModal.bind(this);
     }
     // componentDidUpdate(prevProps, prevState) {
     //     debugger
@@ -64,13 +65,14 @@ class EditRewardForm extends React.Component{
             "showEditReward": false
         })
     }
-    handleModal(){
+    handleModal(e){
+        e.stopPropagation();
         debugger
         if(!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm){
            this.setState({
                 'showModal': true
             })
-        this.props.showModal(this.state.item_name, this.props.item.rewards,this.props.item.id);
+        this.props.deleteRewardModal(this.props.reward.id);
         // this.setState({
         //     'showModal': false
         // });
@@ -216,7 +218,7 @@ class EditRewardForm extends React.Component{
                             <div className='show-reward-section-lower-low'>
                                 <div className='show-reward-section-lower-buttons'>
                                     <button type='button' id='edit-item-right-button' onClick={()=>this.editItem()}>Edit</button>
-                                    <button type='button' id='edit-item-right-button' onClick={()=>this.handleModal()}>Delete</button>
+                                    <button type='button' id='edit-item-right-button' onClick={this.handleModal}>Delete</button>
                                 </div>
                             </div>
                         </div>
