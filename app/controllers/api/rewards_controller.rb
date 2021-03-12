@@ -8,11 +8,13 @@ class Api::RewardsController < ApplicationController
     end
 
     def create
-        debugger
+        # debugger
         @reward = Reward.new(reward_params)
-        @items = params[:reward][:items]
-        debugger
+        # debugger
         if @reward.save
+            @items = params[:reward][:items]
+            @items.each{|key, value| RewardsItem.create!(rewards_id: @reward.id, items_id:key)}
+            
             render :show
         else
             render json: @reward.errors.full_messages, status: 422
