@@ -68,8 +68,6 @@ class EditPromotionDate extends React.Component{
             let HR = hour < 10 ? `0${hour}`: hour;
             let MT = minute < 10 ? `0${minute}`: minute;
             let SD = second < 10 ? `0${second}`: second;
-            debugger
-            // debugger
             // let newDateFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
             // let newDate = new Date(newDateFormat);
             // debugger
@@ -176,17 +174,6 @@ class EditPromotionDate extends React.Component{
                 return this.setState({[key]: newHourDate.getHours()})
                 
             }
-            // if(key === 'minute'){
-            //     // debugger
-            //     let newFormat = `${year}-${MM}-${DD}T${HR}:${e.currentTarget.value}:${SD}`;
-            //     let newHourDate = new Date(newFormat);
-            //     console.log('newDate: '+newHourDate);
-            //     console.log('endDate: '+endDate);
-            //     // debugger
-            //     return this.setState({[key]: newHourDate.getMinutes()})
-                
-            // }
-            debugger
             return this.setState({[key]: e.currentTarget.value});
             
         } 
@@ -273,9 +260,7 @@ class EditPromotionDate extends React.Component{
             const day = this.state.day;
             const hour = this.state.hour > 11? (this.state.hour % 12) : this.state.hour;
             const minute = this.state.minute;
-            const am = this.state.am
-            // console.log('endDate: '+this.state.endDate);
-            debugger
+            const am = this.state.am;
             return (
                 <div className= 'project-promotion-container'>
                                                         {

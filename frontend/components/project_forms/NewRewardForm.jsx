@@ -65,7 +65,7 @@ class NewRewrdForm extends React.Component{
         return e =>{
             const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
             const newItems = Object.assign({}, this.state.items,{[parseInt(e.currentTarget.value)]: newItem});
-            debugger
+            // debugger
             this.setState({
                 'items': newItems
             })
@@ -77,7 +77,7 @@ class NewRewrdForm extends React.Component{
             // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
             const newItems = Object.assign({}, this.state.items);
             delete newItems[parseInt(id)];
-            debugger
+            // debugger
             this.setState({
                 'items': newItems
             })
@@ -85,7 +85,7 @@ class NewRewrdForm extends React.Component{
     }
 
     handleSubmit(e){
-        // debugger
+        debugger
         e.preventDefault();
         let validMonth = this.state.validmonth;
         let validYear= this.state.validyear;
@@ -97,7 +97,7 @@ class NewRewrdForm extends React.Component{
         let titleError= '';
         let descriptionError= '';
         let amountError= '';
-        debugger
+        // debugger
         if(this.state.month === ''){
             validMonth = false;
             monthError = 'Month is required';
@@ -175,7 +175,6 @@ class NewRewrdForm extends React.Component{
             const item = {'item_name': this.state.item_name, 'project_id': this.props.project.id}
             this.props.createItem(item)
             .then((item) =>{
-                debugger
                 const newItem = item.item;
                 const newItems = Object.assign({}, this.state.items, {[newItem.id]: newItem});
                 debugger

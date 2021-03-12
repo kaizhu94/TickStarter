@@ -8,7 +8,7 @@ const rewardsReducer = (state = {}, action )=>{
             // debugger
             return action.rewards;
         case RECEIVE_REWARD:
-            debugger
+            // debugger
             const rewards = Object.assign({}, state, {[action.reward.id]: action.reward});
             return rewards;
         default:

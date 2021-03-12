@@ -7,7 +7,7 @@ const itemsReducer = (state = {}, action )=>{
         case RECEIVE_ALL_ITEMS:
             return action.items;
         case RECEIVE_ITEM:
-            // debugger
+            debugger
             const newItems = Object.assign({}, state, {[action.item.id]: action.item});
             return newItems;
         case DELETE_ITEM:

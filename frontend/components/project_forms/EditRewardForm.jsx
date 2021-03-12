@@ -30,7 +30,6 @@ class EditRewardForm extends React.Component{
     //     debugger
     // }
     componentDidMount(){
-        debugger
         const {reward} = this.props;
         const date = new Date(reward.estimated_delivery);
 
@@ -181,7 +180,6 @@ class EditRewardForm extends React.Component{
                 </li>
             )
         }):'';
-        debugger
         const itemsForEdit = Object.values(this.state.items).map((item, index) =>{
             return(
                 <li key = {index}>
@@ -189,7 +187,6 @@ class EditRewardForm extends React.Component{
                 </li>
             )
         })
-        debugger
         return(
             <div>
                 <div className={`show-reward${this.showingForm()}`}>

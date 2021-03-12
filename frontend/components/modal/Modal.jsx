@@ -17,6 +17,7 @@ function Modal( props ){
         updateProjectImage(projectId, formData)
             .then(()=> closeModal());
     }
+    // function deleteItem(){}
     if(!modal){
         return null;
     }

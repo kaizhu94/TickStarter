@@ -77,6 +77,8 @@ class Rewards extends React.Component{
             this.setState({
                 'tab': num
             })  
+            this.props.receiveAllItems(this.props.project.id);
+            this.props.receiveAllRewards(this.props.project.id);
         }
     }
     disable(){
@@ -116,7 +118,7 @@ class Rewards extends React.Component{
         })
     }
     cancel(){
-        debugger
+        // debugger
         this.props.updateDisabledBottomButton();
         if(this.state.tab === 0){
             this.setState({
@@ -136,7 +138,7 @@ class Rewards extends React.Component{
             'itemId': itemId,
         })
         this.props.openModal('deleteItem');
-        // this.props.receiveAllRewards();
+        // this.props.receiveAllRewards(this.props.project.id);
         // this.props.receiveAllItems();
     }
 

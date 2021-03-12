@@ -41,7 +41,7 @@ class EditItemForm extends React.Component{
         })
     }
     handleModal(){
-        debugger
+        // debugger
         if(!this.props.disabledBottomButton && !this.props.showItemForm && !this.props.showEditItemForm){
            this.setState({
                 'showModal': true
@@ -67,7 +67,7 @@ class EditItemForm extends React.Component{
     }
     render(){
         const {item} = this.props;
-        debugger
+        // debugger
         return (
             <div>
                 <div className={`show-item${this.showingForm()}`}>

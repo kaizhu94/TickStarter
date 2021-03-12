@@ -524,6 +524,7 @@ var fetchAllItems = function fetchAllItems(project_id) {
 };
 var createItem = function createItem(item) {
   return function (dispatch) {
+    debugger;
     return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.createItem(item).then(function (item) {
       return dispatch(receiveItem(item));
     });
@@ -539,7 +540,7 @@ var updateItem = function updateItem(item) {
 };
 var deleteItem = function deleteItem(itemId) {
   return function (dispatch) {
-    debugger;
+    // debugger
     return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.deleteItem(itemId).then(function () {
       return dispatch(removeItem(itemId));
     });
@@ -678,7 +679,7 @@ var createProject = function createProject(project) {
 };
 var deleteProject = function deleteProject(projectId) {
   return function (dispatch) {
-    debugger;
+    // debugger
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.deleteProject(projectId).then(function () {
       return dispatch(removeProject(projectId));
     });
@@ -694,7 +695,7 @@ var updateProject = function updateProject(id, project) {
 };
 var updateProjectImage = function updateProjectImage(id, formdata) {
   return function (dispatch) {
-    debugger;
+    // debugger
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProjectImage(id, formdata).then(function (project) {
       return dispatch(receiveProject(project));
     });
@@ -1906,7 +1907,8 @@ function Modal(props) {
     updateProjectImage(projectId, formData).then(function () {
       return closeModal();
     });
-  }
+  } // function deleteItem(){}
+
 
   if (!modal) {
     return null;
@@ -2936,8 +2938,7 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleModal",
     value: function handleModal() {
-      debugger;
-
+      // debugger
       if (!this.props.disabledBottomButton && !this.props.showItemForm && !this.props.showEditItemForm) {
         this.setState({
           'showModal': true
@@ -2970,8 +2971,8 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var item = this.props.item;
-      debugger;
+      var item = this.props.item; // debugger
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-item".concat(this.showingForm())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4055,9 +4056,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         var DD = day < 10 ? "0".concat(day) : day;
         var HR = hour < 10 ? "0".concat(hour) : hour;
         var MT = minute < 10 ? "0".concat(minute) : minute;
-        var SD = second < 10 ? "0".concat(second) : second;
-        debugger; // debugger
-        // let newDateFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
+        var SD = second < 10 ? "0".concat(second) : second; // let newDateFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
         // let newDate = new Date(newDateFormat);
         // debugger
         // console.log('newDate: '+newDate);
@@ -4177,18 +4176,8 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           console.log('endDate: ' + endDate); // debugger
 
           return _this2.setState(_defineProperty({}, key, newHourDate.getHours()));
-        } // if(key === 'minute'){
-        //     // debugger
-        //     let newFormat = `${year}-${MM}-${DD}T${HR}:${e.currentTarget.value}:${SD}`;
-        //     let newHourDate = new Date(newFormat);
-        //     console.log('newDate: '+newHourDate);
-        //     console.log('endDate: '+endDate);
-        //     // debugger
-        //     return this.setState({[key]: newHourDate.getMinutes()})
-        // }
+        }
 
-
-        debugger;
         return _this2.setState(_defineProperty({}, key, e.currentTarget.value));
       };
     }
@@ -4297,9 +4286,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         var day = this.state.day;
         var hour = this.state.hour > 11 ? this.state.hour % 12 : this.state.hour;
         var minute = this.state.minute;
-        var am = this.state.am; // console.log('endDate: '+this.state.endDate);
-
-        debugger;
+        var am = this.state.am;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "project-promotion-container"
         }, this.props.selectTab ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4604,7 +4591,6 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
   _createClass(EditRewardForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
       var reward = this.props.reward;
       var date = new Date(reward.estimated_delivery);
       this.setState({
@@ -4773,13 +4759,11 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
           key: index
         }, item.item_name);
       }) : '';
-      debugger;
       var itemsForEdit = Object.values(this.state.items).map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index
         }, item.item_name);
       });
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-reward".concat(this.showingForm())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -5194,7 +5178,6 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, NewItemForm);
 
     _this = _super.call(this, props);
-    debugger;
     _this.state = {
       item_name: '',
       valid: true,
@@ -5707,8 +5690,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       return function (e) {
         var newItem = _this5.props.allItems[parseInt(e.currentTarget.value)];
 
-        var newItems = Object.assign({}, _this5.state.items, _defineProperty({}, parseInt(e.currentTarget.value), newItem));
-        debugger;
+        var newItems = Object.assign({}, _this5.state.items, _defineProperty({}, parseInt(e.currentTarget.value), newItem)); // debugger
 
         _this5.setState({
           'items': newItems
@@ -5725,8 +5707,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       return function (e) {
         // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
         var newItems = Object.assign({}, _this6.state.items);
-        delete newItems[parseInt(id)];
-        debugger;
+        delete newItems[parseInt(id)]; // debugger
 
         _this6.setState({
           'items': newItems
@@ -5736,7 +5717,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      // debugger
+      debugger;
       e.preventDefault();
       var validMonth = this.state.validmonth;
       var validYear = this.state.validyear;
@@ -5747,8 +5728,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       var yearError = '';
       var titleError = '';
       var descriptionError = '';
-      var amountError = '';
-      debugger;
+      var amountError = ''; // debugger
 
       if (this.state.month === '') {
         validMonth = false;
@@ -5842,7 +5822,6 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           'project_id': this.props.project.id
         };
         this.props.createItem(item).then(function (item) {
-          debugger;
           var newItem = item.item;
           var newItems = Object.assign({}, _this7.state.items, _defineProperty({}, newItem.id, newItem));
           debugger;
@@ -6720,6 +6699,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         this.setState({
           'tab': num
         });
+        this.props.receiveAllItems(this.props.project.id);
+        this.props.receiveAllRewards(this.props.project.id);
       }
     }
   }, {
@@ -6770,7 +6751,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "cancel",
     value: function cancel() {
-      debugger;
+      // debugger
       this.props.updateDisabledBottomButton();
 
       if (this.state.tab === 0) {
@@ -6791,7 +6772,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         'rewards': rewards,
         'itemId': itemId
       });
-      this.props.openModal('deleteItem'); // this.props.receiveAllRewards();
+      this.props.openModal('deleteItem'); // this.props.receiveAllRewards(this.props.project.id);
       // this.props.receiveAllItems();
     }
   }, {
@@ -7616,7 +7597,7 @@ var itemsReducer = function itemsReducer() {
       return action.items;
 
     case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ITEM:
-      // debugger
+      debugger;
       var newItems = Object.assign({}, state, _defineProperty({}, action.item.id, action.item));
       return newItems;
 
@@ -7776,7 +7757,7 @@ var rewardsReducer = function rewardsReducer() {
       return action.rewards;
 
     case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_REWARD:
-      debugger;
+      // debugger
       var rewards = Object.assign({}, state, _defineProperty({}, action.reward.id, action.reward));
       return rewards;
 
@@ -8177,7 +8158,7 @@ var deleteProject = function deleteProject(projectID) {
   });
 };
 var updateProject = function updateProject(id, project) {
-  debugger;
+  // debugger
   return $.ajax({
     method: 'PATCH',
     url: "api/projects/".concat(id),
@@ -8187,7 +8168,7 @@ var updateProject = function updateProject(id, project) {
   });
 };
 var updateProjectImage = function updateProjectImage(id, formData) {
-  debugger;
+  // debugger
   return $.ajax({
     method: "PATCH",
     url: "/api/projects/".concat(id),
