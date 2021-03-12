@@ -1,4 +1,4 @@
-import {RECEIVE_ALL_REWARDS, RECEIVE_REWARD}  from '../actions/reward_action'
+import {RECEIVE_ALL_REWARDS, RECEIVE_REWARD, DELETE_REWARD}  from '../actions/reward_action'
 
 const rewardsReducer = (state = {}, action )=>{
     // debugger
@@ -11,6 +11,10 @@ const rewardsReducer = (state = {}, action )=>{
             // debugger
             const rewards = Object.assign({}, state, {[action.reward.id]: action.reward});
             return rewards;
+        case DELETE_REWARD:
+            const oldRewards = Object.assign({}, state);
+            delete oldRewards[action.rewardId];
+            return oldRewards;
         default:
             return state;
     }

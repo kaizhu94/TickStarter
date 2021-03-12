@@ -21,6 +21,18 @@ class Api::RewardsController < ApplicationController
         end
     end
 
+    def destroy
+        @reward = Reward.find(params[:id])
+        if @reward
+            RewardsItem.where(rewards_id: @reward.id).each do |rewarditem_join|
+                rewarditem_join.destroy
+            end
+            @reward.destroy
+        else
+            render json: @reward.errors.full_messages, status: 404
+        end
+    end
+
     private
 
     def reward_params

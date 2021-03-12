@@ -49,6 +49,7 @@ class EditRewardForm extends React.Component{
             // debugger
             this.props.updateDisabledBottomButton();
             this.props.openEditRewardForm();
+            this.props.receiveAllItems(this.props.reward.project_id);
             this.setState({
                 'showEditReward' : !this.state.showEditReward
             })
@@ -158,8 +159,16 @@ class EditRewardForm extends React.Component{
             })
             // debugger
         }else{
-            let Format = `${this.state.year}-${this.state.month}-01T10:00:00`;
+            let Format = `${this.state.year}-${this.state.month}-01T10:00:00.000Z`;
             let date = new Date(Format);
+            debugger
+            const reward = { project_id: this.state.project_id,
+                             title: this.state.title,
+                             description: this.state.description,
+                             estimated_delivery: date,
+                             amount: this.state.amount,
+                             items: this.state.items}
+            debugger
 
             // debugger
         }

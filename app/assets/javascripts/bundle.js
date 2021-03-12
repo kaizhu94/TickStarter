@@ -715,15 +715,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_ALL_REWARDS": () => /* binding */ RECEIVE_ALL_REWARDS,
 /* harmony export */   "RECEIVE_REWARD": () => /* binding */ RECEIVE_REWARD,
+/* harmony export */   "DELETE_REWARD": () => /* binding */ DELETE_REWARD,
 /* harmony export */   "receiveAllRewards": () => /* binding */ receiveAllRewards,
 /* harmony export */   "receiveReward": () => /* binding */ receiveReward,
+/* harmony export */   "removeReward": () => /* binding */ removeReward,
 /* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards,
-/* harmony export */   "createReward": () => /* binding */ createReward
+/* harmony export */   "createReward": () => /* binding */ createReward,
+/* harmony export */   "deleteReward": () => /* binding */ deleteReward
 /* harmony export */ });
 /* harmony import */ var _util_reward_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/reward_util */ "./frontend/util/reward_util.js");
 
 var RECEIVE_ALL_REWARDS = 'RECEIVE_ALL_REWARDS';
 var RECEIVE_REWARD = 'RECEIVE_REWARD';
+var DELETE_REWARD = 'DELETE_REWARD';
 var receiveAllRewards = function receiveAllRewards(rewards) {
   return {
     type: RECEIVE_ALL_REWARDS,
@@ -734,6 +738,12 @@ var receiveReward = function receiveReward(reward) {
   return {
     type: RECEIVE_REWARD,
     reward: reward
+  };
+};
+var removeReward = function removeReward(rewardId) {
+  return {
+    type: DELETE_REWARD,
+    rewardId: rewardId
   };
 };
 var fetchAllRewards = function fetchAllRewards(project_id) {
@@ -747,6 +757,14 @@ var createReward = function createReward(reward) {
   return function (dispatch) {
     return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.createReward(reward).then(function (reward) {
       return dispatch(receiveReward(reward));
+    });
+  };
+};
+var deleteReward = function deleteReward(rewardId) {
+  return function (dispatch) {
+    // debugger
+    return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.deleteReward(rewardId).then(function () {
+      return dispatch(removeReward(rewardId));
     });
   };
 };
@@ -1879,9 +1897,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
 /* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
+/* harmony import */ var _actions_reward_action__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/reward_action */ "./frontend/actions/reward_action.js");
+
 
 
 
@@ -1895,7 +1915,8 @@ function Modal(props) {
       errors = props.errors,
       projectId = props.projectId,
       updateProjectImage = props.updateProjectImage,
-      deleteItem = props.deleteItem; // debugger
+      deleteItem = props.deleteItem,
+      deleteReward = props.deleteReward; // debugger
 
   function redirect(projectId, tab) {
     props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
@@ -1968,7 +1989,11 @@ function Modal(props) {
         className: "unsave-modal-continer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-upper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Delete this reward?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete Reward")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Delete this reward?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: function onClick() {
+          return deleteReward(props.rewardId);
+        }
+      }, "Delete Reward")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unsave-lower"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: closeModal
@@ -2102,11 +2127,14 @@ var mdp = function mdp(dispatch) {
     },
     deleteItem: function deleteItem(itemId) {
       return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_4__.deleteItem)(itemId));
+    },
+    deleteReward: function deleteReward(rewardId) {
+      return dispatch((0,_actions_reward_action__WEBPACK_IMPORTED_MODULE_5__.deleteReward)(rewardId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(msp, mdp)(Modal)));
 
 /***/ }),
 
@@ -4625,6 +4653,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         // debugger
         this.props.updateDisabledBottomButton();
         this.props.openEditRewardForm();
+        this.props.receiveAllItems(this.props.reward.project_id);
         this.setState({
           'showEditReward': !this.state.showEditReward
         });
@@ -4753,8 +4782,18 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
           'amountErrorMessage': amountError
         }); // debugger
       } else {
-        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00");
-        var date = new Date(Format); // debugger
+        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00.000Z");
+        var date = new Date(Format);
+        debugger;
+        var reward = {
+          project_id: this.state.project_id,
+          title: this.state.title,
+          description: this.state.description,
+          estimated_delivery: date,
+          amount: this.state.amount,
+          items: this.state.items
+        };
+        debugger; // debugger
       } // if()
 
     }
@@ -6840,7 +6879,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             showRewardForm: _this3.state.showRewardForm,
             showEditRewardForm: _this3.state.showEditRewardForm,
             openEditRewardForm: _this3.openEditRewardForm,
-            deleteRewardModal: _this3.deleteRewardModal
+            deleteRewardModal: _this3.deleteRewardModal,
+            receiveAllItems: _this3.props.receiveAllItems
           });
         }); // debugger
 
@@ -7788,6 +7828,11 @@ var rewardsReducer = function rewardsReducer() {
       var rewards = Object.assign({}, state, _defineProperty({}, action.reward.id, action.reward));
       return rewards;
 
+    case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.DELETE_REWARD:
+      var oldRewards = Object.assign({}, state);
+      delete oldRewards[action.rewardId];
+      return oldRewards;
+
     default:
       return state;
   }
@@ -8217,7 +8262,8 @@ var updateProjectImage = function updateProjectImage(id, formData) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards,
-/* harmony export */   "createReward": () => /* binding */ createReward
+/* harmony export */   "createReward": () => /* binding */ createReward,
+/* harmony export */   "deleteReward": () => /* binding */ deleteReward
 /* harmony export */ });
 var fetchAllRewards = function fetchAllRewards(project_id) {
   // debugger
@@ -8230,13 +8276,20 @@ var fetchAllRewards = function fetchAllRewards(project_id) {
   });
 };
 var createReward = function createReward(reward) {
-  debugger;
+  // debugger
   return $.ajax({
     method: 'POST',
     url: "api/rewards",
     data: {
       reward: reward
     }
+  });
+};
+var deleteReward = function deleteReward(rewardId) {
+  // debugger
+  return $.ajax({
+    method: 'DELETE',
+    url: "api/rewards/".concat(rewardId)
   });
 };
 

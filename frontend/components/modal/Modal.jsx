@@ -4,9 +4,10 @@ import {closeModal} from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom'
 import { updateProjectImage } from '../../actions/project_actions'
 import { deleteItem } from '../../actions/item_actions'
+import { deleteReward } from '../../actions/reward_action'
 
 function Modal( props ){
-    const {modal, closeModal, errors, projectId, updateProjectImage, deleteItem} = props
+    const {modal, closeModal, errors, projectId, updateProjectImage, deleteItem, deleteReward} = props
     // debugger
     function redirect(projectId, tab){
         props.history.push(`/projects/${projectId}/edit/${tab}`)
@@ -67,7 +68,7 @@ function Modal( props ){
                         <div className = 'unsave-upper'>
                             <h2>Delete this reward?</h2>
                             <p>This action cannot be undone.</p>
-                            <button >
+                            <button onClick={()=>deleteReward(props.rewardId)}>
                                 Delete Reward
                             </button>
                         </div>
@@ -207,6 +208,7 @@ const mdp =dispatch =>{
         closeModal: ()=>dispatch(closeModal()),
         updateProjectImage: (id, FormData) => dispatch(updateProjectImage(id, FormData)),
         deleteItem: (itemId) => dispatch(deleteItem(itemId)),
+        deleteReward: (rewardId) => dispatch(deleteReward(rewardId)),
     }
 }
 

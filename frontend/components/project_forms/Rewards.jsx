@@ -181,6 +181,7 @@ class Rewards extends React.Component{
                                         showEditRewardForm = {this.state.showEditRewardForm}
                                         openEditRewardForm ={this.openEditRewardForm}
                                         deleteRewardModal={this.deleteRewardModal}
+                                        receiveAllItems={this.props.receiveAllItems}
                                         />
                 )
             })
