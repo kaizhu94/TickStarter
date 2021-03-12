@@ -8,8 +8,9 @@ class Api::RewardsController < ApplicationController
     end
 
     def create
+        debugger
         @reward = Reward.new(reward_params)
-        @items = params[:items]
+        @items = params[:reward][:items]
         debugger
         if @reward.save
             render :show

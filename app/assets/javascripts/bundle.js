@@ -745,7 +745,7 @@ var fetchAllRewards = function fetchAllRewards(project_id) {
 var createReward = function createReward(reward) {
   return function (dispatch) {
     return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.createReward(reward).then(function (reward) {
-      return dispatch(receiveItem(reward));
+      return dispatch(receiveReward(reward));
     });
   };
 };
@@ -5789,8 +5789,9 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           'amountErrorMessage': amountError
         }); // debugger
       } else {
-        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00");
+        var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00.000Z");
         var date = new Date(Format);
+        debugger;
         var reward = {
           project_id: this.state.project_id,
           title: this.state.title,
@@ -5800,7 +5801,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           items: this.state.items
         };
         debugger;
-        this.props.createReward(reward); // debugger
+        this.props.createReward(reward);
+        this.props.cancel(); // debugger
       } // if()
 
     }

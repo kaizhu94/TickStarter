@@ -137,9 +137,9 @@ class NewRewrdForm extends React.Component{
             })
             // debugger
         }else{
-            let Format = `${this.state.year}-${this.state.month}-01T10:00:00`;
+            let Format = `${this.state.year}-${this.state.month}-01T10:00:00.000Z`;
             let date = new Date(Format);
-
+            debugger
             const reward = { project_id: this.state.project_id,
                              title: this.state.title,
                              description: this.state.description,
@@ -148,6 +148,7 @@ class NewRewrdForm extends React.Component{
                              items: this.state.items}
             debugger
             this.props.createReward(reward);
+            this.props.cancel();
 
             // debugger
         }
