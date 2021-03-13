@@ -21,6 +21,28 @@ class Api::RewardsController < ApplicationController
         end
     end
 
+    def update
+        @reward = Reward.find(params[:id])
+        if @reward
+            # debugger
+            @items = params[:reward][:items]
+            # debugger
+            
+            RewardsItem.where(rewards_id: @reward.id).each do |rewarditem_join|
+                rewarditem_join.destroy
+            end
+            # debugger
+            if @items
+                @items.each{|key, value| RewardsItem.create!(rewards_id: @reward.id, items_id:key)}
+            end
+                # debugger
+            @reward.update(reward_params)
+            render :show
+        else
+            render json: @reward.errors.full_messages, status: 404
+        end
+    end
+
     def destroy
         @reward = Reward.find(params[:id])
         if @reward

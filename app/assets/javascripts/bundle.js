@@ -721,6 +721,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "removeReward": () => /* binding */ removeReward,
 /* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards,
 /* harmony export */   "createReward": () => /* binding */ createReward,
+/* harmony export */   "updateReward": () => /* binding */ updateReward,
 /* harmony export */   "deleteReward": () => /* binding */ deleteReward
 /* harmony export */ });
 /* harmony import */ var _util_reward_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/reward_util */ "./frontend/util/reward_util.js");
@@ -756,6 +757,14 @@ var fetchAllRewards = function fetchAllRewards(project_id) {
 var createReward = function createReward(reward) {
   return function (dispatch) {
     return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.createReward(reward).then(function (reward) {
+      return dispatch(receiveReward(reward));
+    });
+  };
+};
+var updateReward = function updateReward(reward) {
+  return function (dispatch) {
+    // debugger
+    return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.updateReward(reward).then(function (reward) {
       return dispatch(receiveReward(reward));
     });
   };
@@ -4511,17 +4520,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _EditRewardForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditRewardForm */ "./frontend/components/project_forms/EditRewardForm.jsx");
+/* harmony import */ var _actions_reward_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/reward_action */ "./frontend/actions/reward_action.js");
+/* harmony import */ var _actions_item_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/item_actions */ "./frontend/actions/item_actions.js");
+/* harmony import */ var _EditRewardForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditRewardForm */ "./frontend/components/project_forms/EditRewardForm.jsx");
+
+
 
 
 
 var msp = function msp(state) {
   // debugger
-  return {};
+  return {
+    allItems: state.entities.items
+  };
 };
 
 var mdp = function mdp(dispatch) {
   return {
+    updateReward: function updateReward(reward) {
+      return dispatch((0,_actions_reward_action__WEBPACK_IMPORTED_MODULE_1__.updateReward)(reward));
+    },
+    createItem: function createItem(item) {
+      return dispatch((0,_actions_item_actions__WEBPACK_IMPORTED_MODULE_2__.createItem)(item));
+    },
     openModal: function (_openModal) {
       function openModal(_x) {
         return _openModal.apply(this, arguments);
@@ -4551,7 +4572,7 @@ var mdp = function mdp(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditRewardForm__WEBPACK_IMPORTED_MODULE_1__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditRewardForm__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 
@@ -4607,7 +4628,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       showModal: false,
       showEditReward: false,
-      items: '',
+      items: {},
       month: '',
       year: '',
       title: '',
@@ -4622,10 +4643,15 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       yearErrorMessage: '',
       titleErrorMessage: '',
       descriptionErrorMessage: '',
-      amountErrorMessage: ''
+      amountErrorMessage: '',
+      showAddItem: false,
+      item_name: '',
+      validInputName: '',
+      project_id: props.project.id
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleModal = _this.handleModal.bind(_assertThisInitialized(_this));
+    _this.createNewItem = _this.createNewItem.bind(_assertThisInitialized(_this));
     return _this;
   } // componentDidUpdate(prevProps, prevState) {
   //     debugger
@@ -4643,7 +4669,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         year: date.getFullYear(),
         'description': reward.description,
         'amount': reward.amount,
-        'items': this.props.reward.items ? this.props.reward.items : ''
+        'items': this.props.reward.items ? this.props.reward.items : this.state.items
       });
     }
   }, {
@@ -4669,15 +4695,23 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
     value: function cancel() {
       this.props.updateDisabledBottomButton();
       this.props.openEditRewardForm();
+      var reward = this.props.reward;
+      var date = new Date(reward.estimated_delivery);
       this.setState({
-        "showEditReward": false
+        "showEditReward": false,
+        'title': reward.title,
+        'month': date.getMonth() + 1 < 10 ? "0".concat(date.getMonth() + 1) : "".concat(date.getMonth() + 1),
+        'year': date.getFullYear(),
+        'description': reward.description,
+        'amount': reward.amount,
+        'items': this.props.reward.items ? this.props.reward.items : {}
       });
+      if (this.state.showAddItem) this.updateshowAddItem();
     }
   }, {
     key: "handleModal",
     value: function handleModal(e) {
       e.stopPropagation();
-      debugger;
 
       if (!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm) {
         this.setState({
@@ -4693,8 +4727,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
     value: function update(key) {
       var _this2 = this;
 
-      var name = "valid" + "".concat(key); // debugger
-
+      var name = "valid" + "".concat(key);
       return function (e) {
         var _this2$setState;
 
@@ -4719,14 +4752,64 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "updateItemName",
+    value: function updateItemName(key) {
+      var _this4 = this;
+
+      return function (e) {
+        return _this4.setState(_defineProperty({}, key, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "updateshowAddItem",
+    value: function updateshowAddItem() {
+      this.setState({
+        'showAddItem': !this.state.showAddItem,
+        'item_name': ''
+      });
+    }
+  }, {
+    key: "updateItems",
+    value: function updateItems() {
+      var _this5 = this;
+
+      return function (e) {
+        var newItem = _this5.props.allItems[parseInt(e.currentTarget.value)];
+
+        var newItems = Object.assign({}, _this5.state.items, _defineProperty({}, parseInt(e.currentTarget.value), newItem)); // debugger
+
+        _this5.setState({
+          'items': newItems
+        });
+
+        _this5.updateshowAddItem();
+      };
+    }
+  }, {
     key: "isValid",
     value: function isValid(key) {
       return this.state[key] ? '' : '-invalid';
     }
   }, {
+    key: "removeItem",
+    value: function removeItem(id) {
+      var _this6 = this;
+
+      return function (e) {
+        // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
+        var newItems = Object.assign({}, _this6.state.items);
+        delete newItems[parseInt(id)]; // debugger
+
+        _this6.setState({
+          'items': newItems
+        });
+      };
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      debugger;
+      var _this7 = this;
+
       e.preventDefault();
       var validMonth = this.state.validmonth;
       var validYear = this.state.validyear;
@@ -4784,29 +4867,73 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       } else {
         var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00.000Z");
         var date = new Date(Format);
-        debugger;
         var reward = {
           project_id: this.state.project_id,
+          rewardId: this.props.reward.id,
           title: this.state.title,
           description: this.state.description,
           estimated_delivery: date,
           amount: this.state.amount,
           items: this.state.items
         };
-        debugger; // debugger
+        this.props.updateReward(reward).then(function (reward) {
+          return _this7.setState({
+            'items': reward.reward.items ? reward.reward.items : {}
+          });
+        });
+        this.cancel();
       } // if()
 
     }
   }, {
+    key: "createNewItem",
+    value: function createNewItem(e) {
+      var _this8 = this;
+
+      e.preventDefault();
+
+      if (this.state.item_name === '' || !this.isNameExist()) {
+        this.setState({
+          'validInputName': '-invalid'
+        });
+      } else {
+        var item = {
+          'item_name': this.state.item_name,
+          'project_id': this.props.project.id
+        };
+        this.props.createItem(item).then(function (item) {
+          var newItem = item.item;
+          var newItems = Object.assign({}, _this8.state.items, _defineProperty({}, newItem.id, newItem));
+          return _this8.setState({
+            'items': newItems,
+            'validInputName': ''
+          });
+        });
+        this.updateshowAddItem();
+      }
+    }
+  }, {
+    key: "isNameExist",
+    value: function isNameExist() {
+      var names = Object.values(this.props.allItems);
+
+      for (var i = 0; i < names.length; i++) {
+        if (this.state.item_name === names[i].item_name) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this9 = this;
 
       var reward = this.props.reward;
       var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var date = new Date(reward.estimated_delivery);
       var estimated_delivery = "".concat(months[date.getMonth()], " ").concat(date.getFullYear());
-      debugger;
       var currentTime = new Date();
       var currentYear = currentTime.getFullYear();
       var month = months[parseInt(this.state.month) - 1];
@@ -4815,10 +4942,29 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
           key: index
         }, item.item_name);
       }) : '';
-      var itemsForEdit = Object.values(this.state.items).map(function (item, index) {
+      var itemsForPreview = Object.values(this.state.items).map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index
         }, item.item_name);
+      });
+      var allItems = Object.values(this.props.allItems);
+      var allItemsArray = allItems.map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          value: item.id,
+          key: index
+        }, item.item_name);
+      });
+      var items = Object.values(this.state.items);
+      var itemsArray = items.map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: index,
+          className: "reward-items-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+          id: "itemsArray-title"
+        }, item.item_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+          id: "itemsArray-remove",
+          onClick: _this9.removeItem(item.id)
+        }, "Remove"));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-reward".concat(this.showingForm())
@@ -4835,7 +4981,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       }, "INCLUDES")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-reward-section-lower".concat(this.showingForm()),
         onClick: function onClick() {
-          return _this4.editItem();
+          return _this9.editItem();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-reward-section-lower-up"
@@ -4861,7 +5007,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         type: "button",
         id: "edit-item-right-button",
         onClick: function onClick() {
-          return _this4.editItem();
+          return _this9.editItem();
         }
       }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
@@ -4876,7 +5022,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         type: "button",
         id: "edit-cancel",
         onClick: function onClick() {
-          return _this4.cancel();
+          return _this9.cancel();
         }
       }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
@@ -4931,10 +5077,12 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         className: "form-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Description"), this.state.validdescription ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         id: "reward-description",
+        value: this.state.description,
         placeholder: "Get an early copy - hot off the presses!",
         onChange: this.update('description')
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         id: "reward-description-invalid",
+        value: this.state.description,
         placeholder: "Get an early copy - hot off the presses!",
         onChange: this.update('description')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
@@ -4996,6 +5144,50 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       }, this.state.monthErrorMessage), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "rewrd-error-message"
       }, this.state.yearErrorMessage))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Items"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Build out a list of what you're offering."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reward-add-item"
+      }, items.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "reward-add-item-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "TITLE"
+      }, "TITLE"), itemsArray) : null, this.state.showAddItem ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "Add-Item-Block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "Add-Item-Block-h3"
+      }, "Add an existing item"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        id: "reward-select-item",
+        value: "",
+        onChange: this.updateItems()
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: true
+      }, " Choose one "), allItemsArray), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "new-item-or"
+      }, "Or"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "Add-Item-Block-h3"
+      }, "Create a new item"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        id: "item-name-input".concat(this.state.validInputName),
+        value: this.state.item_name,
+        onChange: this.updateItemName('item_name'),
+        placeholder: "Digital photo"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "new-item-button",
+        onClick: this.createNewItem
+      }, " Save "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        onClick: function onClick() {
+          return _this9.updateshowAddItem();
+        },
+        id: "newitem-cancel"
+      }, "Cancel")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        id: "new-item-button",
+        onClick: function onClick() {
+          return _this9.updateshowAddItem();
+        }
+      }, " + New item"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-save-bot"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
@@ -5004,7 +5196,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         type: "button",
         id: "edit-cancel",
         onClick: function onClick() {
-          return _this4.cancel();
+          return _this9.cancel();
         }
       }, "Cancel")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview"
@@ -5018,11 +5210,11 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         id: "empty-preview"
       }, "Get an early copy \u2014 hot off the presses!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "preview-title"
-      }, this.state.description), this.state.items === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, this.state.description), items.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-include-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "INCLUDES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "preview-inlcude-items"
-      }, itemsForEdit)) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, itemsForPreview)) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date"
@@ -5771,7 +5963,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      debugger;
+      // debugger
       e.preventDefault();
       var validMonth = this.state.validmonth;
       var validYear = this.state.validyear;
@@ -5828,8 +6020,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         }); // debugger
       } else {
         var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00.000Z");
-        var date = new Date(Format);
-        debugger;
+        var date = new Date(Format); // debugger
+
         var reward = {
           project_id: this.state.project_id,
           title: this.state.title,
@@ -5837,8 +6029,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           estimated_delivery: date,
           amount: this.state.amount,
           items: this.state.items
-        };
-        debugger;
+        }; // debugger
+
         this.props.createReward(reward);
         this.props.cancel(); // this.props.
         // debugger
@@ -5863,8 +6055,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
     value: function createNewItem(e) {
       var _this7 = this;
 
-      e.preventDefault();
-      debugger;
+      e.preventDefault(); // debugger
 
       if (this.state.item_name === '' || !this.isNameExist()) {
         this.setState({
@@ -5877,14 +6068,14 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         };
         this.props.createItem(item).then(function (item) {
           var newItem = item.item;
-          var newItems = Object.assign({}, _this7.state.items, _defineProperty({}, newItem.id, newItem));
-          debugger;
+          var newItems = Object.assign({}, _this7.state.items, _defineProperty({}, newItem.id, newItem)); // debugger
+
           return _this7.setState({
             'items': newItems,
             'validInputName': ''
           });
-        });
-        debugger;
+        }); // debugger
+
         this.updateshowAddItem();
       }
     }
@@ -5906,7 +6097,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this8 = this;
 
-      debugger;
+      // debugger
       var currentTime = new Date();
       var currentYear = currentTime.getFullYear();
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -5930,7 +6121,12 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           onClick: _this8.removeItem(item.id)
         }, "Remove"));
       });
-      debugger;
+      var itemsForPreview = Object.values(this.state.items).map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: index
+        }, item.item_name);
+      }); // debugger
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -6126,7 +6322,11 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         id: "empty-preview"
       }, "Get an early copy \u2014 hot off the presses!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "preview-title"
-      }, this.state.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, this.state.description), items.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "preview-include-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "INCLUDES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "preview-inlcude-items"
+      }, itemsForPreview)) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-date"
@@ -6880,7 +7080,8 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             showEditRewardForm: _this3.state.showEditRewardForm,
             openEditRewardForm: _this3.openEditRewardForm,
             deleteRewardModal: _this3.deleteRewardModal,
-            receiveAllItems: _this3.props.receiveAllItems
+            receiveAllItems: _this3.props.receiveAllItems,
+            project: _this3.props.project
           });
         }); // debugger
 
@@ -6908,8 +7109,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         }, rewardsArray), this.props.disabledBottomButton && this.state.showRewardForm ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewRewardFormContainer__WEBPACK_IMPORTED_MODULE_1__.default, {
           cancel: this.cancel,
           disabledBottomButton: this.props.disabledBottomButton,
-          project: this.props.project // receiveAllItems={this.props.receiveAllItems()}
-
+          project: this.props.project
         }) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-form-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -8263,7 +8463,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchAllRewards": () => /* binding */ fetchAllRewards,
 /* harmony export */   "createReward": () => /* binding */ createReward,
-/* harmony export */   "deleteReward": () => /* binding */ deleteReward
+/* harmony export */   "deleteReward": () => /* binding */ deleteReward,
+/* harmony export */   "updateReward": () => /* binding */ updateReward
 /* harmony export */ });
 var fetchAllRewards = function fetchAllRewards(project_id) {
   // debugger
@@ -8290,6 +8491,16 @@ var deleteReward = function deleteReward(rewardId) {
   return $.ajax({
     method: 'DELETE',
     url: "api/rewards/".concat(rewardId)
+  });
+};
+var updateReward = function updateReward(reward) {
+  debugger;
+  return $.ajax({
+    method: 'PATCH',
+    url: "api/rewards/".concat(reward.rewardId),
+    data: {
+      reward: reward
+    }
   });
 };
 

@@ -43,7 +43,7 @@ class NewRewrdForm extends React.Component{
     }
     updateItemName(key){
         return e => this.setState({[key]: e.currentTarget.value }
-);
+        );
     }
     updateAmount(key){
         return e =>{  
@@ -85,7 +85,7 @@ class NewRewrdForm extends React.Component{
     }
 
     handleSubmit(e){
-        debugger
+        // debugger
         e.preventDefault();
         let validMonth = this.state.validmonth;
         let validYear= this.state.validyear;
@@ -139,14 +139,14 @@ class NewRewrdForm extends React.Component{
         }else{
             let Format = `${this.state.year}-${this.state.month}-01T10:00:00.000Z`;
             let date = new Date(Format);
-            debugger
+            // debugger
             const reward = { project_id: this.state.project_id,
                              title: this.state.title,
                              description: this.state.description,
                              estimated_delivery: date,
                              amount: this.state.amount,
                              items: this.state.items}
-            debugger
+            // debugger
             this.props.createReward(reward);
             this.props.cancel();
             // this.props.
@@ -166,7 +166,7 @@ class NewRewrdForm extends React.Component{
     }
     createNewItem(e){
         e.preventDefault();
-        debugger
+        // debugger
         if(this.state.item_name === '' || !this.isNameExist()){
             this.setState({
                 'validInputName': '-invalid'
@@ -177,13 +177,13 @@ class NewRewrdForm extends React.Component{
             .then((item) =>{
                 const newItem = item.item;
                 const newItems = Object.assign({}, this.state.items, {[newItem.id]: newItem});
-                debugger
+                // debugger
                     return this.setState({
                         'items': newItems,
                         'validInputName': '',
                     })
                 })
-            debugger
+            // debugger
             this.updateshowAddItem();
         }
     }
@@ -198,7 +198,7 @@ class NewRewrdForm extends React.Component{
     }
     
     render(){
-        debugger
+        // debugger
         let currentTime = new Date();
         const currentYear = currentTime.getFullYear();
         const months = [ "January", "February", "March", "April", "May", "June", 
@@ -220,7 +220,14 @@ class NewRewrdForm extends React.Component{
                 </div>
             )
         })
-            debugger
+        const itemsForPreview = Object.values(this.state.items).map((item, index) =>{
+            return(
+                <li key = {index}>
+                    {item.item_name}
+                </li>
+            )
+        })
+            // debugger
         return(
             <div className = 'reward-form-section'>
                 <form onSubmit={this.handleSubmit} className='add-reward-form'>
@@ -367,6 +374,16 @@ class NewRewrdForm extends React.Component{
                                 ):(
                                     <p id='preview-title'>{this.state.description}</p>
                                 )
+                            }
+                            {
+                                items.length>0 ?(
+                                    <div className='preview-include-block'>
+                                        <h5>INCLUDES</h5>
+                                        <ul className='preview-inlcude-items'>
+                                            {itemsForPreview}
+                                        </ul>
+                                    </div>
+                                ): (null)
                             }
                             <div className='preview-date-block'>
                                 <h5>ESTIMATED DELIVERY</h5>

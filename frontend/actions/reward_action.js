@@ -38,6 +38,13 @@ export const createReward = (reward) => dispatch =>{
         )
 }
 
+export const updateReward = (reward) => dispatch =>{
+    // debugger
+    return RewardAPIUtil.updateReward(reward).then(
+        (reward) => dispatch(receiveReward(reward))
+        )
+}
+
 export const deleteReward = (rewardId) => dispatch =>{
     // debugger
     return RewardAPIUtil.deleteReward(rewardId).then(

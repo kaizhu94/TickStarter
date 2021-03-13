@@ -23,3 +23,12 @@ export const deleteReward = rewardId =>{
       url: `api/rewards/${rewardId}`
     })
 }
+
+export const updateReward = (reward) =>{
+  debugger
+  return $.ajax({
+      method: 'PATCH',
+      url: `api/rewards/${reward.rewardId}`,
+      data: {reward}
+    })
+}

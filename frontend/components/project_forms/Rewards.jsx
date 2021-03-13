@@ -182,6 +182,7 @@ class Rewards extends React.Component{
                                         openEditRewardForm ={this.openEditRewardForm}
                                         deleteRewardModal={this.deleteRewardModal}
                                         receiveAllItems={this.props.receiveAllItems}
+                                        project={this.props.project}
                                         />
                 )
             })
@@ -215,7 +216,7 @@ class Rewards extends React.Component{
                                         <NewRewardFormContainer cancel={this.cancel}
                                                                 disabledBottomButton = {this.props.disabledBottomButton}
                                                                 project={this.props.project}
-                                                                // receiveAllItems={this.props.receiveAllItems()}
+                                                               
                                                                 />
                                     ):(
                                         null
