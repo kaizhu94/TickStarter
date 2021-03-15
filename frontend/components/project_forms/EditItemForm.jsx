@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Modal from '../modal/Modal'
 
 class EditItemForm extends React.Component{
     constructor(props){

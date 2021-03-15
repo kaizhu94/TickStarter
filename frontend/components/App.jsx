@@ -14,6 +14,7 @@ import ProjectDashboardNavBar from './NavBar/ProjectDashboardNavContainer'
 import ProjectDashbordContainer from './project_forms/ProjectDashbordContainer'
 import EditProfileNavContainer from './NavBar/EditProfileNavContainer'
 import EditProjectContainer from './project_forms/EditProjectContainer'
+import ProjectShowContainer from './project/ProjectShowContainer'
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
 					<ProtectedRoute path='/projects/new' component={NewProjectFormContainer}/> 
 					<ProtectedRoute path='/projects/:projectId/dashboard' component={ProjectDashbordContainer}/>
 					<ProtectedRoute path='/projects/:projectId/edit/:id' component={EditProjectContainer}/>
+					<ProtectedRoute path='/projects/:projectId' component={ProjectShowContainer}/>
 					<Route path='/' component={MainContentContainer} />
 				</Switch>
 			</section>
@@ -47,6 +49,7 @@ const App = () => {
 					<Route exact path='/' component={Footer} />
 					<Route exact path='/signup' component={Footer} />
 					<Route exact path='/login' component={Footer} />
+					<Route exact path='/projects/:projectId' component={Footer} />
 				</Switch>
 			</footer>
 			
