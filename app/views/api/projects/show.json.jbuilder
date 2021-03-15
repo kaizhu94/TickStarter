@@ -7,6 +7,9 @@ json.category_name  @project.category.category_name
 if @project.title_image.attached?
     json.title_image_url url_for(@project.title_image)
 end
+json.backers @backings.length
+json.pledge @pledge
+json.progress @progress
 # json.title_image_url do
 #     if @project.title_image.attached?
 #         debugger

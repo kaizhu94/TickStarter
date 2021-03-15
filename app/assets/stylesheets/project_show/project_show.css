@@ -1,6 +1,8 @@
 .project-show-block{
     width: 100%;
     background-color: rgb(249 248 248);;
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 30px;
 }
 .project-show-block .project-show-container{
     width: 90%;
@@ -49,6 +51,26 @@
     margin-bottom: 30px;
     line-height: 25px;
 }
+.progress-bar-base{
+    display: flex;
+    background-color: gainsboro;
+}
+.progress-bar{
+    height: 6px;
+    background-color: #009E74;
+    /* flex-basis: 0%; */
+}
+
+.right-section h1{
+    font-weight: 800;
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+#pledge-amount-fulfill{
+    color: #009E74;
+}
+
 #back-button{
     width: 100%;
     height: 46px;

@@ -8,6 +8,10 @@ class Api::ProjectsController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
+        @backings = @project.backings
+        @pledge = @backings.inject(0){|sum, x| sum + x[:backing_amount]}
+        @progress = @pledge / @project[:goal]
+        # debugger
         render :show
     end
 
@@ -30,11 +34,7 @@ class Api::ProjectsController < ApplicationController
         else
             # debugger
             if @project.title_image.attached? && params[:project][:title_image] 
-                # debugger
                 @project.title_image.purge
-            # elsif @project.title_image.attached? && params[:project][:title_image] == 'delete'
-            #     debugger
-            #     @project.title_image.purge
             end
             
             if @project 
