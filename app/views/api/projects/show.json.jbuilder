@@ -10,6 +10,7 @@ end
 json.backers @backings.length
 json.pledge @pledge
 json.progress @progress
+json.founder @founder
 # json.title_image_url do
 #     if @project.title_image.attached?
 #         debugger

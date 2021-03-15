@@ -11,6 +11,7 @@ class Api::ProjectsController < ApplicationController
         @backings = @project.backings
         @pledge = @backings.inject(0){|sum, x| sum + x[:backing_amount]}
         @progress = @pledge / @project[:goal]
+        @founder = User.find(@project[:founder_id])
         # debugger
         render :show
     end

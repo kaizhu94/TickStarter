@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&display=swap');
+
 .project-show-block{
     width: 100%;
     background-color: rgb(249 248 248);;
@@ -23,6 +25,7 @@
     font-weight: 700;
     font-size: 35px;
     margin-bottom: 20px;
+    color: black;
 }
 .project-show-upper p{
     font-size: 25px;
@@ -83,4 +86,31 @@
 #back-button:hover{
     cursor: pointer;
     background-color: #016b46;
+}
+
+.backing-page{
+    width: 100%;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+.backing-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid gainsboro;
+    font-size: 20px;
+    background: #FBFBFA;
+}
+.backing-header a{
+    font-weight: 800;
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: black;
+}
+.backing-header p{
+    font-size: 20px;
+    font-weight: 400;
 }

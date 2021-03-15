@@ -6,7 +6,9 @@ class BackingNavBar extends React.Component{
     render(){
         return (
             <div className = 'backing-navbar'>
-                 <Link to='/' id='tickstart-link'>TickStarter</Link>
+                <nav className='backing-nav'>
+                    <Link to='/' id='tickstart-link'>TickStarter</Link>
+                </nav>
             </div>
         )
     }

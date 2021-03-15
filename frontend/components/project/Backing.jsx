@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 class Backing extends React.Component{
     constructor(props){
@@ -6,18 +7,22 @@ class Backing extends React.Component{
     }
 
     componentDidMount(){
-        this.props.receiveAllRewards();
+        this.props.receiveAllRewards(this.props.match.params.projectId);
+        this.props.receiveProject(this.props.match.params.projectId);
     }
 
     render(){
-        const { rewards } = this.props
-        if(!rewards){
+        const { rewards, project } = this.props
+        if(!rewards || !project){
             return null;
         }else{
             debugger
             return(
-                <div>
-                    hi
+                <div className = 'backing-page'>
+                    <div className = 'backing-header'>
+                        <Link to={`/projects/${this.props.match.params.projectId}`}>{project.project_name}</Link>
+                        <p>by {project.founder.username}</p>
+                    </div>
                 </div>
             )
         }
