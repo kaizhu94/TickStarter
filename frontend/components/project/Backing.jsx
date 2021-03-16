@@ -16,6 +16,14 @@ class Backing extends React.Component{
         if(!rewards || !project){
             return null;
         }else{
+            const rewardArray = Object.values.map((reward, index) =>{
+                return(
+                    <div key = {index}>
+                        
+
+                    </div>
+                )
+            })
             debugger
             return(
                 <div className = 'backing-page'>

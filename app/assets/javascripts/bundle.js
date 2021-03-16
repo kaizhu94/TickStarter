@@ -2403,6 +2403,11 @@ var Backing = /*#__PURE__*/function (_React$Component) {
       if (!rewards || !project) {
         return null;
       } else {
+        var rewardArray = Object.values.map(function (reward, index) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            key: index
+          });
+        });
         debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "backing-page"
