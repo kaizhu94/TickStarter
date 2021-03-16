@@ -2384,9 +2384,15 @@ var Backing = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Backing);
 
   function Backing(props) {
+    var _this;
+
     _classCallCheck(this, Backing);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      selectedReward: ''
+    };
+    return _this;
   }
 
   _createClass(Backing, [{
@@ -2396,8 +2402,17 @@ var Backing = /*#__PURE__*/function (_React$Component) {
       this.props.receiveProject(this.props.match.params.projectId);
     }
   }, {
+    key: "updateSelectedReward",
+    value: function updateSelectedReward(index) {
+      this.setState({
+        'selectedReward': index
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           rewards = _this$props.rewards,
           project = _this$props.project;
@@ -2405,10 +2420,12 @@ var Backing = /*#__PURE__*/function (_React$Component) {
       if (!rewards || !project) {
         return null;
       } else {
-        var rewardArray = Object.values.map(function (reward, index) {
+        var rewardArray = Object.values(rewards).map(function (reward, index) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BackingForm__WEBPACK_IMPORTED_MODULE_1__.default, {
             key: index,
-            reward: reward
+            reward: reward,
+            updateSelectedReward: _this2.updateSelectedReward,
+            selectedReward: _this2.state.selectedReward
           });
         });
         debugger;
@@ -2424,7 +2441,7 @@ var Backing = /*#__PURE__*/function (_React$Component) {
           className: "left-backing-body"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "left-top"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Support this project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Select an option below"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Support this project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Select an option below")), rewardArray), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right-backing-body"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right-top"
@@ -2531,7 +2548,7 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      showDrop: false
+      rewardIndex: props.key
     };
     return _this;
   }
@@ -2539,9 +2556,40 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
   _createClass(BackingForm, [{
     key: "render",
     value: function render() {
+      var reward = this.props.reward;
+      var showDrop = this.state.rewardIndex == this.props.selectedReward;
+      var itemsInclude = Object.values(reward.items).map(function (item, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: index
+        }, item.item_name);
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-element"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "ele-body"
+      }, showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-checkmark"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        "class": "far fa-check"
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "unselected"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        "class": "far fa-circle"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "ele-right"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "ele-right-top"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "ele-right-top-left"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "$", reward.amount, " or more"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, reward.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, reward.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "ele-items"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "INCLUDES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "ele-items-list"
+      }, itemsInclude)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "number-of-backers"
+      }, " backers")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "ele-right-top-right"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), this.state.showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null) : null)));
     }
   }]);
 

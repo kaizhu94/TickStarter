@@ -6,6 +6,9 @@ import BackingForm from './BackingForm';
 class Backing extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            selectedReward: '',
+        }
     }
 
     componentDidMount(){
@@ -13,15 +16,24 @@ class Backing extends React.Component{
         this.props.receiveProject(this.props.match.params.projectId);
     }
 
+    updateSelectedReward(index){
+        this.setState({
+            'selectedReward': index,
+        })
+    }
+
     render(){
         const { rewards, project } = this.props
         if(!rewards || !project){
             return null;
         }else{
-            const rewardArray = Object.values.map((reward, index) =>{
+            const rewardArray = Object.values(rewards).map((reward, index) =>{
                 return(
                     <BackingForm key={index}
-                                 reward = {reward}/>
+                                 reward = {reward}
+                                 updateSelectedReward={this.updateSelectedReward}
+                                 selectedReward={this.state.selectedReward}
+                                 />
                 )
             })
             debugger
@@ -37,6 +49,9 @@ class Backing extends React.Component{
                                 <h1>Support this project</h1>
                                 <h3>Select an option below</h3>
                             </div>
+                            {
+                                rewardArray
+                            }
                         </div>
                         <div className = 'right-backing-body'>
                             <div className= 'right-top'>
