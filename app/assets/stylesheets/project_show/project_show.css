@@ -130,7 +130,9 @@
     width: 65%;
     margin-bottom: 20px;
 }
-
+.left-top{
+    margin-left: 2%;
+}
 .left-top h1{
     font-weight: 600;
     font-size: 30px;
@@ -162,8 +164,15 @@
 
 
 .reward-element{
+    width: 96%;
+    margin-bottom: 15px;
+    margin-left: 2%;
+}
+
+.reward-element-hovering{
     width: 100%;
     margin-bottom: 15px;
+    transition-delay: 0.1s;
 }
 .ele-body{
     display: flex;
@@ -175,11 +184,12 @@
 }
 
 .selected-checkmark{
-    display: block;
+    /* display: flex;
+    width: 8%;
     border: 1px solid white;
     border-radius: 20px;
     background-color: green;
-    color: white;
+    color: white; */
 }
 .unselected{
     display: flex;

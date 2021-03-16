@@ -33,6 +33,7 @@ class Backing extends React.Component{
                                  reward = {reward}
                                  updateSelectedReward={this.updateSelectedReward}
                                  selectedReward={this.state.selectedReward}
+                                 index = {index}
                                  />
                 )
             })

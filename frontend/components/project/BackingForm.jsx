@@ -4,12 +4,42 @@ class BackingForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            rewardIndex: props.key,
+            rewardIndex: props.index,
+            backingAmount: 10,
+            validamount: true,
+            hovering: false
+        }
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+
+    }
+
+    updateAmount(key){
+        return e =>{  
+        let value = e.currentTarget.value; 
+        if(value === ''){
+            return this.setState({[key]:  value,
+            }
+                );
+        }else{
+            return this.setState({[key]:  Math.round(value),
+                                'validamount': true
+            }
+            );
+        }
         }
     }
+    triggerOrNot(){
+        let newState = !this.state.hovering;
+        this.setState({hovering: newState})
+    }
+
     render(){
         const { reward } = this.props;
-        let showDrop = this.state.rewardIndex == this.props.selectedReward;
+        let showDrop = this.state.rewardIndex === this.props.selectedReward;
         const itemsInclude = Object.values(reward.items).map((item, index) =>{
             return(
                 <li key = {index}>
@@ -21,14 +51,15 @@ class BackingForm extends React.Component{
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const date = new Date(reward.estimated_delivery)
         const estimated_delivery = `${months[date.getMonth()]} ${date.getFullYear()}`
+        let isSelecting = this.state.hovering ||this.state.showDrop ? '-hovering': '';
         return(
-            <div className = 'reward-element'>
+            <div className = {`reward-element${isSelecting}`} onMouseEnter={()=>this.triggerOrNot()} onMouseLeave={()=>this.triggerOrNot()}>
                 <div className = 'ele-body'>
                     {
                         showDrop ? (
-                            <div className='selected-checkmark'><i class="far fa-check"></i></div>
+                            <div className='selected-checkmark'><i className="far fa-check"></i></div>
                         ):(
-                            <div className='unselected'><i class="far fa-circle"></i></div>
+                            <div className='unselected'><i className="far fa-circle"></i></div>
                         )
                     }
                     <div className='ele-right'>
@@ -54,10 +85,16 @@ class BackingForm extends React.Component{
                         </div>
                         <div></div>
                         {
-                            this.state.showDrop ? (
-                                <div>
-
-                                </div>
+                            showDrop ? (
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className='sumbit-backing-upper'>Pledge amount</div>
+                                    <div className='sumbit-backing-lower'>
+                                        <div className='amount-section'>
+                                            <label id='amount-label'>CA$</label>
+                                            <input type="number" id="reward-amount" value={this.state.backingAmount} onChange={this.updateAmount('amount')}/>
+                                         </div>
+                                    </div>
+                                </form>
                             ):(null)
                         }
                     </div>

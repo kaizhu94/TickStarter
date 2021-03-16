@@ -2425,7 +2425,8 @@ var Backing = /*#__PURE__*/function (_React$Component) {
             key: index,
             reward: reward,
             updateSelectedReward: _this2.updateSelectedReward,
-            selectedReward: _this2.state.selectedReward
+            selectedReward: _this2.state.selectedReward,
+            index: index
           });
         });
         debugger;
@@ -2514,6 +2515,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2548,16 +2551,52 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      rewardIndex: props.key
+      rewardIndex: props.index,
+      backingAmount: 10,
+      validamount: true,
+      hovering: false
     };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(BackingForm, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+    }
+  }, {
+    key: "updateAmount",
+    value: function updateAmount(key) {
+      var _this2 = this;
+
+      return function (e) {
+        var value = e.currentTarget.value;
+
+        if (value === '') {
+          return _this2.setState(_defineProperty({}, key, value));
+        } else {
+          var _this2$setState2;
+
+          return _this2.setState((_this2$setState2 = {}, _defineProperty(_this2$setState2, key, Math.round(value)), _defineProperty(_this2$setState2, 'validamount', true), _this2$setState2));
+        }
+      };
+    }
+  }, {
+    key: "triggerOrNot",
+    value: function triggerOrNot() {
+      var newState = !this.state.hovering;
+      this.setState({
+        hovering: newState
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var reward = this.props.reward;
-      var showDrop = this.state.rewardIndex == this.props.selectedReward;
+      var showDrop = this.state.rewardIndex === this.props.selectedReward;
       var itemsInclude = Object.values(reward.items).map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index
@@ -2567,18 +2606,25 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
       var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var date = new Date(reward.estimated_delivery);
       var estimated_delivery = "".concat(months[date.getMonth()], " ").concat(date.getFullYear());
+      var isSelecting = this.state.hovering || this.state.showDrop ? '-hovering' : '';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "reward-element"
+        className: "reward-element".concat(isSelecting),
+        onMouseEnter: function onMouseEnter() {
+          return _this3.triggerOrNot();
+        },
+        onMouseLeave: function onMouseLeave() {
+          return _this3.triggerOrNot();
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "ele-body"
       }, showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "selected-checkmark"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        "class": "far fa-check"
+        className: "far fa-check"
       })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unselected"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        "class": "far fa-circle"
+        className: "far fa-circle"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "ele-right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2599,7 +2645,22 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
         id: "show-reward-p-two"
       }, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "ele-estimated-delivery"
-      }, estimated_delivery)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), this.state.showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null) : null)));
+      }, estimated_delivery)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "sumbit-backing-upper"
+      }, "Pledge amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "sumbit-backing-lower"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "amount-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        id: "amount-label"
+      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "number",
+        id: "reward-amount",
+        value: this.state.backingAmount,
+        onChange: this.updateAmount('amount')
+      })))) : null)));
     }
   }]);
 
