@@ -114,3 +114,47 @@
     font-size: 20px;
     font-weight: 400;
 }
+
+.backing-body{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.left-backing-body{
+    padding-left: 18px;
+    padding-right: 18px;
+    width: 65%;
+    margin-bottom: 20px;
+}
+
+.left-top h1{
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.left-top h3, .right-top h3{
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.right-backing-body{
+    padding-left: 18px;
+    padding-right: 18px;
+    width: 35%;
+}
+
+.right-top h1{
+    font-weight: 800;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.right-top h5{
+    line-height: 25px;
+}
