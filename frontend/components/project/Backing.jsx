@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
+import BackingForm from './BackingForm';
+
 class Backing extends React.Component{
     constructor(props){
         super(props);
@@ -18,10 +20,8 @@ class Backing extends React.Component{
         }else{
             const rewardArray = Object.values.map((reward, index) =>{
                 return(
-                    <div key = {index}>
-                        
-
-                    </div>
+                    <BackingForm key={index}
+                                 reward = {reward}/>
                 )
             })
             debugger
