@@ -1,4 +1,7 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom';
+
+import { createBacking } from '../../util/backing_util'
 
 class BackingForm extends React.Component{
     constructor(props){
@@ -16,7 +19,15 @@ class BackingForm extends React.Component{
         e.preventDefault();
         debugger
         if(this.state.backingAmount >= this.props.reward.amount){
-
+            const backing = {
+                'backer_id': this.props.userId,
+                'backing_amount': this.state.backingAmount,
+                'reward_id': this.props.reward.id,
+            }
+            createBacking(backing)
+                .then(
+                  () =>  this.props.history.push(`/projects/${this.props.project.id}`)
+                )
         }else{
             this.setState({
                 'validamount': false,
@@ -105,7 +116,7 @@ class BackingForm extends React.Component{
                                     <div className='sumbit-backing-upper'>Pledge amount</div>
                                     <div className='sumbit-backing-lower'>
                                         <div className={`backing-amount-section${this.isValidAmount()}`}>
-                                            <label id='backing-amount-label'>CA$</label>
+                                            <label id='backing-amount-label'>$</label>
                                             <input type="number" id="backing-reward-amount" value={this.state.backingAmount} onChange={this.updateAmount('backingAmount')}/>
                                          </div>
                                          <button type='submit' id={`backing-form-button${isNotValidAmount}`}>Backing</button>
@@ -120,4 +131,8 @@ class BackingForm extends React.Component{
     }
 }
 
-export default BackingForm;
+export default withRouter(BackingForm);
+
+
+
+

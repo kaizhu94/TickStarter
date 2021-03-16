@@ -35,6 +35,8 @@ class Backing extends React.Component{
                                  updateSelectedReward={this.updateSelectedReward}
                                  selectedReward={this.state.selectedReward}
                                  index = {index}
+                                 userId = {this.props.userId}
+                                 project = {project}
                                  />
                 )
             })

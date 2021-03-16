@@ -325,6 +325,7 @@
     padding-bottom: 0px;
     justify-content: center;
     align-items: center;
+    font-size: 20px;
 }
 #backing-reward-amount{
     width: 80%;

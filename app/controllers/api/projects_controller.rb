@@ -3,6 +3,7 @@ class Api::ProjectsController < ApplicationController
 
     def index
         @projects = Project.all
+        @published_projects = Project.where(published: true)
         render :index
     end
 
@@ -10,7 +11,7 @@ class Api::ProjectsController < ApplicationController
         @project = Project.find(params[:id])
         @backings = @project.backings
         @pledge = @backings.inject(0){|sum, x| sum + x[:backing_amount]}
-        @progress = @pledge / @project[:goal]
+        @progress = @pledge / @project[:goal] * 100
         @founder = User.find(@project[:founder_id])
         # debugger
         render :show

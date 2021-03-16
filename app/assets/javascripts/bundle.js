@@ -2427,7 +2427,9 @@ var Backing = /*#__PURE__*/function (_React$Component) {
             reward: reward,
             updateSelectedReward: _this2.updateSelectedReward,
             selectedReward: _this2.state.selectedReward,
-            index: index
+            index: index,
+            userId: _this2.props.userId,
+            project: project
           });
         });
         debugger;
@@ -2483,7 +2485,8 @@ var msp = function msp(state, ownprops) {
   debugger;
   return {
     rewards: state.entities.rewards,
-    project: state.entities.projects[ownprops.match.params.projectId]
+    project: state.entities.projects[ownprops.match.params.projectId],
+    userId: state.session.id
   };
 };
 
@@ -2514,6 +2517,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _util_backing_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/backing_util */ "./frontend/util/backing_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2537,6 +2542,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -2564,10 +2571,21 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
   _createClass(BackingForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
       debugger;
 
-      if (this.state.backingAmount >= this.props.reward.amount) {} else {
+      if (this.state.backingAmount >= this.props.reward.amount) {
+        var backing = {
+          'backer_id': this.props.userId,
+          'backing_amount': this.state.backingAmount,
+          'reward_id': this.props.reward.id
+        };
+        (0,_util_backing_util__WEBPACK_IMPORTED_MODULE_1__.createBacking)(backing).then(function () {
+          return _this2.props.history.push("/projects/".concat(_this2.props.project.id));
+        });
+      } else {
         this.setState({
           'validamount': false
         });
@@ -2576,17 +2594,17 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateAmount",
     value: function updateAmount(key) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
         var value = e.currentTarget.value;
 
         if (value === '') {
-          return _this2.setState(_defineProperty({}, key, value));
+          return _this3.setState(_defineProperty({}, key, value));
         } else {
-          var _this2$setState2;
+          var _this3$setState2;
 
-          return _this2.setState((_this2$setState2 = {}, _defineProperty(_this2$setState2, key, Math.round(value)), _defineProperty(_this2$setState2, 'validamount', true), _this2$setState2));
+          return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, Math.round(value)), _defineProperty(_this3$setState2, 'validamount', true), _this3$setState2));
         }
       };
     }
@@ -2606,7 +2624,7 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var reward = this.props.reward;
       var showDrop = this.state.rewardIndex === this.props.selectedReward;
@@ -2627,15 +2645,15 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-element".concat(isBigger),
         onMouseEnter: function onMouseEnter() {
-          return _this3.triggerOrNot();
+          return _this4.triggerOrNot();
         },
         onMouseLeave: function onMouseLeave() {
-          return _this3.triggerOrNot();
+          return _this4.triggerOrNot();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "ele-body".concat(isSelecting),
         onClick: function onClick() {
-          return _this3.props.updateSelectedReward(_this3.props.index);
+          return _this4.props.updateSelectedReward(_this4.props.index);
         }
       }, showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "selected-checkmark"
@@ -2676,7 +2694,7 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
         className: "backing-amount-section".concat(this.isValidAmount())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         id: "backing-amount-label"
-      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "number",
         id: "backing-reward-amount",
         value: this.state.backingAmount,
@@ -2691,7 +2709,7 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
   return BackingForm;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BackingForm);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)(BackingForm));
 
 /***/ }),
 
@@ -8898,6 +8916,30 @@ document.addEventListener("DOMContentLoaded", function () {
     store: store
   }), root); // ReactDOM.render(<h1>HI</h1>, root);
 });
+
+/***/ }),
+
+/***/ "./frontend/util/backing_util.js":
+/*!***************************************!*\
+  !*** ./frontend/util/backing_util.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createBacking": () => /* binding */ createBacking
+/* harmony export */ });
+var createBacking = function createBacking(backing) {
+  // debugger
+  return $.ajax({
+    method: 'POST',
+    url: "api/backings",
+    data: {
+      backing: backing
+    }
+  });
+};
 
 /***/ }),
 

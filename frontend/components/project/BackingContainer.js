@@ -9,7 +9,8 @@ const msp = (state, ownprops) =>{
     debugger
     return ({
         rewards: state.entities.rewards,
-        project: state.entities.projects[ownprops.match.params.projectId]
+        project: state.entities.projects[ownprops.match.params.projectId],
+        userId: state.session.id
     })
 }
 

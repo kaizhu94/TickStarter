@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :show]
     resources :items, only: [:index, :create, :update, :destroy]
     resources :rewards, only: [:index, :create, :update, :destroy]
+    resources :backings, only: [ :create]
   end
 end
 
