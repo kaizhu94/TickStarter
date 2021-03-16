@@ -182,14 +182,30 @@
     padding-right: 20px;
     padding-bottom: 10px;
 }
+.ele-body:hover{
+    cursor: pointer;
+}
+
+.ele-body-show{
+    display: flex;
+    border: 2px solid rgb(158, 158, 158);
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
 
 .selected-checkmark{
-    /* display: flex;
     width: 8%;
+}
+.selected-checkmark i{
+    display: flex;
     border: 1px solid white;
-    border-radius: 20px;
+    border-radius: 30px;
     background-color: green;
-    color: white; */
+    color: white;
+    padding: 2px;
+    width: 15px;
 }
 .unselected{
     display: flex;
@@ -215,6 +231,7 @@
     display: flex;
     flex-direction: column;
     width: 55%;
+    margin-bottom: 20px;
 }
 
 .ele-right-top-left h2{
@@ -277,4 +294,76 @@
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 20px;
+}
+
+.backing-form{
+    margin-bottom: 50px;
+}
+
+.sumbit-backing-upper{
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #656969;
+}
+
+.sumbit-backing-lower{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.backing-amount-section, .backing-amount-section-invalid{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid gainsboro;
+    width: 68%;
+}
+#backing-amount-label{
+    width: 20%;
+    display: flex;
+    border: none;
+    padding-bottom: 0px;
+    justify-content: center;
+    align-items: center;
+}
+#backing-reward-amount{
+    width: 80%;
+    padding-left: 15px;
+    border: none;
+    border-left: 1px solid gainsboro;
+    font-size: 18px;
+}
+.backing-amount-section-invalid, .backing-amount-section-invalid #backing-reward-amount{
+    border-color: red;
+}
+.backing-amount-section:focus-within, .backing-amount-section:focus-within #backing-reward-amount{
+    border-color: green;
+}
+.backing-amount-section-invalid:focus-within, .backing-amount-section-invalid:focus-within:focus-within #backing-reward-amount{
+    border-color: green;
+}
+#backing-reward-amount:focus{
+    outline: none;
+}
+
+
+#backing-form-button, #backing-form-button-notValid{
+    padding: 10px 18px;
+    border: none;
+    background-color: green;
+    color: white;
+    height:50px;
+    width: 20%;
+    margin-right: 20px;
+}
+#backing-form-button-notValid{
+    opacity: 0.2;
+}
+#backing-form-button-notValid:hover{
+    cursor: not-allowed;
+}
+
+#backing-form-button:hover{
+    cursor: pointer;
+    background-color: rgb(2, 95, 2);
 }

@@ -9,6 +9,7 @@ class Backing extends React.Component{
         this.state = {
             selectedReward: '',
         }
+        this.updateSelectedReward = this.updateSelectedReward.bind(this);
     }
 
     componentDidMount(){

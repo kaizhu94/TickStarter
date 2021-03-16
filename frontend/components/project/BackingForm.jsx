@@ -5,7 +5,7 @@ class BackingForm extends React.Component{
         super(props);
         this.state = {
             rewardIndex: props.index,
-            backingAmount: 10,
+            backingAmount: props.reward.amount,
             validamount: true,
             hovering: false
         }
@@ -14,7 +14,14 @@ class BackingForm extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
+        debugger
+        if(this.state.backingAmount >= this.props.reward.amount){
 
+        }else{
+            this.setState({
+                'validamount': false,
+            })
+        }
     }
 
     updateAmount(key){
@@ -37,9 +44,14 @@ class BackingForm extends React.Component{
         this.setState({hovering: newState})
     }
 
+    isValidAmount(){
+        return this.state.validamount? '': '-invalid';
+    }
+
     render(){
         const { reward } = this.props;
         let showDrop = this.state.rewardIndex === this.props.selectedReward;
+        debugger
         const itemsInclude = Object.values(reward.items).map((item, index) =>{
             return(
                 <li key = {index}>
@@ -51,13 +63,16 @@ class BackingForm extends React.Component{
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const date = new Date(reward.estimated_delivery)
         const estimated_delivery = `${months[date.getMonth()]} ${date.getFullYear()}`
-        let isSelecting = this.state.hovering ||this.state.showDrop ? '-hovering': '';
+        let isBigger= this.state.hovering || showDrop ? '-hovering': '';
+        let isSelecting = this.state.showDrop ? '-show':''
+        let isNotValidAmount = this.state.backingAmount < reward.amount? '-notValid':'';
+        debugger
         return(
-            <div className = {`reward-element${isSelecting}`} onMouseEnter={()=>this.triggerOrNot()} onMouseLeave={()=>this.triggerOrNot()}>
-                <div className = 'ele-body'>
+            <div className = {`reward-element${isBigger}`} onMouseEnter={()=>this.triggerOrNot()} onMouseLeave={()=>this.triggerOrNot()}>
+                <div className = {`ele-body${isSelecting}`} onClick={()=>this.props.updateSelectedReward(this.props.index)}>
                     {
                         showDrop ? (
-                            <div className='selected-checkmark'><i className="far fa-check"></i></div>
+                            <div className='selected-checkmark'><i className="fas fa-check"></i></div>
                         ):(
                             <div className='unselected'><i className="far fa-circle"></i></div>
                         )
@@ -86,13 +101,14 @@ class BackingForm extends React.Component{
                         <div></div>
                         {
                             showDrop ? (
-                                <form onSubmit={this.handleSubmit}>
+                                <form onSubmit={this.handleSubmit} className='backing-form'>
                                     <div className='sumbit-backing-upper'>Pledge amount</div>
                                     <div className='sumbit-backing-lower'>
-                                        <div className='amount-section'>
-                                            <label id='amount-label'>CA$</label>
-                                            <input type="number" id="reward-amount" value={this.state.backingAmount} onChange={this.updateAmount('amount')}/>
+                                        <div className={`backing-amount-section${this.isValidAmount()}`}>
+                                            <label id='backing-amount-label'>CA$</label>
+                                            <input type="number" id="backing-reward-amount" value={this.state.backingAmount} onChange={this.updateAmount('backingAmount')}/>
                                          </div>
+                                         <button type='submit' id={`backing-form-button${isNotValidAmount}`}>Backing</button>
                                     </div>
                                 </form>
                             ):(null)

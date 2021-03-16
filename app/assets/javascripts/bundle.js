@@ -2392,6 +2392,7 @@ var Backing = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       selectedReward: ''
     };
+    _this.updateSelectedReward = _this.updateSelectedReward.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2552,7 +2553,7 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       rewardIndex: props.index,
-      backingAmount: 10,
+      backingAmount: props.reward.amount,
       validamount: true,
       hovering: false
     };
@@ -2564,6 +2565,13 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      debugger;
+
+      if (this.state.backingAmount >= this.props.reward.amount) {} else {
+        this.setState({
+          'validamount': false
+        });
+      }
     }
   }, {
     key: "updateAmount",
@@ -2591,12 +2599,18 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "isValidAmount",
+    value: function isValidAmount() {
+      return this.state.validamount ? '' : '-invalid';
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
       var reward = this.props.reward;
       var showDrop = this.state.rewardIndex === this.props.selectedReward;
+      debugger;
       var itemsInclude = Object.values(reward.items).map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index
@@ -2606,9 +2620,12 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
       var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var date = new Date(reward.estimated_delivery);
       var estimated_delivery = "".concat(months[date.getMonth()], " ").concat(date.getFullYear());
-      var isSelecting = this.state.hovering || this.state.showDrop ? '-hovering' : '';
+      var isBigger = this.state.hovering || showDrop ? '-hovering' : '';
+      var isSelecting = this.state.showDrop ? '-show' : '';
+      var isNotValidAmount = this.state.backingAmount < reward.amount ? '-notValid' : '';
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "reward-element".concat(isSelecting),
+        className: "reward-element".concat(isBigger),
         onMouseEnter: function onMouseEnter() {
           return _this3.triggerOrNot();
         },
@@ -2616,11 +2633,14 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
           return _this3.triggerOrNot();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "ele-body"
+        className: "ele-body".concat(isSelecting),
+        onClick: function onClick() {
+          return _this3.props.updateSelectedReward(_this3.props.index);
+        }
       }, showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "selected-checkmark"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "far fa-check"
+        className: "fas fa-check"
       })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "unselected"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
@@ -2646,21 +2666,25 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
       }, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "ele-estimated-delivery"
       }, estimated_delivery)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        onSubmit: this.handleSubmit
+        onSubmit: this.handleSubmit,
+        className: "backing-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "sumbit-backing-upper"
       }, "Pledge amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "sumbit-backing-lower"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "amount-section"
+        className: "backing-amount-section".concat(this.isValidAmount())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        id: "amount-label"
+        id: "backing-amount-label"
       }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "number",
-        id: "reward-amount",
+        id: "backing-reward-amount",
         value: this.state.backingAmount,
-        onChange: this.updateAmount('amount')
-      })))) : null)));
+        onChange: this.updateAmount('backingAmount')
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit",
+        id: "backing-form-button".concat(isNotValidAmount)
+      }, "Backing"))) : null)));
     }
   }]);
 
