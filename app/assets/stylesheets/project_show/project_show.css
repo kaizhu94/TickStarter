@@ -247,8 +247,24 @@
     border: 1px solid white;
     border-radius: 5px;
     width: 85px;
+    text-align: center;
+    padding: 5px;
+    font-size: 16px;
 }
 
 .ele-right-top-right{
     width: 45%;
+}
+
+#show-reward-p-two{
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: rgb(41, 41, 41);
+}
+
+#ele-estimated-delivery{
+    color: black;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }

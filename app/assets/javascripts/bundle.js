@@ -2563,6 +2563,10 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
           key: index
         }, item.item_name);
       });
+      var numberOfBackers = reward.backers ? reward.backers : 0;
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var date = new Date(reward.estimated_delivery);
+      var estimated_delivery = "".concat(months[date.getMonth()], " ").concat(date.getFullYear());
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-element"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2587,9 +2591,15 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
         className: "ele-items-list"
       }, itemsInclude)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "number-of-backers"
-      }, " backers")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, " ", "".concat(numberOfBackers, " backers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "ele-right-top-right"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), this.state.showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null) : null)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "ele-right-top-right-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "show-reward-p-two"
+      }, "ESTIMATED DELIVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        id: "ele-estimated-delivery"
+      }, estimated_delivery)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), this.state.showDrop ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null) : null)));
     }
   }]);
 

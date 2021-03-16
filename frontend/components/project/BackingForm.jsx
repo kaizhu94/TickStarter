@@ -17,6 +17,10 @@ class BackingForm extends React.Component{
                 </li>
             )
         });
+        const numberOfBackers = reward.backers? reward.backers : 0;
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const date = new Date(reward.estimated_delivery)
+        const estimated_delivery = `${months[date.getMonth()]} ${date.getFullYear()}`
         return(
             <div className = 'reward-element'>
                 <div className = 'ele-body'>
@@ -39,10 +43,13 @@ class BackingForm extends React.Component{
                                         {itemsInclude}
                                     </ul>
                                 </div>
-                                <div className='number-of-backers'> backers</div>
+                                <div className='number-of-backers'> {`${numberOfBackers} backers`}</div>
                             </div>
                             <div className='ele-right-top-right'>
-
+                                <div className='ele-right-top-right-body'>
+                                    <p id='show-reward-p-two'>ESTIMATED DELIVERY</p>
+                                    <p id='ele-estimated-delivery'>{estimated_delivery}</p>
+                                </div>
                             </div>
                         </div>
                         <div></div>
