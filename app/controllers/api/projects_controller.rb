@@ -2,8 +2,9 @@ class Api::ProjectsController < ApplicationController
     before_action :ensure_logged_in, only: [:create]
 
     def index
-        @projects = Project.where(founder_id: params[:user_id])
-        debugger
+        # debugger
+        @projects = Project.where(founder_id: params[:id])
+        # debugger
         @published_projects = Project.where(published: true)
         render :index
     end

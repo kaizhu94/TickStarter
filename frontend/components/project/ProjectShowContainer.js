@@ -1,19 +1,20 @@
 import { connect } from 'react-redux';
 
-import {fetchProject} from '../../actions/project_actions'
+import {fetchProjects} from '../../actions/project_actions'
 
 import ProjectShow from './ProjectShow'
 
 const msp = (state, ownprops) =>{
     debugger
     return ({
-        project: state.entities.projects[ownprops.match.params.projectId]
+        user: state.entities.users[state.session.id],
+        projects: state.entities.projects.published_projects
     })
 }
 
 const mdp = dispatch=>{
     return ({
-        receiveProject: (projectId) => dispatch(fetchProject(projectId)),
+        receiveProjects: (userId) => dispatch(fetchProjects(userId)),
     })
 }
 export default connect(msp, mdp)(ProjectShow);

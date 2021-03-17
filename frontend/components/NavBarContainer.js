@@ -5,7 +5,8 @@ import NavBar from './NavBar'
 const msp = state =>{
     debugger
     return ({
-        currentUser: state.entities.users[state.session.id]
+        currentUser: state.entities.users[state.session.id],
+        createdProjects:  state.entities.projects.owner_projects
     })
 }
 

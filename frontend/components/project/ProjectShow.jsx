@@ -6,32 +6,33 @@ class ProjectShow extends React.Component{
     }
 
     componentDidMount(){
-        this.props.receiveProject(this.props.match.params.projectId)
+        this.props.receiveProjects(this.props.user.id)
     }
-    
-    isFulfill(){
-        return this.props.project.progress >= 100 ? '-fulfill': '';
-    }
+   
 
     redirect(){
-        this.props.history.push(`/projects/${this.props.project.id}/backing`);
+        this.props.history.push(`/projects/${this.props.match.params.projectId}/backing`);
     }
 
     render(){
         // debugger
-        if(!this.props.project){
+        if(!this.props.projects){
             return null;
         }else{
-            const{ project } = this.props;
+            const{ projects } = this.props;
+            const project = projects[this.props.match.params.projectId];
+            debugger
             const date = new Date(project.end_date);
             const currentDate = new Date();
             let dayDiff =Math.round((date.getTime() - currentDate.getTime()) / (1000 * 3600 * 24));
             if (dayDiff < 1){
                 dayDiff = Math.round((date.getTime() - currentDate.getTime()).getHours());
             }
-            debugger
-            // this.progress.current.style.flexBasis = `${project.progress}%`;
-            debugger
+            let progress = 0;
+            if(project.goal){
+                progress = project.pledge / project.goal * 100
+            }
+            const isFulfill = progress >= 100 ? '-fulfill': '';
             return(
                 <div className='project-show-block'>
                     <div className='project-show-container'>
@@ -40,15 +41,15 @@ class ProjectShow extends React.Component{
                             <p>{project.description}</p>
                         </div>
                         <div className='project-show-lower'>
-                            <img src={project.title_image_url} alt="title-image"/>
+                            <img src={project.title_image} alt="title-image"/>
                             <div className='project-show-lower-right'>
                                 <div className='right-section'>
                                     <div className = 'progress-bar-base'>
-                                        <div className = 'progress-bar' style={{flexBasis: `${project.progress}%`}}></div>
+                                        <div className = 'progress-bar' style={{flexBasis: `${progress}%`}}></div>
                                     </div>
                                 </div>
                                 <div className='right-section'>
-                                    <h1 id={`pledge-amount${this.isFulfill()}`}>${project.pledge}</h1>
+                                    <h1 id={`pledge-amount${isFulfill}`}>${project.pledge}</h1>
                                     <p>pledge of ${project.goal} goal</p>
                                 </div>
                                 <div className='right-section'>

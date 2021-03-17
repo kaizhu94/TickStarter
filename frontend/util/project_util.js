@@ -1,9 +1,9 @@
-export const fetchProjects = (userId) =>{
+export const fetchProjects = (id) =>{
   debugger
     return $.ajax({
         method: 'GET',
         url: 'api/projects',
-        data: {userId}
+        data: {id}
       })
 }
 

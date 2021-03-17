@@ -1,6 +1,6 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom';
 
-import LogOutButton from '../buttons/LogOutButton'
 
 class Profile extends React.Component{
     constructor(props){
@@ -10,6 +10,7 @@ class Profile extends React.Component{
         }
         this.triggerOrNot = this.triggerOrNot.bind(this);
         this.handleLogOut =this.handleLogOut.bind(this);
+        this.redirect = this.redirect.bind(this);
     }
 
     componentDidMount(){
@@ -18,7 +19,7 @@ class Profile extends React.Component{
     }
 
     triggerOrNot(e){
-        // e.preventDefault();
+        // // e.preventDefault();
         let newState = !this.state.showDropdown;
         this.setState({showDropdown: newState})
     }
@@ -28,9 +29,35 @@ class Profile extends React.Component{
         this.props.logout();
     }
 
-
+    redirect(proejctId){
+        this.props.history.push(`/projects/${proejctId}/dashboard`)
+    }
 
     render(){
+        let createdProjects='';
+        if(this.props.createdProjects){
+            debugger
+            createdProjects = Object.values(this.props.createdProjects).map((project, index)=>{
+                return (
+                    <div key = {index} className='created-proejct-ele'>
+                        {
+                            project.title_image? (
+                                <img src={project.title_image} alt="project-img" onClick={()=>this.redirect(project.id)}/>
+                            ):(
+                                <img src={window.blank} alt="project-img" onClick={()=>this.redirect(project.id)}/>
+                            )
+                        }
+                        {
+                            project.project_name? (
+                                <p onClick={()=>this.redirect(project.id)}>{project.project_name}</p>
+                            ):(
+                                <p onClick={()=>this.redirect(project.id)}>{`${project.category_name} project`}</p>
+                            )
+                        }
+                    </div>
+                )
+            })
+        }
         return (
             <div className='profile'>
                
@@ -42,7 +69,8 @@ class Profile extends React.Component{
                             <div className='profile-dropdown'>
                                 <div className='profile-top'>
                                     <div className = 'created-projects'>
-                                        
+                                        <h2 className='created-projects-top'>CREATED PROJECTS</h2>
+                                        {createdProjects}
                                     </div>
                                 </div>
                                 <div className='logout-block'>
@@ -64,4 +92,4 @@ class Profile extends React.Component{
     }
 }
 
-export default Profile;
+export default withRouter(Profile);
