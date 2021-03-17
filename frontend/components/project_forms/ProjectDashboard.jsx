@@ -7,7 +7,7 @@ class ProjectDashboard extends React.Component{
     }
     componentDidMount(){
         debugger
-        this.props.receiveProjects(this.props.user.id)
+        this.props.receiveProjects()
     }
 
     handleDelete(e){

@@ -14,8 +14,7 @@ class Profile extends React.Component{
     }
 
     componentDidMount(){
-        debugger
-        this.props.fetchProjects(this.props.currentUser.id)
+        this.props.fetchProjects()
     }
 
     triggerOrNot(e){

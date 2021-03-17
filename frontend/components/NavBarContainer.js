@@ -13,7 +13,7 @@ const msp = state =>{
 const mdp = dispatch=>{
     return ({
         logout: () => dispatch(logout()),
-        fetchProjects: (userId) => dispatch(fetchProjects(userId))
+        fetchProjects: () => dispatch(fetchProjects())
     })
 }
 

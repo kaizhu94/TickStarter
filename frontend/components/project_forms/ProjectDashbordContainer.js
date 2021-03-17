@@ -15,7 +15,7 @@ const msp = (state, ownprops) =>{
 
 const mdp = (dispatch) => {
     return {
-      receiveProjects: userId => dispatch(fetchProjects(userId)),
+      receiveProjects: () => dispatch(fetchProjects()),
       deleteProject: projectId => dispatch(deleteProject(projectId)),
     };
   }

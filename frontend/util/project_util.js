@@ -1,9 +1,8 @@
-export const fetchProjects = (id) =>{
+export const fetchProjects = () =>{
   debugger
     return $.ajax({
         method: 'GET',
         url: 'api/projects',
-        data: {id}
       })
 }
 

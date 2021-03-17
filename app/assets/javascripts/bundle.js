@@ -656,10 +656,10 @@ var removeProject = function removeProject(projectId) {
     projectId: projectId
   };
 };
-var fetchProjects = function fetchProjects(userId) {
+var fetchProjects = function fetchProjects() {
   return function (dispatch) {
     debugger;
-    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.fetchProjects(userId).then(function (projects) {
+    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.fetchProjects().then(function (projects) {
       return dispatch(receiveProjects(projects));
     });
   };
@@ -1765,8 +1765,8 @@ var mdp = function mdp(dispatch) {
     logout: function logout() {
       return dispatch((0,_actions_session_action__WEBPACK_IMPORTED_MODULE_1__.logout)());
     },
-    fetchProjects: function fetchProjects(userId) {
-      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__.fetchProjects)(userId));
+    fetchProjects: function fetchProjects() {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__.fetchProjects)());
     }
   };
 };
@@ -1808,8 +1808,8 @@ var mdp = function mdp(dispatch) {
     logout: function logout() {
       return dispatch((0,_actions_session_action__WEBPACK_IMPORTED_MODULE_1__.logout)());
     },
-    fetchProjects: function fetchProjects(userId) {
-      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__.fetchProjects)(userId));
+    fetchProjects: function fetchProjects() {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__.fetchProjects)());
     }
   };
 };
@@ -2295,8 +2295,7 @@ var Profile = /*#__PURE__*/function (_React$Component) {
   _createClass(Profile, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
-      this.props.fetchProjects(this.props.currentUser.id);
+      this.props.fetchProjects();
     }
   }, {
     key: "triggerOrNot",
@@ -2979,7 +2978,7 @@ var ProjectShow = /*#__PURE__*/function (_React$Component) {
   _createClass(ProjectShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveProjects(this.props.user.id);
+      this.props.receiveProjects();
     }
   }, {
     key: "redirect",
@@ -3092,8 +3091,8 @@ var msp = function msp(state, ownprops) {
 
 var mdp = function mdp(dispatch) {
   return {
-    receiveProjects: function receiveProjects(userId) {
-      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__.fetchProjects)(userId));
+    receiveProjects: function receiveProjects() {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__.fetchProjects)());
     }
   };
 };
@@ -7381,7 +7380,7 @@ var ProjectDashboard = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       debugger;
-      this.props.receiveProjects(this.props.user.id);
+      this.props.receiveProjects();
     }
   }, {
     key: "handleDelete",
@@ -7491,8 +7490,8 @@ var msp = function msp(state, ownprops) {
 
 var mdp = function mdp(dispatch) {
   return {
-    receiveProjects: function receiveProjects(userId) {
-      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__.fetchProjects)(userId));
+    receiveProjects: function receiveProjects() {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__.fetchProjects)());
     },
     deleteProject: function deleteProject(projectId) {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__.deleteProject)(projectId));
@@ -9116,14 +9115,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "updateProject": () => /* binding */ updateProject,
 /* harmony export */   "updateProjectImage": () => /* binding */ updateProjectImage
 /* harmony export */ });
-var fetchProjects = function fetchProjects(id) {
+var fetchProjects = function fetchProjects() {
   debugger;
   return $.ajax({
     method: 'GET',
-    url: 'api/projects',
-    data: {
-      id: id
-    }
+    url: 'api/projects'
   });
 };
 var fetchProject = function fetchProject(projectId) {

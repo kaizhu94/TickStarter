@@ -6,7 +6,7 @@ class ProjectShow extends React.Component{
     }
 
     componentDidMount(){
-        this.props.receiveProjects(this.props.user.id)
+        this.props.receiveProjects()
     }
    
 
