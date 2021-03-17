@@ -33,6 +33,10 @@ class Project < ApplicationRecord
         foreign_key: :project_id,
         class_name: :Item
 
+    has_many :backings,
+        through: :rewards,
+        source: :backings
+
     has_one_attached :title_image
     has_many_attached :background_images
 end

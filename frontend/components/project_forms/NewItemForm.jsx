@@ -5,10 +5,13 @@ class NewItemForm extends React.Component{
         super(props);
         this.state={
             item_name:'',
-            valid: true
+            valid: true,
+            project_id: props.project.id
         }
         this.handleSumbit = this.handleSumbit.bind(this);
     }
+
+    
     update(key){
         return e => {
             return this.setState({[key]: e.currentTarget.value,
@@ -21,26 +24,31 @@ class NewItemForm extends React.Component{
     handleSumbit(e){
         e.preventDefault();
         if(this.emptyInput()){
-            debugger
+            // debugger
             this.setState({
                 'valid': false
             })
         }else{
-            debugger
+            this.props.createItem(this.state);
+            this.props.cancel();
         }
     }
     render(){
         return(
             <form onSubmit={this.handleSumbit}>
                 <div className='new-item-form'>
-                    {
+                    <div className='top-button-conatiner'>
+                        <button type='button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
+                        <button type='submit' id = 'edit-next-button-top'>Save item</button>
+                    </div>
+                    {/* {
                         this.props.disabledBottomButton ? (
                                 <div className='top-button-conatiner'>
                                     <button type='button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
                                     <button type='submit' id = 'edit-next-button-top'>Save item</button>
                                 </div>
                             ):(null)
-                    }
+                    } */}
                     <h1>Add a new item</h1>
                     <div className='add-new-item-section'>
                         <div className='add-new-item-section-word'>

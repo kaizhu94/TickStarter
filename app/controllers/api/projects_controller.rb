@@ -2,12 +2,30 @@ class Api::ProjectsController < ApplicationController
     before_action :ensure_logged_in, only: [:create]
 
     def index
-        @projects = Project.all
+        # debugger
+        if params[:id]
+            @projects = Project.where(founder_id: params[:id])
+        end
+        # debugger
+        all_published_projects = Project.where(published: true)
+        time = Time.now
+        all_published_projects.each do |project|
+            if project[:end_date] <= time 
+                project.update(published: false)
+            end
+        end
+        @published_projects = Project.where(published: true)
+        # debugger
         render :index
     end
 
     def show
         @project = Project.find(params[:id])
+        # @backings = @project.backings
+        # @pledge = @backings.inject(0){|sum, x| sum + x[:backing_amount]}
+        # @progress = @pledge / @project[:goal] * 100
+        # @founder = User.find(@project[:founder_id])
+        # debugger
         render :show
     end
 
@@ -22,7 +40,6 @@ class Api::ProjectsController < ApplicationController
 
     def update
         @project = Project.find(params[:id])
-        # debugger
         if @project.title_image.attached? && params[:project][:title_image] == 'delete'
             # debugger
             @project.title_image.purge
@@ -30,11 +47,7 @@ class Api::ProjectsController < ApplicationController
         else
             # debugger
             if @project.title_image.attached? && params[:project][:title_image] 
-                # debugger
                 @project.title_image.purge
-            # elsif @project.title_image.attached? && params[:project][:title_image] == 'delete'
-            #     debugger
-            #     @project.title_image.purge
             end
             
             if @project 

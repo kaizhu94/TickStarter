@@ -27,8 +27,9 @@ export const removeProject = (projectId)=>{
 
 
 
-export const fetchProjects = () => dispatch =>{
-    return ProjectAPIUtil.fetchProjects().then(
+export const fetchProjects = (userId) => dispatch =>{
+    debugger
+    return ProjectAPIUtil.fetchProjects(userId).then(
         (projects) => dispatch(receiveProjects(projects))
         )
 }
@@ -46,7 +47,7 @@ export const createProject = (project) => dispatch =>{
 }
 
 export const deleteProject = (projectId) => dispatch =>{
-    debugger
+    // debugger
     return ProjectAPIUtil.deleteProject(projectId).then(
         () => dispatch(removeProject(projectId))
         )
@@ -60,7 +61,7 @@ export const updateProject = (id, project) => dispatch =>{
 }
 
 export const updateProjectImage = (id, formdata) => dispatch =>{
-    debugger
+    // debugger
     return ProjectAPIUtil.updateProjectImage(id, formdata).then(
         (project) => dispatch(receiveProject(project))
         )

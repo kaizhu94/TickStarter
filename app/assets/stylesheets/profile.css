@@ -6,10 +6,12 @@
 	background-color: white;
 	border: 1px solid rgb(206, 203, 203);
 	padding: 20px;
-	width: 225px;
+	width: 500px;
 	z-index: 1;
 	text-align: left;
 	font-weight: initial;
+	font-size: 18px;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 .logout-block{
 	border-top: 1px solid rgb(206, 203, 203);
@@ -20,6 +22,10 @@
 	position: relative;
 	width: auto;
 }
+#logout:hover{
+	color: green;
+	text-decoration: underline;
+}
 
 #profile-button{
 	border: none;
@@ -28,4 +34,35 @@
 #earth{
 	height: 40px;
 	width: 40px;
+}
+.created-projects .created-projects-top{
+	font-weight: 600;
+	color: black;
+	margin-bottom: 30px;
+	font-size: 18px;
+}
+
+.created-proejct-ele{
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 15px;
+}
+
+.created-proejct-ele img{
+	width: 50px;
+	height: 30px;
+	margin-right: 10px;
+}
+.created-proejct-ele img:hover{
+	cursor: pointer;
+}
+
+.created-proejct-ele p{
+	line-height: 25px;
+}
+
+.created-proejct-ele p:hover{
+	cursor: pointer;
+	color: green;
+	text-decoration: underline;
 }

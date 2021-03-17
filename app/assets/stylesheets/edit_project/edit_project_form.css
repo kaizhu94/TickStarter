@@ -791,9 +791,35 @@ button, select{
     z-index: 20;
 }
 
-.top-button-conatiner #edit-next-button-top:hover{
+#edit-next-button-top:hover{
     cursor: pointer;
     background-color: #016b46;
 }
 
+.edit-item-top-button-conatiner{
+    display: flex;
+    margin-top: 50px;
+}
+.edit-item-top-button-conatiner #edit-next-button-top:hover{
+    cursor: pointer;
+    background-color: #016b46;
+}
 
+#edit-item-next-button-top{
+    margin-right: 15px;
+    padding: 15px;
+    border: none;
+    color: white;
+    background-color: #028858;
+    width: 226px;
+    font-size: 17px;
+}
+#edit-item-cancel{
+    margin-right: 15px;
+    padding: 15px;
+    border: 1px solid gainsboro;
+    color:rgb(82, 82, 82);
+    background-color:white;
+    width: 226px;
+    font-size: 17px;
+}

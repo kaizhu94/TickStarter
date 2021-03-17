@@ -9,6 +9,7 @@ class NewRewrdForm extends React.Component{
             title: '',
             description: '',
             amount: 1,
+            estimated_delivery: '',
             validmonth: true,
             validyear: true,
             validtitle: true,
@@ -19,15 +20,30 @@ class NewRewrdForm extends React.Component{
             titleErrorMessage: '',
             descriptionErrorMessage: '',
             amountErrorMessage: '',
+
+            items: {},
+            showAddItem: false,
+
+
+            item_name: '',
+            validInputName: '',
+
+            project_id: props.project.id
         }
         this.handleSubmit= this.handleSubmit.bind(this);
+        this.createNewItem = this.createNewItem.bind(this);
+        this.updateItems = this.updateItems.bind(this);
     }
     update(key){
         const name = `valid` + `${key}`;
-        debugger
+        
         return e => this.setState({[key]: e.currentTarget.value,
                                [name]: true }
             );
+    }
+    updateItemName(key){
+        return e => this.setState({[key]: e.currentTarget.value }
+        );
     }
     updateAmount(key){
         return e =>{  
@@ -45,8 +61,31 @@ class NewRewrdForm extends React.Component{
         }
     }
 
+    updateItems(){
+        return e =>{
+            const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
+            const newItems = Object.assign({}, this.state.items,{[parseInt(e.currentTarget.value)]: newItem});
+            // debugger
+            this.setState({
+                'items': newItems
+            })
+            this.updateshowAddItem();
+        }
+    }
+    removeItem(id){
+        return e =>{
+            // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
+            const newItems = Object.assign({}, this.state.items);
+            delete newItems[parseInt(id)];
+            // debugger
+            this.setState({
+                'items': newItems
+            })
+        }
+    }
+
     handleSubmit(e){
-        debugger
+        // debugger
         e.preventDefault();
         let validMonth = this.state.validmonth;
         let validYear= this.state.validyear;
@@ -58,13 +97,13 @@ class NewRewrdForm extends React.Component{
         let titleError= '';
         let descriptionError= '';
         let amountError= '';
-        
+        // debugger
         if(this.state.month === ''){
             validMonth = false;
             monthError = 'Month is required';
         }
         if(this.state.year === ''){
-            debugger
+            // debugger
             validYear = false;
             yearError = 'Year is required';
         }
@@ -77,13 +116,13 @@ class NewRewrdForm extends React.Component{
             descriptionError = 'Please enter a description or at least one item.'
         }
         if(this.state.amount < 1 || this.state.amount > 13000){
-            debugger
+            // debugger
             validAmount = false;
             amountError='Enter a value between $1 and $13,000.'
         }
-        debugger
+        // debugger
         if(validMonth===false || validYear===false || validTitle===false || validDescription===false || validAmount===false){
-            debugger
+            // debugger
             this.setState({
                 'validmonth': validMonth,
                 'validyear': validYear,
@@ -96,36 +135,106 @@ class NewRewrdForm extends React.Component{
                 'descriptionErrorMessage': descriptionError,
                 'amountErrorMessage': amountError
             })
-            debugger
+            // debugger
         }else{
-            let Format = `${this.state.year}-${this.state.month}-'01'T'10':'00':'00'`;
+            let Format = `${this.state.year}-${this.state.month}-01T10:00:00.000Z`;
             let date = new Date(Format);
-
-            debugger
+            // debugger
+            const reward = { project_id: this.state.project_id,
+                             title: this.state.title,
+                             description: this.state.description,
+                             estimated_delivery: date,
+                             amount: this.state.amount,
+                             items: this.state.items}
+            // debugger
+            this.props.createReward(reward);
+            this.props.cancel();
+            // this.props.
+            // debugger
         }
         // if()
     }
     isValid(key){
         return this.state[key] ? '': '-invalid';
     }
+
+    updateshowAddItem(){
+        this.setState({
+            'showAddItem': !this.state.showAddItem,
+            'item_name': ''
+        })
+    }
+    createNewItem(e){
+        e.preventDefault();
+        // debugger
+        if(this.state.item_name === '' || !this.isNameExist()){
+            this.setState({
+                'validInputName': '-invalid'
+            })
+        }else{
+            const item = {'item_name': this.state.item_name, 'project_id': this.props.project.id}
+            this.props.createItem(item)
+            .then((item) =>{
+                const newItem = item.item;
+                const newItems = Object.assign({}, this.state.items, {[newItem.id]: newItem});
+                // debugger
+                    return this.setState({
+                        'items': newItems,
+                        'validInputName': '',
+                    })
+                })
+            // debugger
+            this.updateshowAddItem();
+        }
+    }
+    isNameExist(){
+        const names = Object.values(this.props.allItems);
+        for(let i =0; i< names.length; i++){
+            if(this.state.item_name === names[i].item_name){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     render(){
+        // debugger
         let currentTime = new Date();
         const currentYear = currentTime.getFullYear();
         const months = [ "January", "February", "March", "April", "May", "June", 
                "July", "August", "September", "October", "November", "December" ];
         const month = months[parseInt(this.state.month)-1]
-        debugger
+
+        const allItems = Object.values(this.props.allItems);
+        const allItemsArray = allItems.map((item, index) => {
+            return (
+                <option value={item.id} key={index}>{item.item_name}</option>
+                )
+            })
+        const items = Object.values(this.state.items);
+        const itemsArray = items.map((item, index) => {
+            return (
+                <div key ={index} className='reward-items-block'>
+                    <p id='itemsArray-title'>{item.item_name}</p>
+                    <p id='itemsArray-remove'  onClick={this.removeItem(item.id)}>Remove</p>
+                </div>
+            )
+        })
+        const itemsForPreview = Object.values(this.state.items).map((item, index) =>{
+            return(
+                <li key = {index}>
+                    {item.item_name}
+                </li>
+            )
+        })
+            // debugger
         return(
             <div className = 'reward-form-section'>
                 <form onSubmit={this.handleSubmit} className='add-reward-form'>
-                    {
-                        this.props.disabledBottomButton ? (
-                                <div className='top-button-conatiner'>
-                                    <button type = 'button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
-                                    <button type = 'submit' id = 'edit-next-button-top'>Save reward</button>
-                                </div>
-                            ):(null)
-                    }
+                    <div className='top-button-conatiner'>
+                        <button type = 'button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
+                        <button type = 'submit' id = 'edit-next-button-top'>Save reward</button>
+                    </div>
                     <div className = 'reward-form-block'>
                         <div className = 'reward-form-container'>
                             <div className='form-section'>
@@ -205,6 +314,39 @@ class NewRewrdForm extends React.Component{
                                     <p id='rewrd-error-message'>{this.state.monthErrorMessage}</p>
                                     <p id='rewrd-error-message'>{this.state.yearErrorMessage}</p>
                                 </div>
+                            </div >
+                            <div className='form-section'>
+                                <h3>Items</h3>
+                                <p>Build out a list of what you're offering.</p>
+                                <div className='reward-add-item'>
+                                    {
+                                    items.length > 0? (
+                                            <div className='reward-add-item-block'>
+                                                <p id='TITLE'>TITLE</p>
+                                                {itemsArray}
+                                            </div>
+                                    ): (null)
+                                    }
+                                    {
+                                         this.state.showAddItem ? (
+                                            <div className='Add-Item-Block'>
+                                                <h3 id='Add-Item-Block-h3'>Add an existing item</h3>
+                                                <select id='reward-select-item' value='' onChange={this.updateItems()}>
+                                                    <option value='' disabled > Choose one </option>
+                                                    {allItemsArray}
+                                                </select>
+                                                <p id='new-item-or'>Or</p>
+                                                <h3 id='Add-Item-Block-h3'>Create a new item</h3>
+                                                <input type="text"  id={`item-name-input${this.state.validInputName}`} value={this.state.item_name}
+                                                    onChange={this.updateItemName('item_name')} placeholder='Digital photo'/>
+                                                <button type='button' id='new-item-button' onClick={this.createNewItem}> Save </button>
+                                                <p onClick={()=>this.updateshowAddItem()} id='newitem-cancel'>Cancel</p>
+                                            </div>
+                                        ):(
+                                            <button type='button' id='new-item-button' onClick={()=> this.updateshowAddItem()}> + New item</button>
+                                        )
+                                    }
+                                </div>
                             </div>
                             <div className='reward-save-bot'>
                                     <button type = 'submit' id = 'edit-next-button-top'>Save reward</button>
@@ -232,6 +374,16 @@ class NewRewrdForm extends React.Component{
                                 ):(
                                     <p id='preview-title'>{this.state.description}</p>
                                 )
+                            }
+                            {
+                                items.length>0 ?(
+                                    <div className='preview-include-block'>
+                                        <h5>INCLUDES</h5>
+                                        <ul className='preview-inlcude-items'>
+                                            {itemsForPreview}
+                                        </ul>
+                                    </div>
+                                ): (null)
                             }
                             <div className='preview-date-block'>
                                 <h5>ESTIMATED DELIVERY</h5>

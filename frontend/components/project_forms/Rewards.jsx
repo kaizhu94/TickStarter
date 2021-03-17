@@ -1,11 +1,15 @@
 import React from 'react';
 
-import NewRewardFormContainer from './NewRewardFormContainer'
-import NewItemFormContainer from './NewItemFormContainer'
+import NewRewardFormContainer from './NewRewardFormContainer';
+import NewItemFormContainer from './NewItemFormContainer';
+import EditItemConatiner from './EditItemContainer';
+import EditRewardContainer from './EditRewardContainer'
+
+import Modal from '../modal/Modal';
 
 class Headers extends React.Component {
     render() {
-        debugger
+        // debugger
       const selected = this.props.selected;
       const headers = this.props.tabs.map((tab, index) => {
         const title = tab.title;
@@ -46,94 +50,204 @@ class Rewards extends React.Component{
         super(props);
         this.state= {
             tab: 0,
-            // showRewardForm: false,
-            // showItemForm: false,
+            showRewardForm: false,
+            showItemForm: false,
+            showEditItemForm: false,
+            showEditRewardForm:false,
+            item_name: '',
+            rewards: 0,
+            itemId: '',
+            rewardsId: ''
             // updateDisabledBottomButton: this.props.disabledBottomButton,
         }
         this.updatetab = this.updatetab.bind(this);
         this.showNewRewardForm = this.showNewRewardForm.bind(this);
-        // this.cancel = this.cancel.bind(this);
-        debugger
+        this.cancel = this.cancel.bind(this);
+        this.openEditItemForm = this.openEditItemForm.bind(this);
+        this.openEditRewardForm = this.openEditRewardForm.bind(this);
+        this.showModal = this.showModal.bind(this);
+        this.deleteRewardModal = this.deleteRewardModal.bind(this);
+        // debugger
+    }
+
+    componentDidMount(){
+        this.props.receiveAllItems(this.props.project.id);
+        this.props.receiveAllRewards(this.props.project.id);
     }
     updatetab(num){
         if(!this.props.disabledBottomButton){
             this.setState({
                 'tab': num
             })  
+            this.props.receiveAllItems(this.props.project.id);
+            this.props.receiveAllRewards(this.props.project.id);
         }
     }
     disable(){
-        debugger
+        // debugger
         return this.props.disabledBottomButton ? '-disable': ''
     }
+    // editItem(){
+    //     if(this.disable() !== '-disable'){
+    //         this.setState({
+    //             'showEditItemForm': true
+    //         })
+    //     }
+    // }
     showNewRewardForm(){
         if(!this.props.disabledBottomButton){
-            debugger
+            // debugger
             this.props.updateDisabledBottomButton();
+            if(this.state.tab === 0){
+                this.setState({
+                    'showRewardForm': true
+                })
+            }else{
+                this.setState({
+                    'showItemForm': true
+                })
+            }
         }
     }
-    // cancel(){
-    //     debugger
-    //     this.props.updateDisabledBottomButton();
-    // }
+    openEditItemForm(){
+        this.setState({
+            'showEditItemForm': !this.state.showEditItemForm
+        })
+    }
+    openEditRewardForm(){
+        this.setState({
+            'showEditRewardForm': !this.state.showEditRewardForm
+        })
+    }
+    cancel(){
+        // debugger
+        this.props.updateDisabledBottomButton();
+        if(this.state.tab === 0){
+            this.setState({
+                'showRewardForm': false
+            })
+        }else{
+            this.setState({
+                'showItemForm': false
+            })
+        }
+    }
+
+    showModal(item_name, rewards, itemId){
+        this.setState({
+            'item_name': item_name,
+            'rewards': rewards,
+            'itemId': itemId,
+        })
+        this.props.openModal('deleteItem');
+        // this.props.receiveAllRewards(this.props.project.id);
+        // this.props.receiveAllItems();
+    }
+    deleteRewardModal(rewardId){
+        this.setState({
+            'rewardId': rewardId,
+        })
+        this.props.openModal('deleteReward');
+    }
     render(){
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
         const disable = this.disable();
-        debugger
-        return (
-            <div className='rewards-items-container'>
-                {/* {
-                    this.props.disabledBottomButton ? (
+        const {items, rewards} = this.props;
+        // debugger
+        if(!items || !rewards){
+            // debugger
+            return null;
+        }else{
+            const arrayItems = Object.values(items).map((item, index) => {
+                return( 
+                    <EditItemConatiner key={index}
+                                        item={item}
+                                        updateDisabledBottomButton={this.props.updateDisabledBottomButton}
+                                        disabledBottomButton = {this.props.disabledBottomButton}
+                                        showItemForm={this.state.showItemForm}
+                                        showEditItemForm={this.state.showEditItemForm}
+                                        openEditItemForm={this.openEditItemForm}
+                                        showModal = {this.showModal}
+                                        />
+                )
+            });
+            const rewardsArray = Object.values(rewards).map((reward,index) => {
+                return(
+                    <EditRewardContainer key={index}
+                                        reward={reward}
+                                        updateDisabledBottomButton={this.props.updateDisabledBottomButton}
+                                        disabledBottomButton = {this.props.disabledBottomButton}
+                                        showRewardForm = {this.state.showRewardForm}
+                                        showEditRewardForm = {this.state.showEditRewardForm}
+                                        openEditRewardForm ={this.openEditRewardForm}
+                                        deleteRewardModal={this.deleteRewardModal}
+                                        receiveAllItems={this.props.receiveAllItems}
+                                        project={this.props.project}
+                                        />
+                )
+            })
+            // debugger
+            return (
+                <div className='rewards-items-container'>
+                    <Modal item_name={this.state.item_name}
+                                rewards={this.state.rewards}
+                                itemId={this.state.itemId}
+                                rewardId = {this.state.rewardId}/>
+                   
+                    <Headers selected = {this.state.tab}
+                            tabs = {tabs}
+                            updatetab = {this.updatetab}
+                            disable = {disable}
+                                    />
+                    {
                         this.state.tab === 0 ? (
-                            <div className='top-button-conatiner'>
-                                <button id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
-                                <button id = 'edit-next-button-top'>Save reward</button>
+                            <div className='rewards-form-block'>
+                                <div className={`new-reward-button-section${this.disable()}`}>
+                                    <p>Add rewards to your project, which can be physical items or special experiences</p>
+                                    <button type='button' onClick={this.showNewRewardForm}>+ New reward</button>   
+                                </div>
+                                <div className={`rewards-array`}>
+                                    {
+                                        rewardsArray
+                                    }
+                                </div>
+                                {
+                                    (this.props.disabledBottomButton && this.state.showRewardForm) ? (
+                                        <NewRewardFormContainer cancel={this.cancel}
+                                                                disabledBottomButton = {this.props.disabledBottomButton}
+                                                                project={this.props.project}
+                                                               
+                                                                />
+                                    ):(
+                                        null
+                                    )
+                                }
                             </div>
-                        ):(
-                            <div className='top-button-conatiner'>
-                                <button id = 'edit-cancel' onClick={()=>this.cancel()}>Cancel</button>
-                                <button id = 'edit-next-button-top'>Save item</button>
+                        ): (
+                            <div className='rewards-form-block'>
+                                <div className={`new-reward-button-section${this.disable()}`}>
+                                    <p>We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you’re offering.</p>
+                                    <button type='button' onClick={this.showNewRewardForm}>+ New item</button>
+                                </div>
+                                <div className={`items-array`}>
+                                    {
+                                        arrayItems
+                                    }
+                                </div>
+                                {
+                                    (this.props.disabledBottomButton && this.state.showItemForm) ? (
+                                        <NewItemFormContainer cancel={this.cancel}
+                                                            disabledBottomButton = {this.props.disabledBottomButton}
+                                                            project={this.props.project}
+                                        />
+                                    ):(null)
+                                }
                             </div>
                         )
-                    ) : (null
-                    )
-                } */}
-                <Headers selected = {this.state.tab}
-                        tabs = {tabs}
-                        updatetab = {this.updatetab}
-                        disable = {disable}
-                                />
-                {
-                    this.state.tab === 0 ? (
-                        <div className='rewards-form-block'>
-                            <div className={`new-reward-button-section${this.disable()}`}>
-                                <p>Add rewards to your project, which can be physical items or special experiences</p>
-                                <button type='button' onClick={this.showNewRewardForm}>+ New reward</button>   
-                            </div>
-                            {
-                                this.props.disabledBottomButton ? (
-                                    <NewRewardFormContainer cancel={this.props.updateDisabledBottomButton}
-                                                            disabledBottomButton = {this.props.disabledBottomButton}/>
-                                ):(null)
-                            }
-                        </div>
-                    ): (
-                        <div className='rewards-form-block'>
-                            <div className={`new-reward-button-section${this.disable()}`}>
-                                <p>We recommend you list your items below before creating your reward in the other tabs. Items are optional, reusable building blocks for your reward tiers and add-ons to help clearly present what you’re offering.</p>
-                                <button type='button' onClick={this.showNewRewardForm}>+ New item</button>
-                            </div>
-                            {
-                                this.props.disabledBottomButton ? (
-                                    <NewItemFormContainer cancel={this.props.updateDisabledBottomButton}
-                                    disabledBottomButton = {this.props.disabledBottomButton}/>
-                                ):(null)
-                            }
-                        </div>
-                    )
-                }
-            </div>
-        )
+                    }
+                </div>
+            )
+        }
     }
 }
 

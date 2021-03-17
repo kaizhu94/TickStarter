@@ -2,7 +2,7 @@ import React from 'react';
 
 import EditTitleImage from './EditTitleImage'
 import EditPromotionDate from './EditPromotionDate'
-import Rewards from './Rewards'
+import Rewards from './RewardsContainer'
 
 class Headers extends React.Component {
     render() {
@@ -60,8 +60,8 @@ class EditProjectForm extends React.Component{
             selectedMainCat: '',
             location_id: '',
             goal: null,
-            risks: null,
-            description: null,
+            risks: '',
+            description: '',
             selectedDateTab: false,
 
             launch_date: null,
@@ -141,7 +141,7 @@ class EditProjectForm extends React.Component{
     }
 
     updateDisabledBottomButton(){
-        debugger
+        // debugger
         // e.preventDefault();
         const value = !this.state.disabledBottomButton;
         const isModified = !this.state.isModified;
@@ -161,7 +161,7 @@ class EditProjectForm extends React.Component{
     }
 
     selectTab(num) {
-        debugger
+        // debugger
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -457,7 +457,7 @@ class EditProjectForm extends React.Component{
 
             const locations = Object.values(this.props.locations);
 
-            debugger
+            // debugger
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}
@@ -615,6 +615,7 @@ class EditProjectForm extends React.Component{
                                                     startDate = {this.state.launch_date}
                                                     endDate = {this.state.end_date} 
                                                     updateEndDate={this.updateEndDate}
+                                                    project={this.props.project}
                                                     />
                                             </div>
                                         </div>

@@ -3,9 +3,11 @@ import {connect} from 'react-redux';
 import {closeModal} from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom'
 import { updateProjectImage } from '../../actions/project_actions'
+import { deleteItem } from '../../actions/item_actions'
+import { deleteReward } from '../../actions/reward_action'
 
 function Modal( props ){
-    const {modal, closeModal, errors, projectId, updateProjectImage} = props
+    const {modal, closeModal, errors, projectId, updateProjectImage, deleteItem, deleteReward} = props
     // debugger
     function redirect(projectId, tab){
         props.history.push(`/projects/${projectId}/edit/${tab}`)
@@ -38,6 +40,7 @@ function Modal( props ){
                 </div>
             </div> 
             );
+            break;
         case 'delete-file':
             // debugger
             return (
@@ -56,6 +59,57 @@ function Modal( props ){
                     </div>
                 </div>
             )
+            break;
+        case 'deleteReward':
+            // debugger
+            return (
+                <div className='modal-background' onClick={closeModal}>
+                    <div className='unsave-modal-continer'>
+                        <div className = 'unsave-upper'>
+                            <h2>Delete this reward?</h2>
+                            <p>This action cannot be undone.</p>
+                            <button onClick={()=>deleteReward(props.rewardId)}>
+                                Delete Reward
+                            </button>
+                        </div>
+                        <div className = 'unsave-lower'>
+                            <p onClick={closeModal}>Close</p>
+                        </div>
+                    </div>
+                </div>
+            )
+            break;
+        case 'deleteItem':
+                return (
+                    <div className='modal-background' onClick={closeModal}>
+                        <div className='unsave-modal-continer'>
+                            <div className = 'unsave-upper'>
+                                <h2>Delete this item?</h2>
+                                {
+                                    props.rewards === 0 ? (
+                                        <div>
+                                            <p>{props.item_name} is not used in any of your rewards.</p>
+                                            <button onClick={()=>deleteItem(props.itemId)}>
+                                                Delete Item
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <p>{props.item_name} will be deleted from {props.rewards} of your rewards. This action cannot be undone.</p>
+                                            <button onClick={()=>deleteItem(props.itemId)}>
+                                                Delete from {props.rewards} rewards
+                                            </button>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                            <div className = 'unsave-lower'>
+                                <p onClick={closeModal}>No, never mind</p>
+                            </div>
+                        </div>
+                    </div>
+                )
+                break;
         case 'unsave-tab-0':
         // debugger
         return (
@@ -74,6 +128,7 @@ function Modal( props ){
                 </div>
             </div>
         )
+        break;
         case 'unsave-tab-1':
             // debugger
             return (
@@ -92,6 +147,7 @@ function Modal( props ){
                     </div>
                 </div>
             )
+            break;
         case 'unsave-tab-2':
             // debugger
             return (
@@ -110,6 +166,7 @@ function Modal( props ){
                     </div>
                 </div>
             )
+            break;
         case 'unsave-tab-3':
             // debugger
             return (
@@ -128,6 +185,7 @@ function Modal( props ){
                     </div>
                 </div>
             )
+            break;
         default:
             return null;
     }
@@ -136,7 +194,7 @@ function Modal( props ){
 }
 
 
-const msp =state =>{
+const msp =(state, ownprops) =>{
     // debugger
     return {
         modal: state.ui.modal,
@@ -149,6 +207,8 @@ const mdp =dispatch =>{
     return {
         closeModal: ()=>dispatch(closeModal()),
         updateProjectImage: (id, FormData) => dispatch(updateProjectImage(id, FormData)),
+        deleteItem: (itemId) => dispatch(deleteItem(itemId)),
+        deleteReward: (rewardId) => dispatch(deleteReward(rewardId)),
     }
 }
 

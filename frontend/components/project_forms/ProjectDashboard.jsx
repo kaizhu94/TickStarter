@@ -6,7 +6,8 @@ class ProjectDashboard extends React.Component{
         this.handleDelete = this.handleDelete.bind(this);
     }
     componentDidMount(){
-        this.props.receiveProject(this.props.match.params.projectId)
+        debugger
+        this.props.receiveProjects(this.props.user.id)
     }
 
     handleDelete(e){
@@ -15,18 +16,24 @@ class ProjectDashboard extends React.Component{
     }
 
     redirect(tab){
-        this.props.history.push(`/projects/${this.props.project.id}/edit/${tab}`);
+        this.props.history.push(`/projects/${this.props.match.params.projectId}/edit/${tab}`);
     }
 
     render(){
-        if(!this.props.project){
+        debugger
+        if(!this.props.projects){
             return null
         }
-        const {user, project} = this.props
+        const {user} = this.props;
+        const project = this.props.projects[this.props.match.params.projectId];
         return (
             <div className = 'dashboard-main'>
                 <div className = 'dashboard-head'>
-                        <h1>{project.category_name} Proeject</h1>
+                        {project.project_name? (
+                                <h1>{project.project_name}</h1>
+                            ):(
+                                <h1>{`${project.category_name} Project`}</h1>
+                            )}
                         <p>By {user.username}</p>
                 </div>
                 <div className = 'dashboard-body'>
