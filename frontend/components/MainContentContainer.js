@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 
+import { fetchProjects } from '../actions/project_actions'
+
 import MainContents from './MainContents'
 
 const msp = state =>{
@@ -8,6 +10,10 @@ const msp = state =>{
         currentUser: state.entities.users[state.session.id]
     })
 }
+const mdp = dispatch=>{
+    return ({
+        fetchProjects: () => dispatch(fetchProjects())
+    })
+}
 
-
-export default connect(msp, null)(MainContents)
+export default connect(msp, mdp)(MainContents)

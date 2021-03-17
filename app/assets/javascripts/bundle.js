@@ -1061,7 +1061,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _MainContents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainContents */ "./frontend/components/MainContents.jsx");
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _MainContents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainContents */ "./frontend/components/MainContents.jsx");
+
 
 
 
@@ -1072,7 +1074,15 @@ var msp = function msp(state) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, null)(_MainContents__WEBPACK_IMPORTED_MODULE_1__.default));
+var mdp = function mdp(dispatch) {
+  return {
+    fetchProjects: function fetchProjects() {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__.fetchProjects)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_MainContents__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -1140,6 +1150,11 @@ var MainContents = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MainContents, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchProjects();
+    }
+  }, {
     key: "render",
     value: function render() {
       var tab;

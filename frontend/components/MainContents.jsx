@@ -13,7 +13,10 @@ class MainContents extends React.Component{
         super(props);   
     }
 
-    
+    componentDidMount(){
+        this.props.fetchProjects();
+    }
+
     render(){
         let tab;
         if(this.props.currentUser){
