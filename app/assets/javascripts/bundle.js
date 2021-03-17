@@ -656,9 +656,10 @@ var removeProject = function removeProject(projectId) {
     projectId: projectId
   };
 };
-var fetchProjects = function fetchProjects() {
+var fetchProjects = function fetchProjects(userId) {
   return function (dispatch) {
-    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.fetchProjects().then(function (projects) {
+    debugger;
+    return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.fetchProjects(userId).then(function (projects) {
       return dispatch(receiveProjects(projects));
     });
   };
@@ -1258,7 +1259,9 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.currentUser) {
         logOrProfile = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_profile_Profile__WEBPACK_IMPORTED_MODULE_1__.default, {
-          logout: this.props.logout
+          logout: this.props.logout,
+          fetchProjects: this.props.fetchProjects,
+          currentUser: this.props.currentUser
         });
       } else {
         logOrProfile = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1771,12 +1774,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/actions/session_action.js");
-/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NavBar */ "./frontend/components/NavBar.jsx");
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NavBar */ "./frontend/components/NavBar.jsx");
+
 
 
 
 
 var msp = function msp(state) {
+  debugger;
   return {
     currentUser: state.entities.users[state.session.id]
   };
@@ -1786,11 +1792,14 @@ var mdp = function mdp(dispatch) {
   return {
     logout: function logout() {
       return dispatch((0,_actions_session_action__WEBPACK_IMPORTED_MODULE_1__.logout)());
+    },
+    fetchProjects: function fetchProjects(userId) {
+      return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__.fetchProjects)(userId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NavBar__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NavBar__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 
@@ -2294,6 +2303,12 @@ var Profile = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Profile, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      debugger;
+      this.props.fetchProjects(this.props.currentUser.id);
+    }
+  }, {
     key: "triggerOrNot",
     value: function triggerOrNot(e) {
       // e.preventDefault();
@@ -2323,6 +2338,10 @@ var Profile = /*#__PURE__*/function (_React$Component) {
       }), this.state.showDropdown ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "profile-dropdown"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "profile-top"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "created-projects"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "logout-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         onClick: this.handleLogOut,
@@ -9059,10 +9078,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "updateProject": () => /* binding */ updateProject,
 /* harmony export */   "updateProjectImage": () => /* binding */ updateProjectImage
 /* harmony export */ });
-var fetchProjects = function fetchProjects() {
+var fetchProjects = function fetchProjects(userId) {
+  debugger;
   return $.ajax({
     method: 'GET',
-    url: 'api/projects'
+    url: 'api/projects',
+    data: {
+      userId: userId
+    }
   });
 };
 var fetchProject = function fetchProject(projectId) {

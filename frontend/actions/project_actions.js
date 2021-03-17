@@ -27,8 +27,9 @@ export const removeProject = (projectId)=>{
 
 
 
-export const fetchProjects = () => dispatch =>{
-    return ProjectAPIUtil.fetchProjects().then(
+export const fetchProjects = (userId) => dispatch =>{
+    debugger
+    return ProjectAPIUtil.fetchProjects(userId).then(
         (projects) => dispatch(receiveProjects(projects))
         )
 }

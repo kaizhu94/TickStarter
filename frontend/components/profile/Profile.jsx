@@ -12,6 +12,11 @@ class Profile extends React.Component{
         this.handleLogOut =this.handleLogOut.bind(this);
     }
 
+    componentDidMount(){
+        debugger
+        this.props.fetchProjects(this.props.currentUser.id)
+    }
+
     triggerOrNot(e){
         // e.preventDefault();
         let newState = !this.state.showDropdown;
@@ -35,7 +40,11 @@ class Profile extends React.Component{
                     this.state.showDropdown
                         ? (
                             <div className='profile-dropdown'>
-                               
+                                <div className='profile-top'>
+                                    <div className = 'created-projects'>
+                                        
+                                    </div>
+                                </div>
                                 <div className='logout-block'>
                                     <p onClick={this.handleLogOut} id='logout'>Log out</p>
 

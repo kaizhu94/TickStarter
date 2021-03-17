@@ -7,7 +7,9 @@ class NavBar extends React.Component{
     render(){
         let logOrProfile;
         if(this.props.currentUser){
-            logOrProfile = <Profile logout={this.props.logout}/>
+            logOrProfile = <Profile logout={this.props.logout}
+                            fetchProjects={this.props.fetchProjects}
+                            currentUser={this.props.currentUser}/>
             
         }else{
             logOrProfile = <div id='login-or-demo'>

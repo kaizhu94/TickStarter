@@ -20,6 +20,10 @@
 	position: relative;
 	width: auto;
 }
+#logout:hover{
+	color: green;
+	text-decoration: underline;
+}
 
 #profile-button{
 	border: none;
