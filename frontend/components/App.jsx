@@ -35,7 +35,6 @@ const App = () => {
 					<Route path='/' component={NavBarContainer} />
 				</Switch>
 			</header>
-
 			<section className="main-section">
 				<Switch>
 					<AuthRoute path="/signup" component={SignupFormContainer} />
@@ -45,6 +44,8 @@ const App = () => {
 					<ProtectedRoute path='/projects/:projectId/edit/:id' component={EditProjectContainer}/>
 					<ProtectedRoute path='/projects/:projectId/backing' component={BackingContainer}/>
 					<ProtectedRoute path='/projects/:projectId' component={ProjectShowContainer}/>
+					
+					<Route path='/cat/:catId' component={NavBarContainer} />
 					<Route path='/' component={MainContentContainer} />
 				</Switch>
 			</section>

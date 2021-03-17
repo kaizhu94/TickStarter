@@ -3,9 +3,19 @@ class Api::ProjectsController < ApplicationController
 
     def index
         # debugger
-        @projects = Project.where(founder_id: params[:id])
+        if params[:id]
+            @projects = Project.where(founder_id: params[:id])
+        end
         # debugger
+        all_published_projects = Project.where(published: true)
+        time = Time.now
+        all_published_projects.each do |project|
+            if project[:end_date] <= time 
+                project.update(published: false)
+            end
+        end
         @published_projects = Project.where(published: true)
+        # debugger
         render :index
     end
 

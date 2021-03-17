@@ -954,6 +954,9 @@ var App = function App() {
     path: "/projects/:projectId",
     component: _project_ProjectShowContainer__WEBPACK_IMPORTED_MODULE_14__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    path: "/cat/:catId",
+    component: _NavBarContainer__WEBPACK_IMPORTED_MODULE_4__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
     path: "/",
     component: _MainContentContainer__WEBPACK_IMPORTED_MODULE_5__.default
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", {
