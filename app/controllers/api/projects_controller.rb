@@ -3,8 +3,9 @@ class Api::ProjectsController < ApplicationController
 
     def index
         # debugger
-        if params[:id]
-            @projects = Project.where(founder_id: params[:id])
+        @projects = []
+        if logged_in?
+            @projects = Project.where(founder_id: current_user[:id])
         end
         # debugger
         all_published_projects = Project.where(published: true)
