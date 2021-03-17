@@ -225,14 +225,16 @@ class EditPromotionDate extends React.Component{
             // debugger
         }
         // debugger
-        if(this.isValidDate(newDate)){
+        const {project} =this.props;
+        if(this.isValidDate(newDate) && project.project_name && project.subtitle
+        && project.goal){
             this.props.updateEndDate(newDate);
             this.setState({
                 'publishMessage': 'Your project is published! Use save to sumbit the form.'
             })
         }else{
             this.setState({
-                'publishMessage': 'Invalid date'
+                'publishMessage': 'Complete every section of editting project then publish.'
             })
         }
     }

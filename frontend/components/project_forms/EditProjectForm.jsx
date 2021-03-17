@@ -60,8 +60,8 @@ class EditProjectForm extends React.Component{
             selectedMainCat: '',
             location_id: '',
             goal: null,
-            risks: null,
-            description: null,
+            risks: '',
+            description: '',
             selectedDateTab: false,
 
             launch_date: null,
@@ -615,6 +615,7 @@ class EditProjectForm extends React.Component{
                                                     startDate = {this.state.launch_date}
                                                     endDate = {this.state.end_date} 
                                                     updateEndDate={this.updateEndDate}
+                                                    project={this.props.project}
                                                     />
                                             </div>
                                         </div>

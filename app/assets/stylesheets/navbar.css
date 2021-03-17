@@ -43,7 +43,7 @@
 }
 .right-nav *:hover{
     cursor: pointer;
-    color: rgb(54, 80, 15);
+    color: green;
 }
 
 .right-nav #search{
@@ -57,9 +57,9 @@
     display: flex;
     /* justify-content: space-between; */
 }
-.left-nav div *:hover{
+.left-nav div p:hover{
     cursor: pointer;
-    color: rgb(54, 80, 15);
+    color: green;
 }
 .left-nav>div{
     display: flex;
@@ -78,6 +78,10 @@
     text-decoration: none;
     color: black;
 }
+.left-nav #start-project #start-a-project:hover{
+    color: green;
+}
+
 
 #login{
     text-decoration: none;
@@ -91,7 +95,7 @@
 
 #login:hover{
     /* text-decoration: underline; */
-    color: rgb(54, 80, 15);
+    color: green;
 }
 
 .navbar #search{

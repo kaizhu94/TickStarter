@@ -3964,8 +3964,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       selectedMainCat: '',
       location_id: '',
       goal: null,
-      risks: null,
-      description: null,
+      risks: '',
+      description: '',
       selectedDateTab: false,
       launch_date: null,
       end_date: null,
@@ -4522,7 +4522,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           updateDateTab: this.updateDateTab,
           startDate: this.state.launch_date,
           endDate: this.state.end_date,
-          updateEndDate: this.updateEndDate
+          updateEndDate: this.updateEndDate,
+          project: this.props.project
         })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-block".concat(this.hidebutton())
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4980,14 +4981,16 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       } // debugger
 
 
-      if (this.isValidDate(newDate)) {
+      var project = this.props.project;
+
+      if (this.isValidDate(newDate) && project.project_name && project.subtitle && project.goal) {
         this.props.updateEndDate(newDate);
         this.setState({
           'publishMessage': 'Your project is published! Use save to sumbit the form.'
         });
       } else {
         this.setState({
-          'publishMessage': 'Invalid date'
+          'publishMessage': 'Complete every section of editting project then publish.'
         });
       }
     }
