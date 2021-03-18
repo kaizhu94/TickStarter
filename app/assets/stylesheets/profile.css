@@ -25,6 +25,7 @@
 #logout:hover{
 	color: green;
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 #profile-button{

@@ -36,21 +36,22 @@
     font-weight: 400;
     font-size: 18px;
 }
-.right-nav>div{
+.right-nav #search{
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 14px;
     font-weight: 400;
 }
-.right-nav *:hover{
+.right-nav #search:hover{
     cursor: pointer;
     color: green;
 }
 
 .right-nav #search{
-
-    width: 15px;
+    width: 48px;
     height: 15px;
     padding-right: 10px;
+    display: flex;
+    font-size: 18px;
 }
 
 .left-nav {

@@ -30,7 +30,7 @@ class NavBar extends React.Component{
                 </nav>
                 
                 <nav className='right-nav'>
-                    <p>Search
+                    <p id="search">Search
                     <img id="search" src={window.search} ></img>
                     </p>
                     {logOrProfile}
