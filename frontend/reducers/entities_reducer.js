@@ -6,6 +6,7 @@ import locationsReducer from './locations_reducer'
 import categoriesReducer from './categories_reducer'
 import itemsReducer from './items_reducer'
 import rewardsReducer from './rewards_reducer'
+import searchReducer from './search_reducer'
 
 const entitiesReducer = combineReducers({
   users: usersReducer,
@@ -13,7 +14,8 @@ const entitiesReducer = combineReducers({
   locations: locationsReducer,
   categories: categoriesReducer,
   items: itemsReducer,
-  rewards: rewardsReducer
+  rewards: rewardsReducer,
+  search: searchReducer
 });
 
 export default entitiesReducer;

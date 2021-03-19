@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :create, :update, :destroy]
     resources :rewards, only: [:index, :create, :update, :destroy]
     resources :backings, only: [ :create]
+
+    get '/search', to: 'search#search'
   end
 end
 

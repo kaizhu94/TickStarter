@@ -16,6 +16,7 @@ class Api::ProjectsController < ApplicationController
             end
         end
         @published_projects = Project.where(published: true)
+
         # debugger
         render :index
     end
