@@ -1,9 +1,8 @@
 class Api::SearchController < ApplicationController
 
     def search
-        debugger
-        @projects = Project.joins(:category).where(published: true).where("category_name ILIKE :term", term: "%#{params[:searchTerm]}%")
-        debugger
+        @projects_by_name = Project.where(published: true).where("project_name ILIKE :term", term: "%#{params[:searchTerm]}%")
+        render :result
     end
 
 end

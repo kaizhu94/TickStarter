@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { logout } from '../actions/session_action'
 import { fetchProjects } from '../actions/project_actions'
+import { searchProjects } from '../actions/search_actions'
 import NavBar from './NavBar'
 const msp = state =>{
     debugger
@@ -13,7 +14,8 @@ const msp = state =>{
 const mdp = dispatch=>{
     return ({
         logout: () => dispatch(logout()),
-        fetchProjects: () => dispatch(fetchProjects())
+        fetchProjects: () => dispatch(fetchProjects()),
+        searchProjects: (searchTerm) => dispatch(searchProjects(searchTerm))
     })
 }
 

@@ -6,6 +6,7 @@ const searchReducer = (state={}, action) =>{
     Object.freeze(state);
     switch(action.type){
         case SEARCH_PROJECTS:
+            debugger
             return action.projects;
         default:
             return state;

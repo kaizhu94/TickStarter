@@ -1347,7 +1347,8 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       }
 
       return this.state.showSearch ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_NavBar_SearchBar__WEBPACK_IMPORTED_MODULE_2__.default, {
-        updateShowSearch: this.updateShowSearch
+        updateShowSearch: this.updateShowSearch,
+        searchProjects: this.props.searchProjects
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "navbar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
@@ -1923,10 +1924,13 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      debugger;
       this.props.history.push({
         pathname: '/search',
         search: "search=".concat(this.state.searchTerm)
       });
+      this.props.searchProjects(this.state.searchTerm);
+      this.props.updateShowSearch();
     }
   }, {
     key: "render",
@@ -1941,7 +1945,7 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
         type: "text",
         id: "search-bar-input",
         value: this.state.searchTerm,
-        placeholder: "Search for projects or categories",
+        placeholder: "Search for projects by key word in name",
         onChange: this.update()
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-times",
@@ -1974,7 +1978,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/actions/session_action.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NavBar */ "./frontend/components/NavBar.jsx");
+/* harmony import */ var _actions_search_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/search_actions */ "./frontend/actions/search_actions.js");
+/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NavBar */ "./frontend/components/NavBar.jsx");
+
 
 
 
@@ -1995,11 +2001,14 @@ var mdp = function mdp(dispatch) {
     },
     fetchProjects: function fetchProjects() {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__.fetchProjects)());
+    },
+    searchProjects: function searchProjects(searchTerm) {
+      return dispatch((0,_actions_search_actions__WEBPACK_IMPORTED_MODULE_3__.searchProjects)(searchTerm));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NavBar__WEBPACK_IMPORTED_MODULE_3__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NavBar__WEBPACK_IMPORTED_MODULE_4__.default));
 
 /***/ }),
 
@@ -8104,22 +8113,37 @@ var SearchResult = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(SearchResult);
 
   function SearchResult(props) {
+    var _this;
+
     _classCallCheck(this, SearchResult);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      searchTerm: queryString.parse(props.location.search).search
+    };
+    return _this;
   }
 
   _createClass(SearchResult, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevPops, prevState) {
+      if (prevPops !== this.props) {
+        debugger;
+        this.props.searchProjects(this.state.searchTerm).then(this.setState({
+          'searchTerm': queryString.parse(this.props.location.search).search
+        }));
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var search = queryString.parse(this.props.location.search).search;
-      this.props.searchProjects(search);
+      this.props.searchProjects(this.searchTerm);
     }
   }, {
     key: "render",
     value: function render() {
       debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, search);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.searchTerm);
     }
   }]);
 
@@ -9077,6 +9101,7 @@ var searchReducer = function searchReducer() {
 
   switch (action.type) {
     case _actions_search_actions__WEBPACK_IMPORTED_MODULE_0__.SEARCH_PROJECTS:
+      debugger;
       return action.projects;
 
     default:

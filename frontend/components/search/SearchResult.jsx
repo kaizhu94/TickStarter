@@ -3,18 +3,26 @@ const queryString = require('query-string');
 class SearchResult extends React.Component{
     constructor(props){
         super(props);
-
+        this.state={
+            searchTerm: queryString.parse(props.location.search).search
+        }
     }
-
+    
+    componentDidUpdate(prevPops, prevState){
+        if(prevPops !== this.props){
+            debugger
+            this.props.searchProjects(this.state.searchTerm).then( 
+                this.setState({ 'searchTerm': queryString.parse(this.props.location.search).search}))
+        }
+    }
     componentDidMount(){
-        const search = queryString.parse(this.props.location.search).search;
-        this.props.searchProjects(search)
+        this.props.searchProjects(this.searchTerm)
     }
 
     render(){
         debugger
         return(
-            <div>{search}</div>
+            <div>{this.state.searchTerm}</div>
         )
     }
 }

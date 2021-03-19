@@ -33,7 +33,8 @@ class NavBar extends React.Component{
         return (
             
                 this.state.showSearch?(
-                    <SearchBar updateShowSearch={this.updateShowSearch}/>
+                    <SearchBar updateShowSearch={this.updateShowSearch}
+                                searchProjects = {this.props.searchProjects}/>
                 ):(
                     <div className = 'navbar'>
                         <nav className='left-nav'>
