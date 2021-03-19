@@ -1924,7 +1924,6 @@ var SearchBar = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
       this.props.history.push({
         pathname: '/search',
         search: "search=".concat(this.state.searchTerm)
@@ -1987,7 +1986,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  debugger;
   return {
     currentUser: state.entities.users[state.session.id],
     createdProjects: state.entities.projects.owner_projects
@@ -2519,7 +2517,6 @@ var Profile = /*#__PURE__*/function (_React$Component) {
       var createdProjects = '';
 
       if (this.props.createdProjects) {
-        debugger;
         createdProjects = Object.values(this.props.createdProjects).map(function (project, index) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             key: index,
@@ -8173,7 +8170,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  debugger;
   return {};
 };
 

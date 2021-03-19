@@ -4,7 +4,6 @@ import { searchProjects } from '../../actions/search_actions'
 
 import SearchResult from './SearchResult'
 const msp = state =>{
-    debugger
     return ({
     })
 }

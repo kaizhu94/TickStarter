@@ -16,7 +16,6 @@ class SearchBar extends React.Component{
     }
     handleSubmit(e){
         e.preventDefault();
-        debugger
         this.props.history.push({ pathname: '/search', search: `search=${this.state.searchTerm}`})
         this.props.searchProjects(this.state.searchTerm)
         this.props.updateShowSearch();

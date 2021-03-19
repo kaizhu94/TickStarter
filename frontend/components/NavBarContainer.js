@@ -4,7 +4,6 @@ import { fetchProjects } from '../actions/project_actions'
 import { searchProjects } from '../actions/search_actions'
 import NavBar from './NavBar'
 const msp = state =>{
-    debugger
     return ({
         currentUser: state.entities.users[state.session.id],
         createdProjects:  state.entities.projects.owner_projects

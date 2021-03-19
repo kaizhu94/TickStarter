@@ -35,7 +35,6 @@ class Profile extends React.Component{
     render(){
         let createdProjects='';
         if(this.props.createdProjects){
-            debugger
             createdProjects = Object.values(this.props.createdProjects).map((project, index)=>{
                 return (
                     <div key = {index} className='created-proejct-ele'>
