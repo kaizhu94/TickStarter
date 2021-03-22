@@ -121,8 +121,8 @@ class EditProjectForm extends React.Component{
                                 'category_name': pro.category_name,
                                 'location_id': pro.location_id,
                                 'goal': pro.goal,
-                                'risks': pro.risks,
-                                'description': pro.description,
+                                'risks': pro.risks === null ? '':pro.risks,
+                                'description': pro.description === null ? '':pro.description,
                                 'launch_date': pro.launch_date ? new Date(pro.launch_date) : startDate,
                                 'end_date': pro.end_date ? new Date(pro.end_date): endDate,
                                 'published': pro.published
@@ -430,7 +430,6 @@ class EditProjectForm extends React.Component{
     }
 
     render(){
-        // debugger
         const tabs = [{title: 'Basics'}, {title: 'Funding'}, 
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project || !this.props.maincategories || !this.props.subcategories

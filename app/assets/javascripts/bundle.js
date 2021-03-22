@@ -1502,14 +1502,12 @@ var EditProfileNavBar = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, EditProfileNavBar);
 
     return _super.call(this, props);
-  }
+  } // componentDidMount(){
+  //     this.props.receiveProject(this.props.match.params.projectId)
+  // }
+
 
   _createClass(EditProfileNavBar, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.receiveProject(this.props.match.params.projectId);
-    }
-  }, {
     key: "render",
     value: function render() {
       if (!this.props.project) {
@@ -4241,8 +4239,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           'category_name': pro.category_name,
           'location_id': pro.location_id,
           'goal': pro.goal,
-          'risks': pro.risks,
-          'description': pro.description,
+          'risks': pro.risks === null ? '' : pro.risks,
+          'description': pro.description === null ? '' : pro.description,
           'launch_date': pro.launch_date ? new Date(pro.launch_date) : startDate,
           'end_date': pro.end_date ? new Date(pro.end_date) : endDate,
           'published': pro.published
@@ -4558,7 +4556,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
-      // debugger
       var tabs = [{
         title: 'Basics'
       }, {
