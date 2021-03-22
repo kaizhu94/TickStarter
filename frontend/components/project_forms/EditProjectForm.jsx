@@ -105,24 +105,27 @@ class EditProjectForm extends React.Component{
         this.props.receiveCategories();
         this.props.receiveLocations();
         this.props.receiveProject(this.props.match.params.projectId)
-            .then(() => {
+            .then((project) => {
+                debugger
+                const pro = project.project;
+                debugger
                 let startDate = new Date();
                 let endDate = new Date(startDate.getTime());
                 endDate.setDate(startDate.getDate() + 30);
                 this.setState({
-                                'id': this.props.project.id,
-                                'project_name': this.props.project.project_name,
-                                'subtitle': this.props.project.subtitle,
-                                'selectedMainCat': this.props.project.category_id,
-                                'category_id': this.props.project.category_id,
-                                'category_name': this.props.project.category_name,
-                                'location_id': this.props.project.location_id,
-                                'goal': this.props.project.goal,
-                                'risks': this.props.project.risks,
-                                'description': this.props.project.description,
-                                'launch_date': this.props.project.launch_date ? new Date(this.props.project.launch_date) : startDate,
-                                'end_date': this.props.project.end_date ? new Date(this.props.project.end_date): endDate,
-                                'published': this.props.project.published
+                                'id': pro.id,
+                                'project_name': pro.project_name,
+                                'subtitle': pro.subtitle,
+                                'selectedMainCat': pro.category_id,
+                                'category_id': pro.category_id,
+                                'category_name': pro.category_name,
+                                'location_id': pro.location_id,
+                                'goal': pro.goal,
+                                'risks': pro.risks,
+                                'description': pro.description,
+                                'launch_date': pro.launch_date ? new Date(pro.launch_date) : startDate,
+                                'end_date': pro.end_date ? new Date(pro.end_date): endDate,
+                                'published': pro.published
                             })
             })
     }
@@ -432,6 +435,7 @@ class EditProjectForm extends React.Component{
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project || !this.props.maincategories || !this.props.subcategories
             || this.state.selectedMainCat === '' || !this.props.locations){
+                debugger
             return null;
         }else{
             const maincategoriesID = Object.keys(this.props.maincategories);

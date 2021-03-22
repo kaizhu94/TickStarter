@@ -1188,8 +1188,7 @@ var MainContents = /*#__PURE__*/function (_React$Component) {
 
   _createClass(MainContents, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchProjects();
+    value: function componentDidMount() {// this.props.fetchProjects();
     }
   }, {
     key: "render",
@@ -2487,6 +2486,7 @@ var Profile = /*#__PURE__*/function (_React$Component) {
   _createClass(Profile, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
       this.props.fetchProjects();
     }
   }, {
@@ -2639,8 +2639,9 @@ var Backing = /*#__PURE__*/function (_React$Component) {
   _createClass(Backing, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.receiveAllRewards(this.props.match.params.projectId);
+      debugger;
       this.props.receiveProject(this.props.match.params.projectId);
+      this.props.receiveAllRewards(this.props.match.params.projectId);
     }
   }, {
     key: "updateSelectedReward",
@@ -2659,7 +2660,16 @@ var Backing = /*#__PURE__*/function (_React$Component) {
           project = _this$props.project;
 
       if (!rewards || !project) {
-        return null;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "search-result-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "search-result-body"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "no-result"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-exclamation-triangle",
+          id: "ex-mark"
+        }), " The reward of this project haven't set up yet!")));
       } else {
         var rewardArray = Object.values(rewards).map(function (reward, index) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BackingForm__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -2672,7 +2682,6 @@ var Backing = /*#__PURE__*/function (_React$Component) {
             project: project
           });
         });
-        debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "backing-page"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2685,7 +2694,16 @@ var Backing = /*#__PURE__*/function (_React$Component) {
           className: "left-backing-body"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "left-top"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Support this project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Select an option below")), rewardArray), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Support this project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Select an option below")), rewardArray.length > 0 ? rewardArray : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "search-result-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "search-result-body"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "no-result"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-exclamation-triangle",
+          id: "ex-mark"
+        }), " The reward of this project haven't set up yet!")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right-backing-body"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "right-top"
@@ -3164,16 +3182,16 @@ var ProjectShow = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ProjectShow);
 
     return _super.call(this, props);
-  }
+  } // componentDidMount(){
+  //     // debugger
+  //     // this.props.receiveProjects()
+  // }
+
 
   _createClass(ProjectShow, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.receiveProjects();
-    }
-  }, {
     key: "redirect",
     value: function redirect() {
+      debugger;
       this.props.history.push("/projects/".concat(this.props.match.params.projectId, "/backing"));
     }
   }, {
@@ -4206,25 +4224,28 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       // debugger
       this.props.receiveCategories();
       this.props.receiveLocations();
-      this.props.receiveProject(this.props.match.params.projectId).then(function () {
+      this.props.receiveProject(this.props.match.params.projectId).then(function (project) {
+        debugger;
+        var pro = project.project;
+        debugger;
         var startDate = new Date();
         var endDate = new Date(startDate.getTime());
         endDate.setDate(startDate.getDate() + 30);
 
         _this3.setState({
-          'id': _this3.props.project.id,
-          'project_name': _this3.props.project.project_name,
-          'subtitle': _this3.props.project.subtitle,
-          'selectedMainCat': _this3.props.project.category_id,
-          'category_id': _this3.props.project.category_id,
-          'category_name': _this3.props.project.category_name,
-          'location_id': _this3.props.project.location_id,
-          'goal': _this3.props.project.goal,
-          'risks': _this3.props.project.risks,
-          'description': _this3.props.project.description,
-          'launch_date': _this3.props.project.launch_date ? new Date(_this3.props.project.launch_date) : startDate,
-          'end_date': _this3.props.project.end_date ? new Date(_this3.props.project.end_date) : endDate,
-          'published': _this3.props.project.published
+          'id': pro.id,
+          'project_name': pro.project_name,
+          'subtitle': pro.subtitle,
+          'selectedMainCat': pro.category_id,
+          'category_id': pro.category_id,
+          'category_name': pro.category_name,
+          'location_id': pro.location_id,
+          'goal': pro.goal,
+          'risks': pro.risks,
+          'description': pro.description,
+          'launch_date': pro.launch_date ? new Date(pro.launch_date) : startDate,
+          'end_date': pro.end_date ? new Date(pro.end_date) : endDate,
+          'published': pro.published
         });
       });
     }
@@ -4549,6 +4570,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       }];
 
       if (!this.props.project || !this.props.maincategories || !this.props.subcategories || this.state.selectedMainCat === '' || !this.props.locations) {
+        debugger;
         return null;
       } else {
         var maincategoriesID = Object.keys(this.props.maincategories);
@@ -7565,15 +7587,13 @@ var ProjectDashboard = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // componentDidMount(){
+  //     // debugger
+  //     // this.props.receiveProjects()
+  // }
+
 
   _createClass(ProjectDashboard, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      debugger;
-      this.props.receiveProjects();
-    }
-  }, {
     key: "handleDelete",
     value: function handleDelete(e) {
       var _this2 = this;
@@ -7592,8 +7612,6 @@ var ProjectDashboard = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this3 = this;
-
-      debugger;
 
       if (!this.props.projects) {
         return null;
@@ -8116,7 +8134,7 @@ var SearchResult = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      searchTerm: queryString.parse(props.location.search).search
+      projectIdx: -1
     };
     return _this;
   }
@@ -8124,23 +8142,121 @@ var SearchResult = /*#__PURE__*/function (_React$Component) {
   _createClass(SearchResult, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevPops, prevState) {
-      if (prevPops !== this.props) {
-        debugger;
-        this.props.searchProjects(this.state.searchTerm).then(this.setState({
-          'searchTerm': queryString.parse(this.props.location.search).search
-        }));
+      if (prevPops.location.search !== this.props.location.search) {
+        this.props.searchProjects(queryString.parse(this.props.location.search).search);
       }
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.searchProjects(this.searchTerm);
+      this.props.searchProjects(queryString.parse(this.props.location.search).search);
+    }
+  }, {
+    key: "redirect",
+    value: function redirect(projectId) {
+      this.props.history.push("/projects/".concat(projectId));
+    }
+  }, {
+    key: "hoverSubtitle",
+    value: function hoverSubtitle(idx) {
+      this.setState({
+        'projectIdx': idx
+      });
+    }
+  }, {
+    key: "notHoverSubtitle",
+    value: function notHoverSubtitle() {
+      this.setState({
+        'projectIdx': -1
+      });
+    }
+  }, {
+    key: "isHovering",
+    value: function isHovering() {
+      return this.state.projectIdx === -1 ? '' : '-hover';
     }
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.searchTerm);
+
+      if (!this.props.results) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "search-result-block"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "search-result-body"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "no-result"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-exclamation-triangle",
+          id: "ex-mark"
+        }), " We can't find projects that match your search")));
+      }
+
+      var results = this.props.results;
+      var resultArray = Object.values(results).map(function (project, index) {
+        var subtitle = project.subtitle.length > 100 ? project.subtitle.slice(0, 97) + '...' : project.subtitle;
+        var progress = Math.round(project.pledge / project.goal * 100);
+        var date = new Date(project.end_date);
+        var currentDate = new Date();
+        var dayDiff = Math.round((date.getTime() - currentDate.getTime()) / (1000 * 3600 * 24));
+
+        if (dayDiff < 1) {
+          dayDiff = Math.round((date.getTime() - currentDate.getTime()).getHours());
+        }
+
+        debugger;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "result-ele",
+          key: index
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          id: "result-image",
+          src: project.title_image,
+          alt: "title-image",
+          onClick: function onClick() {
+            return _this2.redirect(project.id);
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "result-ele-mid",
+          onClick: function onClick() {
+            return _this2.redirect(project.id);
+          }
+        }, _this2.state.projectIdx === index ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+          id: "ele-name".concat(_this2.isHovering())
+        }, project.project_name) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+          id: "ele-name"
+        }, project.project_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+          onMouseEnter: function onMouseEnter() {
+            return _this2.hoverSubtitle(index);
+          },
+          onMouseLeave: function onMouseLeave() {
+            return _this2.notHoverSubtitle();
+          }
+        }, subtitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "By ".concat(project.founder.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "result-ele-lower"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "result-progress-base"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "result-progress-bar",
+          style: {
+            flexBasis: "".concat(progress, "%")
+          }
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "$".concat(project.pledge, " pledged")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "".concat(progress, "% funded")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "".concat(dayDiff, " days to go"))));
+      }); // debugger
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "search-result-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "search-result-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "results-hearder"
+      }, "Explore ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        id: "results-hearder-span"
+      }, resultArray.length, " projects")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "results-body"
+      }, resultArray)));
     }
   }]);
 
@@ -8170,7 +8286,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  return {};
+  return {
+    results: state.entities.search.projects_by_name
+  };
 };
 
 var mdp = function mdp(dispatch) {

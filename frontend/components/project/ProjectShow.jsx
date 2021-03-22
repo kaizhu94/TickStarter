@@ -5,12 +5,14 @@ class ProjectShow extends React.Component{
         super(props);
     }
 
-    componentDidMount(){
-        this.props.receiveProjects()
-    }
+    // componentDidMount(){
+    //     // debugger
+    //     // this.props.receiveProjects()
+    // }
    
 
     redirect(){
+        debugger
         this.props.history.push(`/projects/${this.props.match.params.projectId}/backing`);
     }
 

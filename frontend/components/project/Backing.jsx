@@ -13,8 +13,9 @@ class Backing extends React.Component{
     }
 
     componentDidMount(){
-        this.props.receiveAllRewards(this.props.match.params.projectId);
+        debugger
         this.props.receiveProject(this.props.match.params.projectId);
+        this.props.receiveAllRewards(this.props.match.params.projectId);
     }
 
     updateSelectedReward(index){
@@ -26,7 +27,13 @@ class Backing extends React.Component{
     render(){
         const { rewards, project } = this.props
         if(!rewards || !project){
-            return null;
+            return (
+                <div className='search-result-block'>
+                    <div className='search-result-body'>
+                        <div className='no-result'><i className="fas fa-exclamation-triangle" id='ex-mark'></i> The reward of this project haven't set up yet!</div>
+                    </div>
+                </div>
+            );
         }else{
             const rewardArray = Object.values(rewards).map((reward, index) =>{
                 return(
@@ -40,7 +47,6 @@ class Backing extends React.Component{
                                  />
                 )
             })
-            debugger
             return(
                 <div className = 'backing-page'>
                     <div className = 'backing-header'>
@@ -54,7 +60,15 @@ class Backing extends React.Component{
                                 <h3>Select an option below</h3>
                             </div>
                             {
-                                rewardArray
+                                rewardArray.length > 0? (
+                                    rewardArray
+                                ):(
+                                    <div className='search-result-block'>
+                                        <div className='search-result-body'>
+                                            <div className='no-result'><i className="fas fa-exclamation-triangle" id='ex-mark'></i> The reward of this project haven't set up yet!</div>
+                                        </div>
+                                    </div>
+                                )
                             }
                         </div>
                         <div className = 'right-backing-body'>

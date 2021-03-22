@@ -5,10 +5,10 @@ class ProjectDashboard extends React.Component{
         super(props);
         this.handleDelete = this.handleDelete.bind(this);
     }
-    componentDidMount(){
-        debugger
-        this.props.receiveProjects()
-    }
+    // componentDidMount(){
+    //     // debugger
+    //     // this.props.receiveProjects()
+    // }
 
     handleDelete(e){
         e.preventDefault();
@@ -20,7 +20,6 @@ class ProjectDashboard extends React.Component{
     }
 
     render(){
-        debugger
         if(!this.props.projects){
             return null
         }
