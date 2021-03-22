@@ -8,6 +8,9 @@ import FreshSection from './FreshSection'
 import TakingOffSection from './TakingOffSection'
 import Tabs from './project/Tabs'
 import SampleIndex from './project/SampleIndex'
+
+import FeatureProject from './project/FeaturePorject'
+
 class MainContents extends React.Component{
     constructor(props){
         super(props);   
@@ -17,18 +20,38 @@ class MainContents extends React.Component{
         // this.props.fetchProjects();
     }
 
+    shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+        return array
+    }
+
     render(){
+        if(!this.props.publishedProjects){
+            return null;
+        }
+        const { currentUser, publishedProjects} = this.props;
         let tab;
-        if(this.props.currentUser){
+        if(currentUser){
             tab = <a target="_blank" href="https://github.com/kaizhu94/TickStarter/wiki" id='WIKI-link'>WIKI News</a>
         }else{
             tab = <Link to='/signup' id='signup'>Signup For TickStarter</Link>
         }
+        const projectArray = Object.values(publishedProjects);
+        const featured = projectArray[Math.floor(Math.random() * projectArray.length)];
+        
+        
+        const randomProjects = this.shuffle(projectArray).slice(0,9);
+        debugger
+
         const pages = [
             {pageNumber: '1', content: <ProjectIndex/>},
             {pageNumber: '2', content: <SampleIndex/>},
             {pageNumber: '3', content: <ProjectIndex/>}
           ];
+        debugger
         return (
             <div className='main'>
                 <SectionBar/>
@@ -36,7 +59,7 @@ class MainContents extends React.Component{
                     <div className='main-projects-container'>
                         <div className='featured-project-block'>
                             <h3>FEATURED PROJECT</h3>
-                            <Project />
+                            <FeatureProject project={featured}/>
                         </div>
                         <div className = 'recommand-projects-block'>
                             <h3>RECOMMENDED FOR YOU</h3>

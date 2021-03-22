@@ -9,6 +9,9 @@
     border-right: 1px solid  gainsboro;
     padding-right: 70px;
 }
+.featured-project-block:hover{
+    cursor: pointer;
+}
 .featured-project-block h3{
     font-family: 'Khand', sans-serif;
     font-weight: bold;
@@ -16,23 +19,14 @@
     margin-bottom: 30px;
     color: #656969;
 }
-
-
 .featured-project-block #posture{
     width: 100%;
-}
-.featured-project-block #posture:hover{
-    cursor: pointer;
 }
 .featured-project-block:hover  h1{
     text-decoration: underline;
     cursor: pointer;
     color: rgb(2, 134, 2);
 }
-/* .featured-project-block h1:hover{
-    text-decoration: underline;
-    cursor: pointer;
-} */
 
 .featured-project-block h1{
     font-size: 22px;
@@ -48,6 +42,8 @@
 .featured-project-block #feature-subtitle{
     font-family: 'Martel', serif;
 }
+
+
 .featured-project-block #founder-name{
     padding-top: 30px;
     padding-bottom: 30px;
