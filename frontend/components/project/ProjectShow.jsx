@@ -5,10 +5,9 @@ class ProjectShow extends React.Component{
         super(props);
     }
 
-    // componentDidMount(){
-    //     // debugger
-    //     // this.props.receiveProjects()
-    // }
+    componentDidMount(){
+        this.props.receiveProjects()
+    }
    
 
     redirect(){

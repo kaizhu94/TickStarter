@@ -13,10 +13,9 @@ class Profile extends React.Component{
         this.redirect = this.redirect.bind(this);
     }
 
-    componentDidMount(){
-        debugger
-        this.props.fetchProjects()
-    }
+    // componentDidMount(){
+    //     // this.props.fetchProjects()
+    // }
 
     triggerOrNot(e){
         // // e.preventDefault();
@@ -34,6 +33,9 @@ class Profile extends React.Component{
     }
 
     render(){
+        if(!this.props.createdProjects){
+            return null;
+        }
         let createdProjects='';
         if(this.props.createdProjects){
             createdProjects = Object.values(this.props.createdProjects).map((project, index)=>{

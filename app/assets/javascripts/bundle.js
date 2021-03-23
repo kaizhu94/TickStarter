@@ -984,7 +984,7 @@ var App = function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
     path: "/projects/:projectId/backing",
     component: _project_BackingContainer__WEBPACK_IMPORTED_MODULE_15__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
     path: "/projects/:projectId",
     component: _project_ProjectShowContainer__WEBPACK_IMPORTED_MODULE_14__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
@@ -1191,7 +1191,8 @@ var MainContents = /*#__PURE__*/function (_React$Component) {
 
   _createClass(MainContents, [{
     key: "componentDidMount",
-    value: function componentDidMount() {// this.props.fetchProjects();
+    value: function componentDidMount() {
+      this.props.fetchProjects();
     }
   }, {
     key: "shuffle",
@@ -2177,7 +2178,7 @@ var Footer = function Footer() {
     className: "footer-support"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "About Me"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     target: "_blank",
-    href: "https://meetflo.zendesk.com/hc/en-us/articles/230425728-Privacy-Policies"
+    href: "https://docs.google.com/document/d/1odMqEh-eN2mR7ASCe2q64yiymLQDLSf_cBw2z0OTylw/edit#"
   }, "Resume")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "footer-more"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "MORE FROM TICKSTARTER"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -2516,15 +2517,12 @@ var Profile = /*#__PURE__*/function (_React$Component) {
     _this.handleLogOut = _this.handleLogOut.bind(_assertThisInitialized(_this));
     _this.redirect = _this.redirect.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // componentDidMount(){
+  //     // this.props.fetchProjects()
+  // }
+
 
   _createClass(Profile, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      debugger;
-      this.props.fetchProjects();
-    }
-  }, {
     key: "triggerOrNot",
     value: function triggerOrNot(e) {
       // // e.preventDefault();
@@ -2548,6 +2546,10 @@ var Profile = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var _this2 = this;
+
+      if (!this.props.createdProjects) {
+        return null;
+      }
 
       var createdProjects = '';
 
@@ -3310,13 +3312,14 @@ var ProjectShow = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ProjectShow);
 
     return _super.call(this, props);
-  } // componentDidMount(){
-  //     // debugger
-  //     // this.props.receiveProjects()
-  // }
-
+  }
 
   _createClass(ProjectShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.receiveProjects();
+    }
+  }, {
     key: "redirect",
     value: function redirect() {
       debugger;
@@ -7719,13 +7722,15 @@ var ProjectDashboard = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     return _this;
-  } // componentDidMount(){
-  //     // debugger
-  //     // this.props.receiveProjects()
-  // }
-
+  }
 
   _createClass(ProjectDashboard, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // debugger
+      this.props.receiveProjects();
+    }
+  }, {
     key: "handleDelete",
     value: function handleDelete(e) {
       var _this2 = this;

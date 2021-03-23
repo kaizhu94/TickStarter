@@ -17,7 +17,7 @@ const Footer =() =>{
                     </div>
                     <div className='footer-support'>
                         <h3>About Me</h3>
-                        <a target="_blank" href="https://meetflo.zendesk.com/hc/en-us/articles/230425728-Privacy-Policies">Resume</a>
+                        <a target="_blank" href="https://docs.google.com/document/d/1odMqEh-eN2mR7ASCe2q64yiymLQDLSf_cBw2z0OTylw/edit#">Resume</a>
                         
 
                     </div>
