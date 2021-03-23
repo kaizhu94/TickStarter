@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-import Project from './project/Project'
+
 import ProjectIndex from './project/ProjectsIndex'
 import SectionBar from './section_bar/SectionBar'
 import FreshSection from './FreshSection'
 import TakingOffSection from './TakingOffSection'
 import Tabs from './project/Tabs'
-import SampleIndex from './project/SampleIndex'
+
 
 import FeatureProject from './project/FeaturePorject'
 

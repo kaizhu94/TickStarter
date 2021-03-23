@@ -55,3 +55,14 @@
     font-weight: 600;
     color: #656969;
 }
+
+.feature-progress{
+    position: relative;
+    top: -6px;
+}
+
+.project-progress{
+    width:288px;
+    position: relative;
+    top: -6px;
+}
