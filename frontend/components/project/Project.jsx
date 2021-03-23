@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 class  Project extends React.Component{
 
     render(){
+        const { project } = this.props;
         return (
             <div className='project-block'>
-                <img id="posture" src={window.posture} ></img>
-                <h1 id='project-header'>GOPOSE: World’s first 2 in 1 fix posture and pulse massager</h1>
-                <p id='feature-subtitle'>GOPOSE Tech | Fix Posture | Pulse Massage | Intuitive GOPOSE App | Get Your Health & Confidence Back</p>
-                <p id='feature-founder'>By <Link to='/' id='founder-name'>Kai</Link></p>
+                <img id="posture" src={project.title_image} ></img>
+                <h1 id='project-header'>{project.project_name}</h1>
+                <p id='feature-subtitle'>{project.subtitle}</p>
+                <p id='feature-founder'>{`By ${project.founder.username}`}</p>
             </div>
         )
     }

@@ -11,7 +11,6 @@ class ProjectShow extends React.Component{
    
 
     redirect(){
-        debugger
         this.props.history.push(`/projects/${this.props.match.params.projectId}/backing`);
     }
 

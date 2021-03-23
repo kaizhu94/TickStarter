@@ -44,6 +44,8 @@ class MainContents extends React.Component{
         
         
         const randomProjects = this.shuffle(projectArray).slice(0,9);
+        const freshProjects = this.shuffle(projectArray).slice(0,9);
+        const offProjects = this.shuffle(projectArray).slice(0,9);
         const listOne = randomProjects.slice(0,3);
         const listTwo = randomProjects.slice(3,6);
         const listThree = randomProjects.slice(6,9);
@@ -78,7 +80,7 @@ class MainContents extends React.Component{
                     <div className='fresh-block'>
                         <div className='project-list'>
                             <h3>FRESH FAVORITES</h3>
-                            <FreshSection/>
+                            <FreshSection projects = {freshProjects}/>
                         </div>
                     </div>
                 </div>
@@ -86,7 +88,7 @@ class MainContents extends React.Component{
                         <div className='takingoff-block'>
                             <div className='project-list2'>
                                 <h3>TAKING OFF</h3>
-                                <TakingOffSection/>
+                                <TakingOffSection projects={offProjects}/>
                             </div>
                         </div>
                 </div>
