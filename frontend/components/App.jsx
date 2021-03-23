@@ -18,7 +18,7 @@ import ProjectShowContainer from './project/ProjectShowContainer'
 import BackingContainer from './project/BackingContainer'
 import BackingNavBar from './NavBar/BackingNavBar'
 import SearchResultContainer from '../components/search/SearchResultContainer'
-
+import ProjectByCatContainer from './project_by_sections/ProjectByCatContainer'
 
 const App = () => {
   return (
@@ -46,7 +46,7 @@ const App = () => {
 					<ProtectedRoute path='/projects/:projectId/backing' component={BackingContainer}/>
 					<Route path='/projects/:projectId' component={ProjectShowContainer}/>
 					<Route path='/search' component={SearchResultContainer} />
-					<Route path='/cat/:catId' component={NavBarContainer} />
+					<Route path='/cat/:catId' component={ProjectByCatContainer} />
 					<Route path='/' component={MainContentContainer} />
 				</Switch>
 			</section>
@@ -57,6 +57,7 @@ const App = () => {
 					<Route exact path='/signup' component={Footer} />
 					<Route exact path='/login' component={Footer} />
 					<Route exact path='/projects/:projectId' component={Footer} />
+					<Route exact path='/cat/:catId' component={Footer} />
 				</Switch>
 			</footer>
 			

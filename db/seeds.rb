@@ -393,7 +393,7 @@ p2 = Project.create!(
     location_id: l2.id,
     published: true,
     founder_id: u2.id,
-    category_id: c29.id,
+    category_id: c19.id,
     goal: 8000,
     launch_date: "2021-03-04T16:18:33.000Z",
     end_date: "2021-04-17T15:03:33.000Z"
@@ -421,7 +421,7 @@ p4 = Project.create!(
     location_id: l3.id,
     published: true,
     founder_id: u3.id,
-    category_id: c35.id,
+    category_id: c25.id,
     goal: 7000,
     launch_date: "2021-03-04T16:18:33.000Z",
     end_date: "2021-04-17T15:03:33.000Z"

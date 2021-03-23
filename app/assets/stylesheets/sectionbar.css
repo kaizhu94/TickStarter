@@ -38,7 +38,7 @@
     content: '';
     display: block;
     margin: auto;
-    height: 1px;
+    height: 2px;
     width: 0px;
     background: transparent;
     transition: height 1s ease, background-color 1s ease;
@@ -49,4 +49,5 @@
   }
   #section-index li:hover{
     color: rgb(2, 177, 2);
+    cursor: pointer;
   }

@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
+.cat-project-header{
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.cat-project-header h1{
+    font-family: 'Libre Baskerville', serif;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.cat-project-header p{
+    color: rgb(90, 90, 90);
+    font-size: 20px;
+}

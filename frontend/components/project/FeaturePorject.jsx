@@ -6,6 +6,9 @@ class FeatureProject extends React.Component{
         this.props.history.push(`/projects/${projectId}`);
     }
     render(){
+        if(!this.props.project){
+            return null;
+        }
         const { project } = this.props;
         let progress = 0;
         if(project.goal){
