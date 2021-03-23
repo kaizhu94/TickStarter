@@ -36,7 +36,7 @@ function Modal( props ){
                             {errorsArr}
                         </ul>
                     </div>
-                    <img id="xIcon" src={window.xIcon} />
+                    {/* <img id="xIcon" src={window.xIcon} /> */}
                 </div>
             </div> 
             );
