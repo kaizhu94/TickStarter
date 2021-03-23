@@ -44,14 +44,16 @@ class MainContents extends React.Component{
         
         
         const randomProjects = this.shuffle(projectArray).slice(0,9);
+        const listOne = randomProjects.slice(0,3);
+        const listTwo = randomProjects.slice(3,6);
+        const listThree = randomProjects.slice(6,9);
         debugger
 
         const pages = [
-            {pageNumber: '1', content: <ProjectIndex/>},
-            {pageNumber: '2', content: <SampleIndex/>},
-            {pageNumber: '3', content: <ProjectIndex/>}
+            {pageNumber: '1', content: <ProjectIndex projects = {listOne}/>},
+            {pageNumber: '2', content: <ProjectIndex projects = {listTwo}/>},
+            {pageNumber: '3', content: <ProjectIndex projects = {listThree}/>}
           ];
-        debugger
         return (
             <div className='main'>
                 <SectionBar/>

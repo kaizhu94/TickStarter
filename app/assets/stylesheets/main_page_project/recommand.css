@@ -67,6 +67,8 @@
 }
 .recom-project-info{
     display: block;
+    line-height: 25px;
+    margin-bottom: 20px;
 }
 .pages-footer ul{
     display: flex;

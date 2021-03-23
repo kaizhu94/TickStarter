@@ -1233,18 +1233,26 @@ var MainContents = /*#__PURE__*/function (_React$Component) {
       var projectArray = Object.values(publishedProjects);
       var featured = projectArray[Math.floor(Math.random() * projectArray.length)];
       var randomProjects = this.shuffle(projectArray).slice(0, 9);
+      var listOne = randomProjects.slice(0, 3);
+      var listTwo = randomProjects.slice(3, 6);
+      var listThree = randomProjects.slice(6, 9);
       debugger;
       var pages = [{
         pageNumber: '1',
-        content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_ProjectsIndex__WEBPACK_IMPORTED_MODULE_2__.default, null)
+        content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_ProjectsIndex__WEBPACK_IMPORTED_MODULE_2__.default, {
+          projects: listOne
+        })
       }, {
         pageNumber: '2',
-        content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_SampleIndex__WEBPACK_IMPORTED_MODULE_7__.default, null)
+        content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_ProjectsIndex__WEBPACK_IMPORTED_MODULE_2__.default, {
+          projects: listTwo
+        })
       }, {
         pageNumber: '3',
-        content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_ProjectsIndex__WEBPACK_IMPORTED_MODULE_2__.default, null)
+        content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_ProjectsIndex__WEBPACK_IMPORTED_MODULE_2__.default, {
+          projects: listThree
+        })
       }];
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "main"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_section_bar_SectionBar__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3172,7 +3180,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3210,42 +3218,50 @@ var ProjectIndexItem = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(ProjectIndexItem, [{
+    key: "redirect",
+    value: function redirect(projectId) {
+      this.props.history.push("/projects/".concat(projectId));
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
+      if (!this.props.project) {
+        return null;
+      }
+
+      var project = this.props.project;
+      var name = project.project_name.length > 40 ? project.project_name.slice(0, 27) + '...' : project.project_name;
+      var progress = Math.round(project.pledge / project.goal * 100);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "project-index-item-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "project-index-item-intaincer"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/signup"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         id: "posture",
-        src: window.posture
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        src: project.title_image,
+        onClick: function onClick() {
+          return _this.redirect(project.id);
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "recom-project-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "GOPOSE: World\u2019s first 2 in 1 fix posture and pulse massager"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+        onClick: function onClick() {
+          return _this.redirect(project.id);
+        }
+      }, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "found-percentage"
-      }, "100% funded"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+      }, "".concat(progress, "% funded")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "founder"
-      }, "By ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/",
-        id: "founder-name"
-      }, "Kai")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "like-or-not"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        id: "like",
-        src: window.like
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        id: "dislike",
-        src: window.dislike
-      })))));
+      }, "By ".concat(project.founder.username)))));
     }
   }]);
 
   return ProjectIndexItem;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProjectIndexItem);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.withRouter)(ProjectIndexItem));
 
 /***/ }),
 
@@ -3465,21 +3481,26 @@ var ProjectIndex = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(ProjectIndex);
 
-  function ProjectIndex(props) {
+  function ProjectIndex() {
     _classCallCheck(this, ProjectIndex);
 
-    return _super.call(this, props);
+    return _super.apply(this, arguments);
   }
 
   _createClass(ProjectIndex, [{
-    key: "updatePage",
-    value: function updatePage(e) {}
-  }, {
     key: "render",
     value: function render() {
+      var projects = this.props.projects;
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "recom-item-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProjectIndexItem__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProjectIndexItem__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProjectIndexItem__WEBPACK_IMPORTED_MODULE_1__.default, null)))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProjectIndexItem__WEBPACK_IMPORTED_MODULE_1__.default, {
+        project: projects[0]
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProjectIndexItem__WEBPACK_IMPORTED_MODULE_1__.default, {
+        project: projects[1]
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProjectIndexItem__WEBPACK_IMPORTED_MODULE_1__.default, {
+        project: projects[2]
+      })))));
     }
   }]);
 

@@ -1,23 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 class  ProjectIndexItem extends React.Component{
-
+    redirect(projectId){
+        this.props.history.push(`/projects/${projectId}`);
+    }
     render(){
+        if(!this.props.project){
+            return null;
+        }
+        const { project } = this.props;
+        const name = project.project_name.length > 40? project.project_name.slice(0,27)+'...' : project.project_name;
+        const progress = Math.round(project.pledge / project.goal * 100);
         return (
             <div className='project-index-item-block'>
                 <div className='project-index-item-intaincer'>
-                    <Link to='/signup'>
-                        <img id="posture" src={window.posture} ></img>
-                    </Link>
+                    <img id="posture" src={project.title_image} onClick={()=>this.redirect(project.id)}></img>
                     
                     <div className='recom-project-info'>
-                        <h1>GOPOSE: World’s first 2 in 1 fix posture and pulse massager</h1>
-                        <p id='found-percentage'>100% funded</p>
-                        <p id='founder'>By <Link to='/' id='founder-name'>Kai</Link></p>
-                        <ul className= 'like-or-not'>
-                            <img id="like" src={window.like} ></img>
-                            <img id="dislike" src={window.dislike} ></img>
-                        </ul>
+                        <h1 onClick={()=>this.redirect(project.id)}>{name}</h1>
+                        <p id='found-percentage'>{`${progress}% funded`}</p>
+                        <p id='founder'>{`By ${project.founder.username}`}</p>
                     </div>
                 </div>
             </div>
@@ -26,4 +28,4 @@ class  ProjectIndexItem extends React.Component{
 
 }
 
-export default ProjectIndexItem;
+export default withRouter(ProjectIndexItem);

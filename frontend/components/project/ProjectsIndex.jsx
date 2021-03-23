@@ -1,22 +1,16 @@
 import React from 'react'
 import ProjectIndexItem from './ProjectIndexItem'
 class ProjectIndex extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
-    updatePage(e){
-
-    }
-
     render(){
+        const { projects } =this.props;
+        debugger
         return (
             <div>
                 <div id='recom-item-info'>
                     <ul>
-                        <li><ProjectIndexItem/></li>
-                        <li><ProjectIndexItem/></li>
-                        <li><ProjectIndexItem/></li>
+                        <li><ProjectIndexItem project={projects[0]}/></li>
+                        <li><ProjectIndexItem project={projects[1]}/></li>
+                        <li><ProjectIndexItem project={projects[2]}/></li>
                     </ul>
                 </div>
                
