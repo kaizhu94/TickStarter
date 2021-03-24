@@ -51,11 +51,14 @@
 
 .result-ele-mid{
     width: 90%;
-    height: 35%;
+    height: 30vh;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 25px;
     line-height: 25px;
     margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
@@ -96,6 +99,7 @@
     display: flex;
     flex-direction: column;
     width: 90%;
+    height: 30%;
     margin: auto;
     margin-top: 0px;
     font-size: 18px;
