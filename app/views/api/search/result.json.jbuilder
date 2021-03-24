@@ -7,7 +7,10 @@ json.projects_by_name do
             json.pledge pledge
             json.backers project.backings.length
             # json.progress pledge / project.goal * 100
-            json.founder User.find(project[:founder_id])
+            json.founder do
+                f = User.find(project[:founder_id])
+                json.extract! f, :id, :username
+            end
             if project.title_image.attached?
                 json.title_image url_for(project.title_image)
             end
