@@ -31,21 +31,20 @@ export const fetchAllItems = (project_id) => dispatch =>{
 }
 
 export const createItem = (item) => dispatch =>{
-    debugger
     return ItemAPIUtil.createItem(item).then(
         (item) => dispatch(receiveItem(item))
         )
 }
 
 export const updateItem = (item) => dispatch =>{
-    // debugger
+    
     return ItemAPIUtil.updateItem(item).then(
         (item) => dispatch(receiveItem(item))
         )
 }
 
 export const deleteItem = (itemId) => dispatch =>{
-    // debugger
+    
     return ItemAPIUtil.deleteItem(itemId).then(
         () => dispatch(removeItem(itemId))
         )

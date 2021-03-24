@@ -17,7 +17,7 @@ class BackingForm extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        debugger
+        
         if(this.state.backingAmount >= this.props.reward.amount){
             const backing = {
                 'backer_id': this.props.userId,
@@ -62,7 +62,7 @@ class BackingForm extends React.Component{
     render(){
         const { reward } = this.props;
         let showDrop = this.state.rewardIndex === this.props.selectedReward;
-        debugger
+        
         const itemsInclude = Object.values(reward.items).map((item, index) =>{
             return(
                 <li key = {index}>
@@ -77,7 +77,7 @@ class BackingForm extends React.Component{
         let isBigger= this.state.hovering || showDrop ? '-hovering': '';
         let isSelecting = this.state.showDrop ? '-show':''
         let isNotValidAmount = this.state.backingAmount < reward.amount? '-notValid':'';
-        debugger
+        
         return(
             <div className = {`reward-element${isBigger}`} onMouseEnter={()=>this.triggerOrNot()} onMouseLeave={()=>this.triggerOrNot()}>
                 <div className = {`ele-body${isSelecting}`} onClick={()=>this.props.updateSelectedReward(this.props.index)}>

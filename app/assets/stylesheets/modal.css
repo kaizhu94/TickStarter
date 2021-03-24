@@ -1,5 +1,4 @@
-.modal-background {
-    position: fixed;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
@@ -122,5 +121,59 @@
 }
 
 .unsave-lower p:hover{
+  cursor: pointer;
+}
+
+
+
+.discover-modal{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #FBFBFA;
+  z-index: 20;
+}
+
+.discover-modal-body{
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.discover-head{
+  font-size: 20px;
+  color: green;
+  width: 100%;
+  border-bottom: 1px solid gainsboro;
+  padding-top: 20px;
+  padding-bottom: 22px;
+}
+
+#close-discover{
+  position: fixed;
+  top: 43px;
+  right: 50px;
+  font-size: 23px;
+  color: green;
+}
+
+#close-discover:hover{
+  cursor: pointer;
+}
+
+.discover-section-ul{
+  margin-top: 10px;
+  margin-bottom: 40px;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 60px;
+}
+.discover-section-ul li{
+  font-weight: 500;
+}
+.discover-section-ul li:hover{
   cursor: pointer;
 }

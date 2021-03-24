@@ -36,9 +36,7 @@ class EditRewardForm extends React.Component{
         this.handleModal = this.handleModal.bind(this);
         this.createNewItem = this.createNewItem.bind(this);
     }
-    // componentDidUpdate(prevProps, prevState) {
-    //     debugger
-    // }
+    
     componentDidMount(){
         const {reward} = this.props;
         const date = new Date(reward.estimated_delivery);
@@ -55,7 +53,7 @@ class EditRewardForm extends React.Component{
 
     editItem(){
         if(!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm){
-            // debugger
+            
             this.props.updateDisabledBottomButton();
             this.props.openEditRewardForm();
             this.props.receiveAllItems(this.props.reward.project_id);
@@ -134,7 +132,7 @@ class EditRewardForm extends React.Component{
         return e =>{
             const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
             const newItems = Object.assign({}, this.state.items,{[parseInt(e.currentTarget.value)]: newItem});
-            // debugger
+            
             this.setState({
                 'items': newItems
             })
@@ -151,7 +149,7 @@ class EditRewardForm extends React.Component{
             // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
             const newItems = Object.assign({}, this.state.items);
             delete newItems[parseInt(id)];
-            // debugger
+            
             this.setState({
                 'items': newItems
             })
@@ -176,7 +174,7 @@ class EditRewardForm extends React.Component{
             monthError = 'Month is required';
         }
         if(this.state.year === ''){
-            // debugger
+            
             validYear = false;
             yearError = 'Year is required';
         }
@@ -189,13 +187,13 @@ class EditRewardForm extends React.Component{
             descriptionError = 'Please enter a description or at least one item.'
         }
         if(this.state.amount < 1 || this.state.amount > 13000){
-            // debugger
+            
             validAmount = false;
             amountError='Enter a value between $1 and $13,000.'
         }
-        // debugger
+        
         if(validMonth===false || validYear===false || validTitle===false || validDescription===false || validAmount===false){
-            // debugger
+            
             this.setState({
                 'validmonth': validMonth,
                 'validyear': validYear,
@@ -208,7 +206,7 @@ class EditRewardForm extends React.Component{
                 'descriptionErrorMessage': descriptionError,
                 'amountErrorMessage': amountError
             })
-            // debugger
+            
         }else{
             let Format = `${this.state.year}-${this.state.month}-01T10:00:00.000Z`;
             let date = new Date(Format);

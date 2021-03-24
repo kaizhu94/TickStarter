@@ -3,7 +3,7 @@ import { logout } from '../../actions/session_action'
 import { fetchProjects } from '../../actions/project_actions'
 import ProjectDashboardNavBar from './ProjectDashboardNavBar'
 const msp = state =>{
-    debugger
+    
     return ({
         currentUser: state.entities.users[state.session.id],
         createdProjects:  state.entities.projects.owner_projects

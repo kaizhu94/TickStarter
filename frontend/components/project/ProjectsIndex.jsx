@@ -3,7 +3,7 @@ import ProjectIndexItem from './ProjectIndexItem'
 class ProjectIndex extends React.Component{
     render(){
         const { projects } =this.props;
-        debugger
+        
         return (
             <div>
                 <div id='recom-item-info'>

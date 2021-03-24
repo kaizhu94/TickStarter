@@ -524,7 +524,6 @@ var fetchAllItems = function fetchAllItems(project_id) {
 };
 var createItem = function createItem(item) {
   return function (dispatch) {
-    debugger;
     return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.createItem(item).then(function (item) {
       return dispatch(receiveItem(item));
     });
@@ -532,7 +531,6 @@ var createItem = function createItem(item) {
 };
 var updateItem = function updateItem(item) {
   return function (dispatch) {
-    // debugger
     return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.updateItem(item).then(function (item) {
       return dispatch(receiveItem(item));
     });
@@ -540,7 +538,6 @@ var updateItem = function updateItem(item) {
 };
 var deleteItem = function deleteItem(itemId) {
   return function (dispatch) {
-    // debugger
     return _util_item_util__WEBPACK_IMPORTED_MODULE_0__.deleteItem(itemId).then(function () {
       return dispatch(removeItem(itemId));
     });
@@ -679,7 +676,6 @@ var createProject = function createProject(project) {
 };
 var deleteProject = function deleteProject(projectId) {
   return function (dispatch) {
-    // debugger
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.deleteProject(projectId).then(function () {
       return dispatch(removeProject(projectId));
     });
@@ -687,7 +683,6 @@ var deleteProject = function deleteProject(projectId) {
 };
 var updateProject = function updateProject(id, project) {
   return function (dispatch) {
-    // debugger
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProject(id, project).then(function (project) {
       return dispatch(receiveProject(project));
     });
@@ -695,7 +690,6 @@ var updateProject = function updateProject(id, project) {
 };
 var updateProjectImage = function updateProjectImage(id, formdata) {
   return function (dispatch) {
-    // debugger
     return _util_project_util__WEBPACK_IMPORTED_MODULE_0__.updateProjectImage(id, formdata).then(function (project) {
       return dispatch(receiveProject(project));
     });
@@ -763,7 +757,6 @@ var createReward = function createReward(reward) {
 };
 var updateReward = function updateReward(reward) {
   return function (dispatch) {
-    // debugger
     return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.updateReward(reward).then(function (reward) {
       return dispatch(receiveReward(reward));
     });
@@ -771,7 +764,6 @@ var updateReward = function updateReward(reward) {
 };
 var deleteReward = function deleteReward(rewardId) {
   return function (dispatch) {
-    // debugger
     return _util_reward_util__WEBPACK_IMPORTED_MODULE_0__.deleteReward(rewardId).then(function () {
       return dispatch(removeReward(rewardId));
     });
@@ -804,7 +796,6 @@ var receiveSearch = function receiveSearch(projects) {
 };
 var searchProjects = function searchProjects(searchTerm) {
   return function (dispatch) {
-    debugger;
     return _util_search_util__WEBPACK_IMPORTED_MODULE_0__.search(searchTerm).then(function (projects) {
       return dispatch(receiveSearch(projects));
     });
@@ -1080,7 +1071,6 @@ var FreshSection = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var projects = this.props.projects;
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "section-index"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_Project__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -1250,7 +1240,6 @@ var MainContents = /*#__PURE__*/function (_React$Component) {
       var listOne = randomProjects.slice(0, 3);
       var listTwo = randomProjects.slice(3, 6);
       var listThree = randomProjects.slice(6, 9);
-      debugger;
       var pages = [{
         pageNumber: '1',
         content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_ProjectsIndex__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -1378,6 +1367,11 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "openModal",
+    value: function openModal() {
+      this.props.openModal('discover');
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -1408,7 +1402,10 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
         className: "left-nav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-        id: "discover"
+        id: "discover",
+        onClick: function onClick() {
+          return _this2.openModal();
+        }
       }, "Discover"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "start-project"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
@@ -1883,7 +1880,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  debugger;
   return {
     currentUser: state.entities.users[state.session.id],
     createdProjects: state.entities.projects.owner_projects
@@ -2030,7 +2026,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_action */ "./frontend/actions/session_action.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/project_actions */ "./frontend/actions/project_actions.js");
 /* harmony import */ var _actions_search_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/search_actions */ "./frontend/actions/search_actions.js");
-/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NavBar */ "./frontend/components/NavBar.jsx");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./NavBar */ "./frontend/components/NavBar.jsx");
+
 
 
 
@@ -2054,11 +2052,14 @@ var mdp = function mdp(dispatch) {
     },
     searchProjects: function searchProjects(searchTerm) {
       return dispatch((0,_actions_search_actions__WEBPACK_IMPORTED_MODULE_3__.searchProjects)(searchTerm));
+    },
+    openModal: function openModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.openModal)(modal));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NavBar__WEBPACK_IMPORTED_MODULE_4__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NavBar__WEBPACK_IMPORTED_MODULE_5__.default));
 
 /***/ }),
 
@@ -2265,10 +2266,15 @@ function Modal(props) {
       projectId = props.projectId,
       updateProjectImage = props.updateProjectImage,
       deleteItem = props.deleteItem,
-      deleteReward = props.deleteReward; // debugger
+      deleteReward = props.deleteReward;
 
   function redirect(projectId, tab) {
     props.history.push("/projects/".concat(projectId, "/edit/").concat(tab));
+  }
+
+  function redirectToCat(catNum) {
+    props.history.push("/cat/".concat(catNum));
+    closeModal();
   }
 
   function deleteImage() {
@@ -2284,6 +2290,56 @@ function Modal(props) {
   }
 
   switch (modal) {
+    case 'discover':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "discover-modal"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "discover-modal-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "discover-head"
+      }, "Sections"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-times",
+        id: "close-discover",
+        onClick: closeModal
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "discover-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "discover-section-ul"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: function onClick() {
+          return redirectToCat(1);
+        }
+      }, "Arts"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: function onClick() {
+          return redirectToCat(2);
+        }
+      }, "Comics & Illustration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: function onClick() {
+          return redirectToCat(3);
+        }
+      }, "Design & Tech"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: function onClick() {
+          return redirectToCat(4);
+        }
+      }, "Film"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: function onClick() {
+          return redirectToCat(5);
+        }
+      }, "Food & Craft"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: function onClick() {
+          return redirectToCat(6);
+        }
+      }, "Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: function onClick() {
+          return redirectToCat(7);
+        }
+      }, "Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: function onClick() {
+          return redirectToCat(8);
+        }
+      }, "Publishing")))));
+      break;
+
     case 'errors':
       var errorsArr = errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -2307,7 +2363,6 @@ function Modal(props) {
       break;
 
     case 'delete-file':
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -2327,7 +2382,6 @@ function Modal(props) {
       break;
 
     case 'deleteReward':
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -2370,7 +2424,6 @@ function Modal(props) {
       break;
 
     case 'unsave-tab-0':
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -2390,7 +2443,6 @@ function Modal(props) {
       break;
 
     case 'unsave-tab-1':
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -2410,7 +2462,6 @@ function Modal(props) {
       break;
 
     case 'unsave-tab-2':
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -2430,7 +2481,6 @@ function Modal(props) {
       break;
 
     case 'unsave-tab-3':
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-background",
         onClick: closeModal
@@ -2455,7 +2505,6 @@ function Modal(props) {
 }
 
 var msp = function msp(state, ownprops) {
-  // debugger
   return {
     modal: state.ui.modal,
     errors: state.errors.session,
@@ -2699,7 +2748,6 @@ var Backing = /*#__PURE__*/function (_React$Component) {
   _createClass(Backing, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
       this.props.receiveProject(this.props.match.params.projectId);
       this.props.receiveAllRewards(this.props.match.params.projectId);
     }
@@ -2800,7 +2848,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
   return {
     rewards: state.entities.rewards,
     project: state.entities.projects[ownprops.match.params.projectId],
@@ -2892,7 +2939,6 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      debugger;
 
       if (this.state.backingAmount >= this.props.reward.amount) {
         var backing = {
@@ -2946,7 +2992,6 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
 
       var reward = this.props.reward;
       var showDrop = this.state.rewardIndex === this.props.selectedReward;
-      debugger;
       var itemsInclude = Object.values(reward.items).map(function (item, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index
@@ -2959,7 +3004,6 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
       var isBigger = this.state.hovering || showDrop ? '-hovering' : '';
       var isSelecting = this.state.showDrop ? '-show' : '';
       var isNotValidAmount = this.state.backingAmount < reward.amount ? '-notValid' : '';
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-element".concat(isBigger),
         onMouseEnter: function onMouseEnter() {
@@ -3398,13 +3442,11 @@ var ProjectShow = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      // debugger
       if (!this.props.projects) {
         return null;
       } else {
         var projects = this.props.projects;
         var project = projects[this.props.match.params.projectId];
-        debugger;
         var date = new Date(project.end_date);
         var currentDate = new Date();
         var dayDiff = Math.round((date.getTime() - currentDate.getTime()) / (1000 * 3600 * 24));
@@ -3490,7 +3532,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
   return {
     user: state.entities.users[state.session.id],
     projects: state.entities.projects.published_projects
@@ -3562,7 +3603,6 @@ var ProjectIndex = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var projects = this.props.projects;
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "recom-item-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProjectIndexItem__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -3822,7 +3862,6 @@ var ProjectByCat = /*#__PURE__*/function (_React$Component) {
         }, "Signup For TickStarter");
       }
 
-      debugger;
       var mainCat = Object.values(categories.maincategories);
       var subCat = Object.values(categories.subcategories);
       var catNum = this.props.match.params.catId;
@@ -3919,7 +3958,6 @@ var ProjectByCat = /*#__PURE__*/function (_React$Component) {
         });
       }
 
-      debugger;
       subCat.forEach(function (cat) {
         if (cat.parent_id === parantCat) {
           catsInclude.push(cat.id);
@@ -3936,7 +3974,6 @@ var ProjectByCat = /*#__PURE__*/function (_React$Component) {
       var listOne = randomProjects.slice(0, 3);
       var listTwo = randomProjects.slice(3, 6);
       var listThree = randomProjects.slice(6, 9);
-      debugger;
       var pages = [{
         pageNumber: '1',
         content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_project_ProjectsIndex__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -4062,7 +4099,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // debugger
   return {};
 };
 
@@ -4148,7 +4184,6 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
     key: "editItem",
     value: function editItem() {
       if (!this.props.disabledBottomButton && !this.props.showItemForm && !this.props.showEditItemForm) {
-        // debugger
         this.props.updateDisabledBottomButton();
         this.props.openEditItemForm();
         this.setState({
@@ -4179,7 +4214,6 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleModal",
     value: function handleModal() {
-      // debugger
       if (!this.props.disabledBottomButton && !this.props.showItemForm && !this.props.showEditItemForm) {
         this.setState({
           'showModal': true
@@ -4195,10 +4229,9 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSumbit",
     value: function handleSumbit(e) {
-      e.preventDefault(); // debugger
+      e.preventDefault();
 
       if (this.state.item_name === '') {
-        // debugger
         this.setState({
           'valid': false
         });
@@ -4212,8 +4245,7 @@ var EditItemForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var item = this.props.item; // debugger
-
+      var item = this.props.item;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "show-item".concat(this.showingForm())
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4308,7 +4340,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  // debugger
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
@@ -4517,13 +4548,10 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function componentDidMount() {
       var _this3 = this;
 
-      // debugger
       this.props.receiveCategories();
       this.props.receiveLocations();
       this.props.receiveProject(this.props.match.params.projectId).then(function (project) {
-        debugger;
         var pro = project.project;
-        debugger;
         var startDate = new Date();
         var endDate = new Date(startDate.getTime());
         endDate.setDate(startDate.getDate() + 30);
@@ -4555,7 +4583,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "updateDateTab",
     value: function updateDateTab() {
-      // debugger
       var value = !this.state.selectedDateTab;
       this.setState({
         'selectedDateTab': value,
@@ -4565,7 +4592,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "updateDisabledBottomButton",
     value: function updateDisabledBottomButton() {
-      // debugger
       // e.preventDefault();
       var value = !this.state.disabledBottomButton;
       var isModified = !this.state.isModified;
@@ -4577,7 +4603,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "updateEndDate",
     value: function updateEndDate(endDate) {
-      // debugger
       this.setState({
         'end_date': endDate,
         'published': true,
@@ -4587,7 +4612,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "selectTab",
     value: function selectTab(num) {
-      // debugger
       var modalOpen = false;
 
       if (this.state.isModified && num !== this.state.tab) {
@@ -4644,11 +4668,9 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     value: function updateSubCat(key) {
       var _this6 = this;
 
-      // debugger
       return function (e) {
         var _this6$setState;
 
-        // debugger
         var id = '';
 
         if (e.currentTarget.value === '0') {
@@ -4666,12 +4688,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       var _this7 = this;
 
       return function (e) {
-        // debugger
         // const regexp = /^[0-9\b]+(.[0-9\b]+)$/;
-        var value = e.currentTarget.value; // if(regexp.test(value)){
-        //     debugger
-        // }
-        // debugger
+        var value = e.currentTarget.value;
 
         if (value === '') {
           var _this7$setState;
@@ -4687,10 +4705,8 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault(); // debugger
-
-      var formData = new FormData(); // debugger
-      // formData.append('project[id]', this.state.id);
+      e.preventDefault();
+      var formData = new FormData(); // formData.append('project[id]', this.state.id);
 
       formData.append('project[project_name]', this.state.project_name);
       formData.append('project[subtitle]', this.state.subtitle);
@@ -4704,7 +4720,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         formData.append('project[published]', this.state.published);
         formData.append('project[launch_date]', this.state.launch_date);
         formData.append('project[end_date]', this.state.end_date);
-      } // // debugger
+      } // 
       // if (this.state.photo.length !== 0) {
       //     formData.append('project[photo]', this.state.photo);
       //   }
@@ -4811,7 +4827,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "redirectToBoard",
     value: function redirectToBoard() {
-      // debugger
       this.props.history.push("/projects/".concat(this.state.id, "/dashboard"));
     }
   }, {
@@ -4865,7 +4880,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       }];
 
       if (!this.props.project || !this.props.maincategories || !this.props.subcategories || this.state.selectedMainCat === '' || !this.props.locations) {
-        debugger;
         return null;
       } else {
         var maincategoriesID = Object.keys(this.props.maincategories);
@@ -4892,8 +4906,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           maincatId = this.props.subcategories[this.props.project.category_id].parent_id;
         }
 
-        var locations = Object.values(this.props.locations); // debugger
-
+        var locations = Object.values(this.props.locations);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "Edit-Project"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Headers, {
@@ -5246,7 +5259,6 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   _createClass(EditPromotionDate, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger
       var date = this.props.startDate;
       var endDate = this.props.endDate;
       var limitDate = new Date(date.getTime());
@@ -5276,7 +5288,6 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "isValidDate",
     value: function isValidDate(newDate) {
-      // debugger
       return newDate.getTime() <= this.state.limitDate.getTime() && newDate.getTime() > this.state.startDate.getTime();
     }
   }, {
@@ -5285,9 +5296,6 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       return function (e) {
-        // let startDate = this.state.startDate;
-        // let limitDate = this.state.limitDate;
-        // let year = this.state.year;
         var _this2$state = _this2.state,
             startDate = _this2$state.startDate,
             endDate = _this2$state.endDate,
@@ -5301,23 +5309,14 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         var DD = day < 10 ? "0".concat(day) : day;
         var HR = hour < 10 ? "0".concat(hour) : hour;
         var MT = minute < 10 ? "0".concat(minute) : minute;
-        var SD = second < 10 ? "0".concat(second) : second; // let newDateFormat = `${year}-${MM}-${DD}T${HR}:${MT}:${SD}`;
-        // let newDate = new Date(newDateFormat);
-        // debugger
-        // console.log('newDate: '+newDate);
-        // console.log('endDate: '+endDate);
+        var SD = second < 10 ? "0".concat(second) : second;
 
         if (key === 'year') {
-          // debugger
-          // newDate = endDate;
           var newDateFormat = "".concat(e.currentTarget.value, "-").concat(MM, "-").concat(DD, "T").concat(HR, ":").concat(MT, ":").concat(SD);
           var newDate = new Date(newDateFormat);
           newDate.setFullYear(endDate.getFullYear() + (e.currentTarget.value - endDate.getFullYear()));
-          console.log('newDate: ' + newDate);
-          console.log('endDate: ' + endDate);
 
-          var isValid = _this2.isValidDate(newDate); // debugger
-
+          var isValid = _this2.isValidDate(newDate);
 
           return _this2.setState({
             'endDate': isValid ? newDate : endDate,
@@ -5337,17 +5336,6 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
 
           var _isValid = _this2.isValidDate(_newDate);
 
-          console.log('newDate: ' + _newDate);
-          console.log('endDate: ' + endDate); // debugger
-          // if(e.currentTarget.value === ''){
-          //     return this.setState({
-          //         'month': e.currentTarget.value
-          //                     });
-          // }
-
-          console.log('this.month: ' + _this2.state.month);
-          console.log('month: ' + e.currentTarget.value);
-
           if (_isValid) {
             return _this2.setState({
               'endDate': _isValid ? _newDate : endDate,
@@ -5356,7 +5344,6 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
             });
           } else {
             if (e.currentTarget.value < 1 || e.currentTarget.value > 12) {
-              // debugger
               return _this2.setState({
                 'month': e.currentTarget.value,
                 'error': _isValid ? '' : "Invalid Month!"
@@ -5373,8 +5360,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         if (key === 'day') {
           var DA = e.currentTarget.value < 10 ? "0".concat(e.currentTarget.value) : e.currentTarget.value;
           var newDayFormat = "".concat(year, "-").concat(MM, "-").concat(DA, "T").concat(HR, ":").concat(MT, ":").concat(SD);
-          var newDayDate = new Date(newDayFormat); // debugger
-
+          var newDayDate = new Date(newDayFormat);
           var _isValid2 = false;
 
           if (newDayDate) {
@@ -5382,20 +5368,14 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
             _isValid2 = _this2.isValidDate(newDayDate);
           }
 
-          console.log('newDayDate: ' + newDayDate);
-          console.log('endDate: ' + endDate); // debugger
-
           if (_isValid2) {
-            // debugger
             return _this2.setState({
               'endDate': _isValid2 ? newDayDate : endDate,
               'day': e.currentTarget.value,
               'error': _isValid2 ? '' : "Date must be in the next 60 days!"
             });
           } else {
-            // debugger
             if (isNaN(newDayDate.getDate())) {
-              // debugger    
               return _this2.setState({
                 'day': e.currentTarget.value,
                 'error': "Invalid Date!"
@@ -5410,16 +5390,11 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         }
 
         if (key === 'hour') {
-          // debugger
           var ho = e.currentTarget.value;
-          if (!_this2.state.am) ho = parseInt(ho) + 12; // debugger
-
+          if (!_this2.state.am) ho = parseInt(ho) + 12;
           var HO = ho < 10 ? "0".concat(ho) : ho;
           var newFormat = "".concat(year, "-").concat(MM, "-").concat(DD, "T").concat(HO, ":").concat(MT, ":").concat(SD);
           var newHourDate = new Date(newFormat);
-          console.log('newDate: ' + newHourDate);
-          console.log('endDate: ' + endDate); // debugger
-
           return _this2.setState(_defineProperty({}, key, newHourDate.getHours()));
         }
 
@@ -5444,9 +5419,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         if (e.currentTarget.value < 1 || e.currentTarget.value > 60) {
           var _this3$setState2;
 
-          // debugger
           var value = e.currentTarget.value < 1 ? 1 : 60; // newDate.setDate(newDate.getDate() + value);
-          // debugger
 
           return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, value), _defineProperty(_this3$setState2, 'limitMessage', 'Days for funding duration must be between 1 and 60.'), _this3$setState2));
         }
@@ -5466,11 +5439,10 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handlePublish",
     value: function handlePublish() {
-      var newDate = new Date(this.state.startDate.getTime()); // debugger
+      var newDate = new Date(this.state.startDate.getTime());
 
       if (this.props.selectTab) {
-        // debugger
-        newDate.setDate(newDate.getDate() + parseInt(this.state.days)); // debugger
+        newDate.setDate(newDate.getDate() + parseInt(this.state.days));
       } else {
         var _this$state = this.state,
             startDate = _this$state.startDate,
@@ -5487,9 +5459,8 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         var MT = minute < 10 ? "0".concat(minute) : minute;
         var SD = second < 10 ? "0".concat(second) : second;
         var newDayFormat = "".concat(year, "-").concat(MM, "-").concat(DD, "T").concat(HR, ":").concat(MT, ":").concat(SD);
-        newDate = new Date(newDayFormat); // debugger
-      } // debugger
-
+        newDate = new Date(newDayFormat);
+      }
 
       var project = this.props.project;
 
@@ -5507,7 +5478,6 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateByCalendar",
     value: function updateByCalendar(newDate) {
-      // debugger
       this.setState({
         'year': newDate.getFullYear(),
         'month': newDate.getMonth() + 1,
@@ -5724,7 +5694,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // debugger
   return {
     allItems: state.entities.items
   };
@@ -5848,10 +5817,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
     _this.handleModal = _this.handleModal.bind(_assertThisInitialized(_this));
     _this.createNewItem = _this.createNewItem.bind(_assertThisInitialized(_this));
     return _this;
-  } // componentDidUpdate(prevProps, prevState) {
-  //     debugger
-  // }
-
+  }
 
   _createClass(EditRewardForm, [{
     key: "componentDidMount",
@@ -5871,7 +5837,6 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
     key: "editItem",
     value: function editItem() {
       if (!this.props.disabledBottomButton && !this.props.showRewardForm && !this.props.showEditRewardForm) {
-        // debugger
         this.props.updateDisabledBottomButton();
         this.props.openEditRewardForm();
         this.props.receiveAllItems(this.props.reward.project_id);
@@ -5971,7 +5936,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       return function (e) {
         var newItem = _this5.props.allItems[parseInt(e.currentTarget.value)];
 
-        var newItems = Object.assign({}, _this5.state.items, _defineProperty({}, parseInt(e.currentTarget.value), newItem)); // debugger
+        var newItems = Object.assign({}, _this5.state.items, _defineProperty({}, parseInt(e.currentTarget.value), newItem));
 
         _this5.setState({
           'items': newItems
@@ -5993,7 +5958,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       return function (e) {
         // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
         var newItems = Object.assign({}, _this6.state.items);
-        delete newItems[parseInt(id)]; // debugger
+        delete newItems[parseInt(id)];
 
         _this6.setState({
           'items': newItems
@@ -6023,7 +5988,6 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       }
 
       if (this.state.year === '') {
-        // debugger
         validYear = false;
         yearError = 'Year is required';
       }
@@ -6039,14 +6003,11 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       }
 
       if (this.state.amount < 1 || this.state.amount > 13000) {
-        // debugger
         validAmount = false;
         amountError = 'Enter a value between $1 and $13,000.';
-      } // debugger
-
+      }
 
       if (validMonth === false || validYear === false || validTitle === false || validDescription === false || validAmount === false) {
-        // debugger
         this.setState({
           'validmonth': validMonth,
           'validyear': validYear,
@@ -6058,7 +6019,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
           'titleErrorMessage': titleError,
           'descriptionErrorMessage': descriptionError,
           'amountErrorMessage': amountError
-        }); // debugger
+        });
       } else {
         var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00.000Z");
         var date = new Date(Format);
@@ -6486,10 +6447,8 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
   _createClass(EditTitleImage, [{
     key: "handleFile",
     value: function handleFile(e) {
-      // debugger
       var file = e.currentTarget.files[0];
-      var fileReader = new FileReader(); // debugger
-      // fileReader.onloadend = () =>{
+      var fileReader = new FileReader(); // fileReader.onloadend = () =>{
       //     // let photofiles = this.state.photo;
       //     // photofiles[0] = file;
       //     // let photoURLArray = this.state.photoURL;
@@ -6521,8 +6480,7 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var photoUrl = this.props.project.title_image_url; // debugger
-
+      var photoUrl = this.props.project.title_image_url;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "image-right-conatiner"
       }, "     ", !photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -6650,7 +6608,6 @@ var NewItemForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
 
       if (this.emptyInput()) {
-        // debugger
         this.setState({
           'valid': false
         });
@@ -7131,7 +7088,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       return function (e) {
         var newItem = _this5.props.allItems[parseInt(e.currentTarget.value)];
 
-        var newItems = Object.assign({}, _this5.state.items, _defineProperty({}, parseInt(e.currentTarget.value), newItem)); // debugger
+        var newItems = Object.assign({}, _this5.state.items, _defineProperty({}, parseInt(e.currentTarget.value), newItem));
 
         _this5.setState({
           'items': newItems
@@ -7148,7 +7105,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       return function (e) {
         // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
         var newItems = Object.assign({}, _this6.state.items);
-        delete newItems[parseInt(id)]; // debugger
+        delete newItems[parseInt(id)];
 
         _this6.setState({
           'items': newItems
@@ -7158,7 +7115,6 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      // debugger
       e.preventDefault();
       var validMonth = this.state.validmonth;
       var validYear = this.state.validyear;
@@ -7169,7 +7125,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       var yearError = '';
       var titleError = '';
       var descriptionError = '';
-      var amountError = ''; // debugger
+      var amountError = '';
 
       if (this.state.month === '') {
         validMonth = false;
@@ -7177,7 +7133,6 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       }
 
       if (this.state.year === '') {
-        // debugger
         validYear = false;
         yearError = 'Year is required';
       }
@@ -7193,14 +7148,11 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       }
 
       if (this.state.amount < 1 || this.state.amount > 13000) {
-        // debugger
         validAmount = false;
         amountError = 'Enter a value between $1 and $13,000.';
-      } // debugger
-
+      }
 
       if (validMonth === false || validYear === false || validTitle === false || validDescription === false || validAmount === false) {
-        // debugger
         this.setState({
           'validmonth': validMonth,
           'validyear': validYear,
@@ -7212,11 +7164,10 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           'titleErrorMessage': titleError,
           'descriptionErrorMessage': descriptionError,
           'amountErrorMessage': amountError
-        }); // debugger
+        });
       } else {
         var Format = "".concat(this.state.year, "-").concat(this.state.month, "-01T10:00:00.000Z");
-        var date = new Date(Format); // debugger
-
+        var date = new Date(Format);
         var reward = {
           project_id: this.state.project_id,
           title: this.state.title,
@@ -7224,11 +7175,9 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           estimated_delivery: date,
           amount: this.state.amount,
           items: this.state.items
-        }; // debugger
-
+        };
         this.props.createReward(reward);
         this.props.cancel(); // this.props.
-        // debugger
       } // if()
 
     }
@@ -7250,7 +7199,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
     value: function createNewItem(e) {
       var _this7 = this;
 
-      e.preventDefault(); // debugger
+      e.preventDefault();
 
       if (this.state.item_name === '' || !this.isNameExist()) {
         this.setState({
@@ -7263,14 +7212,12 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         };
         this.props.createItem(item).then(function (item) {
           var newItem = item.item;
-          var newItems = Object.assign({}, _this7.state.items, _defineProperty({}, newItem.id, newItem)); // debugger
-
+          var newItems = Object.assign({}, _this7.state.items, _defineProperty({}, newItem.id, newItem));
           return _this7.setState({
             'items': newItems,
             'validInputName': ''
           });
-        }); // debugger
-
+        });
         this.updateshowAddItem();
       }
     }
@@ -7292,7 +7239,6 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this8 = this;
 
-      // debugger
       var currentTime = new Date();
       var currentYear = currentTime.getFullYear();
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -7320,8 +7266,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: index
         }, item.item_name);
-      }); // debugger
-
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "reward-form-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -7557,7 +7502,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  debugger;
   return {
     allItems: state.entities.items
   };
@@ -7887,7 +7831,6 @@ var ProjectDashboard = /*#__PURE__*/function (_React$Component) {
   _createClass(ProjectDashboard, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger
       this.props.receiveProjects();
     }
   }, {
@@ -7987,7 +7930,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  // debugger
   return {
     user: state.entities.users[state.session.id],
     projects: state.entities.projects.owner_projects
@@ -8071,7 +8013,6 @@ var Headers = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      // debugger
       var selected = this.props.selected;
       var headers = this.props.tabs.map(function (tab, index) {
         var title = tab.title;
@@ -8132,8 +8073,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     _this2.openEditItemForm = _this2.openEditItemForm.bind(_assertThisInitialized(_this2));
     _this2.openEditRewardForm = _this2.openEditRewardForm.bind(_assertThisInitialized(_this2));
     _this2.showModal = _this2.showModal.bind(_assertThisInitialized(_this2));
-    _this2.deleteRewardModal = _this2.deleteRewardModal.bind(_assertThisInitialized(_this2)); // debugger
-
+    _this2.deleteRewardModal = _this2.deleteRewardModal.bind(_assertThisInitialized(_this2));
     return _this2;
   }
 
@@ -8157,7 +8097,6 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "disable",
     value: function disable() {
-      // debugger
       return this.props.disabledBottomButton ? '-disable' : '';
     } // editItem(){
     //     if(this.disable() !== '-disable'){
@@ -8171,7 +8110,6 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     key: "showNewRewardForm",
     value: function showNewRewardForm() {
       if (!this.props.disabledBottomButton) {
-        // debugger
         this.props.updateDisabledBottomButton();
 
         if (this.state.tab === 0) {
@@ -8202,7 +8140,6 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "cancel",
     value: function cancel() {
-      // debugger
       this.props.updateDisabledBottomButton();
 
       if (this.state.tab === 0) {
@@ -8247,10 +8184,9 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
       var disable = this.disable();
       var _this$props = this.props,
           items = _this$props.items,
-          rewards = _this$props.rewards; // debugger
+          rewards = _this$props.rewards;
 
       if (!items || !rewards) {
-        // debugger
         return null;
       } else {
         var arrayItems = Object.values(items).map(function (item, index) {
@@ -8278,8 +8214,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
             receiveAllItems: _this3.props.receiveAllItems,
             project: _this3.props.project
           });
-        }); // debugger
-
+        });
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "rewards-items-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_5__.default, {
@@ -8353,7 +8288,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  // debugger
   return {
     items: state.entities.items,
     rewards: state.entities.rewards
@@ -8477,8 +8411,6 @@ var SearchResult = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      debugger;
-
       if (!this.props.results) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "search-result-block"
@@ -8504,7 +8436,6 @@ var SearchResult = /*#__PURE__*/function (_React$Component) {
           dayDiff = Math.round((date.getTime() - currentDate.getTime()).getHours());
         }
 
-        debugger;
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "result-ele",
           key: index
@@ -8541,8 +8472,7 @@ var SearchResult = /*#__PURE__*/function (_React$Component) {
             flexBasis: "".concat(progress, "%")
           }
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "$".concat(project.pledge, " pledged")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "".concat(progress, "% funded")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "".concat(dayDiff, " days to go"))));
-      }); // debugger
-
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "search-result-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -8690,7 +8620,6 @@ var SectionBar = /*#__PURE__*/function (_React$Component) {
       //         publishingId = cat.id;
       //     }
       // })
-      // debugger
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "section-bar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -9385,7 +9314,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var itemsReducer = function itemsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  // debugger
   Object.freeze(state);
 
   switch (action.type) {
@@ -9393,12 +9321,10 @@ var itemsReducer = function itemsReducer() {
       return action.items;
 
     case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ITEM:
-      debugger;
       var newItems = Object.assign({}, state, _defineProperty({}, action.item.id, action.item));
       return newItems;
 
     case _actions_item_actions__WEBPACK_IMPORTED_MODULE_0__.DELETE_ITEM:
-      // debugger
       var items = Object.assign({}, state);
       delete items[action.itemId];
       return items;
@@ -9498,7 +9424,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var projectReducer = function projectReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  // debugger
   Object.freeze(state);
 
   switch (action.type) {
@@ -9506,8 +9431,7 @@ var projectReducer = function projectReducer() {
       return action.projects;
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PROJECT:
-      var newProject = _defineProperty({}, action.project.id, action.project); // debugger
-
+      var newProject = _defineProperty({}, action.project.id, action.project);
 
       return newProject;
 
@@ -9544,16 +9468,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var rewardsReducer = function rewardsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  // debugger
   Object.freeze(state);
 
   switch (action.type) {
     case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_REWARDS:
-      // debugger
       return action.rewards;
 
     case _actions_reward_action__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_REWARD:
-      // debugger
       var rewards = Object.assign({}, state, _defineProperty({}, action.reward.id, action.reward));
       return rewards;
 
@@ -9619,12 +9540,10 @@ __webpack_require__.r(__webpack_exports__);
 var searchReducer = function searchReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  // debugger
   Object.freeze(state);
 
   switch (action.type) {
     case _actions_search_actions__WEBPACK_IMPORTED_MODULE_0__.SEARCH_PROJECTS:
-      debugger;
       return action.projects;
 
     default:
@@ -9861,7 +9780,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createBacking": () => /* binding */ createBacking
 /* harmony export */ });
 var createBacking = function createBacking(backing) {
-  // debugger
   return $.ajax({
     method: 'POST',
     url: "api/backings",
@@ -9924,7 +9842,6 @@ var fetchAllItems = function fetchAllItems(project_id) {
   });
 };
 var createItem = function createItem(item) {
-  // debugger
   return $.ajax({
     method: 'POST',
     url: "api/items",
@@ -9934,14 +9851,12 @@ var createItem = function createItem(item) {
   });
 };
 var deleteItem = function deleteItem(itemId) {
-  // debugger
   return $.ajax({
     method: 'DELETE',
     url: "api/items/".concat(itemId)
   });
 };
 var updateItem = function updateItem(item) {
-  // debugger
   return $.ajax({
     method: 'PATCH',
     url: "api/items/".concat(item.id),
@@ -9990,7 +9905,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "updateProjectImage": () => /* binding */ updateProjectImage
 /* harmony export */ });
 var fetchProjects = function fetchProjects() {
-  debugger;
   return $.ajax({
     method: 'GET',
     url: 'api/projects'
@@ -10018,7 +9932,6 @@ var deleteProject = function deleteProject(projectID) {
   });
 };
 var updateProject = function updateProject(id, project) {
-  // debugger
   return $.ajax({
     method: 'PATCH',
     url: "api/projects/".concat(id),
@@ -10028,7 +9941,6 @@ var updateProject = function updateProject(id, project) {
   });
 };
 var updateProjectImage = function updateProjectImage(id, formData) {
-  // debugger
   return $.ajax({
     method: "PATCH",
     url: "/api/projects/".concat(id),
@@ -10055,7 +9967,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "updateReward": () => /* binding */ updateReward
 /* harmony export */ });
 var fetchAllRewards = function fetchAllRewards(project_id) {
-  // debugger
   return $.ajax({
     method: 'GET',
     url: 'api/rewards',
@@ -10065,7 +9976,6 @@ var fetchAllRewards = function fetchAllRewards(project_id) {
   });
 };
 var createReward = function createReward(reward) {
-  // debugger
   return $.ajax({
     method: 'POST',
     url: "api/rewards",
@@ -10075,14 +9985,12 @@ var createReward = function createReward(reward) {
   });
 };
 var deleteReward = function deleteReward(rewardId) {
-  // debugger
   return $.ajax({
     method: 'DELETE',
     url: "api/rewards/".concat(rewardId)
   });
 };
 var updateReward = function updateReward(reward) {
-  debugger;
   return $.ajax({
     method: 'PATCH',
     url: "api/rewards/".concat(reward.rewardId),
@@ -10168,7 +10076,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "search": () => /* binding */ search
 /* harmony export */ });
 var search = function search(searchTerm) {
-  debugger;
   return $.ajax({
     method: "GET",
     url: "/api/search",

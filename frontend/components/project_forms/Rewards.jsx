@@ -9,7 +9,7 @@ import Modal from '../modal/Modal';
 
 class Headers extends React.Component {
     render() {
-        // debugger
+        
       const selected = this.props.selected;
       const headers = this.props.tabs.map((tab, index) => {
         const title = tab.title;
@@ -67,7 +67,7 @@ class Rewards extends React.Component{
         this.openEditRewardForm = this.openEditRewardForm.bind(this);
         this.showModal = this.showModal.bind(this);
         this.deleteRewardModal = this.deleteRewardModal.bind(this);
-        // debugger
+        
     }
 
     componentDidMount(){
@@ -84,7 +84,7 @@ class Rewards extends React.Component{
         }
     }
     disable(){
-        // debugger
+        
         return this.props.disabledBottomButton ? '-disable': ''
     }
     // editItem(){
@@ -96,7 +96,7 @@ class Rewards extends React.Component{
     // }
     showNewRewardForm(){
         if(!this.props.disabledBottomButton){
-            // debugger
+            
             this.props.updateDisabledBottomButton();
             if(this.state.tab === 0){
                 this.setState({
@@ -120,7 +120,7 @@ class Rewards extends React.Component{
         })
     }
     cancel(){
-        // debugger
+        
         this.props.updateDisabledBottomButton();
         if(this.state.tab === 0){
             this.setState({
@@ -153,9 +153,9 @@ class Rewards extends React.Component{
         const tabs = [{title: 'Rewards'}, {title: 'Items'}];
         const disable = this.disable();
         const {items, rewards} = this.props;
-        // debugger
+        
         if(!items || !rewards){
-            // debugger
+            
             return null;
         }else{
             const arrayItems = Object.values(items).map((item, index) => {
@@ -186,7 +186,7 @@ class Rewards extends React.Component{
                                         />
                 )
             })
-            // debugger
+            
             return (
                 <div className='rewards-items-container'>
                     <Modal item_name={this.state.item_name}

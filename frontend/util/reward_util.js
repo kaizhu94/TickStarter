@@ -1,5 +1,5 @@
 export const fetchAllRewards = (project_id) =>{
-  // debugger
+  
     return $.ajax({
         method: 'GET',
         url: 'api/rewards',
@@ -8,7 +8,7 @@ export const fetchAllRewards = (project_id) =>{
 }
 
 export const createReward= reward =>{
-  // debugger
+  
   return $.ajax({
       method: 'POST',
       url: `api/rewards`,
@@ -17,7 +17,7 @@ export const createReward= reward =>{
 }
 
 export const deleteReward = rewardId =>{
-  // debugger
+  
   return $.ajax({
       method: 'DELETE',
       url: `api/rewards/${rewardId}`
@@ -25,7 +25,7 @@ export const deleteReward = rewardId =>{
 }
 
 export const updateReward = (reward) =>{
-  debugger
+  
   return $.ajax({
       method: 'PATCH',
       url: `api/rewards/${reward.rewardId}`,

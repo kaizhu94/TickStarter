@@ -17,6 +17,11 @@ class NavBar extends React.Component{
             'showSearch': !this.state.showSearch
         })
     }
+
+    openModal(){
+        this.props.openModal('discover');
+    }
+
     render(){
         let logOrProfile;
         if(this.props.currentUser){
@@ -39,7 +44,7 @@ class NavBar extends React.Component{
                     <div className = 'navbar'>
                         <nav className='left-nav'>
                             <div>
-                                <p id='discover'>Discover</p>
+                                <p id='discover' onClick={()=>this.openModal()}>Discover</p>
                                 <p id='start-project'><Link to='/projects/new' id='start-a-project'> Start a project</Link> </p>
                             </div>
                         </nav>

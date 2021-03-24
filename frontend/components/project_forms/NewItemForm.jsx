@@ -24,7 +24,7 @@ class NewItemForm extends React.Component{
     handleSumbit(e){
         e.preventDefault();
         if(this.emptyInput()){
-            // debugger
+            
             this.setState({
                 'valid': false
             })

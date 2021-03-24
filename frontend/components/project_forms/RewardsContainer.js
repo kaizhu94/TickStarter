@@ -7,7 +7,7 @@ import { openModal, closeModal } from '../../actions/modal_actions';
 import Rewards from './Rewards'
 
 const msp = state =>{
-    // debugger
+    
     return ({
         items: state.entities.items,
         rewards: state.entities.rewards

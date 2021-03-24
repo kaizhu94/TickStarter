@@ -14,10 +14,10 @@ class EditTitleImage extends React.Component{
         this.deleteFile = this.deleteFile.bind(this);
     }
     handleFile(e){
-        // debugger
+        
         const file = e.currentTarget.files[0];
         const fileReader =new FileReader();
-        // debugger
+        
         // fileReader.onloadend = () =>{
         //     // let photofiles = this.state.photo;
         //     // photofiles[0] = file;
@@ -45,7 +45,7 @@ class EditTitleImage extends React.Component{
     }
     render(){
         let photoUrl = this.props.project.title_image_url;
-        // debugger
+        
         return(
             <div className = 'image-right-conatiner'>     {
                     !photoUrl ? (

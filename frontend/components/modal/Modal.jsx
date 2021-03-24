@@ -8,9 +8,13 @@ import { deleteReward } from '../../actions/reward_action'
 
 function Modal( props ){
     const {modal, closeModal, errors, projectId, updateProjectImage, deleteItem, deleteReward} = props
-    // debugger
+    
     function redirect(projectId, tab){
         props.history.push(`/projects/${projectId}/edit/${tab}`)
+    } 
+    function redirectToCat(catNum){
+        props.history.push(`/cat/${catNum}`);
+        closeModal();
     } 
     function deleteImage(){
         let formData = new FormData();
@@ -22,6 +26,28 @@ function Modal( props ){
         return null;
     }
     switch(modal){
+        case 'discover':
+            return ( 
+                <div className='discover-modal' >
+                    <div className='discover-modal-body'>
+                        <div className='discover-head'>Sections</div>
+                        <i className="fas fa-times" id="close-discover" onClick={closeModal}></i>
+                        <div className='discover-section'>
+                            <ul className='discover-section-ul'>
+                                <li onClick={()=>redirectToCat(1)}>Arts</li>
+                                <li onClick={()=>redirectToCat(2)}>Comics & Illustration</li>
+                                <li onClick={()=>redirectToCat(3)}>Design & Tech</li>
+                                <li onClick={()=>redirectToCat(4)}>Film</li>
+                                <li onClick={()=>redirectToCat(5)}>Food & Craft</li>
+                                <li onClick={()=>redirectToCat(6)}>Games</li>
+                                <li onClick={()=>redirectToCat(7)}>Music</li>
+                                <li onClick={()=>redirectToCat(8)}>Publishing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+                );
+            break;
         case 'errors':
             const errorsArr = errors.map((error,i) =>{
                 return (
@@ -42,7 +68,7 @@ function Modal( props ){
             );
             break;
         case 'delete-file':
-            // debugger
+            
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
@@ -61,7 +87,7 @@ function Modal( props ){
             )
             break;
         case 'deleteReward':
-            // debugger
+            
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
@@ -111,7 +137,7 @@ function Modal( props ){
                 )
                 break;
         case 'unsave-tab-0':
-        // debugger
+        
         return (
             <div className='modal-background' onClick={closeModal}>
                 <div className='unsave-modal-continer'>
@@ -130,7 +156,7 @@ function Modal( props ){
         )
         break;
         case 'unsave-tab-1':
-            // debugger
+            
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
@@ -149,7 +175,7 @@ function Modal( props ){
             )
             break;
         case 'unsave-tab-2':
-            // debugger
+            
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
@@ -168,7 +194,7 @@ function Modal( props ){
             )
             break;
         case 'unsave-tab-3':
-            // debugger
+            
             return (
                 <div className='modal-background' onClick={closeModal}>
                     <div className='unsave-modal-continer'>
@@ -195,7 +221,7 @@ function Modal( props ){
 
 
 const msp =(state, ownprops) =>{
-    // debugger
+    
     return {
         modal: state.ui.modal,
         errors: state.errors.session,

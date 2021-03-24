@@ -37,7 +37,7 @@ class SectionBar extends React.Component{
         //         publishingId = cat.id;
         //     }
         // })
-        // debugger
+        
         return (
             <div className= 'section-bar'>
                 <div className='section-container'>

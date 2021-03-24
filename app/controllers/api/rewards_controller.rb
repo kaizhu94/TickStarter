@@ -1,16 +1,16 @@
 class Api::RewardsController < ApplicationController
 
     def index
-        # debugger
+        
         @rewards = Reward.where(project_id: params[:project_id])
-        # debugger
+        
         render :index
     end
 
     def create
-        # debugger
+        
         @reward = Reward.new(reward_params)
-        # debugger
+        
         if @reward.save
             @items = params[:reward][:items]
             @items.each{|key, value| RewardsItem.create!(rewards_id: @reward.id, items_id:key)}
@@ -24,18 +24,18 @@ class Api::RewardsController < ApplicationController
     def update
         @reward = Reward.find(params[:id])
         if @reward
-            # debugger
+            
             @items = params[:reward][:items]
-            # debugger
+            
             
             RewardsItem.where(rewards_id: @reward.id).each do |rewarditem_join|
                 rewarditem_join.destroy
             end
-            # debugger
+            
             if @items
                 @items.each{|key, value| RewardsItem.create!(rewards_id: @reward.id, items_id:key)}
             end
-                # debugger
+                
             @reward.update(reward_params)
             render :show
         else

@@ -15,13 +15,13 @@ class ProjectShow extends React.Component{
     }
 
     render(){
-        // debugger
+        
         if(!this.props.projects){
             return null;
         }else{
             const{ projects } = this.props;
             const project = projects[this.props.match.params.projectId];
-            debugger
+            
             const date = new Date(project.end_date);
             const currentDate = new Date();
             let dayDiff =Math.round((date.getTime() - currentDate.getTime()) / (1000 * 3600 * 24));

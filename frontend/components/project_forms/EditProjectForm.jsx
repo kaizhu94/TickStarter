@@ -101,14 +101,14 @@ class EditProjectForm extends React.Component{
         }
     }
     componentDidMount(){
-        // debugger
+        
         this.props.receiveCategories();
         this.props.receiveLocations();
         this.props.receiveProject(this.props.match.params.projectId)
             .then((project) => {
-                debugger
+                
                 const pro = project.project;
-                debugger
+                
                 let startDate = new Date();
                 let endDate = new Date(startDate.getTime());
                 endDate.setDate(startDate.getDate() + 30);
@@ -136,7 +136,7 @@ class EditProjectForm extends React.Component{
     }
 
     updateDateTab(){
-        // debugger
+        
         const value = !this.state.selectedDateTab;
         this.setState({'selectedDateTab': value,
             'isModified': true}
@@ -144,7 +144,7 @@ class EditProjectForm extends React.Component{
     }
 
     updateDisabledBottomButton(){
-        // debugger
+        
         // e.preventDefault();
         const value = !this.state.disabledBottomButton;
         const isModified = !this.state.isModified;
@@ -155,7 +155,7 @@ class EditProjectForm extends React.Component{
     }
 
     updateEndDate(endDate){
-        // debugger
+        
         this.setState({
             'end_date': endDate,
             'published': true,
@@ -164,7 +164,7 @@ class EditProjectForm extends React.Component{
     }
 
     selectTab(num) {
-        // debugger
+        
         let modalOpen = false;
         if(this.state.isModified && num !== this.state.tab){
             modalOpen = true
@@ -205,9 +205,9 @@ class EditProjectForm extends React.Component{
         }
         
     updateSubCat(key){
-        // debugger
+        
         return e =>{  
-            // debugger
+            
         let id = '';
         if(e.currentTarget.value === '0'){
             id = this.state.selectedMainCat;
@@ -223,13 +223,11 @@ class EditProjectForm extends React.Component{
 
     updateFunding(key){
         return e =>{  
-            // debugger
+            
         // const regexp = /^[0-9\b]+(.[0-9\b]+)$/;
         let value = e.currentTarget.value; 
-        // if(regexp.test(value)){
-        //     debugger
-        // }
-        // debugger
+        
+        
         if(value === ''){
             return this.setState({[key]:  value,
                 'maincatId':'',
@@ -246,9 +244,9 @@ class EditProjectForm extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        // debugger
+        
         let formData = new FormData();
-        // debugger
+        
         // formData.append('project[id]', this.state.id);
         formData.append('project[project_name]', this.state.project_name);
         formData.append('project[subtitle]', this.state.subtitle);
@@ -262,7 +260,7 @@ class EditProjectForm extends React.Component{
             formData.append('project[launch_date]', this.state.launch_date);
             formData.append('project[end_date]', this.state.end_date);
         }
-        // // debugger
+        // 
         // if (this.state.photo.length !== 0) {
         //     formData.append('project[photo]', this.state.photo);
         //   }
@@ -373,7 +371,7 @@ class EditProjectForm extends React.Component{
     }
 
     redirectToBoard(){
-        // debugger
+        
         this.props.history.push(`/projects/${this.state.id}/dashboard`);
     }
 
@@ -434,7 +432,7 @@ class EditProjectForm extends React.Component{
                     {title: 'Rewards'}, {title: 'Background'}];
         if(!this.props.project || !this.props.maincategories || !this.props.subcategories
             || this.state.selectedMainCat === '' || !this.props.locations){
-                debugger
+                
             return null;
         }else{
             const maincategoriesID = Object.keys(this.props.maincategories);
@@ -460,7 +458,7 @@ class EditProjectForm extends React.Component{
 
             const locations = Object.values(this.props.locations);
 
-            // debugger
+            
             return (
                 <div className = 'Edit-Project'>
                     <Headers selected = {this.state.tab}

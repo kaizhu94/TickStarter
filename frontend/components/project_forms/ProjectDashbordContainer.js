@@ -5,7 +5,7 @@ import ProjectDashboard from './ProjectDashboard'
 
 
 const msp = (state, ownprops) =>{
-    // debugger
+    
     return ({
         user: state.entities.users[state.session.id],
         projects: state.entities.projects.owner_projects

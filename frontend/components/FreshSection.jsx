@@ -5,7 +5,7 @@ import Project from './project/Project'
 class FreshSection extends React.Component{
     render(){
         const { projects } = this.props;
-        debugger
+        
         return (
             <div className='section-index'>
                 <ul>

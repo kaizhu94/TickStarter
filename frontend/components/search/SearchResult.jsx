@@ -35,7 +35,7 @@ class SearchResult extends React.Component{
         return this.state.projectIdx === -1? '': '-hover'
     }
     render(){
-        debugger
+        
         if(!this.props.results){
             return (
                 <div className='search-result-block'>
@@ -55,7 +55,7 @@ class SearchResult extends React.Component{
             if (dayDiff < 1){
                 dayDiff = Math.round((date.getTime() - currentDate.getTime()).getHours());
             }
-            debugger
+            
             return (
                 <div className='result-ele' key = {index}>
                     <img id='result-image' src={project.title_image} 
@@ -82,7 +82,7 @@ class SearchResult extends React.Component{
                 </div>
             )
         })
-        // debugger
+        
         return(
             <div className='search-result-block'>
                 <div className='search-result-body'>

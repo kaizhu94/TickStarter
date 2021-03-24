@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/session_action'
 import { fetchProjects } from '../actions/project_actions'
 import { searchProjects } from '../actions/search_actions'
+import { openModal} from '../actions/modal_actions';
+
 import NavBar from './NavBar'
 const msp = state =>{
     return ({
@@ -14,7 +16,8 @@ const mdp = dispatch=>{
     return ({
         logout: () => dispatch(logout()),
         fetchProjects: () => dispatch(fetchProjects()),
-        searchProjects: (searchTerm) => dispatch(searchProjects(searchTerm))
+        searchProjects: (searchTerm) => dispatch(searchProjects(searchTerm)),
+        openModal: (modal) => dispatch(openModal(modal)),
     })
 }
 

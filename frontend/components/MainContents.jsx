@@ -49,7 +49,7 @@ class MainContents extends React.Component{
         const listOne = randomProjects.slice(0,3);
         const listTwo = randomProjects.slice(3,6);
         const listThree = randomProjects.slice(6,9);
-        debugger
+        
 
         const pages = [
             {pageNumber: '1', content: <ProjectIndex projects = {listOne}/>},

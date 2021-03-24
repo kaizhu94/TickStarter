@@ -40,7 +40,7 @@ class ProjectByCat extends React.Component{
         }else{
             tab = <Link to='/signup' id='signup'>Signup For TickStarter</Link>
         }
-        debugger
+        
         const mainCat = Object.values(categories.maincategories);
         const subCat = Object.values(categories.subcategories);
         const catNum = this.props.match.params.catId;
@@ -128,7 +128,7 @@ class ProjectByCat extends React.Component{
                 }
             })
         }
-        debugger
+        
         subCat.forEach(cat => {
             if( cat.parent_id === parantCat){
                 catsInclude.push(cat.id);
@@ -148,7 +148,7 @@ class ProjectByCat extends React.Component{
         const listOne = randomProjects.slice(0,3);
         const listTwo = randomProjects.slice(3,6);
         const listThree = randomProjects.slice(6,9);
-        debugger
+        
 
         const pages = [
             {pageNumber: '1', content: <ProjectIndex projects = {listOne}/>},

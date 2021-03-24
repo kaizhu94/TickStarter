@@ -1,5 +1,5 @@
 export const fetchProjects = () =>{
-  debugger
+  
     return $.ajax({
         method: 'GET',
         url: 'api/projects',
@@ -29,7 +29,7 @@ export const deleteProject = projectID =>{
 }
 
 export const updateProject = (id, project) =>{
-  // debugger
+  
   return $.ajax({
       method: 'PATCH',
       url: `api/projects/${id}`,
@@ -40,7 +40,7 @@ export const updateProject = (id, project) =>{
 }
 
 export const updateProjectImage = (id, formData) => {
-  // debugger
+  
  return  $.ajax({
     method: "PATCH",
     url: `/api/projects/${id}`,

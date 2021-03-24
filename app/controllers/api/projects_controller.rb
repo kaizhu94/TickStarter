@@ -2,12 +2,12 @@ class Api::ProjectsController < ApplicationController
     before_action :ensure_logged_in, only: [:create]
 
     def index
-        # debugger
+
         @projects = []
         if logged_in?
             @projects = Project.where(founder_id: current_user[:id])
         end
-        # debugger
+
         all_published_projects = Project.where(published: true)
         time = Time.now
         all_published_projects.each do |project|
@@ -17,7 +17,7 @@ class Api::ProjectsController < ApplicationController
         end
         @published_projects = Project.where(published: true)
 
-        # debugger
+
         render :index
     end
 
@@ -25,7 +25,7 @@ class Api::ProjectsController < ApplicationController
         @project = Project.find(params[:id])
         @backings = @project.backings
         @founder = User.find(@project[:founder_id])
-        # debugger
+
         render :show
     end
 
@@ -41,19 +41,19 @@ class Api::ProjectsController < ApplicationController
     def update
         @project = Project.find(params[:id])
         if @project.title_image.attached? && params[:project][:title_image] == 'delete'
-            # debugger
+    
             @project.title_image.purge
             render :show
         else
-            # debugger
+    
             if @project.title_image.attached? && params[:project][:title_image] 
                 @project.title_image.purge
             end
             
             if @project 
-                # debugger
+        
                 @project.update(project_params)
-                # debugger
+        
                 render :show
             else
                 render json: @project.errors.full_messages, status: 404

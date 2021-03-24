@@ -10,7 +10,7 @@ export const receiveSearch = (projects)=>{
 }
 
 export const searchProjects = (searchTerm) => dispatch =>{
-    debugger
+    
     return SearchAPIUtil.search(searchTerm).then(
         (projects) => dispatch(receiveSearch(projects))
         )
