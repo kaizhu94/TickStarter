@@ -58,7 +58,6 @@
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 
@@ -98,19 +97,20 @@
 .result-ele-lower{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 90%;
-    height: 30%;
+    height: 15vh;
     margin: auto;
-    margin-top: 0px;
     font-size: 18px;
     line-height: 25px;
-    margin-bottom: 30px;
+    margin-top: 0px;
+    margin-bottom: 20px;
 }
 
 .result-progress-base{
     display: flex;
     background-color: gainsboro;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .result-progress-bar{
     height: 3px;
