@@ -2303,10 +2303,7 @@ function Modal(props) {
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         id: "session-error-ul"
-      }, errorsArr)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        id: "xIcon",
-        src: window.xIcon
-      })));
+      }, errorsArr))));
       break;
 
     case 'delete-file':
