@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');    position: fixed;
+
+.modal-background{
+    position: fixed;  
     top: 0;
     bottom: 0;
     right: 0;
