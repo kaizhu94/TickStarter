@@ -280,7 +280,7 @@
     margin-bottom: 30px;
     border: 1px solid white;
     border-radius: 35px;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .image-block #upload-image{
     height: 268px;
@@ -302,7 +302,8 @@
     flex-direction: column;
     border: 1px solid white;
     background: white;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); */
     padding: 15px;
 }
 #upload-image{
@@ -430,43 +431,7 @@
     font-size: 18px;
 }
 
-/* .project-promotion-container label{
-    border: 1px solid gainsboro;
-    margin-bottom: 10px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding-left: 25px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 18px;
-}
-.project-promotion-container label div{
-    margin-right: 15px;
-}
 
-
-.project-promotion-container label:hover{
-    border-color: limegreen;
-}
-
-.project-promotion-container label:focus{
-    border-color: limegreen;
-}
-#founding-input:focus{
-    outline: none;
-}
-#circle-dot{
-    display: flex;
-    border: 1px solid rgb(168, 168, 168);
-    border-radius: 20px;
-    width: 15px;
-    height: 15px;
-    box-shadow: 0px 2px 0px 0px #dddddd;
-}
-#selected-dot{
-    color: green;
-    padding-right: 15px;
-} */
 .project-promotion-container{
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;

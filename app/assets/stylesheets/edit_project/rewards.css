@@ -123,7 +123,7 @@
 }
 
 .reward-form-container div p, .preview p{
-    color: rgb(84 84 84);
+    color: rgb(84, 84, 84);
     font-size: 17px;
     line-height: 25px;
 }
@@ -161,7 +161,7 @@
     margin-bottom: 10px;
 }
 #empty-preview{
-    color: rgb(165 165 165);
+    color: rgb(165, 165, 165);
 }
 #preview-title{
     color: rgb(43, 43, 43);
@@ -189,7 +189,7 @@
     border-color: limegreen;
 }
 .reward-form-container .form-section p{
-    color: rgb(107 106 106);
+    color: rgb(107, 106, 106);
 }
 #reward-description{
     height: 98px;
