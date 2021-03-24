@@ -3799,7 +3799,7 @@ var ProjectByCat = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      if (!this.props.publishedProjects || !this.props.categories) {
+      if (!this.props.publishedProjects || !this.props.categories.maincategories) {
         return null;
       }
 
@@ -3822,6 +3822,7 @@ var ProjectByCat = /*#__PURE__*/function (_React$Component) {
         }, "Signup For TickStarter");
       }
 
+      debugger;
       var mainCat = Object.values(categories.maincategories);
       var subCat = Object.values(categories.subcategories);
       var catNum = this.props.match.params.catId;

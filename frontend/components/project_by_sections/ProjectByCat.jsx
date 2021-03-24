@@ -30,7 +30,7 @@ class ProjectByCat extends React.Component{
     }
 
     render(){
-        if(!this.props.publishedProjects || !this.props.categories){
+        if(!this.props.publishedProjects || !this.props.categories.maincategories){
             return null;
         }
         const { currentUser, publishedProjects, categories} = this.props;
@@ -40,6 +40,7 @@ class ProjectByCat extends React.Component{
         }else{
             tab = <Link to='/signup' id='signup'>Signup For TickStarter</Link>
         }
+        debugger
         const mainCat = Object.values(categories.maincategories);
         const subCat = Object.values(categories.subcategories);
         const catNum = this.props.match.params.catId;
