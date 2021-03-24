@@ -9145,17 +9145,17 @@ var SignupForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "showReEmail",
     value: function showReEmail(e) {
-      var newState = !this.state.showDropdownEmail;
+      // let newState = !this.state.showDropdownEmail;
       this.setState({
-        showDropdownEmail: newState
+        showDropdownEmail: true
       });
     }
   }, {
     key: "showRePassword",
     value: function showRePassword(e) {
-      var newState = !this.state.showDropdownPassword;
+      // let newState = !this.state.showDropdownPassword;
       this.setState({
-        showDropdownPassword: newState
+        showDropdownPassword: true
       });
     }
   }, {

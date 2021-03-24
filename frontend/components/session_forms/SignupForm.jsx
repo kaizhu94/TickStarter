@@ -56,12 +56,12 @@ class SignupForm extends React.Component{
     }
 
     showReEmail(e){
-        let newState = !this.state.showDropdownEmail;
-        this.setState({showDropdownEmail: newState})
+        // let newState = !this.state.showDropdownEmail;
+        this.setState({showDropdownEmail: true})
     }
     showRePassword(e){
-        let newState = !this.state.showDropdownPassword;
-        this.setState({showDropdownPassword: newState})
+        // let newState = !this.state.showDropdownPassword;
+        this.setState({showDropdownPassword: true})
     }
     render(){
         let errors = [...this.props.errors];
