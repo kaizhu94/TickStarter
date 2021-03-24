@@ -43,6 +43,7 @@
 
 #result-image{
     width: 100%;
+    height: 35%;
 }
 #result-image:hover{
     cursor: pointer;
@@ -50,7 +51,7 @@
 
 .result-ele-mid{
     width: 90%;
-    height: 25vh;
+    height: 35%;
     margin: auto;
     margin-top: 30px;
     line-height: 25px;
@@ -95,7 +96,6 @@
     display: flex;
     flex-direction: column;
     width: 90%;
-    height: 15vh;
     margin: auto;
     margin-top: 0px;
     font-size: 18px;
