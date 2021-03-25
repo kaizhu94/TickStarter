@@ -7,7 +7,7 @@ import LoginFormContainer from './session_forms/LoginFormContainer';
 import NavBarContainer from './NavBarContainer';
 import MainContentContainer from './MainContentContainer'
 import Modal from './modal/Modal'
-import Footer from './footer/Footer'
+import FooterConatiner from './footer/FooterConatiner'
 import NewProjectNavContainer from './NavBar/NewProjectNavContainer'
 import NewProjectFormContainer from './project_forms/NewProjectFormContainer'
 import ProjectDashboardNavBar from './NavBar/ProjectDashboardNavContainer'
@@ -27,12 +27,12 @@ const App = () => {
 
 			<header className='header'>
 				<Switch>
-					<Route path='/signup' component={NavBarContainer} />
-					<Route path='/login' component={NavBarContainer} />
 					<ProtectedRoute path='/projects/new' component={NewProjectNavContainer}/>
 					<ProtectedRoute path='/projects/:projectId/dashboard' component={ProjectDashboardNavBar}/>
 					<ProtectedRoute path='/projects/:projectId/edit/:id' component={EditProfileNavContainer}/>
 					<ProtectedRoute path='/projects/:projectId/backing' component={BackingNavBar}/>
+					<Route path='/signup' component={NavBarContainer} />
+					<Route path='/login' component={NavBarContainer} />
 					<Route path='/' component={NavBarContainer} />
 				</Switch>
 			</header>
@@ -53,11 +53,11 @@ const App = () => {
 			
 			<footer className='footer-section'>
 				<Switch>
-					<Route exact path='/' component={Footer} />
-					<Route exact path='/signup' component={Footer} />
-					<Route exact path='/login' component={Footer} />
-					<Route exact path='/projects/:projectId' component={Footer} />
-					<Route exact path='/cat/:catId' component={Footer} />
+					<Route exact path='/' component={FooterConatiner} />
+					<Route exact path='/signup' component={FooterConatiner} />
+					<Route exact path='/login' component={FooterConatiner} />
+					<Route exact path='/projects/:projectId' component={FooterConatiner} />
+					<Route exact path='/cat/:catId' component={FooterConatiner} />
 				</Switch>
 			</footer>
 			
