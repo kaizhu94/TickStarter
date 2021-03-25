@@ -6,11 +6,15 @@ class ProjectShow extends React.Component{
     }
 
     componentDidMount(){
-        this.props.receiveProjects()
+        this.props.receiveProjects();
+        this.props.deleteFrom();
     }
    
 
     redirect(){
+        if(!this.props.isLogged){
+            this.props.updateFrom(this.props.location.pathname);
+        }
         this.props.history.push({pathname:`/projects/${this.props.match.params.projectId}/backing`, 
                     from: this.props.location.pathname});
     }

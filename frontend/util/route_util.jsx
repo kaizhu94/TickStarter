@@ -3,14 +3,14 @@ import {withRouter, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux'
 
 
-const Auth = ({ component: Component, path, isLogged, exact }) => {
+const Auth = ({ component: Component, path, isLogged, exact, from }) => {
 	
 	return (
     <Route
 		path={path}
 		exact={exact}
 		render={(props) =>
-			(!isLogged ? <Component {...props} /> : <Redirect to="/" />)
+			(!isLogged ? <Component {...props} /> : <Redirect to={from? from:"/"} />)
 		}
     />
 	)};
@@ -27,8 +27,9 @@ const Protected= ({ component: Component, path, isLogged, exact }) => {
 	)};
 
 const msp = (state, ownProps) => {
-	debugger
-	return { isLogged: Boolean(state.session.id) };
+	
+	return { isLogged: Boolean(state.session.id),
+			from: state.from };
 };
 
 export const AuthRoute = withRouter(connect(msp, null)(Auth));

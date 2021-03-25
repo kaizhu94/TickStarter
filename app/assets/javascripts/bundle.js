@@ -472,6 +472,48 @@ var fetchCategory = function fetchCategory(categoryId) {
 
 /***/ }),
 
+/***/ "./frontend/actions/from_action.js":
+/*!*****************************************!*\
+  !*** ./frontend/actions/from_action.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_FROM": () => /* binding */ RECEIVE_FROM,
+/* harmony export */   "REMOVE_FROM": () => /* binding */ REMOVE_FROM,
+/* harmony export */   "receiveFrom": () => /* binding */ receiveFrom,
+/* harmony export */   "removeFrom": () => /* binding */ removeFrom,
+/* harmony export */   "updateFrom": () => /* binding */ updateFrom,
+/* harmony export */   "deleteFrom": () => /* binding */ deleteFrom
+/* harmony export */ });
+var RECEIVE_FROM = 'RECEIVE_FROM';
+var REMOVE_FROM = 'REMOVE_FROM';
+var receiveFrom = function receiveFrom(from) {
+  return {
+    type: RECEIVE_FROM,
+    from: from
+  };
+};
+var removeFrom = function removeFrom() {
+  return {
+    type: REMOVE_FROM
+  };
+};
+var updateFrom = function updateFrom(from) {
+  return function (dispatch) {
+    return dispatch(receiveFrom(from));
+  };
+};
+var deleteFrom = function deleteFrom() {
+  return function (dispatch) {
+    return dispatch(removeFrom());
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/item_actions.js":
 /*!******************************************!*\
   !*** ./frontend/actions/item_actions.js ***!
@@ -2835,7 +2877,6 @@ var Backing = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           rewards = _this$props.rewards,
           project = _this$props.project;
-      debugger;
 
       if (!rewards || !project) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2918,7 +2959,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
   return {
     rewards: state.entities.rewards,
     project: state.entities.projects[ownprops.match.params.projectId],
@@ -3507,10 +3547,15 @@ var ProjectShow = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.receiveProjects();
+      this.props.deleteFrom();
     }
   }, {
     key: "redirect",
     value: function redirect() {
+      if (!this.props.isLogged) {
+        this.props.updateFrom(this.props.location.pathname);
+      }
+
       this.props.history.push({
         pathname: "/projects/".concat(this.props.match.params.projectId, "/backing"),
         from: this.props.location.pathname
@@ -3605,7 +3650,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var _ProjectShow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProjectShow */ "./frontend/components/project/ProjectShow.jsx");
+/* harmony import */ var _actions_from_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/from_action */ "./frontend/actions/from_action.js");
+/* harmony import */ var _ProjectShow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProjectShow */ "./frontend/components/project/ProjectShow.jsx");
+
 
 
 
@@ -3613,7 +3660,8 @@ __webpack_require__.r(__webpack_exports__);
 var msp = function msp(state, ownprops) {
   return {
     user: state.entities.users[state.session.id],
-    projects: state.entities.projects.published_projects
+    projects: state.entities.projects.published_projects,
+    isLogged: Boolean(state.session.id)
   };
 };
 
@@ -3621,11 +3669,17 @@ var mdp = function mdp(dispatch) {
   return {
     receiveProjects: function receiveProjects() {
       return dispatch((0,_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__.fetchProjects)());
+    },
+    updateFrom: function updateFrom(from) {
+      return dispatch((0,_actions_from_action__WEBPACK_IMPORTED_MODULE_2__.updateFrom)(from));
+    },
+    deleteFrom: function deleteFrom() {
+      return dispatch((0,_actions_from_action__WEBPACK_IMPORTED_MODULE_2__.deleteFrom)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_ProjectShow__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_ProjectShow__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 
@@ -8924,7 +8978,7 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       this.props.logIn(this.state).then(null, function (reject) {
         return _this2.props.openModal('errors');
-      }).then(this.props.closeModal);
+      }).then(this.props.closeModal());
       this.setState({
         password: ""
       });
@@ -8941,7 +8995,6 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "login-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -9002,7 +9055,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
   return {
     // is_login: Boolean(state.session.id),
     errors: state.errors.session
@@ -9375,6 +9427,41 @@ var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
 
 /***/ }),
 
+/***/ "./frontend/reducers/from_reducer.js":
+/*!*******************************************!*\
+  !*** ./frontend/reducers/from_reducer.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _actions_from_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/from_action */ "./frontend/actions/from_action.js");
+
+
+var fromReducer = function fromReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_from_action__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_FROM:
+      return action.from;
+
+    case _actions_from_action__WEBPACK_IMPORTED_MODULE_0__.REMOVE_FROM:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (fromReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/items_reducer.js":
 /*!********************************************!*\
   !*** ./frontend/reducers/items_reducer.js ***!
@@ -9583,21 +9670,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
 /* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
 /* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
 /* harmony import */ var _ui_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui_reducer */ "./frontend/reducers/ui_reducer.js");
+/* harmony import */ var _from_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./from_reducer */ "./frontend/reducers/from_reducer.js");
 
 
 
 
 
-var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
+
+var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
-  ui: _ui_reducer__WEBPACK_IMPORTED_MODULE_3__.default
+  ui: _ui_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
+  from: _from_reducer__WEBPACK_IMPORTED_MODULE_4__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
 
@@ -10105,13 +10195,14 @@ var Auth = function Auth(_ref) {
   var Component = _ref.component,
       path = _ref.path,
       isLogged = _ref.isLogged,
-      exact = _ref.exact;
+      exact = _ref.exact,
+      from = _ref.from;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
     path: path,
     exact: exact,
     render: function render(props) {
       return !isLogged ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Component, props) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Redirect, {
-        to: "/"
+        to: from ? from : "/"
       });
     }
   });
@@ -10134,9 +10225,9 @@ var Protected = function Protected(_ref2) {
 };
 
 var msp = function msp(state, ownProps) {
-  debugger;
   return {
-    isLogged: Boolean(state.session.id)
+    isLogged: Boolean(state.session.id),
+    from: state.from
   };
 };
 
