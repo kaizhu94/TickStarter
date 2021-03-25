@@ -11,7 +11,8 @@ class ProjectShow extends React.Component{
    
 
     redirect(){
-        this.props.history.push(`/projects/${this.props.match.params.projectId}/backing`);
+        this.props.history.push({pathname:`/projects/${this.props.match.params.projectId}/backing`, 
+                    from: this.props.location.pathname});
     }
 
     render(){

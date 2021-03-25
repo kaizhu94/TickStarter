@@ -2835,6 +2835,7 @@ var Backing = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           rewards = _this$props.rewards,
           project = _this$props.project;
+      debugger;
 
       if (!rewards || !project) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2917,6 +2918,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
+  debugger;
   return {
     rewards: state.entities.rewards,
     project: state.entities.projects[ownprops.match.params.projectId],
@@ -3509,7 +3511,10 @@ var ProjectShow = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "redirect",
     value: function redirect() {
-      this.props.history.push("/projects/".concat(this.props.match.params.projectId, "/backing"));
+      this.props.history.push({
+        pathname: "/projects/".concat(this.props.match.params.projectId, "/backing"),
+        from: this.props.location.pathname
+      });
     }
   }, {
     key: "render",
@@ -8936,6 +8941,7 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "login-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -8995,8 +9001,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state) {
-  //    
+var msp = function msp(state, ownprops) {
+  debugger;
   return {
     // is_login: Boolean(state.session.id),
     errors: state.errors.session
@@ -10127,7 +10133,8 @@ var Protected = function Protected(_ref2) {
   });
 };
 
-var msp = function msp(state) {
+var msp = function msp(state, ownProps) {
+  debugger;
   return {
     isLogged: Boolean(state.session.id)
   };

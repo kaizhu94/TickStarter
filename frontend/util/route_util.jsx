@@ -26,7 +26,8 @@ const Protected= ({ component: Component, path, isLogged, exact }) => {
 	/>
 	)};
 
-const msp = (state) => {
+const msp = (state, ownProps) => {
+	debugger
 	return { isLogged: Boolean(state.session.id) };
 };
 

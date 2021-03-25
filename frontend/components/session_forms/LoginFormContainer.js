@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
 import { login } from '../../actions/session_action'
 import { openModal, closeModal } from '../../actions/modal_actions';
-const msp = (state) => {
-  //    
+const msp = (state, ownprops) => {
+  debugger
   return ({
       // is_login: Boolean(state.session.id),
       errors: state.errors.session,

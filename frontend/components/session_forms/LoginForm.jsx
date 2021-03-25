@@ -29,7 +29,7 @@ class LoginForm extends React.Component{
         return e => this.setState({[key]: e.currentTarget.value});
     }
     render(){
-        
+        debugger
         return (
             <div className='login-container'>
                 <div className='login-block'>

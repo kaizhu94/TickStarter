@@ -26,7 +26,7 @@ class Backing extends React.Component{
 
     render(){
         const { rewards, project } = this.props
-        
+        debugger
         if(!rewards || !project){
             return (
                 <div className='search-result-block'>

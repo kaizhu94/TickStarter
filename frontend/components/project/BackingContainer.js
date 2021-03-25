@@ -6,7 +6,7 @@ import {fetchProject} from '../../actions/project_actions';
 import Backing from './Backing'
 
 const msp = (state, ownprops) =>{
-    
+    debugger
     return ({
         rewards: state.entities.rewards,
         project: state.entities.projects[ownprops.match.params.projectId],
