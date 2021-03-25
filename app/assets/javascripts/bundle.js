@@ -10104,7 +10104,7 @@ var Auth = function Auth(_ref) {
       path = _ref.path,
       isLogged = _ref.isLogged,
       exact = _ref.exact;
-  debugger;
+  // debugger
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
     path: path,
     exact: exact,
