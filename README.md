@@ -59,10 +59,3 @@ switch(modal){
     }
 ```
 
-# Features Coming Soon
-  * Project Editing
-  * Project Deleting
-  * Project Show
-  * Porject Backing
-  * Project Searching
-  * Likes or Dislike Porject
