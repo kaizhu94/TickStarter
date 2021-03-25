@@ -8,8 +8,8 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
 # Main Features
   * Sign Up, Log In
     * Users are able to log in to an existing account, or use the guest credential to log in
-    * Users can sign up for a new account                            
-    ![log_gif](https://user-images.githubusercontent.com/71399999/112486963-be089400-8d52-11eb-91f8-da931c95769e.gif)
+    * Users can sign up for a new account   
+    <img width='300' height='300' src='https://user-images.githubusercontent.com/71399999/112486963-be089400-8d52-11eb-91f8-da931c95769e.gif' >
 # Technologies Used
   * Backend: 
     * Ruby on rails
