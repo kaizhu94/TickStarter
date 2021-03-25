@@ -15,6 +15,9 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
     * Project founder can edit his own projects                           
     ![edit1_gif](https://user-images.githubusercontent.com/71399999/112494113-222e5680-8d59-11eb-9e61-3b3be93d2a66.gif)
     ![edit2_gif](https://user-images.githubusercontent.com/71399999/112494118-22c6ed00-8d59-11eb-9011-698bfecc6c81.gif)
+    
+  * Searching Projects                          
+    ![search_gif](https://user-images.githubusercontent.com/71399999/112495683-7ede4100-8d5a-11eb-9804-8a0d571c9820.gif)
 # Technologies Used
   * Backend: 
     * Ruby on rails
