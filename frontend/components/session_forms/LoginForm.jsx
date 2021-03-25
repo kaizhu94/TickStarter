@@ -48,7 +48,7 @@ class LoginForm extends React.Component{
                         <button type = "submit" >Log in</button>
                     </form>
                         <DemoLogInContainer />
-                    <p id='signup-link'>New to TicKStarter? <Link to='/signup' id='signup-link-button'> Sign up</Link></p>
+                    <p id='signup-link'>New to TickStarter? <Link to='/signup' id='signup-link-button'> Sign up</Link></p>
                    
                 </div>
             </div>
