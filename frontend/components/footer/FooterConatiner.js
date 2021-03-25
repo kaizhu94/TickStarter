@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Footer from './Footer'
 
 const msp = (state, ownprops) =>{
-    debugger
     return ({
         isLogged: Boolean(state.session.id)
     })

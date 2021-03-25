@@ -4,7 +4,6 @@ import SectionBar from '../section_bar/SectionBar'
 
 class Footer extends React.Component{
     render(){
-        debugger
         return(
             <div className='footer-container'>
                 <SectionBar />

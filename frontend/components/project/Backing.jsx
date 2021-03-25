@@ -26,7 +26,7 @@ class Backing extends React.Component{
 
     render(){
         const { rewards, project } = this.props
-        debugger
+        
         if(!rewards || !project){
             return (
                 <div className='search-result-block'>
@@ -36,7 +36,7 @@ class Backing extends React.Component{
                 </div>
             );
         }else{
-            debugger
+            
             const rewardArray = Object.values(rewards).map((reward, index) =>{
                 return(
                     <BackingForm key={index}

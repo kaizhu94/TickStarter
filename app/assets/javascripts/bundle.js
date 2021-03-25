@@ -2222,7 +2222,6 @@ var Footer = /*#__PURE__*/function (_React$Component) {
   _createClass(Footer, [{
     key: "render",
     value: function render() {
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "footer-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_section_bar_SectionBar__WEBPACK_IMPORTED_MODULE_1__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2290,7 +2289,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownprops) {
-  debugger;
   return {
     isLogged: Boolean(state.session.id)
   };
@@ -2837,7 +2835,6 @@ var Backing = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           rewards = _this$props.rewards,
           project = _this$props.project;
-      debugger;
 
       if (!rewards || !project) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2851,7 +2848,6 @@ var Backing = /*#__PURE__*/function (_React$Component) {
           id: "ex-mark"
         }), " The reward of this project haven't set up yet!")));
       } else {
-        debugger;
         var rewardArray = Object.values(rewards).map(function (reward, index) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BackingForm__WEBPACK_IMPORTED_MODULE_1__.default, {
             key: index,
@@ -10104,7 +10100,6 @@ var Auth = function Auth(_ref) {
       path = _ref.path,
       isLogged = _ref.isLogged,
       exact = _ref.exact;
-  // debugger
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
     path: path,
     exact: exact,

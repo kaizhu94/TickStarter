@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 
 const Auth = ({ component: Component, path, isLogged, exact }) => {
-	// debugger
+	
 	return (
     <Route
 		path={path}
