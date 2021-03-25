@@ -12,9 +12,11 @@ class Api::RewardsController < ApplicationController
         @reward = Reward.new(reward_params)
         
         if @reward.save
-            @items = params[:reward][:items]
-            @items.each{|key, value| RewardsItem.create!(rewards_id: @reward.id, items_id:key)}
             
+            @items = params[:reward][:items]
+            if @items
+                @items.each{|key, value| RewardsItem.create!(rewards_id: @reward.id, items_id:key)}
+            end
             render :show
         else
             render json: @reward.errors.full_messages, status: 422

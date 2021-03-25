@@ -2766,6 +2766,7 @@ var Backing = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           rewards = _this$props.rewards,
           project = _this$props.project;
+      debugger;
 
       if (!rewards || !project) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2779,6 +2780,7 @@ var Backing = /*#__PURE__*/function (_React$Component) {
           id: "ex-mark"
         }), " The reward of this project haven't set up yet!")));
       } else {
+        debugger;
         var rewardArray = Object.values(rewards).map(function (reward, index) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BackingForm__WEBPACK_IMPORTED_MODULE_1__.default, {
             key: index,
@@ -2992,11 +2994,16 @@ var BackingForm = /*#__PURE__*/function (_React$Component) {
 
       var reward = this.props.reward;
       var showDrop = this.state.rewardIndex === this.props.selectedReward;
-      var itemsInclude = Object.values(reward.items).map(function (item, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          key: index
-        }, item.item_name);
-      });
+      var itemsInclude = [];
+
+      if (reward.items) {
+        itemsInclude = Object.values(reward.items).map(function (item, index) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+            key: index
+          }, item.item_name);
+        });
+      }
+
       var numberOfBackers = reward.backers ? reward.backers : 0;
       var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var date = new Date(reward.estimated_delivery);
@@ -6145,7 +6152,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         className: "up-one"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "show-reward-p-one"
-      }, "CA$ ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, reward.amount))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "$ ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, reward.amount))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "up-two"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "show-reward-p-one"
@@ -6213,7 +6220,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         className: "amount-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         id: "amount-label"
-      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "number",
         id: "reward-amount",
         value: this.state.amount,
@@ -6222,7 +6229,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         className: "amount-section-invalid"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         id: "amount-label"
-      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "number",
         id: "reward-amount",
         value: this.state.amount,
@@ -6358,7 +6365,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         className: "preview"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Reward preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Get a glimpse of how this reward will look on your project page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Pledge CA$ ", this.state.amount, " or more"), this.state.title === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Pledge $ ", this.state.amount, " or more"), this.state.title === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "empty-preview"
       }, "Signed limited-edition") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "preview-title"
@@ -7311,7 +7318,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         className: "amount-section"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         id: "amount-label"
-      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "number",
         id: "reward-amount",
         value: this.state.amount,
@@ -7320,7 +7327,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         className: "amount-section-invalid"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         id: "amount-label"
-      }, "CA$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "number",
         id: "reward-amount",
         value: this.state.amount,
@@ -7454,7 +7461,7 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
         className: "preview"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Reward preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Get a glimpse of how this reward will look on your project page."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "preview-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Pledge CA$ ", this.state.amount, " or more"), this.state.title === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Pledge $ ", this.state.amount, " or more"), this.state.title === '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "empty-preview"
       }, "Signed limited-edition") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "preview-title"

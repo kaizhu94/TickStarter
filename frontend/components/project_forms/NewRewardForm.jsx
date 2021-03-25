@@ -258,12 +258,12 @@ class NewRewrdForm extends React.Component{
                                         {
                                             this.state.validamount? (
                                                 <div className='amount-section'>
-                                                    <label id='amount-label'>CA$</label>
+                                                    <label id='amount-label'>$</label>
                                                     <input type="number" id="reward-amount" value={this.state.amount} onChange={this.updateAmount('amount')}/>
                                                 </div>
                                             ): (
                                                 <div className='amount-section-invalid'>
-                                                    <label id='amount-label'>CA$</label>
+                                                    <label id='amount-label'>$</label>
                                                     <input type="number" id="reward-amount" value={this.state.amount} onChange={this.updateAmount('amount')}/>
                                                 </div>
                                             )
@@ -360,7 +360,7 @@ class NewRewrdForm extends React.Component{
                         </h3>
                         <p>Get a glimpse of how this reward will look on your project page.</p>
                         <div className = 'preview-block'>
-                            <h2>Pledge CA$ {this.state.amount} or more</h2>
+                            <h2>Pledge $ {this.state.amount} or more</h2>
                             {
                                 this.state.title==='' ? (
                                     <p id='empty-preview'>Signed limited-edition</p>

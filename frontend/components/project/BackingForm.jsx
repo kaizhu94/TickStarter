@@ -63,13 +63,16 @@ class BackingForm extends React.Component{
         const { reward } = this.props;
         let showDrop = this.state.rewardIndex === this.props.selectedReward;
         
-        const itemsInclude = Object.values(reward.items).map((item, index) =>{
-            return(
-                <li key = {index}>
-                    {item.item_name}
-                </li>
-            )
-        });
+        let itemsInclude = [];
+        if (reward.items){
+            itemsInclude = Object.values(reward.items).map((item, index) =>{
+                return(
+                    <li key = {index}>
+                        {item.item_name}
+                    </li>
+                )
+            });
+        }
         const numberOfBackers = reward.backers? reward.backers : 0;
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const date = new Date(reward.estimated_delivery)
