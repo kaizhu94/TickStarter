@@ -23,8 +23,8 @@ Tickstarter, a Kickstarter clone, is a platform application that allows individu
   
   
 # Challenges
-  * Implement A Modal For Session Errors                        
-    <img width='300' height='300' src='https://github.com/kaizhu94/TickStarter/blob/main/app/assets/readme/modal.PNG' >
+  * Implement Modals For Invalid Login, Delete Reweards, Delete Items, And Unsaved Changes                     
+    <img width='300' height='300' src='https://user-images.githubusercontent.com/71399999/112489070-7a168e80-8d54-11eb-834e-1bf13ad139e0.gif' >
     
   * Implement A Multipage Form For Creating A Project                                   
     <img width='300' height='300' src='https://user-images.githubusercontent.com/71399999/112488287-c90ff400-8d53-11eb-9e53-953573c68317.gif' >
