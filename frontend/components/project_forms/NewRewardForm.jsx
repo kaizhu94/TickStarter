@@ -74,7 +74,7 @@ class NewRewrdForm extends React.Component{
     }
     removeItem(id){
         return e =>{
-            // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
+           
             const newItems = Object.assign({}, this.state.items);
             delete newItems[parseInt(id)];
             
