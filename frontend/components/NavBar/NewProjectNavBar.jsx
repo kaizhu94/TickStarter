@@ -11,7 +11,6 @@ class NewProjectNavBar extends React.Component{
     }
 
     triggerOrNot(e){
-        // e.preventDefault();
         let newState = !this.state.showDropdown;
         this.setState({showDropdown: newState})
     }
@@ -29,8 +28,7 @@ class NewProjectNavBar extends React.Component{
                     <button  onFocus={this.triggerOrNot} onBlur={this.triggerOrNot} id='new-project-button'>
                         <img id="earth" src={window.earth} ></img>
                         {
-                        this.state.showDropdown
-                            ? (
+                        this.state.showDropdown ? (
                                 <div className='new-project-dropdown'>                             
                                     <div className='dropdown-block'>
                                         <div className='ul-list'>
@@ -41,10 +39,7 @@ class NewProjectNavBar extends React.Component{
 
                                     </div>                        
                                 </div>
-                        )
-                        : (
-                        null
-                        )
+                            ) : ( null )
                         }
                     </button>
                 </div>

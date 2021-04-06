@@ -1,8 +1,6 @@
 import React from 'react';
 import DatePicker from "react-datepicker";
 
-// import "react-datepicker/dist/react-datepicker.css";
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 class EditPromotionDate extends React.Component{
     constructor(props){
@@ -165,19 +163,16 @@ class EditPromotionDate extends React.Component{
                 return this.setState({[key]: e.currentTarget.value,
                     'limitMessage': ''});
             }
-            // let newDate = new Date(this.state.startDate.getTime());
+            
             if(e.currentTarget.value < 1 || e.currentTarget.value > 60){
                 
                 let value = e.currentTarget.value < 1 ? 1 : 60;
-                // newDate.setDate(newDate.getDate() + value);
                 
                 return this.setState({[key]: value,
-                                // 'endDate': newDate,
                                 'limitMessage': 'Days for funding duration must be between 1 and 60.'        
                 });
             }
             return this.setState({[key]: e.currentTarget.value,
-                                // 'endDate': newDate,
                                 'limitMessage': ''});
         }
     }
@@ -191,11 +186,9 @@ class EditPromotionDate extends React.Component{
         let newDate = new Date(this.state.startDate.getTime());
         
         if(this.props.selectTab){
-            
             newDate.setDate(newDate.getDate() + parseInt(this.state.days));
-            
         }else{
-            const {startDate, endDate,  year, month, day, hour, minute, second} = this.state;
+            const { year, month, day, hour, minute, second} = this.state;
             let MM = month < 10 ? `0${month}`: month;
             let DD = day < 10 ? `0${day}`: day;
             let HR = hour < 10 ? `0${hour}`: hour;
@@ -221,14 +214,12 @@ class EditPromotionDate extends React.Component{
     }
 
     updateByCalendar(newDate){
-        
         this.setState({
             'year': newDate.getFullYear(),
             'month': newDate.getMonth()+1,
             'day': newDate.getDate(),
             'showCalender': false
         })
-        // this.props.updateEndDate(newDate);
     }
 
     triggerBorderColor(){

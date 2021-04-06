@@ -13,12 +13,7 @@ class Profile extends React.Component{
         this.redirect = this.redirect.bind(this);
     }
 
-    // componentDidMount(){
-    //     // this.props.fetchProjects()
-    // }
-
     triggerOrNot(e){
-        // // e.preventDefault();
         let newState = !this.state.showDropdown;
         this.setState({showDropdown: newState})
     }
@@ -76,16 +71,9 @@ class Profile extends React.Component{
                                 </div>
                                 <div className='logout-block'>
                                     <p onClick={this.handleLogOut} id='logout'>Log out</p>
-
                                 </div>
-                               
-                                    
-                                
                             </div>
-                    )
-                    : (
-                    null
-                    )
+                    ) : (null)
                 }
                 </button>
             </div>

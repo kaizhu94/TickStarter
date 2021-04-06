@@ -4,12 +4,6 @@ import { updateItem } from '../../actions/item_actions'
 import { openModal, closeModal } from '../../actions/modal_actions';
 import EditItemForm from './EditItemForm'
 
-const msp = state =>{
-    
-    return ({
-    })
-}
-
 const mdp = dispatch=>{
     return ({
         openModal: (modal) => dispatch(openModal(modal)),
@@ -17,4 +11,4 @@ const mdp = dispatch=>{
         updateItem: (item) => dispatch(updateItem(item)),
     })
 }
-export default connect(msp, mdp)(EditItemForm);
+export default connect(null, mdp)(EditItemForm);

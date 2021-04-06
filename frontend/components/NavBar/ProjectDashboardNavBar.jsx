@@ -25,6 +25,7 @@ class ProjectDashboardNavBar extends React.Component{
                        {null}
                     </div>
                 </nav>
+                
                 <nav className='mid-nav'>
                     <Link to='/' id='tickstart-link'>TickStarter</Link>
                 </nav>
@@ -32,7 +33,6 @@ class ProjectDashboardNavBar extends React.Component{
                 <nav className='right-nav'>
                     {logOrProfile}
                 </nav>
-                
             </div>
         )
     }

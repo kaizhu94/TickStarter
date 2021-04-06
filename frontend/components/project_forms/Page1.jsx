@@ -3,8 +3,6 @@ import React from 'react';
 class Page1 extends React.Component{
     
     render(){
-        // let categorisSelectore = Object.value()
-        //    
         if(this.props.currentPage !==1){
             return null
         }
@@ -21,7 +19,7 @@ class Page1 extends React.Component{
                                     })
                                 }
                         </select>
-        //    
+            
         return(
             <div className = 'inner-page-blcok'>
                 <div className = 'inter-page-container'>

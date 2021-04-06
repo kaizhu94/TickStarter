@@ -6,10 +6,6 @@ class EditProfileNavBar extends React.Component{
         super(props);
     }
 
-    // componentDidMount(){
-    //     this.props.receiveProject(this.props.match.params.projectId)
-    // }
-
     render(){
         if(!this.props.project){
             return null

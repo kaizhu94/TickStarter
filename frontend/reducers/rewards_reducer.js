@@ -4,11 +4,9 @@ const rewardsReducer = (state = {}, action )=>{
     
     Object.freeze(state)
     switch(action.type){
-        case RECEIVE_ALL_REWARDS:
-            
+        case RECEIVE_ALL_REWARDS:      
             return action.rewards;
-        case RECEIVE_REWARD:
-            
+        case RECEIVE_REWARD:         
             const rewards = Object.assign({}, state, {[action.reward.id]: action.reward});
             return rewards;
         case DELETE_REWARD:

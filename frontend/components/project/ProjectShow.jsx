@@ -20,7 +20,6 @@ class ProjectShow extends React.Component{
     }
 
     render(){
-        
         if(!this.props.projects){
             return null;
         }else{

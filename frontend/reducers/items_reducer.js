@@ -6,8 +6,7 @@ const itemsReducer = (state = {}, action )=>{
     switch(action.type){
         case RECEIVE_ALL_ITEMS:
             return action.items;
-        case RECEIVE_ITEM:
-            
+        case RECEIVE_ITEM:   
             const newItems = Object.assign({}, state, {[action.item.id]: action.item});
             return newItems;
         case DELETE_ITEM:

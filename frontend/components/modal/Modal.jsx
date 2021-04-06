@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {closeModal} from '../../actions/modal_actions';
-import { Link, Redirect, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { closeModal } from '../../actions/modal_actions';
+import { withRouter } from 'react-router-dom'
 import { updateProjectImage } from '../../actions/project_actions'
 import { deleteItem } from '../../actions/item_actions'
 import { deleteReward } from '../../actions/reward_action'
@@ -220,8 +220,7 @@ function Modal( props ){
 }
 
 
-const msp =(state, ownprops) =>{
-    
+const msp =(state) =>{
     return {
         modal: state.ui.modal,
         errors: state.errors.session,

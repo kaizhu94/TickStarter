@@ -6,37 +6,6 @@ class SectionBar extends React.Component{
         this.props.history.push(`/cat/${catId}`);
     }
     render(){
-        // if(!this.props.maincategories){
-        //     return null;
-        // }
-        // let artId, comicId, designId, filmId, foodId, gameId, musicId, publishingId = '';
-        // const {maincategories} = this.props;
-        // Object.values(maincategories).map( cat => {
-        //     if(cat.category_name === 'Art'){
-        //         artId = cat.id;
-        //     }
-        //     if(cat.category_name === "Comics"){
-        //         comicId = cat.id;
-        //     }
-        //     if(cat.category_name === "Design"){
-        //         designId = cat.id;
-        //     }
-        //     if(cat.category_name === 'Film'){
-        //         filmId = cat.id;
-        //     }
-        //     if(cat.category_name === 'Food'){
-        //         foodId = cat.id;
-        //     }
-        //     if(cat.category_name === 'Games'){
-        //         gameId = cat.id;
-        //     }
-        //     if(cat.category_name === 'Music'){
-        //         musicId = cat.id;
-        //     }
-        //     if(cat.category_name === "Technology"){
-        //         publishingId = cat.id;
-        //     }
-        // })
         
         return (
             <div className= 'section-bar'>

@@ -89,9 +89,6 @@ class EditRewardForm extends React.Component{
                 'showModal': true
             })
         this.props.deleteRewardModal(this.props.reward.id);
-        // this.setState({
-        //     'showModal': false
-        // });
         }
     }
 
@@ -146,7 +143,6 @@ class EditRewardForm extends React.Component{
 
     removeItem(id){
         return e =>{
-            // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
             const newItems = Object.assign({}, this.state.items);
             delete newItems[parseInt(id)];
             

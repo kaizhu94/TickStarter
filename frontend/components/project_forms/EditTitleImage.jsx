@@ -4,9 +4,6 @@ class EditTitleImage extends React.Component{
     constructor(props){
         super(props);
         this.state= {
-            // project: props.project,
-            // photo: null,
-            // photoUrl: props.project.photoUrl[0]
             showDropdown: false
         }
         this.handleFile = this.handleFile.bind(this);
@@ -18,15 +15,6 @@ class EditTitleImage extends React.Component{
         const file = e.currentTarget.files[0];
         const fileReader =new FileReader();
         
-        // fileReader.onloadend = () =>{
-        //     // let photofiles = this.state.photo;
-        //     // photofiles[0] = file;
-        //     // let photoURLArray = this.state.photoURL;
-        //     // photoURLArray[0] = fileReader.result
-        //     this.setState({ photo: file,
-        //                     photoUrl: fileReader.result,
-        //                 })
-        // }
         let formData = new FormData();
         formData.append('project[title_image]', file);
         this.props.updateTitleImage(file);

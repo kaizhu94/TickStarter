@@ -81,22 +81,12 @@ class EditProjectForm extends React.Component{
         this.updateEndDate = this.updateEndDate.bind(this);
         this.redirectToBoard = this.redirectToBoard.bind(this);
         this.updateDisabledBottomButton = this.updateDisabledBottomButton.bind(this);
-        // this.handleFile = this.handleFile.bind(this);
-        // this.triggerOrNot = this.triggerOrNot.bind(this);
     }
     componentDidUpdate(prevProps){
         if(prevProps.tabId !== this.props.tabId){
                 this.setState({
                     tab: parseInt(this.props.match.params.id),
                     isModified: false,
-                    // 'id': this.props.project.id,
-                    // 'project_name': this.props.project.project_name,
-                    // 'subtitle': this.props.project.subtitle,
-                    // 'selectedMainCat': this.props.project.category_id,
-                    // 'category_id': this.props.project.category_id,
-                    // 'category_name': this.props.project.category_name,
-                    // 'location_id': this.props.project.location_id,
-                    
                 })
         }
     }
@@ -106,9 +96,7 @@ class EditProjectForm extends React.Component{
         this.props.receiveLocations();
         this.props.receiveProject(this.props.match.params.projectId)
             .then((project) => {
-                
                 const pro = project.project;
-                
                 let startDate = new Date();
                 let endDate = new Date(startDate.getTime());
                 endDate.setDate(startDate.getDate() + 30);
@@ -144,8 +132,6 @@ class EditProjectForm extends React.Component{
     }
 
     updateDisabledBottomButton(){
-        
-        // e.preventDefault();
         const value = !this.state.disabledBottomButton;
         const isModified = !this.state.isModified;
         this.setState({'disabledBottomButton': value,
@@ -260,10 +246,6 @@ class EditProjectForm extends React.Component{
             formData.append('project[launch_date]', this.state.launch_date);
             formData.append('project[end_date]', this.state.end_date);
         }
-        // 
-        // if (this.state.photo.length !== 0) {
-        //     formData.append('project[photo]', this.state.photo);
-        //   }
         this.props.updateProject(this.state.id, formData);
         this.setState({
             'isModified': false
@@ -806,13 +788,7 @@ class EditProjectForm extends React.Component{
                         <div className={`edit-button-block${this.hidebutton()}`}>
                             <div className = 'edit-button-container'> 
                                 {
-                                    this.state.isModified? ( null
-                                        // this.state.disabledBottomButton?(null):(
-                                        //     <div className = 'edit-buttons'>
-                                        //             <div></div>
-                                        //             <button type='submit' id='edit-save-button'>Save</button>
-                                        //     </div>
-                                        // )
+                                    this.state.isModified? ( null 
                                     ): (
                                         this.state.tab === 2? (
                                             this.state.disabledBottomButton?(null):(

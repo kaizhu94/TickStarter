@@ -83,17 +83,12 @@ class Rewards extends React.Component{
             this.props.receiveAllRewards(this.props.project.id);
         }
     }
+
     disable(){
         
         return this.props.disabledBottomButton ? '-disable': ''
     }
-    // editItem(){
-    //     if(this.disable() !== '-disable'){
-    //         this.setState({
-    //             'showEditItemForm': true
-    //         })
-    //     }
-    // }
+
     showNewRewardForm(){
         if(!this.props.disabledBottomButton){
             
@@ -140,8 +135,6 @@ class Rewards extends React.Component{
             'itemId': itemId,
         })
         this.props.openModal('deleteItem');
-        // this.props.receiveAllRewards(this.props.project.id);
-        // this.props.receiveAllItems();
     }
     deleteRewardModal(rewardId){
         this.setState({

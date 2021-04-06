@@ -13,7 +13,6 @@ class Backing extends React.Component{
     }
 
     componentDidMount(){
-        
         this.props.receiveProject(this.props.match.params.projectId);
         this.props.receiveAllRewards(this.props.match.params.projectId);
     }

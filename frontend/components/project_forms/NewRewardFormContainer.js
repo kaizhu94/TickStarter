@@ -6,7 +6,6 @@ import { createReward } from '../../actions/reward_action';
 import NewRewrdForm from './NewRewardForm'
 
 const msp = state =>{
-    
     return ({
         allItems: state.entities.items
     })

@@ -5,7 +5,7 @@ import { updateFrom, deleteFrom } from '../../actions/from_action'
 
 import ProjectShow from './ProjectShow'
 
-const msp = (state, ownprops) =>{
+const msp = (state) =>{
     
     return ({
         user: state.entities.users[state.session.id],

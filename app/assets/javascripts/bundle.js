@@ -1596,10 +1596,7 @@ var EditProfileNavBar = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, EditProfileNavBar);
 
     return _super.call(this, props);
-  } // componentDidMount(){
-  //     this.props.receiveProject(this.props.match.params.projectId)
-  // }
-
+  }
 
   _createClass(EditProfileNavBar, [{
     key: "render",
@@ -1724,7 +1721,6 @@ var NewProjectNavBar = /*#__PURE__*/function (_React$Component) {
   _createClass(NewProjectNavBar, [{
     key: "triggerOrNot",
     value: function triggerOrNot(e) {
-      // e.preventDefault();
       var newState = !this.state.showDropdown;
       this.setState({
         showDropdown: newState
@@ -1789,13 +1785,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewProjectNavBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NewProjectNavBar */ "./frontend/components/NavBar/NewProjectNavBar.jsx");
 
 
- // const msp = state =>{
-//     return ({
-//     })
-// }
+
 
 var mdp = function mdp(dispatch) {
-  //   
   return {
     logout: function logout() {
       return dispatch((0,_actions_session_action__WEBPACK_IMPORTED_MODULE_1__.logout)());
@@ -2330,14 +2322,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state, ownprops) {
+var msp = function msp(state) {
   return {
     isLogged: Boolean(state.session.id)
   };
-};
-
-var mdp = function mdp(dispatch) {
-  return {};
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, null)(_Footer__WEBPACK_IMPORTED_MODULE_1__.default));
@@ -2615,7 +2603,7 @@ function Modal(props) {
   }
 }
 
-var msp = function msp(state, ownprops) {
+var msp = function msp(state) {
   return {
     modal: state.ui.modal,
     errors: state.errors.session,
@@ -2700,15 +2688,11 @@ var Profile = /*#__PURE__*/function (_React$Component) {
     _this.handleLogOut = _this.handleLogOut.bind(_assertThisInitialized(_this));
     _this.redirect = _this.redirect.bind(_assertThisInitialized(_this));
     return _this;
-  } // componentDidMount(){
-  //     // this.props.fetchProjects()
-  // }
-
+  }
 
   _createClass(Profile, [{
     key: "triggerOrNot",
     value: function triggerOrNot(e) {
-      // // e.preventDefault();
       var newState = !this.state.showDropdown;
       this.setState({
         showDropdown: newState
@@ -3657,7 +3641,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state, ownprops) {
+var msp = function msp(state) {
   return {
     user: state.entities.users[state.session.id],
     projects: state.entities.projects.published_projects,
@@ -4231,10 +4215,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state) {
-  return {};
-};
-
 var mdp = function mdp(dispatch) {
   return {
     openModal: function openModal(modal) {
@@ -4249,7 +4229,7 @@ var mdp = function mdp(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_EditItemForm__WEBPACK_IMPORTED_MODULE_3__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(null, mdp)(_EditItemForm__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 
@@ -4653,9 +4633,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
     _this2.updateDateTab = _this2.updateDateTab.bind(_assertThisInitialized(_this2));
     _this2.updateEndDate = _this2.updateEndDate.bind(_assertThisInitialized(_this2));
     _this2.redirectToBoard = _this2.redirectToBoard.bind(_assertThisInitialized(_this2));
-    _this2.updateDisabledBottomButton = _this2.updateDisabledBottomButton.bind(_assertThisInitialized(_this2)); // this.handleFile = this.handleFile.bind(this);
-    // this.triggerOrNot = this.triggerOrNot.bind(this);
-
+    _this2.updateDisabledBottomButton = _this2.updateDisabledBottomButton.bind(_assertThisInitialized(_this2));
     return _this2;
   }
 
@@ -4665,14 +4643,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
       if (prevProps.tabId !== this.props.tabId) {
         this.setState({
           tab: parseInt(this.props.match.params.id),
-          isModified: false // 'id': this.props.project.id,
-          // 'project_name': this.props.project.project_name,
-          // 'subtitle': this.props.project.subtitle,
-          // 'selectedMainCat': this.props.project.category_id,
-          // 'category_id': this.props.project.category_id,
-          // 'category_name': this.props.project.category_name,
-          // 'location_id': this.props.project.location_id,
-
+          isModified: false
         });
       }
     }
@@ -4725,7 +4696,6 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
   }, {
     key: "updateDisabledBottomButton",
     value: function updateDisabledBottomButton() {
-      // e.preventDefault();
       var value = !this.state.disabledBottomButton;
       var isModified = !this.state.isModified;
       this.setState({
@@ -4853,11 +4823,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
         formData.append('project[published]', this.state.published);
         formData.append('project[launch_date]', this.state.launch_date);
         formData.append('project[end_date]', this.state.end_date);
-      } // 
-      // if (this.state.photo.length !== 0) {
-      //     formData.append('project[photo]', this.state.photo);
-      //   }
-
+      }
 
       this.props.updateProject(this.state.id, formData);
       this.setState({
@@ -5294,13 +5260,7 @@ var EditProjectForm = /*#__PURE__*/function (_React$Component2) {
           className: "edit-button-block".concat(this.hidebutton())
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-button-container"
-        }, this.state.isModified ? null // this.state.disabledBottomButton?(null):(
-        //     <div className = 'edit-buttons'>
-        //             <div></div>
-        //             <button type='submit' id='edit-save-button'>Save</button>
-        //     </div>
-        // )
-        : this.state.tab === 2 ? this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, this.state.isModified ? null : this.state.tab === 2 ? this.state.disabledBottomButton ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "edit-buttons"
         }, this.previousButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.nextButton())) : null)));
       }
@@ -5353,8 +5313,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
- // import "react-datepicker/dist/react-datepicker.css";
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
 
 var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
   _inherits(EditPromotionDate, _React$Component);
@@ -5546,14 +5505,12 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
           var _this3$setState;
 
           return _this3.setState((_this3$setState = {}, _defineProperty(_this3$setState, key, e.currentTarget.value), _defineProperty(_this3$setState, 'limitMessage', ''), _this3$setState));
-        } // let newDate = new Date(this.state.startDate.getTime());
-
+        }
 
         if (e.currentTarget.value < 1 || e.currentTarget.value > 60) {
           var _this3$setState2;
 
-          var value = e.currentTarget.value < 1 ? 1 : 60; // newDate.setDate(newDate.getDate() + value);
-
+          var value = e.currentTarget.value < 1 ? 1 : 60;
           return _this3.setState((_this3$setState2 = {}, _defineProperty(_this3$setState2, key, value), _defineProperty(_this3$setState2, 'limitMessage', 'Days for funding duration must be between 1 and 60.'), _this3$setState2));
         }
 
@@ -5578,8 +5535,6 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         newDate.setDate(newDate.getDate() + parseInt(this.state.days));
       } else {
         var _this$state = this.state,
-            startDate = _this$state.startDate,
-            endDate = _this$state.endDate,
             year = _this$state.year,
             month = _this$state.month,
             day = _this$state.day,
@@ -5616,7 +5571,7 @@ var EditPromotionDate = /*#__PURE__*/function (_React$Component) {
         'month': newDate.getMonth() + 1,
         'day': newDate.getDate(),
         'showCalender': false
-      }); // this.props.updateEndDate(newDate);
+      });
     }
   }, {
     key: "triggerBorderColor",
@@ -6010,9 +5965,7 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
         this.setState({
           'showModal': true
         });
-        this.props.deleteRewardModal(this.props.reward.id); // this.setState({
-        //     'showModal': false
-        // });
+        this.props.deleteRewardModal(this.props.reward.id);
       }
     }
   }, {
@@ -6089,7 +6042,6 @@ var EditRewardForm = /*#__PURE__*/function (_React$Component) {
       var _this6 = this;
 
       return function (e) {
-        // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
         var newItems = Object.assign({}, _this6.state.items);
         delete newItems[parseInt(id)];
 
@@ -6566,9 +6518,6 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      // project: props.project,
-      // photo: null,
-      // photoUrl: props.project.photoUrl[0]
       showDropdown: false
     };
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
@@ -6581,16 +6530,7 @@ var EditTitleImage = /*#__PURE__*/function (_React$Component) {
     key: "handleFile",
     value: function handleFile(e) {
       var file = e.currentTarget.files[0];
-      var fileReader = new FileReader(); // fileReader.onloadend = () =>{
-      //     // let photofiles = this.state.photo;
-      //     // photofiles[0] = file;
-      //     // let photoURLArray = this.state.photoURL;
-      //     // photoURLArray[0] = fileReader.result
-      //     this.setState({ photo: file,
-      //                     photoUrl: fileReader.result,
-      //                 })
-      // }
-
+      var fileReader = new FileReader();
       var formData = new FormData();
       formData.append('project[title_image]', file);
       this.props.updateTitleImage(file);
@@ -6812,11 +6752,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state) {
-  //    
-  return {};
-};
-
 var mdp = function mdp(dispatch) {
   return {
     createItem: function createItem(item) {
@@ -6825,7 +6760,7 @@ var mdp = function mdp(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(msp, mdp)(_NewItemForm__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(null, mdp)(_NewItemForm__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -6905,18 +6840,16 @@ var NewProjectForm = /*#__PURE__*/function (_React$Component) {
   _createClass(NewProjectForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      //    
       this.props.receiveLocations();
       this.props.receiveCategories();
     }
   }, {
     key: "handleChange",
     value: function handleChange(event) {
-      //    
       var _event$target = event.target,
           name = _event$target.name,
           value = _event$target.value;
-      this.setState(_defineProperty({}, name, value)); //    
+      this.setState(_defineProperty({}, name, value));
     }
   }, {
     key: "handleSubmit",
@@ -6933,7 +6866,6 @@ var NewProjectForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "next",
     value: function next() {
-      //    
       var currentPage = this.state.currentPage;
       currentPage = currentPage >= 2 ? 3 : currentPage + 1;
       this.setState({
@@ -7001,15 +6933,11 @@ var NewProjectForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      //    
       if (!this.props.maincategories) {
-        //    
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Loading Page");
       } else {
-        //    
         var maincategories = Object.values(this.props.maincategories);
-        var locations = Object.values(this.props.locations); //    
-
+        var locations = Object.values(this.props.locations);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "new-project-form-block"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -7071,7 +6999,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
-  //    
   return {
     founderId: state.session.id,
     locations: state.entities.locations,
@@ -7236,7 +7163,6 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
       var _this6 = this;
 
       return function (e) {
-        // const newItem = this.props.allItems[parseInt(e.currentTarget.value)]
         var newItems = Object.assign({}, _this6.state.items);
         delete newItems[parseInt(id)];
 
@@ -7310,9 +7236,8 @@ var NewRewrdForm = /*#__PURE__*/function (_React$Component) {
           items: this.state.items
         };
         this.props.createReward(reward);
-        this.props.cancel(); // this.props.
-      } // if()
-
+        this.props.cancel();
+      }
     }
   }, {
     key: "isValid",
@@ -7705,8 +7630,6 @@ var Page1 = /*#__PURE__*/function (_React$Component) {
   _createClass(Page1, [{
     key: "render",
     value: function render() {
-      // let categorisSelectore = Object.value()
-      //    
       if (this.props.currentPage !== 1) {
         return null;
       }
@@ -7726,8 +7649,7 @@ var Page1 = /*#__PURE__*/function (_React$Component) {
           value: c.id,
           key: i
         }, c.category_name);
-      })); //    
-
+      }));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "inner-page-blcok"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -7889,8 +7811,7 @@ var Page3 = /*#__PURE__*/function (_React$Component) {
           value: l.id,
           key: i
         }, l.location);
-      })); //    
-
+      }));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "inner-page-blcok"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -8062,7 +7983,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state, ownprops) {
+var msp = function msp(state) {
   return {
     user: state.entities.users[state.session.id],
     projects: state.entities.projects.owner_projects
@@ -8231,14 +8152,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
     key: "disable",
     value: function disable() {
       return this.props.disabledBottomButton ? '-disable' : '';
-    } // editItem(){
-    //     if(this.disable() !== '-disable'){
-    //         this.setState({
-    //             'showEditItemForm': true
-    //         })
-    //     }
-    // }
-
+    }
   }, {
     key: "showNewRewardForm",
     value: function showNewRewardForm() {
@@ -8293,8 +8207,7 @@ var Rewards = /*#__PURE__*/function (_React$Component2) {
         'rewards': rewards,
         'itemId': itemId
       });
-      this.props.openModal('deleteItem'); // this.props.receiveAllRewards(this.props.project.id);
-      // this.props.receiveAllItems();
+      this.props.openModal('deleteItem');
     }
   }, {
     key: "deleteRewardModal",
@@ -8722,37 +8635,6 @@ var SectionBar = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      // if(!this.props.maincategories){
-      //     return null;
-      // }
-      // let artId, comicId, designId, filmId, foodId, gameId, musicId, publishingId = '';
-      // const {maincategories} = this.props;
-      // Object.values(maincategories).map( cat => {
-      //     if(cat.category_name === 'Art'){
-      //         artId = cat.id;
-      //     }
-      //     if(cat.category_name === "Comics"){
-      //         comicId = cat.id;
-      //     }
-      //     if(cat.category_name === "Design"){
-      //         designId = cat.id;
-      //     }
-      //     if(cat.category_name === 'Film'){
-      //         filmId = cat.id;
-      //     }
-      //     if(cat.category_name === 'Food'){
-      //         foodId = cat.id;
-      //     }
-      //     if(cat.category_name === 'Games'){
-      //         gameId = cat.id;
-      //     }
-      //     if(cat.category_name === 'Music'){
-      //         musicId = cat.id;
-      //     }
-      //     if(cat.category_name === "Technology"){
-      //         publishingId = cat.id;
-      //     }
-      // })
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "section-bar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -9020,7 +8902,7 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
         type: "submit"
       }, "Log in")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DemoLogInContainer__WEBPACK_IMPORTED_MODULE_1__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         id: "signup-link"
-      }, "New to TicKStarter? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      }, "New to TickStarter? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/signup",
         id: "signup-link-button"
       }, " Sign up"))));
@@ -9054,9 +8936,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state, ownprops) {
+var msp = function msp(state) {
   return {
-    // is_login: Boolean(state.session.id),
     errors: state.errors.session
   };
 };
@@ -9350,7 +9231,6 @@ var categoriesReducer = function categoriesReducer() {
 
   switch (action.type) {
     case _actions_category_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_CATEGORIES:
-      //    
       return action.categories;
 
     case _actions_category_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CATEGORY:

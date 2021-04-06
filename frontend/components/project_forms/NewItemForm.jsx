@@ -41,14 +41,7 @@ class NewItemForm extends React.Component{
                         <button type='button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
                         <button type='submit' id = 'edit-next-button-top'>Save item</button>
                     </div>
-                    {/* {
-                        this.props.disabledBottomButton ? (
-                                <div className='top-button-conatiner'>
-                                    <button type='button' id = 'edit-cancel' onClick={()=>this.props.cancel()}>Cancel</button>
-                                    <button type='submit' id = 'edit-next-button-top'>Save item</button>
-                                </div>
-                            ):(null)
-                    } */}
+                    
                     <h1>Add a new item</h1>
                     <div className='add-new-item-section'>
                         <div className='add-new-item-section-word'>

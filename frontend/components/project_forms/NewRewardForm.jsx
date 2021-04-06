@@ -149,10 +149,7 @@ class NewRewrdForm extends React.Component{
             
             this.props.createReward(reward);
             this.props.cancel();
-            // this.props.
-            
         }
-        // if()
     }
     isValid(key){
         return this.state[key] ? '': '-invalid';

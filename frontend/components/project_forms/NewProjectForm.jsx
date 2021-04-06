@@ -25,18 +25,15 @@ class NewProjectForm extends React.Component{
     }
 
     componentDidMount(){
-        //    
         this.props.receiveLocations();
         this.props.receiveCategories();
     }
 
     handleChange(event){
-        //    
         const {name, value} = event.target;
         this.setState({
             [name]: value
         })
-        //    
     }
     handleSubmit(event){
         event.preventDefault();
@@ -47,7 +44,6 @@ class NewProjectForm extends React.Component{
                 return  this.props.history.push(`/projects/${project.project.id}/dashboard`)})
     }
     next(){
-        //    
         let currentPage = this.state.currentPage;
         currentPage = currentPage >= 2? 3: currentPage + 1;
         this.setState({
@@ -131,15 +127,12 @@ class NewProjectForm extends React.Component{
         }
     }
     render(){
-        //    
         if(!this.props.maincategories){
-            //    
             return <div>Loading Page</div>
         }else{
-            //    
             const maincategories = Object.values(this.props.maincategories)
             const locations = Object.values(this.props.locations)
-            //    
+            
             return (
                 
                 <div className='new-project-form-block'>
