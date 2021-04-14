@@ -372,7 +372,7 @@ c81 = Category.create!(
 ) 
 
 # launch_date: "2021-04-08T16:18:33.000Z",
-#     end_date: "2021-05-20T15:03:33.000Z"
+# end_date: "2021-05-20T15:03:33.000Z"
 #//projects
 p1 = Project.create!(
     project_name: "BRING THE SUN TO LUCKENWALDE",
