@@ -28,11 +28,11 @@ class Profile extends React.Component{
     }
 
     render(){
-        // debugger
+        
         // if(!this.props.createdProjects){
         //     return null;
         // }
-        // debugger
+        
         let createdProjects='';
         if(this.props.createdProjects){
             createdProjects = Object.values(this.props.createdProjects).map((project, index)=>{
