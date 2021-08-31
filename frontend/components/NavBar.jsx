@@ -35,6 +35,7 @@ class NavBar extends React.Component{
                 <Link to='/login' id='login'>Log in</Link>
             </div>
         }
+        
         return (
             
                 this.state.showSearch?(
