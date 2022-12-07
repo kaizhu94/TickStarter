@@ -372,7 +372,7 @@ c81 = Category.create!(
 ) 
 
     # launch_date: "2022-12-06T16:18:33.000Z",
-    # end_date: "2022-02-05T15:03:33.000Z"  
+    # end_date: "2023-01-31T15:03:33.000Z"  
 #//projects
 p1 = Project.create!(
     project_name: "BRING THE SUN TO LUCKENWALDE",
@@ -384,7 +384,7 @@ p1 = Project.create!(
     category_id: c17.id,
     goal: 9000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p1.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/1.jpg"), filename: "1.jpg")
 p2 = Project.create!(
@@ -398,7 +398,7 @@ p2 = Project.create!(
     category_id: c19.id,
     goal: 8000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p2.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/2.png"), filename: "2.png")
 p3 = Project.create!(
@@ -412,7 +412,7 @@ p3 = Project.create!(
     category_id: c22.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p3.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/3.png"), filename: "3.png")
 p4 = Project.create!(
@@ -426,7 +426,7 @@ p4 = Project.create!(
     category_id: c25.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p4.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/4.png"), filename: "4.png")
 
@@ -441,7 +441,7 @@ p5 = Project.create!(
     category_id: c16.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p5.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/5.jpg"), filename: "5.jpg")
 
@@ -456,7 +456,7 @@ p6 = Project.create!(
     category_id: c18.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p6.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/6.png"), filename: "6.png")
 
@@ -471,7 +471,7 @@ p7 = Project.create!(
     category_id: c20.id,
     goal: 4000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p7.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/7.png"), filename: "7.png")
 
@@ -487,7 +487,7 @@ p8 = Project.create!(
     category_id: c21.id,
     goal: 4000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p8.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/8.png"), filename: "8.png")
 
@@ -502,7 +502,7 @@ p9 = Project.create!(
     category_id: c24.id,
     goal: 4000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p9.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/9.png"), filename: "9.png")
 
@@ -517,7 +517,7 @@ p10 = Project.create!(
     category_id: c2.id,
     goal: 2000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p10.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/10.jpg"), filename: "10.jpg")
 
@@ -532,7 +532,7 @@ p11 = Project.create!(
     category_id: c29.id,
     goal: 4000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p11.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/11.png"), filename: "11.png")
 
@@ -547,7 +547,7 @@ p12 = Project.create!(
     category_id: c29.id,
     goal: 4000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p12.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/12.jpg"), filename: "12.jpg")
 
@@ -562,7 +562,7 @@ p13 = Project.create!(
     category_id: c29.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p13.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/13.jpg"), filename: "13.jpg")
 
@@ -577,7 +577,7 @@ p14 = Project.create!(
     category_id: c30.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p14.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/14.jpg"), filename: "14.jpg")
 
@@ -592,7 +592,7 @@ p15 = Project.create!(
     category_id: c30.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p15.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/15.jpg"), filename: "15.jpg")
 
@@ -608,7 +608,7 @@ p16 = Project.create!(
     category_id: c31.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p16.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/16.jpg"), filename: "16.jpg")
 
@@ -624,7 +624,7 @@ p17 = Project.create!(
     category_id: c32.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p17.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/17.jpg"), filename: "17.jpg")
 
@@ -639,7 +639,7 @@ p18 = Project.create!(
     category_id: c32.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p18.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/18.png"), filename: "18.png")
 
@@ -655,7 +655,7 @@ p19 = Project.create!(
     category_id: c3.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p19.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/19.png"), filename: "19.png")
 
@@ -670,7 +670,7 @@ p20 = Project.create!(
     category_id: c33.id,
     goal: 2000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p20.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/20.jpg"), filename: "20.jpg")
 
@@ -685,7 +685,7 @@ p21 = Project.create!(
     category_id: c33.id,
     goal: 2000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p21.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/21.jpg"), filename: "21.jpg")
 
@@ -700,7 +700,7 @@ p22 = Project.create!(
     category_id: c34.id,
     goal: 2000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p22.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/22.jpg"), filename: "22.jpg")
 
@@ -715,7 +715,7 @@ p23 = Project.create!(
     category_id: c34.id,
     goal: 2000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p23.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/23.jpeg"), filename: "23.jpeg")
 
@@ -730,7 +730,7 @@ p24 = Project.create!(
     category_id: c34.id,
     goal: 3000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p24.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/24.jpg"), filename: "24.jpg")
 
@@ -745,7 +745,7 @@ p25 = Project.create!(
     category_id: c35.id,
     goal: 3000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p25.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/25.jpg"), filename: "25.jpg")
 
@@ -760,7 +760,7 @@ p26 = Project.create!(
     category_id: c35.id,
     goal: 4000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p26.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/26.jpg"), filename: "26.jpg")
 
@@ -775,7 +775,7 @@ p27 = Project.create!(
     category_id: c35.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p27.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/27.jpg"), filename: "27.jpg")
 
@@ -790,7 +790,7 @@ p28 = Project.create!(
     category_id: c4.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p28.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/28.jpg"), filename: "28.jpg")
 
@@ -805,7 +805,7 @@ p29 = Project.create!(
     category_id: c36.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p29.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/29.jpg"), filename: "29.jpg")
 
@@ -820,7 +820,7 @@ p30 = Project.create!(
     category_id: c36.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p30.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/30.jpg"), filename: "30.jpg")
 
@@ -835,7 +835,7 @@ p31 = Project.create!(
     category_id: c36.id,
     goal: 8000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p31.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/31.jpg"), filename: "31.jpg")
 
@@ -850,7 +850,7 @@ p32 = Project.create!(
     category_id: c5.id,
     goal: 8000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p32.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/32.jpg"), filename: "32.jpg")
 
@@ -865,7 +865,7 @@ p33 = Project.create!(
     category_id: c40.id,
     goal: 8000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p33.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/33.jpg"), filename: "33.jpg")
 
@@ -880,7 +880,7 @@ p34 = Project.create!(
     category_id: c40.id,
     goal: 8000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p34.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/34.jpg"), filename: "34.jpg")
 
@@ -895,7 +895,7 @@ p35 = Project.create!(
     category_id: c41.id,
     goal: 8000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p35.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/35.jpg"), filename: "35.jpg")
 
@@ -910,7 +910,7 @@ p36 = Project.create!(
     category_id: c41.id,
     goal: 8000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p36.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/36.jpg"), filename: "36.jpg")
 
@@ -925,7 +925,7 @@ p37 = Project.create!(
     category_id: c41.id,
     goal: 9000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p37.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/37.png"), filename: "37.png")
 
@@ -940,7 +940,7 @@ p38 = Project.create!(
     category_id: c42.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p38.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/38.jpg"), filename: "38.jpg")
 
@@ -955,7 +955,7 @@ p39  = Project.create!(
     category_id: c42.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p39.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/39.jpg"), filename: "39.jpg")
 
@@ -971,7 +971,7 @@ p40 = Project.create!(
     category_id: c42.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p40.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/40.jpg"), filename: "40.jpg")
 
@@ -987,7 +987,7 @@ p41 = Project.create!(
     category_id: c7.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p41.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/41.jpg"), filename: "41.jpg")
 
@@ -1003,7 +1003,7 @@ p42 = Project.create!(
     category_id: c48.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p42.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/42.jpg"), filename: "42.jpg")
 
@@ -1019,7 +1019,7 @@ p43 = Project.create!(
     category_id: c48.id,
     goal: 9000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p43.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/43.jpg"), filename: "43.jpg")
 
@@ -1035,7 +1035,7 @@ p44 = Project.create!(
     category_id: c48.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p44.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/44.jpg"), filename: "44.jpg")
 
@@ -1051,7 +1051,7 @@ p45 = Project.create!(
     category_id: c49.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p45.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/45.jpg"), filename: "45.jpg")
 
@@ -1066,7 +1066,7 @@ p46 = Project.create!(
     category_id: c49.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p46.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/46.jpg"), filename: "46.jpg")
 p47 = Project.create!(
@@ -1080,7 +1080,7 @@ p47 = Project.create!(
     category_id: c49.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p47.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/47.png"), filename: "47.png")
 
@@ -1095,7 +1095,7 @@ p48 = Project.create!(
     category_id: c50.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p48.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/48.png"), filename: "48.png")
 p49 = Project.create!(
@@ -1109,7 +1109,7 @@ p49 = Project.create!(
     category_id: c50.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p49.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/49.jpg"), filename: "49.jpg")
 p50 = Project.create!(
@@ -1123,7 +1123,7 @@ p50 = Project.create!(
     category_id: c50.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p50.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/50.png"), filename: "50.png")
 
@@ -1138,7 +1138,7 @@ p51 = Project.create!(
     category_id: c8.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p51.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/51.png"), filename: "51.png")
 
@@ -1153,7 +1153,7 @@ p52 = Project.create!(
     category_id: c52.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p52.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/52.jpg"), filename: "52.jpg")
 p53 = Project.create!(
@@ -1167,7 +1167,7 @@ p53 = Project.create!(
     category_id: c52.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p53.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/53.jpg"), filename: "53.jpg")
 
@@ -1182,7 +1182,7 @@ p54 = Project.create!(
     category_id: c54.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p54.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/54.png"), filename: "54.png")
 p55 = Project.create!(
@@ -1196,7 +1196,7 @@ p55 = Project.create!(
     category_id: c54.id,
     goal: 9000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p55.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/55.jpg"), filename: "55.jpg")
 p56 = Project.create!(
@@ -1210,7 +1210,7 @@ p56 = Project.create!(
     category_id: c54.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p56.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/56.jpg"), filename: "56.jpg")
 
@@ -1225,7 +1225,7 @@ p57 = Project.create!(
     category_id: c55.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p57.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/57.jpeg"), filename: "57.jpeg")
 p58 = Project.create!(
@@ -1239,7 +1239,7 @@ p58 = Project.create!(
     category_id: c55.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p58.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/58.png"), filename: "58.png")
 p59 = Project.create!(
@@ -1253,7 +1253,7 @@ p59 = Project.create!(
     category_id: c55.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p59.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/59.png"), filename: "59.png")
 
@@ -1268,7 +1268,7 @@ p60 = Project.create!(
     category_id: c9.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p60.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/60.jpg"), filename: "60.jpg")
 
@@ -1284,7 +1284,7 @@ p61 = Project.create!(
     category_id: c56.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p61.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/61.jpg"), filename: "61.jpg")
 
@@ -1299,7 +1299,7 @@ p62 = Project.create!(
     category_id: c56.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p62.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/62.jpg"), filename: "62.jpg")
 
@@ -1314,7 +1314,7 @@ p63 = Project.create!(
     category_id: c57.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p63.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/63.png"), filename: "63.png")
 
@@ -1329,7 +1329,7 @@ p64 = Project.create!(
     category_id: c57.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p64.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/64.png"), filename: "64.png")
 
@@ -1344,7 +1344,7 @@ p65 = Project.create!(
     category_id: c57.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p65.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/65.jpg"), filename: "65.jpg")
 
@@ -1359,7 +1359,7 @@ p66 = Project.create!(
     category_id: c58.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p66.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/66.jpg"), filename: "66.jpg")
 p67 = Project.create!(
@@ -1373,7 +1373,7 @@ p67 = Project.create!(
     category_id: c58.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p67.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/67.png"), filename: "67.png")
 p68 = Project.create!(
@@ -1387,7 +1387,7 @@ p68 = Project.create!(
     category_id: c58.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p68.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/68.jpeg"), filename: "68.jpeg")
 
@@ -1402,7 +1402,7 @@ p69 = Project.create!(
     category_id: c11.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p69.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/69.jpeg"), filename: "69.jpeg")
 
@@ -1417,7 +1417,7 @@ p70 = Project.create!(
     category_id: c83.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p70.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/70.jpg"), filename: "70.jpg")
 p71 = Project.create!(
@@ -1431,7 +1431,7 @@ p71 = Project.create!(
     category_id: c83.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p71.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/71.jpg"), filename: "71.jpg")
 
@@ -1446,7 +1446,7 @@ p72 = Project.create!(
     category_id: c65.id,
     goal: 9000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p72.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/72.png"), filename: "72.png")
 p73 = Project.create!(
@@ -1460,7 +1460,7 @@ p73 = Project.create!(
     category_id: c65.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p73.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/73.jpg"), filename: "73.jpg")
 p74 = Project.create!(
@@ -1474,7 +1474,7 @@ p74 = Project.create!(
     category_id: c65.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p74.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/74.png"), filename: "74.png")
 
@@ -1489,7 +1489,7 @@ p75 = Project.create!(
     category_id: c64.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p75.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/75.png"), filename: "75.png")
 p76 = Project.create!(
@@ -1503,7 +1503,7 @@ p76 = Project.create!(
     category_id: c64.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p76.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/76.png"), filename: "76.png")
 p77 = Project.create!(
@@ -1517,7 +1517,7 @@ p77 = Project.create!(
     category_id: c64.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p77.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/77.png"), filename: "77.png")
 
@@ -1532,7 +1532,7 @@ p78 = Project.create!(
     category_id: c13.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p78.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/78.png"), filename: "78.png")
 
@@ -1547,7 +1547,7 @@ p79 = Project.create!(
     category_id: c70.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p79.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/79.jpg"), filename: "79.jpg")
 p80 = Project.create!(
@@ -1561,7 +1561,7 @@ p80 = Project.create!(
     category_id: c70.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p80.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/80.jpeg"), filename: "80.jpeg")
 p81 = Project.create!(
@@ -1575,7 +1575,7 @@ p81 = Project.create!(
     category_id: c70.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p81.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/81.png"), filename: "81.png")
 
@@ -1590,7 +1590,7 @@ p82 = Project.create!(
     category_id: c72.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p82.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/82.jpg"), filename: "82.jpg")
 
@@ -1605,7 +1605,7 @@ p83 = Project.create!(
     category_id: c72.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p83.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/83.jpg"), filename: "83.jpg")
 
@@ -1620,7 +1620,7 @@ p84 = Project.create!(
     category_id: c73.id,
     goal: 5000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p84.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/84.png"), filename: "84.png")
 
@@ -1635,7 +1635,7 @@ p85 = Project.create!(
     category_id: c73.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p85.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/85.jpg"), filename: "85.jpg")
 
@@ -1650,6 +1650,6 @@ p86 = Project.create!(
     category_id: c73.id,
     goal: 7000,
     launch_date: "2022-12-06T16:18:33.000Z",
-    end_date: "2022-02-05T15:03:33.000Z"  
+    end_date: "2023-01-31T15:03:33.000Z"  
 )
 p86.title_image.attach(io: URI.open("https://seedstorage.s3.us-east-2.amazonaws.com/Tickstarter/86.jpg"), filename: "86.jpg")
