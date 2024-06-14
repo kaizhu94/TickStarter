@@ -371,8 +371,8 @@ c81 = Category.create!(
     parent_id: c15.id
 ) 
 
-    # launch_date: "2024-05-22T16:18:33.000Z",
-    # end_date: "2024-08-20T15:03:33.000Z"  
+    # launch_date: "2024-08-20T16:18:33.000Z",
+    # end_date: "2024-12-20T15:03:33.000Z"  
 #//projects
 p1 = Project.create!(
     project_name: "BRING THE SUN TO LUCKENWALDE",
